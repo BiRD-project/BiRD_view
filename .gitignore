@@ -7,7 +7,7 @@
 .idea/modules.xml
 .idea/vcs.xml
 __pycache__/
-app.py
+app_v4.py
 generate_example_json_file.py
 process_BRDF_file.py
 test.py
