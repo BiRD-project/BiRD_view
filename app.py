@@ -30,6 +30,10 @@ def server_layout():
         dcc.Store(id='selected_file', storage_type='memory', data=''),
         dcc.Store(id='previous_state',storage_type='memory', data=[]),
         dcc.Store(id='trigger', storage_type='memory', data='Triggered'),
+        dcc.Store(id='3D_plot_previous_state', storage_type='memory', data=[]),
+        dcc.Store(id='3D_trigger', storage_type='memory', data='Triggered'),
+        dcc.Store(id='Projection_plot_previous_state', storage_type='memory', data=[]),
+        dcc.Store(id='Projection_trigger', storage_type='memory', data='Triggered'),
         dcc.Store(id='tristimulus_XYZ_values',storage_type='memory'),
         dcc.Store(id='RGB_values',storage_type='memory'),
         html.Div(id='browser_data_storage', style={'display': 'none'}),
@@ -39,7 +43,7 @@ def server_layout():
                  style={'textAlign': 'center', 'color': colors['text'], 'width': '100%', 'height': '25px', 'line-height':'50px'}),
         html.Hr(style={'margin-bottom':'1px'}),
         html.Div(
-            dcc.Tabs(id="menu-tabs", value='Help', children=[
+            dcc.Tabs(id="menu-tabs", value='Applet', children=[
                 dcc.Tab(id="applet-tab", label='BiRD view v3.0', value='Applet', children=[
                     html.Div(children=[
                         dcc.Loading(id='loading', children=[
@@ -94,47 +98,24 @@ def server_layout():
 
                     dcc.Tabs(id="applet-modes", value='BRDF', children=[
                         dcc.Tab(id="applet-BRDF", label='BRDF visualisation', value='BRDF', children=[
-                            # html.Div(id='3D_graph_block', children=[
-                            #     html.Div(dcc.Dropdown(id='3D_colorscale'),
-                            #              style={'display': 'inline-block', 'width': '25%',
-                            #                     'vertical-align': 'middle'}),
-                            #     html.Div(dcc.Checklist(id='3D_show_color',options=[{'label': 'Show color', 'value': 1}]),
-                            #              style={'display': 'inline-block', 'width': '25%', 'vertical-align': 'middle',
-                            #                     'text-align': 'center'}),
-                            #     html.Div(style={'display': 'inline-block', 'width': '25%'}),
-                            #     html.Div(html.Button(id='3D_toggle_modal',children='Toggle full screen'), style={'display': 'inline-block', 'width': '25%'})],
-                            #     style={'display': 'inline-block', 'width': '50%'}),
-                            # html.Div(style={'display': 'inline-block', 'width': '50%'}),
-                            html.Div(
-                                dcc.Loading(id='3D-plot-L',
-                                            type='default',
-                                            #style=dict(heigh='100px', width='100px'),
-                                            fullscreen=False,
-                                            children=dcc.Graph(id="3D-plot")),
-                                style={'display': 'inline-block', 'width': '50%','vertical-align': 'middle'}),
-                            html.Div(
-                                dcc.Loading(id='Point-spectrum-L',
-                                            type='default',
-                                            # style=dict(heigh='100px', width='100px'),
-                                            fullscreen=False,
-                                            children=dcc.Graph(id="Point-spectrum")),
-                                style={'display': 'inline-block', 'width': '50%','vertical-align': 'middle'}),
-                            # html.Div(style={'display': 'inline-block', 'width': '50%'}),
-                            # html.Div(style={'display': 'inline-block', 'width': '50%'}),
-                            html.Div(
-                                dcc.Loading(id='Projection-plot-L',
-                                            type='default',
-                                            # style=dict(heigh='100px', width='100px'),
-                                            fullscreen=False,
-                                            children=dcc.Graph(id="Projection-plot")),
-                                style={'display': 'inline-block', 'width': '50%','vertical-align': 'middle'}),
-                            html.Div(
-                                dcc.Loading(id='2D-BRDF-L',
-                                            type='default',
-                                            # style=dict(heigh='100px', width='100px'),
-                                            fullscreen=False,
-                                            children=dcc.Graph(id="2D-BRDF")),
-                                style={'display': 'inline-block', 'width': '50%','vertical-align': 'middle'})],
+                            html.Div(children=[
+                                html.Div(dcc.Loading(id='3D-plot-L',
+                                                     children =dcc.Graph(id="3D-plot",responsive=True),
+                                                     style={'height': '420px','line-height': '420px'}),
+                                         style={'width': '50%','height': '420px', 'order':'1'}),
+                                html.Div(dcc.Loading(id='Point-spectrum-L',
+                                                     children=dcc.Graph(id="Point-spectrum", responsive=True),
+                                                     style={'height': '420px', 'line-height': '420px'}),
+                                         style={'width': '50%', 'height': '420px', 'order': '2'}),
+                                html.Div(dcc.Loading(id='Projection-plot-L',
+                                                     children=dcc.Graph(id="Projection-plot", responsive=True),
+                                                     style={'height': '420px', 'line-height': '420px'}),
+                                         style={'width': '50%', 'height': '420px', 'order': '3'}),
+                                html.Div(dcc.Loading(id='2D-BRDF-L',
+                                                     children=dcc.Graph(id="2D-BRDF", responsive=True),
+                                                     style={'height': '420px', 'line-height': '420px'}),
+                                         style={'width': '50%', 'height': '420px', 'order': '4'})],
+                                    style={'display':'flex', 'flex-wrap':  'wrap'})],
                             style={'line-height': '50px', 'padding': '0', 'height': '50px'},
                             selected_style={'line-height': '50px', 'padding': '0', 'height': '50px'}),
                         dcc.Tab(id="applet-COLOR", label='CIELAB', value='CIELAB', children=[
@@ -230,52 +211,6 @@ def upload_data(filenames, contents, value, data, options, selected_file):
 
     return data, options, selected_file, value
 
-# @app.callback([Output('Wavelength','options'),
-#                Output('Polarization', 'options'),
-#                Output('ThetaI','options'),
-#                Output('PhiI','options'),
-#                Output('ThetaV', 'options'),
-#                Output('PhiV', 'options'),
-#                Output('Wavelength','value'),
-#                Output('Polarization', 'value'),
-#                Output('ThetaI','value'),
-#                Output('PhiI','value'),
-#                Output('ThetaV', 'value'),
-#                Output('PhiV', 'value'),
-#                Output('Observer','value'),
-#                Output('Illuminant','value'),
-#                Output('is-visible','value'),
-#                Output('is-reference','value'),
-#                Output('selected_file', 'data')],
-#               [Input('File-selector','value')],
-#               [State('browser_data_storage_1', 'data'),
-#                State('selected_file', 'data')])
-# def update_menu(filename, uploaded_data, previously_selected_file):
-#     if filename is None or uploaded_data is None:
-#         raise PreventUpdate
-#     if filename == previously_selected_file:
-#         raise PreventUpdate
-#     opt_wl = [{'label':value,'value':value} for value in uploaded_data[filename]['measurement_data']['Wavelengths']]
-#     opt_pols = [{'label': value, 'value': value} for value in uploaded_data[filename]['measurement_data']['Polarization']]
-#     opt_theta_Is = [{'label':value,'value':value} for value in uploaded_data[filename]['measurement_data']['thetaIs']]
-#     opt_theta_PhiIs = [{'label':value,'value':value} for value in uploaded_data[filename]['measurement_data']['phiIs']]
-#     opt_theta_Vs = [{'label':value,'value':value} for value in uploaded_data[filename]['measurement_data']['thetaVs']]
-#     opt_theta_PhiVs = [{'label': value, 'value': value} for value in uploaded_data[filename]['measurement_data']['phiVs']]
-#     sel_wl = uploaded_data[filename]['selected_states']['wavelength']
-#     sel_pol = uploaded_data[filename]['selected_states']['polarization']
-#     sel_thetaI = uploaded_data[filename]['selected_states']['theta_I']
-#     sel_phiI = uploaded_data[filename]['selected_states']['phi_I']
-#     sel_thetaV = uploaded_data[filename]['selected_states']['theta_V']
-#     sel_phiV = uploaded_data[filename]['selected_states']['phi_V']
-#     sel_observer = uploaded_data[filename]['selected_states']['observer']
-#     sel_illuminant = uploaded_data[filename]['selected_states']['illuminant']
-#     is_visible = uploaded_data[filename]['selected_states']['visible']
-#     is_reference = uploaded_data[filename]['selected_states']['reference']
-#
-#     return opt_wl, opt_pols, opt_theta_Is, opt_theta_PhiIs,  opt_theta_Vs, opt_theta_PhiVs, \
-#            sel_wl, sel_pol, sel_thetaI, sel_phiI, sel_thetaV, sel_phiV, sel_observer, sel_illuminant, \
-#            is_visible, is_reference, filename
-
 @app.callback([Output('selected_file','data'),
                Output('menu_block','children')],
               [Input('File-selector','value')],
@@ -333,7 +268,7 @@ def modify_state(sel_wl, sel_pol, sel_thetaI, sel_phiI, sel_thetaV, sel_phiV, se
     if filename is None or uploaded_data is None:
         raise PreventUpdate
 
-    new_state = [sel_wl, sel_pol, sel_thetaI, sel_phiI, sel_thetaV, sel_phiV, sel_observer, sel_illuminant, is_visible, is_reference]
+    new_state = [filename, sel_wl, sel_pol, sel_thetaI, sel_phiI, sel_thetaV, sel_phiV, sel_observer, sel_illuminant, is_visible, is_reference]
 
     if new_state == previous_state:
         raise PreventUpdate
@@ -360,8 +295,25 @@ def modify_state(sel_wl, sel_pol, sel_thetaI, sel_phiI, sel_thetaV, sel_phiV, se
     # print('fired')
     return previous_state, dcc.Store(id='browser_data_storage_1', storage_type='memory', data=uploaded_data), 'triggered'
 
-@app.callback(Output('3D-plot','figure'),
+@app.callback([Output('3D_plot_previous_state', 'data'),
+               Output('3D_trigger', 'data')],
               [Input('trigger', 'data')],
+              [State('3D_plot_previous_state', 'data'),
+               State('previous_state', 'data'),
+               State('File-selector', 'value')])
+def trigger_3D_plot(trigger, plot_previous_state, previous_state, filename):
+    if filename == None:
+        raise PreventUpdate
+
+    new_state = previous_state[0:5]
+    if new_state == plot_previous_state:
+        raise PreventUpdate
+    else:
+        plot_previous_state = new_state
+    return plot_previous_state, 'Triggered'
+
+@app.callback(Output('3D-plot','figure'),
+              [Input('3D_trigger', 'data')],
               [State('browser_data_storage_1','data'),
                State('selected_file', 'data')])
 def update_3D_plot(trigger, uploaded_data, filename):
@@ -552,24 +504,46 @@ def update_3D_plot(trigger, uploaded_data, filename):
 
     # figure.update_layout
     layout = go.Layout(title="BRDF 3D plot",
-                         scene=dict(
-                             xaxis_title="Theta (deg)",
-                             yaxis_title="Theta (deg)",
-                             zaxis_title="BRDF"),
-                         scene_xaxis_visible=False,
-                         scene_yaxis_visible=False,
-                         scene_zaxis_visible=False,
-                         scene_aspectmode='manual',
-                         scene_aspectratio=dict(x=2, y=2, z=1),
-                         showlegend=False,
-                         scene_camera_projection_type = "orthographic"
-                         )
+                       scene=dict(
+                           xaxis_title="Theta (deg)",
+                           yaxis_title="Theta (deg)",
+                           zaxis_title="BRDF"),
+                       scene_xaxis_visible=False,
+                       scene_yaxis_visible=False,
+                       scene_zaxis_visible=False,
+                       scene_aspectmode='manual',
+                       scene_aspectratio=dict(x=2, y=2, z=1),
+                       showlegend=False,
+                       scene_camera_projection_type = "orthographic",
+                       modebar = dict(
+                           orientation = 'v',
+                           uirevision = '5'
+                       ))
     # print(time.process_time())
     # print({'data': figure, 'layout': layout})
     return {'data': figure, 'layout': layout}
 
-@app.callback(Output('Projection-plot','figure'),
+@app.callback([Output('Projection_plot_previous_state', 'data'),
+               Output('Projection_trigger', 'data')],
               [Input('trigger', 'data')],
+              [State('Projection_plot_previous_state', 'data'),
+               State('previous_state', 'data'),
+               State('File-selector', 'value')])
+def trigger_Projection_plot_update(trigger, plot_previous_state, previous_state, filename):
+    if filename == None:
+        raise PreventUpdate
+
+    new_state = [previous_state[0],previous_state[1],previous_state[2],previous_state[3],previous_state[4], previous_state[6]]
+
+    if new_state == plot_previous_state:
+        raise PreventUpdate
+    else:
+        plot_previous_state = new_state
+
+    return plot_previous_state, 'Triggered'
+
+@app.callback(Output('Projection-plot','figure'),
+              [Input('Projection_trigger', 'data')],
               [State('browser_data_storage_1','data'),
                State('selected_file', 'data')])
 def update_projection_plot(trigger, uploaded_data, filename):
@@ -579,6 +553,7 @@ def update_projection_plot(trigger, uploaded_data, filename):
     thetas = np.array(uploaded_data[filename]['measurement_data']['thetaVs'])
     arranged_thetas = np.flip(np.append(np.flip(thetas[thetas<0]),thetas[thetas>=0]))
     phis = np.array(uploaded_data[filename]['measurement_data']['phiVs'])
+    s_phi_v = uploaded_data[filename]['selected_states']['phi_V']
 
     thI = uploaded_data[filename]['selected_states']['theta_I']
     phiI = uploaded_data[filename]['selected_states']['phi_I']
@@ -655,7 +630,8 @@ def update_projection_plot(trigger, uploaded_data, filename):
 
     layout = go.Layout(
         title="BRDF polar heatmap",
-        polar_bargap=0
+        polar_bargap=0.005,
+        polar_angularaxis_rotation = -s_phi_v
     )
     # print(time.process_time())
             # if theta < 0:
@@ -664,31 +640,24 @@ def update_projection_plot(trigger, uploaded_data, filename):
             #     theta=180+phis))
     return {'data': figure, 'layout': layout}
 
-@app.callback(Output('2D-BRDF','figure'),
-              [Input('trigger', 'data'),
-               Input('Projection-plot', 'relayoutData')],
-              [State('browser_data_storage_1','data'),
+@app.callback(Output('PhiV','value'),
+              [Input('Projection-plot', 'relayoutData')],
+              [State('browser_data_storage_1', 'data'),
                State('selected_file', 'data')])
-def update_2D_brdf_plot(trigger, relayoutData, uploaded_data, filename):
-    if trigger is None or uploaded_data == {} or filename == '':
+def bezel_select_PhiV(relayoutData, uploaded_data, filename):
+    if uploaded_data == {} or filename == '':
         raise PreventUpdate
 
     relayoutData = relayoutData
-
+    print(relayoutData)
     if relayoutData is None:
-        relayoutData = {'polar.angularaxis.rotation': 0}
+        #relayoutData = {'polar.angularaxis.rotation': 0}
+        raise PreventUpdate
     if not 'polar.angularaxis.rotation' in relayoutData:
-        relayoutData['polar.angularaxis.rotation'] = 0
+        #relayoutData['polar.angularaxis.rotation'] = 0
+        raise PreventUpdate
 
-    figure = go.Figure()
     phis = np.array(uploaded_data[filename]['measurement_data']['phiVs'])
-    thetas = np.array(uploaded_data[filename]['measurement_data']['thetaVs'])
-    thI = uploaded_data[filename]['selected_states']['theta_I']
-    phiI = uploaded_data[filename]['selected_states']['phi_I']
-    pol = uploaded_data[filename]['selected_states']['polarization']
-    wl = uploaded_data[filename]['selected_states']['wavelength']
-    data = uploaded_data[filename]['measurement_data']
-    selected_data = np.array(select_data(wl, thI, phiI, pol, data))
 
     selected_angle = [0]
     if 'polar.angularaxis.rotation' in relayoutData:
@@ -698,18 +667,85 @@ def update_2D_brdf_plot(trigger, relayoutData, uploaded_data, filename):
         else:
             if angle > 0:
                 angle = np.abs(angle)
-                d = np.abs(phis-angle)
+                d = np.abs(phis - angle)
                 min_d = np.min(d)
-                selected_angle = 360-phis[d == min_d]
+                selected_angle = 360 - phis[d == min_d]
+                if selected_angle[0] == 360:
+                    selected_angle[0] = 0
             elif angle <= 0:
                 angle = np.abs(angle)
-                d = np.abs(phis-angle)
+                d = np.abs(phis - angle)
                 min_d = np.min(d)
                 selected_angle = phis[d == min_d]
     else:
         raise PreventUpdate
 
-    selected_angle = selected_angle[0]
+    print(selected_angle)
+
+    return selected_angle[0]
+
+# @app.callback([Output('2D-BRDF_plot_previous_state', 'data'),
+#                Output('2D-BRDF_trigger', 'data')],
+#               [Input('trigger', 'data')],
+#               [State('2D-BRDF_previous_state', 'data'),
+#                State('previous_state', 'data'),
+#                State('File-selector', 'value')])
+# def trigger_Projection_plot_update(trigger, plot_previous_state, previous_state, filename):
+#     if filename == None:
+#         raise PreventUpdate
+#
+#     new_state = [previous_state[0],previous_state[1],previous_state[2],previous_state[3],previous_state[4]]
+#     if new_state == plot_previous_state:
+#         raise PreventUpdate
+#     else:
+#         plot_previous_state = new_state
+#     return plot_previous_state, 'Triggered'
+
+@app.callback(Output('2D-BRDF','figure'),
+              [Input('trigger','data')],
+              [State('browser_data_storage_1','data'),
+               State('selected_file', 'data')])
+def update_2D_brdf_plot(trigger, uploaded_data, filename):
+    if trigger is None or uploaded_data == {} or filename == '':
+        raise PreventUpdate
+
+    # relayoutData = relayoutData
+    #
+    # if relayoutData is None:
+    #     relayoutData = {'polar.angularaxis.rotation': 0}
+    # if not 'polar.angularaxis.rotation' in relayoutData:
+    #     relayoutData['polar.angularaxis.rotation'] = 0
+
+    figure = go.Figure()
+    phis = np.array(uploaded_data[filename]['measurement_data']['phiVs'])
+    thetas = np.array(uploaded_data[filename]['measurement_data']['thetaVs'])
+    thI = uploaded_data[filename]['selected_states']['theta_I']
+    phiI = uploaded_data[filename]['selected_states']['phi_I']
+    pol = uploaded_data[filename]['selected_states']['polarization']
+    wl = uploaded_data[filename]['selected_states']['wavelength']
+    selected_angle = uploaded_data[filename]['selected_states']['phi_V']
+    data = uploaded_data[filename]['measurement_data']
+    selected_data = np.array(select_data(wl, thI, phiI, pol, data))
+
+    # selected_angle = [0]
+    # if 'polar.angularaxis.rotation' in relayoutData:
+    #     angle = relayoutData['polar.angularaxis.rotation']
+    #     if np.abs(angle) > 180:
+    #         raise PreventUpdate
+    #     else:
+    #         if angle > 0:
+    #             angle = np.abs(angle)
+    #             d = np.abs(phis-angle)
+    #             min_d = np.min(d)
+    #             selected_angle = 360-phis[d == min_d]
+    #         elif angle <= 0:
+    #             angle = np.abs(angle)
+    #             d = np.abs(phis-angle)
+    #             min_d = np.min(d)
+    #             selected_angle = phis[d == min_d]
+    # else:
+    #     raise PreventUpdate
+
     if selected_angle == 180:
         phi_mask = np.logical_or(phis == 180, phis == 0)
     elif selected_angle == 360:
@@ -719,13 +755,13 @@ def update_2D_brdf_plot(trigger, relayoutData, uploaded_data, filename):
     elif selected_angle > 180:
         phi_mask = np.logical_or(phis == selected_angle, phis == (selected_angle-180))
 
-    print(phi_mask)
+    #print(phi_mask)
 
     x = thetas
     y = selected_data[:,phi_mask].T
 
     selected_phiVs = phis[phi_mask]
-    print(selected_phiVs)
+    #print(selected_phiVs)
 
     if phis[phi_mask].shape[0] == 1:
         figure.add_trace(go.Scatter(name='BRDF',x = x, y = y[0], mode='lines+markers'))
