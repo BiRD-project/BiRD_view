@@ -33,7 +33,14 @@ def server_layout():
         dcc.Store(id='3D_plot_previous_state', storage_type='memory', data=[]),
         dcc.Store(id='3D_trigger', storage_type='memory', data='Triggered'),
         dcc.Store(id='Projection_plot_previous_state', storage_type='memory', data=[]),
+        dcc.Store(id='Projection_trigger_check', storage_type='memory', data='Triggered'),
         dcc.Store(id='Projection_trigger', storage_type='memory', data='Triggered'),
+        dcc.Store(id='Projection_bezal_turned', storage_type='memory', data=1),
+        dcc.Store(id='Projection_bezal_previous_state', storage_type='memory', data=1),
+        dcc.Store(id='2D_brdf_plot_previous_state', storage_type='memory', data=[]),
+        dcc.Store(id='2D_trigger', storage_type='memory', data='Triggered'),
+        dcc.Store(id='Pspec_previous_state', storage_type='memory', data=[]),
+        dcc.Store(id='Pspec_trigger', storage_type='memory', data='Triggered'),
         dcc.Store(id='tristimulus_XYZ_values',storage_type='memory'),
         dcc.Store(id='RGB_values',storage_type='memory'),
         html.Div(id='browser_data_storage', style={'display': 'none'}),
@@ -176,7 +183,7 @@ def upload_data(filenames, contents, value, data, options, selected_file):
                                    'visible': [],
                                    'reference': []}}
             if i == 0:
-                data[filename]['selected_states']['visible'] = [1]
+                data[filename]['selected_states']['visible'] = []
                 data[filename]['selected_states']['reference'] = [1]
                 selected_file = filename
             new_options.append({'label': filename, 'value': filename})
@@ -514,22 +521,18 @@ def update_3D_plot(trigger, uploaded_data, filename):
                        scene_aspectmode='manual',
                        scene_aspectratio=dict(x=2, y=2, z=1),
                        showlegend=False,
-                       scene_camera_projection_type = "orthographic",
-                       modebar = dict(
-                           orientation = 'v',
-                           uirevision = '5'
-                       ))
+                       scene_camera_projection_type = "orthographic")
     # print(time.process_time())
     # print({'data': figure, 'layout': layout})
     return {'data': figure, 'layout': layout}
 
 @app.callback([Output('Projection_plot_previous_state', 'data'),
-               Output('Projection_trigger', 'data')],
+               Output('Projection_trigger_check', 'data')],
               [Input('trigger', 'data')],
               [State('Projection_plot_previous_state', 'data'),
                State('previous_state', 'data'),
                State('File-selector', 'value')])
-def trigger_Projection_plot_update(trigger, plot_previous_state, previous_state, filename):
+def trigger_Projection_plot_update_check(trigger, plot_previous_state, previous_state, filename):
     if filename == None:
         raise PreventUpdate
 
@@ -541,6 +544,25 @@ def trigger_Projection_plot_update(trigger, plot_previous_state, previous_state,
         plot_previous_state = new_state
 
     return plot_previous_state, 'Triggered'
+
+@app.callback(Output('Projection_trigger', 'data'),
+              [Input('Projection_trigger_check', 'data')],
+              [State('File-selector', 'value'),
+               State('Projection_bezal_turned', 'data'),
+               State('Projection_bezal_previous_state', 'data')])
+def trigger_Projection_plot_update(trigger, filename, bezel, previous_bezel):
+    if filename == None:
+        raise PreventUpdate
+    new_bezel = bezel
+    if new_bezel > previous_bezel:
+        raise PreventUpdate
+    return 'Triggered'
+
+@app.callback(Output('Projection_bezal_previous_state', 'data'),
+              [Input('Projection_bezal_turned', 'data')])
+def update_bezel_previous_state(bezel_new):
+    time.sleep(0.5)
+    return bezel_new
 
 @app.callback(Output('Projection-plot','figure'),
               [Input('Projection_trigger', 'data')],
@@ -640,11 +662,13 @@ def update_projection_plot(trigger, uploaded_data, filename):
             #     theta=180+phis))
     return {'data': figure, 'layout': layout}
 
-@app.callback(Output('PhiV','value'),
+@app.callback([Output('Projection_bezal_turned', 'data'),
+               Output('PhiV','value')],
               [Input('Projection-plot', 'relayoutData')],
               [State('browser_data_storage_1', 'data'),
-               State('selected_file', 'data')])
-def bezel_select_PhiV(relayoutData, uploaded_data, filename):
+               State('selected_file', 'data'),
+               State('Projection_bezal_turned', 'data')])
+def bezel_select_PhiV(relayoutData, uploaded_data, filename, bezel):
     if uploaded_data == {} or filename == '':
         raise PreventUpdate
 
@@ -682,104 +706,178 @@ def bezel_select_PhiV(relayoutData, uploaded_data, filename):
 
     print(selected_angle)
 
-    return selected_angle[0]
+    return bezel+1,selected_angle[0]
 
-# @app.callback([Output('2D-BRDF_plot_previous_state', 'data'),
-#                Output('2D-BRDF_trigger', 'data')],
-#               [Input('trigger', 'data')],
-#               [State('2D-BRDF_previous_state', 'data'),
-#                State('previous_state', 'data'),
-#                State('File-selector', 'value')])
-# def trigger_Projection_plot_update(trigger, plot_previous_state, previous_state, filename):
-#     if filename == None:
-#         raise PreventUpdate
-#
-#     new_state = [previous_state[0],previous_state[1],previous_state[2],previous_state[3],previous_state[4]]
-#     if new_state == plot_previous_state:
-#         raise PreventUpdate
-#     else:
-#         plot_previous_state = new_state
-#     return plot_previous_state, 'Triggered'
-
-@app.callback(Output('2D-BRDF','figure'),
-              [Input('trigger','data')],
-              [State('browser_data_storage_1','data'),
-               State('selected_file', 'data')])
-def update_2D_brdf_plot(trigger, uploaded_data, filename):
-    if trigger is None or uploaded_data == {} or filename == '':
+@app.callback([Output('2D_brdf_plot_previous_state', 'data'),
+               Output('2D_trigger', 'data')],
+              [Input('trigger', 'data')],
+              [State('2D_brdf_plot_previous_state', 'data'),
+               State('previous_state', 'data'),
+               State('File-selector', 'value')])
+def trigger_2D_brdf_plot(trigger, plot_previous_state, previous_state, filename):
+    if filename == None:
         raise PreventUpdate
 
-    # relayoutData = relayoutData
-    #
-    # if relayoutData is None:
-    #     relayoutData = {'polar.angularaxis.rotation': 0}
-    # if not 'polar.angularaxis.rotation' in relayoutData:
-    #     relayoutData['polar.angularaxis.rotation'] = 0
+    new_state = [previous_state[0],previous_state[1],previous_state[2],previous_state[3],previous_state[4], previous_state[6]]
+    if new_state == plot_previous_state:
+        raise PreventUpdate
+    else:
+        plot_previous_state = new_state
+    return plot_previous_state, 'Triggered'
+
+@app.callback(Output('2D-BRDF','figure'),
+              [Input('2D_trigger','data')],
+              [State('browser_data_storage_1','data'),
+               State('selected_file', 'data')])
+def update_2D_brdf_plot(trigger, uploaded_data, selected_filename):
+    if trigger is None or uploaded_data == {} or selected_filename == '':
+        raise PreventUpdate
 
     figure = go.Figure()
-    phis = np.array(uploaded_data[filename]['measurement_data']['phiVs'])
-    thetas = np.array(uploaded_data[filename]['measurement_data']['thetaVs'])
-    thI = uploaded_data[filename]['selected_states']['theta_I']
-    phiI = uploaded_data[filename]['selected_states']['phi_I']
-    pol = uploaded_data[filename]['selected_states']['polarization']
-    wl = uploaded_data[filename]['selected_states']['wavelength']
-    selected_angle = uploaded_data[filename]['selected_states']['phi_V']
-    data = uploaded_data[filename]['measurement_data']
-    selected_data = np.array(select_data(wl, thI, phiI, pol, data))
 
-    # selected_angle = [0]
-    # if 'polar.angularaxis.rotation' in relayoutData:
-    #     angle = relayoutData['polar.angularaxis.rotation']
-    #     if np.abs(angle) > 180:
-    #         raise PreventUpdate
-    #     else:
-    #         if angle > 0:
-    #             angle = np.abs(angle)
-    #             d = np.abs(phis-angle)
-    #             min_d = np.min(d)
-    #             selected_angle = 360-phis[d == min_d]
-    #         elif angle <= 0:
-    #             angle = np.abs(angle)
-    #             d = np.abs(phis-angle)
-    #             min_d = np.min(d)
-    #             selected_angle = phis[d == min_d]
-    # else:
-    #     raise PreventUpdate
+    for filename in uploaded_data:
+        if uploaded_data[filename]['selected_states']['visible'] == [1] and filename != selected_filename:
+            phis = np.array(uploaded_data[filename]['measurement_data']['phiVs'])
+            thetas = np.array(uploaded_data[filename]['measurement_data']['thetaVs'])
+            thI = uploaded_data[filename]['selected_states']['theta_I']
+            phiI = uploaded_data[filename]['selected_states']['phi_I']
+            pol = uploaded_data[filename]['selected_states']['polarization']
+            wl = uploaded_data[filename]['selected_states']['wavelength']
+            selected_angle = uploaded_data[filename]['selected_states']['phi_V']
+            data = uploaded_data[filename]['measurement_data']
+            selected_data = np.array(select_data(wl, thI, phiI, pol, data))
+
+            if selected_angle == 180:
+                phi_mask = np.logical_or(phis == 180, phis == 0)
+            elif selected_angle == 360:
+                phi_mask = np.logical_or(phis == 0, phis == 180)
+            elif selected_angle < 180:
+                phi_mask = np.logical_or(phis == selected_angle, phis == (selected_angle + 180))
+            elif selected_angle > 180:
+                phi_mask = np.logical_or(phis == selected_angle, phis == (selected_angle - 180))
+
+            x = thetas
+            y = selected_data[:, phi_mask].T
+
+            selected_phiVs = phis[phi_mask]
+            # print(selected_phiVs)
+
+            if phis[phi_mask].shape[0] == 1:
+                figure.add_trace(go.Scatter(name='BRDF', x=x, y=y[0], mode='lines+markers'))
+            elif phis[phi_mask].shape[0] == 2:
+                figure.add_trace(go.Scatter(name='BRDF',
+                                            x=np.concatenate((np.sort(-x),x)),
+                                            y=np.concatenate((y[1][np.argsort(-x)],y[0])),
+                                            mode='lines+markers'))
+                # figure.add_trace(go.Scatter(name='BRDF -90 to 0', x=-x, y=y[1], mode='lines+markers'))
+            else:
+                raise PreventUpdate
+
+    phis = np.array(uploaded_data[selected_filename]['measurement_data']['phiVs'])
+    thetas = np.array(uploaded_data[selected_filename]['measurement_data']['thetaVs'])
+    thI = uploaded_data[selected_filename]['selected_states']['theta_I']
+    phiI = uploaded_data[selected_filename]['selected_states']['phi_I']
+    pol = uploaded_data[selected_filename]['selected_states']['polarization']
+    wl = uploaded_data[selected_filename]['selected_states']['wavelength']
+    selected_angle = uploaded_data[selected_filename]['selected_states']['phi_V']
+    data = uploaded_data[selected_filename]['measurement_data']
+    selected_data = np.array(select_data(wl, thI, phiI, pol, data))
 
     if selected_angle == 180:
         phi_mask = np.logical_or(phis == 180, phis == 0)
     elif selected_angle == 360:
-        phi_mask = np.logical_or(phis == 0,phis == 180)
+        phi_mask = np.logical_or(phis == 0, phis == 180)
     elif selected_angle < 180:
-        phi_mask = np.logical_or(phis == selected_angle, phis == (selected_angle+180))
+        phi_mask = np.logical_or(phis == selected_angle, phis == (selected_angle + 180))
     elif selected_angle > 180:
-        phi_mask = np.logical_or(phis == selected_angle, phis == (selected_angle-180))
-
-    #print(phi_mask)
+        phi_mask = np.logical_or(phis == selected_angle, phis == (selected_angle - 180))
 
     x = thetas
-    y = selected_data[:,phi_mask].T
+    y = selected_data[:, phi_mask].T
 
     selected_phiVs = phis[phi_mask]
-    #print(selected_phiVs)
+    # print(selected_phiVs)
 
     if phis[phi_mask].shape[0] == 1:
-        figure.add_trace(go.Scatter(name='BRDF',x = x, y = y[0], mode='lines+markers'))
+        figure.add_trace(go.Scatter(name='BRDF', x=x, y=y[0], mode='lines+markers'))
     elif phis[phi_mask].shape[0] == 2:
-        figure.add_trace(go.Scatter(name='BRDF 0 to 90',x = x, y = y[0], mode='lines+markers'))
-        figure.add_trace(go.Scatter(name='BRDF -90 to 0',x = -x, y = y[1], mode='lines+markers'))
+        figure.add_trace(go.Scatter(name='BRDF',
+                                    x=np.concatenate((np.sort(-x), x)),
+                                    y=np.concatenate((y[1][np.argsort(-x)], y[0])),
+                                    mode='lines+markers'))
+        # figure.add_trace(go.Scatter(name='BRDF -90 to 0', x=-x, y=y[1], mode='lines+markers'))
     else:
         raise PreventUpdate
+
 
     figure.update_layout(
         title="BRDF 2D plot at selected viewing azimuth",
         xaxis_title='Viewing zenith angle Theta (deg)',
-        yaxis_title='Radiance factor'
+        xaxis_nticks=15,
+        xaxis_gridcolor='rgb(112,112,112)',
+        xaxis_zerolinecolor='rgb(0,0,0)',
+        yaxis_title='Radiance factor',
+        yaxis_nticks=10,
+        yaxis_gridcolor='rgb(112,112,112)',
+        yaxis_zerolinecolor='rgb(0,0,0)',
+        plot_bgcolor='rgb(255,255,255)'
     )
 
     return figure
 
+@app.callback([Output('Pspec_previous_state', 'data'),
+               Output('Pspec_trigger', 'data')],
+              [Input('trigger', 'data')],
+              [State('Pspec_previous_state', 'data'),
+               State('previous_state', 'data'),
+               State('File-selector', 'value')])
+def trigger_Pspec_plot(trigger, plot_previous_state, previous_state, filename):
+    if filename == None:
+        raise PreventUpdate
 
+    new_state = [previous_state[1], previous_state[2], previous_state[3], previous_state[4], previous_state[5],
+                 previous_state[6]]
+    if new_state == plot_previous_state:
+        raise PreventUpdate
+    else:
+        plot_previous_state = new_state
+    return plot_previous_state, 'Triggered'
+
+@app.callback(Output('Point-spectrum','figure'),
+              [Input('Pspec_trigger','data')],
+              [State('browser_data_storage_1', 'data'),
+               State('selected_file', 'data')])
+def update_Spectrum_plot(trigger, uploaded_data, filename):
+    if filename is None:
+        raise PreventUpdate
+
+    thI = uploaded_data[filename]['selected_states']['theta_I']
+    phiI = uploaded_data[filename]['selected_states']['phi_I']
+    thV = uploaded_data[filename]['selected_states']['theta_V']
+    phiV = uploaded_data[filename]['selected_states']['phi_V']
+    pol = uploaded_data[filename]['selected_states']['polarization']
+    wls = uploaded_data[filename]['measurement_data']['Wavelengths']
+    data = uploaded_data[filename]['measurement_data']
+
+    x = wls
+    y = select_spectrum(thV,phiV,thI,phiI,pol,data)
+
+    figure = go.Figure()
+    figure.add_trace(go.Scatter(x = x, y = y[0], mode='lines+markers'))
+
+    figure.update_layout(
+        title="Reflectance spectrum at selected viewing zenith and azimuth",
+        xaxis_title='Wavelength (nm)',
+        yaxis_title='Radiance factor',
+        xaxis_nticks=15,
+        xaxis_gridcolor='rgb(112,112,112)',
+        xaxis_zerolinecolor='rgb(0,0,0)',
+        yaxis_nticks=10,
+        yaxis_gridcolor='rgb(112,112,112)',
+        yaxis_zerolinecolor='rgb(0,0,0)',
+        plot_bgcolor='rgb(255,255,255)'
+    )
+    return figure
 
 #
 # @app.callback([Output('2D-BRDF','figure'),
