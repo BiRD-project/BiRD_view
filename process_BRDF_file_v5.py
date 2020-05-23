@@ -27,7 +27,7 @@ def process_BRDF_json_new(dict_from_json):
     u_pols = np.unique(pols)
 
     arranged_data = np.full((u_pols.size, u_theta_Is.size, u_phi_Is.size, u_wls.size, u_theta_Vs.size, u_phi_Vs.size), -0.000001)
-    print(arranged_data.shape)
+    # print(arranged_data.shape)
 
     for i in range(u_wls.size):
         for j in range(pols.size):

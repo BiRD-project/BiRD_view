@@ -26,6 +26,11 @@ colors = {'background': '#111111', 'text': '#000080'}
 
 def server_layout():
     layout = html.Div([
+        dcc.Store(id='files_uploaded_trigger', storage_type='memory', data='Triggered'),
+        dcc.Store(id='Menu_tabs_trigger', storage_type='memory', data='Triggered'),
+        dcc.Store(id='App_mode_tabs_trigger', storage_type='memory', data='Triggered'),
+        dcc.Store(id='App_mode_tab_value', storage_type='memory', data='BRDF'),
+        dcc.Store(id='BRDF_mode_tab_update_trigger', storage_type='memory', data='Triggered'),
         html.Div(id='browser_data_storage_2', children=dcc.Store(id='browser_data_storage_1',storage_type='memory',data={}), style={'display': None}),
         dcc.Store(id='selected_file', storage_type='memory', data=''),
         dcc.Store(id='previous_state',storage_type='memory', data=[]),
@@ -43,15 +48,34 @@ def server_layout():
         dcc.Store(id='Pspec_trigger', storage_type='memory', data='Triggered'),
         dcc.Store(id='tristimulus_XYZ_values',storage_type='memory'),
         dcc.Store(id='RGB_values',storage_type='memory'),
-        html.Div(id='browser_data_storage', style={'display': 'none'}),
+        #html.Div(id='browser_data_storage', style={'display': 'none'}),
+
         html.H1(children='BiRD view v3.0',
                 style={'textAlign': 'center', 'color': colors['text'], 'width': '100%', 'height': '25px', 'line-height':'50px'}),
         html.Div(children='''A web application for BRDF data visualization.''',
                  style={'textAlign': 'center', 'color': colors['text'], 'width': '100%', 'height': '25px', 'line-height':'50px'}),
         html.Hr(style={'margin-bottom':'1px'}),
-        html.Div(
-            dcc.Tabs(id="menu-tabs", value='Applet', children=[
-                dcc.Tab(id="applet-tab", label='BiRD view v3.0', value='Applet', children=[
+
+        dcc.Tabs(id="menu-tabs", value='Applet', children=[
+            dcc.Tab(id="applet-tab", label='BiRD view v3.0', value='Applet',
+                    style={'line-height': '50px', 'padding': '0', 'height': '50px'},
+                    selected_style={'line-height': '50px', 'padding': '0', 'height': '50px'}
+                    ),
+            dcc.Tab(id="help-tab", label='Help', value='Help',
+                    style={'line-height': '50px', 'padding': '0', 'height': '50px'},
+                    selected_style={'line-height': '50px', 'padding': '0', 'height': '50px'})],
+                 style={'width': '100%', 'height': '50px', 'line-height': '50px', 'textAlign': 'top', 'margin-bottom': '0.15%', 'margin-top': '0.15%'}),
+        html.Div(id='menu-tabs-content')
+    ])
+    return layout
+
+@app.callback([Output('menu-tabs-content', 'children'),
+               Output('Menu_tabs_trigger', 'data')],
+              [Input('menu-tabs', 'value')])
+def render_menu_tabs_content(tab):
+    if tab == 'Applet':
+        return html.Div(
+            children=[
                     html.Div(children=[
                         dcc.Loading(id='loading', children=[
                             dcc.Upload(id='upload-data', children=html.Div(id='loading_state', children=['Drag and Drop or ', html.A('Select Files')]),
@@ -64,94 +88,136 @@ def server_layout():
                                                   'textAlign': 'center','margin-bottom':'0.15%', 'margin-top':'0.15%'})
                     ], className="row", id='upload-file'),
 
-                    html.Div([
+                    html.Div(id='menu_block', children=[
+                        html.Div([
+                            html.Div(
+                                dcc.Dropdown(id="File-selector", placeholder="File name", clearable=False), id='File-selector-1',
+                                style={'display': 'inline-block', 'width': '100%','vertical-align' : 'middle', 'text-align' : 'center'})],
+                            style={'display': 'inline-block', 'width': '75.0%', 'margin-bottom':'0.15%', 'margin-top':'0.15%'}),
 
-                    html.Div([html.Div(dcc.Dropdown(id="File-selector", placeholder="File name", clearable=False), id='File-selector-1',
-                                 style={'display': 'inline-block', 'width': '100%','vertical-align' : 'middle', 'text-align' : 'center'})],
-                             style={'display': 'inline-block', 'width': '75.0%', 'margin-bottom':'0.15%', 'margin-top':'0.15%'}),
+                        html.Div(dcc.Checklist(id='is-visible', options=[{'label': 'Visible', 'value': 1}]),
+                                 style={'display': 'inline-block', 'width': '12.5%', 'vertical-align': 'middle',
+                                        'text-align': 'center', 'margin-bottom':'0.15%', 'margin-top':'0.15%'}),
+                        html.Div(dcc.Checklist(id="is-reference", options=[{'label': 'Reference', 'value': 1}]),
+                                 style={'display': 'inline-block', 'width': '12.5%', 'vertical-align': 'middle',
+                                        'text-align': 'center', 'margin-bottom':'0.15%', 'margin-top':'0.15%'}),
 
-                    html.Div(dcc.Checklist(id='is-visible', options=[{'label': 'Visible', 'value': 1}]),
-                             style={'display': 'inline-block', 'width': '12.5%', 'vertical-align': 'middle',
-                                    'text-align': 'center', 'margin-bottom':'0.15%', 'margin-top':'0.15%'}),
-                    html.Div(dcc.Checklist(id="is-reference", options=[{'label': 'Reference', 'value': 1}]),
-                             style={'display': 'inline-block', 'width': '12.5%', 'vertical-align': 'middle',
-                                    'text-align': 'center', 'margin-bottom':'0.15%', 'margin-top':'0.15%'}),
-
-                    html.Div(dcc.Dropdown(id="Wavelength", placeholder="Wavelength", clearable=False),
-                             style={'display': 'inline-block', 'width': '10.457%','vertical-align' : 'middle',
-                                    'margin-bottom':'0.15%', 'margin-top':'0.15%', 'margin-right':'0.15%'}),
-                    html.Div(dcc.Dropdown(id="Polarization", placeholder="Polarization", clearable=False),
-                             style={'display': 'inline-block', 'width': '10.457%', 'vertical-align': 'middle',
-                                    'margin-bottom':'0.15%', 'margin-top':'0.15%', 'margin-left':'0.15%', 'margin-right':'0.15%'}),
-                    html.Div(dcc.Dropdown(id="ThetaI", placeholder="Incidence zenith angle", clearable=False),
-                             style={'display': 'inline-block', 'width': '10.457%', 'vertical-align' : 'middle',
-                                    'margin-bottom':'0.15%', 'margin-top':'0.15%', 'margin-left':'0.15%', 'margin-right':'0.15%'}),
-                    html.Div(dcc.Dropdown(id="PhiI", placeholder="Incidence azimuthal angle", clearable=False),
-                             style={'display': 'inline-block', 'width': '10.457%', 'vertical-align' : 'middle',
-                                    'margin-bottom':'0.15%', 'margin-top':'0.15%', 'margin-left':'0.15%', 'margin-right':'0.15%'}),
-                    html.Div(dcc.Dropdown(id="ThetaV", placeholder="Viewing zenith angle", clearable=False),
-                             style={'display': 'inline-block', 'width': '10.457%', 'vertical-align': 'middle',
-                                    'margin-bottom':'0.15%', 'margin-top':'0.15%', 'margin-left':'0.15%', 'margin-right':'0.15%'}),
-                    html.Div(dcc.Dropdown(id="PhiV", placeholder="Viewing azimuthal angle", clearable=False),
-                             style={'display': 'inline-block', 'width': '10.457%', 'vertical-align': 'middle',
-                                    'margin-bottom':'0.15%', 'margin-top':'0.15%', 'margin-left':'0.15%', 'margin-right':'0.15%'}),
-                    html.Div(dcc.Dropdown(id="Illuminant", placeholder="Illuminant", clearable=False, options=[{'label': value, 'value': value} for value in clr.ILLUMINANTS_SDS]),
-                             style={'display': 'inline-block', 'width': '10.457%', 'vertical-align': 'middle',
-                                    'margin-bottom':'0.15%', 'margin-top':'0.15%', 'margin-left':'0.15%', 'margin-right':'0.15%'}),
-                    html.Div(dcc.Dropdown(id="Observer", placeholder="Observer", clearable=False, options=[{'label':value,'value':value} for value in clr.STANDARD_OBSERVERS_CMFS]),
-                             style={'display': 'inline-block', 'width': '24.7%', 'vertical-align' : 'middle',
-                                    'margin-bottom':'0.15%', 'margin-top':'0.15%', 'margin-left':'0.15%'})], id='menu_block'),
+                        html.Div(dcc.Dropdown(id="Wavelength", placeholder="Wavelength", clearable=False),
+                                 style={'display': 'inline-block', 'width': '10.457%','vertical-align' : 'middle',
+                                        'margin-bottom':'0.15%', 'margin-top':'0.15%', 'margin-right':'0.15%'}),
+                        html.Div(dcc.Dropdown(id="Polarization", placeholder="Polarization", clearable=False),
+                                 style={'display': 'inline-block', 'width': '10.457%', 'vertical-align': 'middle',
+                                        'margin-bottom':'0.15%', 'margin-top':'0.15%', 'margin-left':'0.15%', 'margin-right':'0.15%'}),
+                        html.Div(dcc.Dropdown(id="ThetaI", placeholder="Incidence zenith angle", clearable=False),
+                                 style={'display': 'inline-block', 'width': '10.457%', 'vertical-align' : 'middle',
+                                        'margin-bottom':'0.15%', 'margin-top':'0.15%', 'margin-left':'0.15%', 'margin-right':'0.15%'}),
+                        html.Div(dcc.Dropdown(id="PhiI", placeholder="Incidence azimuthal angle", clearable=False),
+                                 style={'display': 'inline-block', 'width': '10.457%', 'vertical-align' : 'middle',
+                                        'margin-bottom':'0.15%', 'margin-top':'0.15%', 'margin-left':'0.15%', 'margin-right':'0.15%'}),
+                        html.Div(dcc.Dropdown(id="ThetaV", placeholder="Viewing zenith angle", clearable=False),
+                                 style={'display': 'inline-block', 'width': '10.457%', 'vertical-align': 'middle',
+                                        'margin-bottom':'0.15%', 'margin-top':'0.15%', 'margin-left':'0.15%', 'margin-right':'0.15%'}),
+                        html.Div(dcc.Dropdown(id="PhiV", placeholder="Viewing azimuthal angle", clearable=False),
+                                 style={'display': 'inline-block', 'width': '10.457%', 'vertical-align': 'middle',
+                                        'margin-bottom':'0.15%', 'margin-top':'0.15%', 'margin-left':'0.15%', 'margin-right':'0.15%'}),
+                        html.Div(dcc.Dropdown(id="Illuminant", placeholder="Illuminant", clearable=False, options=[{'label': value, 'value': value} for value in clr.ILLUMINANTS_SDS]),
+                                 style={'display': 'inline-block', 'width': '10.457%', 'vertical-align': 'middle',
+                                        'margin-bottom':'0.15%', 'margin-top':'0.15%', 'margin-left':'0.15%', 'margin-right':'0.15%'}),
+                        html.Div(dcc.Dropdown(id="Observer", placeholder="Observer", clearable=False, options=[{'label':value,'value':value} for value in clr.STANDARD_OBSERVERS_CMFS]),
+                                 style={'display': 'inline-block', 'width': '24.7%', 'vertical-align' : 'middle',
+                                        'margin-bottom':'0.15%', 'margin-top':'0.15%', 'margin-left':'0.15%'})]),
 
 
-                    dcc.Tabs(id="applet-modes", value='BRDF', children=[
-                        dcc.Tab(id="applet-BRDF", label='BRDF visualisation', value='BRDF', children=[
-                            html.Div(children=[
-                                html.Div(dcc.Loading(id='3D-plot-L',
-                                                     children =dcc.Graph(id="3D-plot",responsive=True),
-                                                     style={'height': '420px','line-height': '420px'}),
-                                         style={'width': '50%','height': '420px', 'order':'1'}),
-                                html.Div(dcc.Loading(id='Point-spectrum-L',
-                                                     children=dcc.Graph(id="Point-spectrum", responsive=True),
-                                                     style={'height': '420px', 'line-height': '420px'}),
-                                         style={'width': '50%', 'height': '420px', 'order': '2'}),
-                                html.Div(dcc.Loading(id='Projection-plot-L',
-                                                     children=dcc.Graph(id="Projection-plot", responsive=True),
-                                                     style={'height': '420px', 'line-height': '420px'}),
-                                         style={'width': '50%', 'height': '420px', 'order': '3'}),
-                                html.Div(dcc.Loading(id='2D-BRDF-L',
-                                                     children=dcc.Graph(id="2D-BRDF", responsive=True),
-                                                     style={'height': '420px', 'line-height': '420px'}),
-                                         style={'width': '50%', 'height': '420px', 'order': '4'})],
-                                    style={'display':'flex', 'flex-wrap':  'wrap'})],
-                            style={'line-height': '50px', 'padding': '0', 'height': '50px'},
-                            selected_style={'line-height': '50px', 'padding': '0', 'height': '50px'}),
-                        dcc.Tab(id="applet-COLOR", label='CIELAB', value='CIELAB', children=[
-                            html.Div(dcc.Graph(id="CIELAB-3Dplot"), style={'display': 'inline-block', 'width': '50%'}),
-                            html.Div(dcc.Graph(id="CIEAB-plot"), style={'display': 'inline-block', 'width': '50%'}),
-                            html.Div(dcc.Graph(id="CIELAB-plot"), style={'display': 'inline-block', 'width': '50%'})],
+                    dcc.Tabs(id="applet-modes", value= None, children=[
+                        dcc.Tab(id="applet-BRDF", label='BRDF visualisation', value='BRDF',
                                 style={'line-height': '50px', 'padding': '0', 'height': '50px'},
-                                selected_style={'line-height': '50px', 'padding': '0', 'height': '50px'}
-                                )],
-                             style={'width': '100%', 'height': '50px', 'line-height': '50px', 'textAlign': 'top', 'margin-bottom': '0.15%', 'margin-top': '0.15%'})
-                ],
-                        style={'line-height': '50px', 'padding': '0', 'height': '50px'},
-                        selected_style={'line-height': '50px', 'padding': '0', 'height': '50px'}
-                        ),
-                dcc.Tab(id="help-tab", label='Help', value='Help', children=html.Div(children=dcc.Markdown(help_text_markdown,
-                                                                                                           style={'width' : '74%'})),
-                        style={'line-height': '50px', 'padding': '0', 'height': '50px'},
-                        selected_style={'line-height': '50px', 'padding': '0', 'height': '50px'})
-            ],
-                     style={'width': '100%', 'height': '50px', 'line-height': '50px', 'textAlign': 'top', 'margin-bottom': '0.15%', 'margin-top': '0.15%'}
-                     )
-        )
-    ])
-    return layout
+                                selected_style={'line-height': '50px', 'padding': '0', 'height': '50px'}),
+                        dcc.Tab(id="applet-COLOR", label='CIELAB', value='CIELAB',
+                                style={'line-height': '50px', 'padding': '0', 'height': '50px'},
+                                selected_style={'line-height': '50px', 'padding': '0', 'height': '50px'})],
+                             style={'width': '100%', 'height': '50px', 'line-height': '50px', 'textAlign': 'top', 'margin-bottom': '0.15%', 'margin-top': '0.15%'}),
+                    html.Div(id='applet-modes-content')
+                ]
+        ), 'Triggered'
+    elif tab == 'Help':
+        return html.Div(
+            children=html.Div(children=dcc.Markdown(help_text_markdown,
+                                                    style={'width': '74%'}))
+        ), 'Triggered'
+
+@app.callback(Output('applet-modes', 'value'),
+              [Input('Menu_tabs_trigger', 'data')],
+              [State('App_mode_tab_value', 'data')])
+def trigger_menu_tab_population(trigger, tab):
+    # print(tab)
+    return tab
+
+@app.callback([Output('applet-modes-content', 'children'),
+               Output('App_mode_tab_value', 'data'),
+               Output('App_mode_tabs_trigger', 'data')],
+              [Input('applet-modes', 'value')])
+def render_applet_modes_content(tab):
+    if tab is None:
+        raise PreventUpdate
+    if tab == 'BRDF':
+        return html.Div(
+            children=[
+                html.Div(children=[
+                    html.Div(dcc.Loading(id='3D-plot-L',
+                                         children=dcc.Graph(id="3D-plot", responsive=True),
+                                         style={'height': '420px', 'line-height': '420px'}),
+                             style={'width': '50%', 'height': '420px', 'order': '1'}),
+                    html.Div(dcc.Loading(id='Point-spectrum-L',
+                                         children=dcc.Graph(id="Point-spectrum", responsive=True),
+                                         style={'height': '420px', 'line-height': '420px'}),
+                             style={'width': '50%', 'height': '420px', 'order': '2'}),
+                    html.Div(dcc.Loading(id='Projection-plot-L',
+                                         children=dcc.Graph(id="Projection-plot", responsive=True),
+                                         style={'height': '420px', 'line-height': '420px'}),
+                             style={'width': '50%', 'height': '420px', 'order': '3'}),
+                    html.Div(dcc.Loading(id='2D-BRDF-L',
+                                         children=dcc.Graph(id="2D-BRDF", responsive=True),
+                                         style={'height': '420px', 'line-height': '420px'}),
+                             style={'width': '50%', 'height': '420px', 'order': '4'})],
+                    style={'display': 'flex', 'flex-wrap': 'wrap'})]
+        ), tab, 'Triggered'
+    elif tab == 'CIELAB':
+        return html.Div(
+            children=[
+                html.Div(children=[
+                    html.Div(dcc.Loading(id='CIELAB-3D-plot-L',
+                                         children=dcc.Graph(id="CIELAB-3D-plot", responsive=True),
+                                         style={'height': '420px', 'line-height': '420px'}),
+                             style={'width': '50%', 'height': '420px', 'order': '1'}),
+                    html.Div(dcc.Loading(id='CIELAB-Point-spectrum-L',
+                                         children=dcc.Graph(id="CIELAB-Point-spectrum", responsive=True),
+                                         style={'height': '420px', 'line-height': '420px'}),
+                             style={'width': '50%', 'height': '420px', 'order': '2'}),
+                    html.Div(dcc.Loading(id='CIELAB-Projection-plot-L',
+                                         children=dcc.Graph(id="CIELAB-Projection-plot", responsive=True),
+                                         style={'height': '420px', 'line-height': '420px'}),
+                             style={'width': '50%', 'height': '420px', 'order': '3'}),
+                    html.Div(dcc.Loading(id='CIELAB-2D-BRDF-L',
+                                         children=dcc.Graph(id="CIELAB-2D-BRDF", responsive=True),
+                                         style={'height': '420px', 'line-height': '420px'}),
+                             style={'width': '50%', 'height': '420px', 'order': '4'})],
+                    style={'display': 'flex', 'flex-wrap': 'wrap'})]
+        ), tab, 'Triggered'
+
+@app.callback(Output('BRDF_mode_tab_update_trigger', 'data'),
+              [Input('App_mode_tabs_trigger', 'data')],
+              [State('App_mode_tab_value', 'data')])
+def trigger_mode_tab_population(trigger, tab):
+    # print(tab)
+    if tab != 'BRDF':
+        raise PreventUpdate
+    return 'Triggered'
 
 @app.callback([Output('browser_data_storage_1','data'),
                Output('File-selector', 'options'),
               Output('File-selector', 'value'),
-               Output('loading_state','children')],
+               Output('loading_state','children'),
+               Output('files_uploaded_trigger', 'data')],
               [Input('upload-data', 'filename'),
                Input('upload-data', 'contents'),
                Input('upload-data', 'children')],
@@ -215,21 +281,26 @@ def upload_data(filenames, contents, value, data, options, selected_file):
                                    'visible': [],
                                    'reference': []}}
             options.append({'label':filename, 'value': filename})
-
-    return data, options, selected_file, value
+    print('upload')
+    return data, options, selected_file, value, 'Triggered'
 
 @app.callback([Output('selected_file','data'),
                Output('menu_block','children')],
-              [Input('File-selector','value')],
+              [Input('File-selector', 'value'),
+               Input('Menu_tabs_trigger', 'data'),
+               # Input('Menu_tabs_trigger','data'),
+               # Input('App_mode_tabs_trigger','data')
+               ],
               [State('browser_data_storage_1', 'data'),
-               State('selected_file', 'data'),
-               State('File-selector', 'options')])
-def update_menu(filename, uploaded_data, previously_selected_file, file_selection_options):
+               State('selected_file', 'data')])
+def update_menu(filename, menu_tabs_trigger, uploaded_data, previously_selected_file):
 
-    if filename is None or uploaded_data is None:
+    if uploaded_data is None:
         raise PreventUpdate
     if filename == previously_selected_file:
         raise PreventUpdate
+    if filename is None:
+        filename = previously_selected_file
 
     opt_wl = [{'label':value,'value':value} for value in uploaded_data[filename]['measurement_data']['Wavelengths']]
     opt_pols = [{'label': value, 'value': value} for value in uploaded_data[filename]['measurement_data']['Polarization']]
@@ -247,6 +318,10 @@ def update_menu(filename, uploaded_data, previously_selected_file, file_selectio
     sel_illuminant = uploaded_data[filename]['selected_states']['illuminant']
     is_visible = uploaded_data[filename]['selected_states']['visible']
     is_reference = uploaded_data[filename]['selected_states']['reference']
+
+    file_selection_options = []
+    for key in uploaded_data:
+        file_selection_options.append({'label': key, 'value': key})
 
     children = update_menu_block(filename, file_selection_options, opt_wl, opt_pols, opt_theta_Is, opt_theta_PhiIs,  opt_theta_Vs, opt_theta_PhiVs, \
            sel_wl, sel_pol, sel_thetaI, sel_phiI, sel_thetaV, sel_phiV, sel_observer, sel_illuminant, \
@@ -269,8 +344,7 @@ def update_menu(filename, uploaded_data, previously_selected_file, file_selectio
                Input('is-reference', 'value')],
               [State('browser_data_storage_1', 'data'),
                State('File-selector', 'value'),
-               State('previous_state', 'data')]
-              )
+               State('previous_state', 'data')])
 def modify_state(sel_wl, sel_pol, sel_thetaI, sel_phiI, sel_thetaV, sel_phiV, sel_observer, sel_illuminant, is_visible, is_reference, uploaded_data, filename, previous_state):
     if filename is None or uploaded_data is None:
         raise PreventUpdate
@@ -320,11 +394,12 @@ def trigger_3D_plot(trigger, plot_previous_state, previous_state, filename):
     return plot_previous_state, 'Triggered'
 
 @app.callback(Output('3D-plot','figure'),
-              [Input('3D_trigger', 'data')],
+              [Input('3D_trigger', 'data'),
+               Input('BRDF_mode_tab_update_trigger', 'data')],
               [State('browser_data_storage_1','data'),
                State('selected_file', 'data')])
-def update_3D_plot(trigger, uploaded_data, filename):
-    if trigger is None or uploaded_data == {} or filename == '':
+def update_3D_plot(trigger1, trigger2, uploaded_data, filename):
+    if trigger1 is None or uploaded_data == {} or filename == '':
         raise PreventUpdate
     # print(time.process_time())
     theta = np.array(uploaded_data[filename]['measurement_data']['thetaVs'])[np.newaxis]
@@ -565,11 +640,12 @@ def update_bezel_previous_state(bezel_new):
     return bezel_new
 
 @app.callback(Output('Projection-plot','figure'),
-              [Input('Projection_trigger', 'data')],
+              [Input('Projection_trigger', 'data'),
+               Input('BRDF_mode_tab_update_trigger', 'data')],
               [State('browser_data_storage_1','data'),
                State('selected_file', 'data')])
-def update_projection_plot(trigger, uploaded_data, filename):
-    if trigger is None or uploaded_data == {} or filename == '':
+def update_projection_plot(trigger1, trigger2, uploaded_data, filename):
+    if trigger1 is None or uploaded_data == {} or filename == '':
         raise PreventUpdate
 
     thetas = np.array(uploaded_data[filename]['measurement_data']['thetaVs'])
@@ -673,7 +749,7 @@ def bezel_select_PhiV(relayoutData, uploaded_data, filename, bezel):
         raise PreventUpdate
 
     relayoutData = relayoutData
-    print(relayoutData)
+    # print(relayoutData)
     if relayoutData is None:
         #relayoutData = {'polar.angularaxis.rotation': 0}
         raise PreventUpdate
@@ -704,7 +780,7 @@ def bezel_select_PhiV(relayoutData, uploaded_data, filename, bezel):
     else:
         raise PreventUpdate
 
-    print(selected_angle)
+    # print(selected_angle)
 
     return bezel+1,selected_angle[0]
 
@@ -726,11 +802,12 @@ def trigger_2D_brdf_plot(trigger, plot_previous_state, previous_state, filename)
     return plot_previous_state, 'Triggered'
 
 @app.callback(Output('2D-BRDF','figure'),
-              [Input('2D_trigger','data')],
+              [Input('2D_trigger','data'),
+               Input('BRDF_mode_tab_update_trigger', 'data')],
               [State('browser_data_storage_1','data'),
                State('selected_file', 'data')])
-def update_2D_brdf_plot(trigger, uploaded_data, selected_filename):
-    if trigger is None or uploaded_data == {} or selected_filename == '':
+def update_2D_brdf_plot(trigger1, trigger2, uploaded_data, selected_filename):
+    if trigger1 is None or uploaded_data == {} or selected_filename == '':
         raise PreventUpdate
 
     figure = go.Figure()
@@ -835,7 +912,7 @@ def trigger_Pspec_plot(trigger, plot_previous_state, previous_state, filename):
     if filename == None:
         raise PreventUpdate
 
-    new_state = [previous_state[1], previous_state[2], previous_state[3], previous_state[4], previous_state[5],
+    new_state = [previous_state[0], previous_state[2], previous_state[3], previous_state[4], previous_state[5],
                  previous_state[6]]
     if new_state == plot_previous_state:
         raise PreventUpdate
@@ -844,25 +921,44 @@ def trigger_Pspec_plot(trigger, plot_previous_state, previous_state, filename):
     return plot_previous_state, 'Triggered'
 
 @app.callback(Output('Point-spectrum','figure'),
-              [Input('Pspec_trigger','data')],
+              [Input('Pspec_trigger','data'),
+               Input('BRDF_mode_tab_update_trigger', 'data')],
               [State('browser_data_storage_1', 'data'),
                State('selected_file', 'data')])
-def update_Spectrum_plot(trigger, uploaded_data, filename):
-    if filename is None:
+def update_Spectrum_plot(trigger1, trigger2, uploaded_data, selected_filename):
+    if selected_filename is None:
         raise PreventUpdate
 
-    thI = uploaded_data[filename]['selected_states']['theta_I']
-    phiI = uploaded_data[filename]['selected_states']['phi_I']
-    thV = uploaded_data[filename]['selected_states']['theta_V']
-    phiV = uploaded_data[filename]['selected_states']['phi_V']
-    pol = uploaded_data[filename]['selected_states']['polarization']
-    wls = uploaded_data[filename]['measurement_data']['Wavelengths']
-    data = uploaded_data[filename]['measurement_data']
+    figure = go.Figure()
+
+    for filename in uploaded_data:
+        if uploaded_data[filename]['selected_states']['visible'] == [1] and filename != selected_filename:
+            thI = uploaded_data[filename]['selected_states']['theta_I']
+            phiI = uploaded_data[filename]['selected_states']['phi_I']
+            thV = uploaded_data[filename]['selected_states']['theta_V']
+            phiV = uploaded_data[filename]['selected_states']['phi_V']
+            pol = uploaded_data[filename]['selected_states']['polarization']
+            wls = uploaded_data[filename]['measurement_data']['Wavelengths']
+            data = uploaded_data[filename]['measurement_data']
+
+            x = wls
+            y = select_spectrum(thV, phiV, thI, phiI, pol, data)
+
+            figure.add_trace(go.Scatter(x=x, y=y[0], mode='lines+markers'))
+
+
+    thI = uploaded_data[selected_filename]['selected_states']['theta_I']
+    phiI = uploaded_data[selected_filename]['selected_states']['phi_I']
+    thV = uploaded_data[selected_filename]['selected_states']['theta_V']
+    phiV = uploaded_data[selected_filename]['selected_states']['phi_V']
+    pol = uploaded_data[selected_filename]['selected_states']['polarization']
+    wls = uploaded_data[selected_filename]['measurement_data']['Wavelengths']
+    data = uploaded_data[selected_filename]['measurement_data']
 
     x = wls
     y = select_spectrum(thV,phiV,thI,phiI,pol,data)
 
-    figure = go.Figure()
+
     figure.add_trace(go.Scatter(x = x, y = y[0], mode='lines+markers'))
 
     figure.update_layout(
@@ -877,9 +973,9 @@ def update_Spectrum_plot(trigger, uploaded_data, filename):
         yaxis_zerolinecolor='rgb(0,0,0)',
         plot_bgcolor='rgb(255,255,255)'
     )
+    # print('ok')
     return figure
 
-#
 # @app.callback([Output('2D-BRDF','figure'),
 #                Output('selected_phiv','data')],
 #               [Input('Projection-plot','figure'),
