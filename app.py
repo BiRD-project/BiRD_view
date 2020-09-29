@@ -215,8 +215,8 @@ def trigger_mode_tab_population(trigger, tab):
 
 @app.callback([Output('browser_data_storage_1','data'),
                Output('File-selector', 'options'),
-              Output('File-selector', 'value'),
-               Output('loading_state','children'),
+               Output('File-selector', 'value'),
+               Output('loading_state', 'children'),
                Output('files_uploaded_trigger', 'data')],
               [Input('upload-data', 'filename'),
                Input('upload-data', 'contents'),
@@ -225,6 +225,7 @@ def trigger_mode_tab_population(trigger, tab):
                State('File-selector','options'),
                State('File-selector','value')])
 def upload_data(filenames, contents, value, data, options, selected_file):
+
     if contents is None or filenames is None:
         raise PreventUpdate
 
@@ -295,7 +296,7 @@ def upload_data(filenames, contents, value, data, options, selected_file):
                State('selected_file', 'data')])
 def update_menu(filename, menu_tabs_trigger, uploaded_data, previously_selected_file):
 
-    if uploaded_data is None:
+    if uploaded_data == {}:
         raise PreventUpdate
     if filename == previously_selected_file:
         raise PreventUpdate
@@ -346,7 +347,7 @@ def update_menu(filename, menu_tabs_trigger, uploaded_data, previously_selected_
                State('File-selector', 'value'),
                State('previous_state', 'data')])
 def modify_state(sel_wl, sel_pol, sel_thetaI, sel_phiI, sel_thetaV, sel_phiV, sel_observer, sel_illuminant, is_visible, is_reference, uploaded_data, filename, previous_state):
-    if filename is None or uploaded_data is None:
+    if filename is None or uploaded_data == {}:
         raise PreventUpdate
 
     new_state = [filename, sel_wl, sel_pol, sel_thetaI, sel_phiI, sel_thetaV, sel_phiV, sel_observer, sel_illuminant, is_visible, is_reference]
@@ -926,7 +927,7 @@ def trigger_Pspec_plot(trigger, plot_previous_state, previous_state, filename):
               [State('browser_data_storage_1', 'data'),
                State('selected_file', 'data')])
 def update_Spectrum_plot(trigger1, trigger2, uploaded_data, selected_filename):
-    if selected_filename is None:
+    if selected_filename is None or uploaded_data == {}:
         raise PreventUpdate
 
     figure = go.Figure()

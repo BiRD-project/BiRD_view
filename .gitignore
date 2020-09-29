@@ -10,5 +10,5 @@ __pycache__/
 app_v4.py
 generate_example_json_file.py
 process_BRDF_file.py
-test.py
+test1.py
 venv/
