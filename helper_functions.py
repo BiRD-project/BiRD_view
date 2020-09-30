@@ -3,6 +3,7 @@ import colour as clr
 from colormath.color_objects import sRGBColor
 import dash_core_components as dcc
 import dash_html_components as html
+import dash_bootstrap_components as dbc
 
 def select_data(Wavelengths, Theta_I, Phi_I, Polarization, Data):
     u_wls = np.array(Data['Wavelengths'])
@@ -100,5 +101,17 @@ def update_menu_block(filename, file_selection_options, opt_wl, opt_pols, opt_th
                         'margin-bottom':'0.15%', 'margin-top':'0.15%', 'margin-left':'0.15%', 'margin-right':'0.15%'}),
         html.Div(dcc.Dropdown(id="Observer", placeholder="Observer", clearable=False, options=[{'label':value,'value':value} for value in clr.STANDARD_OBSERVERS_CMFS], value=sel_observer),
                  style={'display': 'inline-block', 'width': '24.7%', 'vertical-align' : 'middle',
-                        'margin-bottom':'0.15%', 'margin-top':'0.15%', 'margin-left':'0.15%'})]
+                        'margin-bottom':'0.15%', 'margin-top':'0.15%', 'margin-left':'0.15%'}),
+        dbc.Tooltip("Wavelength", target="Wavelength"),
+        dbc.Tooltip("Polarization", target="Polarization"),
+        dbc.Tooltip("Incidence zenith angle", target="ThetaI"),
+        dbc.Tooltip("Incidence azimuthal angle", target="PhiI"),
+        dbc.Tooltip("Viewing zenith angle", target="ThetaV"),
+        dbc.Tooltip("Viewing azimuthal angle", target="PhiV"),
+        dbc.Tooltip("Illuminant", target="Illuminant"),
+        dbc.Tooltip("Observer", target="Observer"),
+        dbc.Tooltip("Select file", target="File-selector"),
+        dbc.Tooltip("Make data visible alongside other data", target="is-visible"),
+        dbc.Tooltip("Chose this file as reference", target="is-reference")
+    ]
     return children

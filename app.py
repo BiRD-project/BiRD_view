@@ -1,18 +1,18 @@
 import base64
 import json
-
+import dash_gif_component as gif
 import colour as clr
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
-# import dash_bootstrap_components as dbc
+import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
 from process_BRDF_file_v5 import process_BRDF_json_new
 from helper_functions import *
 import colour as clr
 import plotly.graph_objects as go
-from help_text import help_text_markdown
+from help_text import *
 import time
 
 
@@ -44,6 +44,7 @@ def server_layout():
         dcc.Store(id='Projection_bezal_previous_state', storage_type='memory', data=1),
         dcc.Store(id='2D_brdf_plot_previous_state', storage_type='memory', data=[]),
         dcc.Store(id='2D_trigger', storage_type='memory', data='Triggered'),
+        dcc.Store(id='2D_BRDF_plot_clicked', storage_type='memory', data=1),
         dcc.Store(id='Pspec_previous_state', storage_type='memory', data=[]),
         dcc.Store(id='Pspec_trigger', storage_type='memory', data='Triggered'),
         dcc.Store(id='tristimulus_XYZ_values',storage_type='memory'),
@@ -56,8 +57,8 @@ def server_layout():
                  style={'textAlign': 'center', 'color': colors['text'], 'width': '100%', 'height': '25px', 'line-height':'50px'}),
         html.Hr(style={'margin-bottom':'1px'}),
 
-        dcc.Tabs(id="menu-tabs", value='Applet', children=[
-            dcc.Tab(id="applet-tab", label='BiRD view v3.0', value='Applet',
+        dcc.Tabs(id="menu-tabs", value='Help', children=[
+            dcc.Tab(id="applet-tab", label='Applet', value='Applet',
                     style={'line-height': '50px', 'padding': '0', 'height': '50px'},
                     selected_style={'line-height': '50px', 'padding': '0', 'height': '50px'}
                     ),
@@ -125,7 +126,19 @@ def render_menu_tabs_content(tab):
                                         'margin-bottom':'0.15%', 'margin-top':'0.15%', 'margin-left':'0.15%', 'margin-right':'0.15%'}),
                         html.Div(dcc.Dropdown(id="Observer", placeholder="Observer", clearable=False, options=[{'label':value,'value':value} for value in clr.STANDARD_OBSERVERS_CMFS]),
                                  style={'display': 'inline-block', 'width': '24.7%', 'vertical-align' : 'middle',
-                                        'margin-bottom':'0.15%', 'margin-top':'0.15%', 'margin-left':'0.15%'})]),
+                                        'margin-bottom':'0.15%', 'margin-top':'0.15%', 'margin-left':'0.15%'}),
+                        dbc.Tooltip("Wavelength", target="Wavelength"),
+                        dbc.Tooltip("Polarization", target="Polarization"),
+                        dbc.Tooltip("Incidence zenith angle", target="ThetaI"),
+                        dbc.Tooltip("Incidence azimuthal angle", target="PhiI"),
+                        dbc.Tooltip("Viewing zenith angle", target="ThetaV"),
+                        dbc.Tooltip("Viewing azimuthal angle", target="PhiV"),
+                        dbc.Tooltip("Illuminant", target="Illuminant"),
+                        dbc.Tooltip("Observer", target="Observer"),
+                        dbc.Tooltip("Select file", target="File-selector"),
+                        dbc.Tooltip("Make data visible alongside other data", target="is-visible"),
+                        dbc.Tooltip("Chose this file as reference", target="is-reference")
+                    ]),
 
 
                     dcc.Tabs(id="applet-modes", value= None, children=[
@@ -141,8 +154,61 @@ def render_menu_tabs_content(tab):
         ), 'Triggered'
     elif tab == 'Help':
         return html.Div(
-            children=html.Div(children=dcc.Markdown(help_text_markdown,
-                                                    style={'width': '74%'}))
+            children=[html.Div(children=dcc.Markdown(help_text_markdown_part_1,
+                                                    style={'width': '70%'})),
+                      html.Div([gif.GifPlayer(
+                          gif='assets/upload.gif',
+                          still='assets/upload.png')],
+                      style={'width': '70%'}),
+                      html.Div(children=dcc.Markdown(help_text_markdown_part_2,
+                                                     style={'width': '70%'})),
+                      html.Div([gif.GifPlayer(
+                          gif='assets/fileselect.gif',
+                          still='assets/fileselect.png')],
+                          style={'width': '70%'}),
+                      html.Div(children=dcc.Markdown(help_text_markdown_part_3,
+                                                     style={'width': '70%'})),
+                      html.Div([gif.GifPlayer(
+                          gif='assets/navparams.gif',
+                          still='assets/navparams.png')],
+                          style={'width': '70%'}),
+                      html.Div(children=dcc.Markdown(help_text_markdown_part_4,
+                                                     style={'width': '70%'})),
+                      html.Div([gif.GifPlayer(
+                          gif='assets/paramstips.gif',
+                          still='assets/paramstips.png')],
+                          style={'width': '70%'}),
+                      html.Div(children=dcc.Markdown(help_text_markdown_part_5,
+                                                     style={'width': '70%'})),
+                      html.Div([gif.GifPlayer(
+                          gif='assets/3Dplot.gif',
+                          still='assets/3Dplot.png')],
+                          style={'width': '70%'}),
+                      html.Div(children=dcc.Markdown(help_text_markdown_part_6,
+                                                     style={'width': '70%'})),
+                      html.Div([gif.GifPlayer(
+                          gif='assets/3Dprojection.gif',
+                          still='assets/3Dprojection.png')],
+                          style={'width': '70%'}),
+                      html.Div(children=dcc.Markdown(help_text_markdown_part_7,
+                                                     style={'width': '70%'})),
+                      html.Div([gif.GifPlayer(
+                          gif='assets/2Dplot.gif',
+                          still='assets/2Dplot.png')],
+                          style={'width': '70%'}),
+                      html.Div(children=dcc.Markdown(help_text_markdown_part_8,
+                                                     style={'width': '70%'})),
+                      html.Div([gif.GifPlayer(
+                          gif='assets/multiData.gif',
+                          still='assets/multiData.png')],
+                          style={'width': '70%'}),
+                      html.Div(children=dcc.Markdown(help_text_markdown_part_9,
+                                                     style={'width': '70%'})),
+                      html.Div([gif.GifPlayer(
+                          gif='assets/interaction.gif',
+                          still='assets/interaction.png')],
+                          style={'width': '70%'}),
+                      ]
         ), 'Triggered'
 
 @app.callback(Output('applet-modes', 'value'),
@@ -841,11 +907,19 @@ def update_2D_brdf_plot(trigger1, trigger2, uploaded_data, selected_filename):
             # print(selected_phiVs)
 
             if phis[phi_mask].shape[0] == 1:
-                figure.add_trace(go.Scatter(name='BRDF', x=x, y=y[0], mode='lines+markers'))
+                x = x
+                y = y[0]
+                x = x[y >= 0]
+                y = y[y >= 0]
+                figure.add_trace(go.Scatter(name='BRDF', x=x, y=y, mode='lines+markers'))
             elif phis[phi_mask].shape[0] == 2:
+                y = np.concatenate((y[1][np.argsort(-x)], y[0]))
+                x = np.concatenate((np.sort(-x), x))
+                x = x[y >= 0]
+                y = y[y >= 0]
                 figure.add_trace(go.Scatter(name='BRDF',
-                                            x=np.concatenate((np.sort(-x),x)),
-                                            y=np.concatenate((y[1][np.argsort(-x)],y[0])),
+                                            x=x,
+                                            y=y,
                                             mode='lines+markers'))
                 # figure.add_trace(go.Scatter(name='BRDF -90 to 0', x=-x, y=y[1], mode='lines+markers'))
             else:
@@ -877,11 +951,20 @@ def update_2D_brdf_plot(trigger1, trigger2, uploaded_data, selected_filename):
     # print(selected_phiVs)
 
     if phis[phi_mask].shape[0] == 1:
-        figure.add_trace(go.Scatter(name='BRDF', x=x, y=y[0], mode='lines+markers'))
+        x = x
+        y = y[0]
+        x = x[y >= 0]
+        y = y[y >= 0]
+        figure.add_trace(go.Scatter(name='BRDF', x=x, y=y, mode='lines+markers'))
     elif phis[phi_mask].shape[0] == 2:
+        print(phis[phi_mask])
+        y = np.concatenate((y[1][np.argsort(-x)], y[0]))
+        x = np.concatenate((np.sort(-x), x))
+        x = x[y >= 0]
+        y = y[y >= 0]
         figure.add_trace(go.Scatter(name='BRDF',
-                                    x=np.concatenate((np.sort(-x), x)),
-                                    y=np.concatenate((y[1][np.argsort(-x)], y[0])),
+                                    x=x,
+                                    y=y,
                                     mode='lines+markers'))
         # figure.add_trace(go.Scatter(name='BRDF -90 to 0', x=-x, y=y[1], mode='lines+markers'))
     else:
@@ -902,6 +985,24 @@ def update_2D_brdf_plot(trigger1, trigger2, uploaded_data, selected_filename):
     )
 
     return figure
+
+@app.callback([Output('2D_BRDF_plot_clicked', 'data'),
+               Output('ThetaV','value')],
+              [Input('2D-BRDF', 'clickData')],
+              [State('browser_data_storage_1', 'data'),
+               State('selected_file', 'data'),
+               State('2D_BRDF_plot_clicked', 'data')])
+def plot_2D_select_ThetaV(clickData, uploaded_data, filename, clicks):
+    if uploaded_data == {} or filename == '':
+        raise PreventUpdate
+
+    thetas = np.array(uploaded_data[filename]['measurement_data']['thetaVs'])
+
+    if clickData is not None:
+        selected_theta = clickData['points'][0]['x']
+    else:
+        raise PreventUpdate
+    return clicks+1, selected_theta
 
 @app.callback([Output('Pspec_previous_state', 'data'),
                Output('Pspec_trigger', 'data')],
