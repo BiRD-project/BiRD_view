@@ -1321,4 +1321,4 @@ def update_Spectrum_plot(trigger1, trigger2, uploaded_data, selected_filename):
 app.layout = server_layout()
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=False)
