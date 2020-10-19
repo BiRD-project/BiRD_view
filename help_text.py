@@ -132,6 +132,8 @@ Example files (toggle code/tree options to study the file):
 * [Example 1](https://jsoneditoronline.org/#left=url.https%3A%2F%2Fraw.githubusercontent.com%2FBiRD-project%2FBiRD_view%2Fmaster%2Ftest%2520json%2520files%2Ftest_data_8.json&right=local.yutupo)
 * [Example 2](https://jsoneditoronline.org/#left=url.https%3A%2F%2Fraw.githubusercontent.com%2FBiRD-project%2FBiRD_view%2Fmaster%2Ftest%2520json%2520files%2Ftest_data_9.json&right=local.yutupo)
 * [Example 3](https://jsoneditoronline.org/#left=url.https%3A%2F%2Fraw.githubusercontent.com%2FBiRD-project%2FBiRD_view%2Fmaster%2Ftest%2520json%2520files%2F110119_1500-20_i0_A_NO_ADL.json&right=local.yutupo)
+* [Example 4 - SolidAngle_Gloss_NCS7_5mm](https://jsoneditoronline.org/#left=url.https%3A%2F%2Fraw.githubusercontent.com%2FBiRD-project%2FBiRD_view%2Fmaster%2Ftest%2520json%2520files%2FSolidAngle_Gloss_NCS7_5mm.json&right=local.yutupo)
+* [Example 5 - SolidAngle_Gloss_NCS7_10mm](https://jsoneditoronline.org/#left=url.https%3A%2F%2Fraw.githubusercontent.com%2FBiRD-project%2FBiRD_view%2Fmaster%2Ftest%2520json%2520files%2FSolidAngle_Gloss_NCS7_10mm.json&right=local.yutupo)
 
 #### *Quick guide*
 
