@@ -131,7 +131,7 @@ Consortium agreed on following keys and structure in the BRDF file format:
 File can have extension .json or .brdf.
 
 Example files (toggle code/tree options to study the file):
-* [Example 1](https://jsoneditoronline.org/#left=url.https%3A%2F%2Fraw.githubusercontent.com%2FBiRD-project%2FBiRD_view%2Fmaster%2Ftest%2520json%2520files%2Ftest_data_8.json&right=local.yutupo)
+* [Example 1](https://jsoneditoronline.org/#right=local.yutupo&left=url.https%3A%2F%2Fraw.githubusercontent.com%2FBiRD-project%2FBiRD_view%2Fmaster%2FTest%2520BRDF%2520data%2520files%2FT08_example.brdf)
 
 #### *Quick guide*
 

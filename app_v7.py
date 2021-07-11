@@ -1814,6 +1814,7 @@ def update_2D_arbitrary_plot(trigger1, trigger2, trigger3, uploaded_data, select
     return figure
 
 app.layout = server_layout()
+app.title = "BiRDview"
 
 if __name__ == '__main__':
     app.run_server(debug=False,dev_tools_ui=False,dev_tools_props_check=False)
