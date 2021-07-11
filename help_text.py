@@ -11,7 +11,7 @@ open source library and the code can be found [here](https://github.com/BiRD-pro
 
 Current version of application allows to open and view files only in the file format developed and agreed by BiRD consortium.
 
-#### *BRDF file format*
+#### *Universal BRDF data format*
 BRDF file format is based on [json](https://www.json.org/json-en.html) syntax. I.e. it is a text file that stores data in dictionaries in the form of:
 
 > `{key: value}`
@@ -20,120 +20,118 @@ where key is 'string' type and value can be 'string', 'number', 'array', 'True',
 
 Consortium agreed on following keys and structure in the BRDF file format:
 >
-```py
+```json
+>BRDF file is oan object that contains only two main keys "metadata" and "data"
 >{
->  head:{                        # Header section. Has quite loose definition. Keys and contents may vary freely, but 
->                                # must follow json syntax and data types.
->                                
->          date: "dd-mm-yyyy",   # Value --> String. Date format is fixed as shown here.
->          
->          any key: any data     # For example, detection slid angle, list of authors, institute or organization where 
->                                # measurements were made etc.
+>   "metadata": "value is an object with keys describing metadata and static properties of BRDF dataset" *
+>       {                                
+>           "id":          "value is a globally unique id as a string",
+>           "type":        "BRDF",
+>           "name":        "file name as a string",
+>           "timestamp":   "timestamp of measurement or simulation as a string in the format of 
+>                           YYYY-MM-DDThh:mm:ss±hh:mm UTC corresponding to ISO8601 standard",
+>           "provenance":  "value is a string or an object {key: number/string} with corresponding keys describing 
+>                           the origin of the data i.e. institution, address, personell etc.",
+>           "simulation":  "value is a string or an object {key: number/string} with corresponding keys describing 
+>                           the mathematical/physical simulation model and its parameters used to produce BRDF data",
+>           "system":      "value is a string or an object {key: number/string} with corresponding keys describing 
+>                           the setup or instrumentation and its parameters used to measure BRDF data",
+>           "sample":      "value is a string or an object {key: number/string} with corresponding keys describing 
+>                           the virtual or actual sample used to produce BRDF data",
+>           "environment": "value is a string or an object {key: number/string} with corresponding keys describing 
+>                           the environmental conditions during BRDFmeasurement like pressure, temperature, 
+>                           humidity, etc.",
+>           "comments":    "value is a string or an object {key: number/string} with corresponding keys describing 
+>                           any additional data related to BRDF measurement",
+>           "any key":     "value is a string or an object {key: number/string} with corresponding keys describing
+>                           any other information relevant to the BRDF data"
 >       },
 >       
->  data:{                                        # Data section has a strict definition. All keys should remain as 
->                                                # specified and adding other keys is not allowed.
+>   "data": "value is an object with keys related to definition of BRDF function in spherical coordinates, 
+>            variable properties of BRDF data and BRDF values themselves"
+>       {
+>           "variables": "value is an array of objects where each object desribes a variable
+>                         that was changed during measurement or simulation - see example below"
+>               [
+>                   {"name":         "theta_i",  
+>                    "type":         "number", 
+>                    "unit":         "deg or rad",                     
+>                    "description": "Illumination zenith angle of incidence",
+>                    "any key":      "value as number or string"},                                             #1 **
 >
->          #==================================== Illumination properties keys ====================================
+>                   {"name":        "phi_i",    
+>                    "type":        "number", 
+>                    "unit":        "deg or rad",                     
+>                    "description": "Illumination azimuthal angle of incidence",
+>                    "any key":     "value as number or string"},                                              #2 **
 >
->          #------------------------------------ Primary axis ----------------------------------------------------
->                                                
->          wavelengths: [λ1, λ2, ..., λN],       # Value --> array of numbers. Primary axis or row vector for data.
->                                                # Wavelengths at which each data row was measured.
+>                   {"name":        "theta_r",  
+>                    "type":        "number", 
+>                    "unit":        "deg or rad",                     
+>                    "description": "Viewing zenith angle",
+>                    "any key":     "value as number or string"},                                              #3 **
 >
->          #------------------------------------ Non-primary axes ------------------------------------------------
+>                   {"name":        "phi_r",    
+>                    "type":        "number", 
+>                    "unit":        "deg or rad",                     
+>                    "description": "Viewing azimuthal angle",
+>                    "any key":     "value as number or string"},                                              #4 **
 >
->          pol: [pol1, pol2, ..., polM],         # Value --> array of strings. Names can be any  - i.e. 'p','s' or 
->                                                # 'p-polarized', 's-polarized' or any other would be read correctly.
->                                                # NB! If you have two or more different values for polarization,
->                                                # parser will automatically calculate average of all of them.
->                                                # this feature is cannot be disabled at the moment, but it doesn't
->                                                # disturb BRDF viewing in any scenario. If you used unpolarized light,
->                                                # insert 'u' or 'unpolarized' respectively. 
+>                   {"name":        "BRDF",     
+>                    "type":        "number", 
+>                    "unit":        "sr-1",                          
+>                    "description": "Measured or simulated BRDF values",
+>                    "any key":     "value as number or string"},                                              #5 **
 >
->          theta_i: [θi1, θi2, ..., θiM],        # Value --> array of numbers. Illumination incidence zenith angle. 
->                                                # Can vary +/-90 deg around normal to the sample.
->                                                
->          phi_i: [Φi1, Φi2, ..., ΦiM],          # Value --> array of numbers. Illumination incidence azimuthal angle. 
->                                                # Can vary 0 to 360 deg. Depends on measurement procedure.
->                                                # If theta_i is measured only from 0 to 90, then it is wise to use 
->                                                # range 0 to 360 deg.
->                                                # If theta_i is measured +/-90 around normal, i.e. you measure 
->                                                # simultaneously data at theta_i and theta_i + 180,
->                                                # then it is better to use range 0 to 180 deg to avoid data overlapping.
+>                   {"name":        "uBRDF",    
+>                    "type":        "number", 
+>                    "unit":        "sr-1",                          
+>                    "description": "Uncertainty of measured or simulated BRDF values",
+>                    "any key":     "value as number or string"},                                              #6 **
 >
->          #==================================== Viewing properties keys =========================================
+>                    ...
 >
->          #------------------------------------ Non-primary axes ------------------------------------------------
->                                                
->          theta_v: [θv1, θv2, ..., θvM],        # Value --> array of numbers. Illumination viewing zenith angle. 
->                                                # Can vary +/-90 deg around normal to the sample.
->                                                
->          phi_v: [Φv1, Φv2, ..., ΦvM],          # Value --> array of numbers. Illumination viewing azimuthal angle. 
->                                                # Can vary 0 to 360 deg. Depends on measurement procedure. 
->                                                # If theta_i is measured only from 0 to 90, then it is wise to use range
->                                                # 0 to 360 deg. If theta_i is measured +/-90 around normal, i.e. you 
->                                                # measure simultaneously data at theta_v and theta_v + 180,
->                                                # then it is better to use range 0 to 180 deg to avoid data overlapping.
->                                                #
->                                                # NB! In current version, the projection heatmap polar plot won't operate
->                                                # correctly if ou measured twice one and the same plane. It is common if 
->                                                # you have measured BRDF at phi_v = 0 in the beginning of measurement and
->                                                # 180 or 360 in the end of the measurement depending if theta_v varies 
->                                                # from +/-90 or 0 to 90 around normal).
->                                                # Try to avoid this by manually selecting which of two datasets in 
->                                                # the same plane to leave in the file.
->                                                # If you would like to test repeatability by measuring multiple data 
->                                                # sets in one plane, try to separate data to different file int present 
->                                                # format. That way you would be able to analyze them while seeing all 
->                                                # graphs correctly.
->                                                
->          #==================================== Data points =====================================================
+>                   {"name":        "any name 1", 
+>                    "type":        "number" or "string", 
+>                    "unit":        "corresponding unit",  
+>                    "description": "short description of variable or its definition", 
+>                    "any key":     "value as number or string"},                                              #M-1 
 >
->          data: [[point1, point2, ..., pointM], # 1    # Value --> array of arrays of numbers.
->                 [point1, point2, ..., pointM], # 2    # 2D array of measured BRDF values corresponding to illumination
->                 ...,                                  # and viewing properties defined above. There are N rows 
->                 [point1, point2, ..., pointM]] # N    # corresponding to the number of values in primary axis, i.e. 
->                                                       # number of wavelengths. Each row contains an array with the length
->                                                       # of M corresponding to the number of values in all non-primary axes.
->  }
+>                   {"name":        "any name 2", 
+>                    "type":        "number" or "string", 
+>                    "unit":        "corresponding unit",
+>                    "description": "short description of variable or its definition", 
+>                    "any key":     "value as number or string"},                                              #M
+>               ],
+>           "values": "value is an array with length N corresponding to number of measured BRDF points where
+>				       each element is an array with length M corresponding to M varibles that were varied 
+>				       during simulation/measurement"
+>               [
+>                   [number_1, number_2, number_3, number_4, ... number/string_M-1, number/string_M],          #1
+>                   [number_1, number_2, number_3, number_4, ... number/string_M-1, number/string_M],          #2
+>                    ...
+>                   [number_1, number_2, number_3, number_4, ... number/string_M-1, number/string_M]           #N
+>               ]
+>       }
 >}
+>
+>*  All keys in metadata are mandatory except any additional keys described as "any key". If there is no data
+>    corresponding to the key, please use "NA" string. For example if data corresponds purely to measurement,
+>    there shouldn't be any simulation data available and hence the field is "NA".
+>
+>** All objects within array of "variables" specified by this mark are mandatory and should be always present
+>    even if the corresponding variables were constant during simulation or measurement. Numerical values of such 
+>    variables should be fixed and repeated through all corresponding columns within 2D array of "values". 
+>    Other objects within "variables" are not mandatory and if corresponding variables were constant it is
+>    advised to specify this information under one of the "metadata" keys to avoid repeating information within 
+>    2D array of "values"
 ```
 >
 
 File can have extension .json or .brdf.
 
-Clean view of file format:
-
->
-```py
->{
->  head:{                       
->          date: "dd-mm-yyyy",   
->          any key: any data     
->       },
->  data:{                                                                      
->          wavelengths: [λ1, λ2, ..., λN],      
->          pol: [pol1, pol2, ..., polM],         
->          theta_i: [θi1, θi2, ..., θiM],       
->          phi_i: [Φi1, Φi2, ..., ΦiM],         
->          theta_v: [θv1, θv2, ..., θvM],        
->          phi_v: [Φv1, Φv2, ..., ΦvM],          
->          data: [[point1, point2, ..., pointM], # 1    
->                 [point1, point2, ..., pointM], # 2    
->                 ...,                                  
->                 [point1, point2, ..., pointM]] # N                                                     
->       }
->}
-```
->
-
 Example files (toggle code/tree options to study the file):
 * [Example 1](https://jsoneditoronline.org/#left=url.https%3A%2F%2Fraw.githubusercontent.com%2FBiRD-project%2FBiRD_view%2Fmaster%2Ftest%2520json%2520files%2Ftest_data_8.json&right=local.yutupo)
-* [Example 2](https://jsoneditoronline.org/#left=url.https%3A%2F%2Fraw.githubusercontent.com%2FBiRD-project%2FBiRD_view%2Fmaster%2Ftest%2520json%2520files%2Ftest_data_9.json&right=local.yutupo)
-* [Example 3](https://jsoneditoronline.org/#left=url.https%3A%2F%2Fraw.githubusercontent.com%2FBiRD-project%2FBiRD_view%2Fmaster%2Ftest%2520json%2520files%2F110119_1500-20_i0_A_NO_ADL.json&right=local.yutupo)
-* [Example 4 - SolidAngle_Gloss_NCS7_5mm](https://jsoneditoronline.org/#left=url.https%3A%2F%2Fraw.githubusercontent.com%2FBiRD-project%2FBiRD_view%2Fmaster%2Ftest%2520json%2520files%2FSolidAngle_Gloss_NCS7_5mm.json&right=local.yutupo)
-* [Example 5 - SolidAngle_Gloss_NCS7_10mm](https://jsoneditoronline.org/#left=url.https%3A%2F%2Fraw.githubusercontent.com%2FBiRD-project%2FBiRD_view%2Fmaster%2Ftest%2520json%2520files%2FSolidAngle_Gloss_NCS7_10mm.json&right=local.yutupo)
 
 #### *Quick guide*
 
