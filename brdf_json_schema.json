@@ -1,0 +1,393 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/product.schema.json",
+  "title": "Universal BRDF data format schema",
+  "description": "A JSON schema for automatic validation of Universal BRDF data format proposed by BiRD project consortium in 2021",
+  "type": "object",
+  "required": [
+    "metadata",
+    "data"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "metadata": {
+      "title": "metadata",
+      "description": "A section of a file that describes the measured or simulated BRDF data set from the point of view of data origin, simulation or measurement system's parameters, sample parameters and evironment. It also contains a globaly unique dataset identifier, specifices the data type, file name and records a timestamp of a measurement or simulation",
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "name",
+        "timestamp",
+        "provenance",
+        "simulation",
+        "system",
+        "sample",
+        "environment",
+        "comments"
+      ],
+      "properties": {
+        "id": {
+          "title": "id",
+          "description": "Globally unique identifier such as GUID, UUID or DOI as a string",
+          "type": "string"
+        },
+        "type": {
+          "title": "type",
+          "description": "Data type identifier. Always a \"BRDF\" that stands for bidirectional reflectance distribution function.",
+          "type": "string",
+          "const": "BRDF"
+        },
+        "name": {
+          "title": "name",
+          "description": "Current file name as a string",
+          "type": "string"
+        },
+        "timestamp": {
+          "title": "timestamp",
+          "description": "Timestamp of measurement or simulation as a string in the format of YYYY-MM-DDThh:mm:ss±hh of UTC time corresponding to ISO8601 standard.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "provenance": {
+          "title": "provenance",
+          "description": "String or an object with keys describing the origin of the data i.e. institution, address, personell etc. Object has values as a number or a string.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "additionalProperties": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "simulation": {
+          "title": "simulation",
+          "description": "String or an object with keys describing the mathematical/physical simulation model and its parameters used to produce BRDF data. Object has values as a number or a string.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "additionalProperties": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "system": {
+          "title": "system",
+          "description": "String or an object with keys describing the setup or instrumentation and its parameters used to measure BRDF data. Object has values as a number or a string.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "additionalProperties": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "sample": {
+          "title": "sample",
+          "description": "String or an object with keys describing the virtual or actual sample used to produce BRDF data. Object has values as a number or a string.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "additionalProperties": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "environment": {
+          "title": "environment",
+          "description": "String or an object with keys describing the environmental conditions during BRDFmeasurement like pressure, temperature, humidity, etc. Object has values as a number or a string.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "additionalProperties": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "comments": {
+          "title": "comments",
+          "description": "String or an object with keys describing any additional data related to BRDF measurement. Object has values as a number or a string.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "additionalProperties": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "additionalProperties": {
+        "description": "String or an object with keys describing any other information relevant to the BRDF data that cannot be presented within mandatory metadata objects. Object has values as a number or a string.",
+        "oneOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "object",
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "number"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "data": {
+      "title": "data",
+      "type": "object",
+      "description": "an object with keys related to definition of BRDF function, variable properties of BRDF data and BRDF values themselves",
+      "required": [
+        "variables",
+        "values"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "variables": {
+          "title": "variables",
+          "description": " an array of the objects where each object desribes a variables that were changed during measurement or simulation",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "type",
+              "unit",
+              "description"
+            ],
+            "properties": {
+              "name": {
+                "title": "name",
+                "description": "Short keyword describing variable",
+                "type": "string"
+              },
+              "type": {
+                "title": "type",
+                "description": "Type of corresponding value in \"values\" as a number or string written within \"...\"",
+                "type": "string",
+                "enum": [
+                  "string",
+                  "number"
+                ]
+              },
+              "unit": {
+                "title": "unit",
+                "description": "units of variable as a string",
+                "type": "string"
+              },
+              "description": {
+                "title": "description",
+                "description": "short description of variable or its definition",
+                "type": "string"
+              }
+            },
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "number"
+                }
+              ]
+            }
+          },
+          "allOf": [
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "title": "name",
+                    "type": "string",
+                    "const": "theta_i"
+                  },
+                  "unit": {
+                    "title": "unit",
+                    "type": "string",
+                    "enum": ["deg", "rad"]
+                  }
+                }
+              }
+            },
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "title": "name",
+                    "type": "string",
+                    "const": "phi_i"
+                  },
+                  "unit": {
+                    "title": "unit",
+                    "type": "string",
+                    "enum": ["deg", "rad"]
+                  }
+                }
+              }
+            },
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "title": "name",
+                    "type": "string",
+                    "const": "theta_r"
+                  },
+                  "unit": {
+                    "title": "unit",
+                    "type": "string",
+                    "enum": ["deg", "rad"]
+                  }
+                }
+              }
+            },
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "title": "name",
+                    "type": "string",
+                    "const": "phi_r"
+                  },
+                  "unit": {
+                    "title": "unit",
+                    "type": "string",
+                    "enum": ["deg", "rad"]
+                  }
+                }
+              }
+            },
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "title": "name",
+                    "type": "string",
+                    "const": "BRDF"
+                  },
+                  "unit": {
+                    "title": "unit",
+                    "type": "string",
+                    "const": "sr-1"
+                  }
+                }
+              }
+            },
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "title": "name",
+                    "type": "string",
+                    "const": "uBRDF"
+                  },
+                  "unit": {
+                    "title": "unit",
+                    "type": "string",
+                    "const": "sr-1"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "values": {
+          "title": "values",
+          "description": "Array of length N corresponding to number of measured BRDF points where each element is and array of length M corresponding to M varibles that were varied during simulation/measurement",
+          "type": "array",
+          "items": {
+            "description": "Array of length M corresponding to M varibles that were varied during simulation/measurement alongside BRDF vales and their uncertainties. Order of elements should corespond to order of variables in \"variables\"",
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "number"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

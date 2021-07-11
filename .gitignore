@@ -7,8 +7,10 @@
 .idea/modules.xml
 .idea/vcs.xml
 __pycache__/
-app_v4.py
-generate_example_json_file.py
-process_BRDF_file.py
-test1.py
+Unrelated test files/app_v4.py
+Unrelated test files/generate_example_json_file.py
+Unrelated test files/process_BRDF_file.py
+Unrelated test files/test1.py
 venv/
+Unrelated test files/
+test json files/
