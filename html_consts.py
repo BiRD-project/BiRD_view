@@ -1,5 +1,0 @@
-marginTop = '0.15%'
-marginBottom = '0.15%'
-marginRight = '0.15%'
-marginLeft = '0.15%'
-params_width = '6.52%'
