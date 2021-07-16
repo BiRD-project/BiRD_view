@@ -148,20 +148,12 @@ to file name where N corresponds to number of copies.
 
 Click on gif below to see uploading procedure example:
 
-'''
-
-help_text_markdown_part_2 = '''
-
 ##### *Selecting uploaded file*
 
 To select one of the uploaded files as an active, click dropdown menu with file names and select file by clicking on its 
 file name. After that menu with file parameters as well as figures will be updated to correspond to selected file.
 
 Click on gif below to see file selecting procedure example:
-
-'''
-
-help_text_markdown_part_3 = '''
 
 ##### *Navigating through data parameters and figures*
 
@@ -175,15 +167,7 @@ they are not changed for other files and applet remembers choices for each file.
 Choices can be made by clicking corresponding dropdown and selecting desired parameter value. Click on the gif below to
 see an example.
 
-'''
-
-help_text_markdown_part_4 = '''
-
 Metadata of the file can be acessed through a "Metadata" tab within file menu:
-
-'''
-
-help_text_markdown_part_5 = '''
 
 Changing data parameters will update the figures located on the right from file menu dropdowns'.
 There are currently two tabs that allow you to explore BRDF data in terms of raw values and 
@@ -194,43 +178,23 @@ incidence zenith and azimuthal angles as well as all other parameters. Changing 
 Dots on the figure represent measured data points and by hovering the mouse over them one can see measured values.
 Color coded surface drawn though measured points gives an idea about the shape of the BRDF.
 
-'''
-
-help_text_markdown_part_6 = '''
-
 Bottom left figure represents the projection of 3D plot to the XY plane and converted to the polar plot. By rotating
 plot one can select viewing azimuthal angle in parallel with corresponding dropdown menu. This selects a plane for 2D BRDF
 plot located  on the right (bottom-right).
-
-'''
-
-help_text_markdown_part_7 = '''
 
 2D BRDF plot shows you the BRDF at specified incidence zenith, azimuthal angles, additional parameters and selected
 viewing azimuthal angle. Changing these parameters will cause graph to update. By clicking on a point located shown on this graph
 you can see the reflectance spectrum at this point. 
 
-'''
-
-help_text_markdown_part_8 = '''
-
 Last graph located at the upper right corner can show 2D BRDF dependence on any parameter selected as X including additional parameters.
 To select parameter as X use dropdown menu named "Select variable as X". Upon selection graph will be updated and desired
 BRDF dependence on selected parameter will be shown.
-
-'''
-
-help_text_markdown_part_9 = '''
 
 ##### *Viewing data from multiple files at the same time*
 
 On 2D plots user can plot and compare data from one and the same file or from different files. To do that one needs to 
 take a snapshot of file menu state by pressing "Snap state" button. When state is snapped BiRDview will remember it and plot it 
 alongside any other state from file menu or other sanaped states. 
-
-'''
-
-help_text_markdown_part_10 = '''
 
 ##### Basics on figures' controls
 
@@ -240,4 +204,4 @@ more. Don't be afraid to learn by trial and remember that you can return to init
 the plot or by using home button on the figure menu that appears in the upper right corner of the graphs when you hover
 your mouse over them. In menu you can also find other useful option and save figures as .png files.
 
-'''
+
