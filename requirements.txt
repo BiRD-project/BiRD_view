@@ -11,11 +11,12 @@ dash-table==4.11.3
 Flask==2.0.1
 Flask-Compress==1.10.1
 future==0.18.2
+gunicorn==20.1.0
 itsdangerous==2.0.1
 Jinja2==3.0.1
 jsonschema==3.2.0
 MarkupSafe==2.0.1
-numpy==1.19.5
+numpy==1.21.0
 plotly==5.1.0
 pyrsistent==0.18.0
 six==1.16.0
