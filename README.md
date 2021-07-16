@@ -1,4 +1,4 @@
-'''
+help_text_markdown_part_1 = '''
 #### *About BiRDview*
 
 ***BiRDview*** is an open source web-application for visualization of _**B**idirectional **R**eflectance **D**istribution **F**unction_ (**BRDF**) measurement data.
@@ -20,7 +20,7 @@ where key is 'string' type and value can be 'string', 'number', 'array', 'True',
 
 Consortium agreed on following keys and structure in the BRDF file format:
 >
-'''json
+```json
 >BRDF file is an object that contains only two main keys "metadata" and "data"
 >{
 >   "metadata": "value is an object with keys describing metadata and static properties of BRDF dataset" *
@@ -150,7 +150,7 @@ Click on gif below to see uploading procedure example:
 
 '''
 
-'''
+help_text_markdown_part_2 = '''
 
 ##### *Selecting uploaded file*
 
@@ -161,7 +161,7 @@ Click on gif below to see file selecting procedure example:
 
 '''
 
-'''
+help_text_markdown_part_3 = '''
 
 ##### *Navigating through data parameters and figures*
 
@@ -177,13 +177,13 @@ see an example.
 
 '''
 
-'''
+help_text_markdown_part_4 = '''
 
 Metadata of the file can be acessed through a "Metadata" tab within file menu:
 
 '''
 
-'''
+help_text_markdown_part_5 = '''
 
 Changing data parameters will update the figures located on the right from file menu dropdowns'.
 There are currently two tabs that allow you to explore BRDF data in terms of raw values and 
@@ -196,7 +196,7 @@ Color coded surface drawn though measured points gives an idea about the shape o
 
 '''
 
-'''
+help_text_markdown_part_6 = '''
 
 Bottom left figure represents the projection of 3D plot to the XY plane and converted to the polar plot. By rotating
 plot one can select viewing azimuthal angle in parallel with corresponding dropdown menu. This selects a plane for 2D BRDF
@@ -204,7 +204,7 @@ plot located  on the right (bottom-right).
 
 '''
 
-'''
+help_text_markdown_part_7 = '''
 
 2D BRDF plot shows you the BRDF at specified incidence zenith, azimuthal angles, additional parameters and selected
 viewing azimuthal angle. Changing these parameters will cause graph to update. By clicking on a point located shown on this graph
@@ -212,7 +212,7 @@ you can see the reflectance spectrum at this point.
 
 '''
 
-'''
+help_text_markdown_part_8 = '''
 
 Last graph located at the upper right corner can show 2D BRDF dependence on any parameter selected as X including additional parameters.
 To select parameter as X use dropdown menu named "Select variable as X". Upon selection graph will be updated and desired
@@ -220,7 +220,7 @@ BRDF dependence on selected parameter will be shown.
 
 '''
 
-'''
+help_text_markdown_part_9 = '''
 
 ##### *Viewing data from multiple files at the same time*
 
@@ -229,7 +229,8 @@ take a snapshot of file menu state by pressing "Snap state" button. When state i
 alongside any other state from file menu or other sanaped states. 
 
 '''
-'''
+
+help_text_markdown_part_10 = '''
 
 ##### Basics on figures' controls
 
