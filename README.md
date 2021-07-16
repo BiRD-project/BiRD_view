@@ -145,16 +145,12 @@ will be shown until all files are loaded. Uploaded file's/files' name will appea
 Uploading of files with the same name is also allowed. In this case a suffix "_copy_N" will be added
 to file name where N corresponds to number of copies. 
 
-Click on gif below to see uploading procedure example:
-
 ![](https://github.com/BiRD-project/BiRD_view/blob/f2100170ddc2f404fb1c3b4e154f598ee7e6ef0e/assets/upload.gif)
 
 ##### *Selecting uploaded file*
 
 To select one of the uploaded files as an active, click dropdown menu with file names and select file by clicking on its 
 file name. After that menu with file parameters as well as figures will be updated to correspond to selected file.
-
-Click on gif below to see file selecting procedure example:
 
 ![](https://github.com/BiRD-project/BiRD_view/blob/f2100170ddc2f404fb1c3b4e154f598ee7e6ef0e/assets/fileselect.gif)
 
@@ -167,10 +163,13 @@ incidence zenith angle, incidence azimuthal angle, viewing zenith angle, viewing
 available parameters (from top to bottom). All parameters remain unique to every file. That means when you change parameters for one file,
 they are not changed for other files and applet remembers choices for each file. 
 
-Choices can be made by clicking corresponding dropdown and selecting desired parameter value. Click on the gif below to
-see an example.
+Choices can be made by clicking corresponding dropdown and selecting desired parameter value. 
+
+![](https://github.com/BiRD-project/BiRD_view/blob/9c52883537f5d19cdc6e42ac2e0cbda9587d45fb/assets/navparams.gif)
 
 Metadata of the file can be acessed through a "Metadata" tab within file menu:
+
+![](https://github.com/BiRD-project/BiRD_view/blob/9c52883537f5d19cdc6e42ac2e0cbda9587d45fb/assets/metadata.gif)
 
 Changing data parameters will update the figures located on the right from file menu dropdowns'.
 There are currently two tabs that allow you to explore BRDF data in terms of raw values and 
@@ -181,23 +180,33 @@ incidence zenith and azimuthal angles as well as all other parameters. Changing 
 Dots on the figure represent measured data points and by hovering the mouse over them one can see measured values.
 Color coded surface drawn though measured points gives an idea about the shape of the BRDF.
 
+![](https://github.com/BiRD-project/BiRD_view/blob/master/assets/3Dplot.gif)
+
 Bottom left figure represents the projection of 3D plot to the XY plane and converted to the polar plot. By rotating
 plot one can select viewing azimuthal angle in parallel with corresponding dropdown menu. This selects a plane for 2D BRDF
 plot located  on the right (bottom-right).
+
+![](https://github.com/BiRD-project/BiRD_view/blob/master/assets/3Dprojection.gif)
 
 2D BRDF plot shows you the BRDF at specified incidence zenith, azimuthal angles, additional parameters and selected
 viewing azimuthal angle. Changing these parameters will cause graph to update. By clicking on a point located shown on this graph
 you can see the reflectance spectrum at this point. 
 
+![](https://github.com/BiRD-project/BiRD_view/blob/master/assets/2Dplot.gif)
+
 Last graph located at the upper right corner can show 2D BRDF dependence on any parameter selected as X including additional parameters.
 To select parameter as X use dropdown menu named "Select variable as X". Upon selection graph will be updated and desired
 BRDF dependence on selected parameter will be shown.
+
+![](https://github.com/BiRD-project/BiRD_view/blob/master/assets/multiPlot.gif)
 
 ##### *Viewing data from multiple files at the same time*
 
 On 2D plots user can plot and compare data from one and the same file or from different files. To do that one needs to 
 take a snapshot of file menu state by pressing "Snap state" button. When state is snapped BiRDview will remember it and plot it 
 alongside any other state from file menu or other sanaped states. 
+
+![](https://github.com/BiRD-project/BiRD_view/blob/master/assets/multiData.gif)
 
 ##### Basics on figures' controls
 
@@ -206,5 +215,7 @@ You can move graphs, rotate them, zoom to specific areas, get information by hov
 more. Don't be afraid to learn by trial and remember that you can return to initial states either by double-clicking on 
 the plot or by using home button on the figure menu that appears in the upper right corner of the graphs when you hover
 your mouse over them. In menu you can also find other useful option and save figures as .png files.
+
+![](https://github.com/BiRD-project/BiRD_view/blob/master/assets/interaction.gif)
 
 
