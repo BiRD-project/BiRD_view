@@ -18,8 +18,8 @@ BRDF file format is based on [json](https://www.json.org/json-en.html) syntax. I
 where key is 'string' type and value can be 'string', 'number', 'array', 'True', 'False', 'Null' or 'object' i.e. another '{key: value}' structure.
 
 Consortium agreed on following keys and structure in the BRDF file format:
-
-json
+>
+'''json
 >BRDF file is an object that contains only two main keys "metadata" and "data"
 >{
 >   "metadata": "value is an object with keys describing metadata and static properties of BRDF dataset" *
