@@ -147,12 +147,16 @@ to file name where N corresponds to number of copies.
 
 Click on gif below to see uploading procedure example:
 
+![](https://github.com/BiRD-project/BiRD_view/blob/f2100170ddc2f404fb1c3b4e154f598ee7e6ef0e/assets/upload.gif)
+
 ##### *Selecting uploaded file*
 
 To select one of the uploaded files as an active, click dropdown menu with file names and select file by clicking on its 
 file name. After that menu with file parameters as well as figures will be updated to correspond to selected file.
 
 Click on gif below to see file selecting procedure example:
+
+![](https://github.com/BiRD-project/BiRD_view/blob/f2100170ddc2f404fb1c3b4e154f598ee7e6ef0e/assets/fileselect.gif)
 
 ##### *Navigating through data parameters and figures*
 
