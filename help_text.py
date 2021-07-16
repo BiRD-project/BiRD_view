@@ -7,7 +7,7 @@ It was developed as one of the results of Joint Research Project _**Bi**directio
 initiative of [EURAMET](https://www.euramet.org/about-euramet/).
 
 Application is written in Python using [Plotly](https://plotly.com/) [Dash](https://dash.plotly.com/) 
-open source library and the code can be found [here](https://github.com/BiRD-project/BiRD_view_v4). 
+open source library and the code can be found [here](https://github.com/BiRD-project/BiRD_view). 
 
 Current version of application allows to open and view files only in the file format developed and agreed by BiRD consortium.
 
@@ -134,8 +134,8 @@ File can be validated using following JSON Schema: [brdf_json_schema.json](https
 
 Example files (toggle code/tree options to study the file):
 * [Example 1](https://jsoneditoronline.org/#right=local.yutupo&left=url.https%3A%2F%2Fraw.githubusercontent.com%2FBiRD-project%2FBiRD_view%2Fmaster%2FTest%2520BRDF%2520data%2520files%2FT08_example.brdf)
-* [Example 2](https://jsoneditoronline.org/#right=local.yutupo&left=url.https%3A%2F%2Fraw.githubusercontent.com%2FBiRD-project%2FBiRD_view%2Fmaster%2FTest%2520BRDF%2520data%2520files%2processed_sand_data_v3.brdf)
-* [Example 3](https://jsoneditoronline.org/#right=local.yutupo&left=url.https%3A%2F%2Fraw.githubusercontent.com%2FBiRD-project%2FBiRD_view%2Fmaster%2FTest%2520BRDF%2520data%2520files%2sand_stones_450_900.brdf)
+* [Example 2](https://jsoneditoronline.org/#right=local.yutupo&left=url.https%3A%2F%2Fraw.githubusercontent.com%2FBiRD-project%2FBiRD_view%2Fmaster%2FTest%2520BRDF%2520data%2520files%2Fprocessed_sand_data_v3.brdf)
+* [Example 3](https://jsoneditoronline.org/#right=local.yutupo&left=url.https%3A%2F%2Fraw.githubusercontent.com%2FBiRD-project%2FBiRD_view%2Fmaster%2FTest%2520BRDF%2520data%2520files%2Fsand_stones_450_900.brdf)
 
 #### *Quick guide*
 
@@ -168,11 +168,9 @@ help_text_markdown_part_3 = '''
 By definition BRDF data has more than 3 dimensions that makes it impossible to depict all the data on a single figure.
 For this reason smaller pieces of data should be selected and depicted on multiple figures. In BiRD view this can be performed
 by using dropdown menus located under file selection dropdown. There, corresponding to BRDF file format, you can select:
-wavelength, polarization, incidence zenith angle, incidence azimuthal angle, viewing zenith angle, and viewing azimuthal angle 
-(from left to right). There are also two options related to color analysis that allow you to select Illuminant and Observer 
-to estimate CIELAB values. These options are not related to the uploaded files and default they are "D65" and 
-"CIE 1931 2 Degree Observer". All parameters remain unique to every file. That means when you change parameters for one file,
-they are not changed for other files and applet remembers choices for each file.
+incidence zenith angle, incidence azimuthal angle, viewing zenith angle, viewing azimuthal angle and any additional
+available parameters (from top to bottom). All parameters remain unique to every file. That means when you change parameters for one file,
+they are not changed for other files and applet remembers choices for each file. 
 
 Choices can be made by clicking corresponding dropdown and selecting desired parameter value. Click on the gif below to
 see an example.
@@ -181,18 +179,18 @@ see an example.
 
 help_text_markdown_part_4 = '''
 
-If you forget which dropdown changed the parameter you need, you can always hover the mouse over dropdown and a quick tip will appear:
+Metadata of the file can be acessed through a "Metadata" tab within file menu:
 
 '''
 
 help_text_markdown_part_5 = '''
 
-Changing data parameters will update the figures located underneath dropdowns' menu.
+Changing data parameters will update the figures located on the right from file menu dropdowns'.
 There are currently two tabs that allow you to explore BRDF data in terms of raw values and 
 CIELAB values calculated from them.
 
 There are four figures for BRDF data viewing. First - top left - provides the 3D shape of BRDF at specified
-wavelength, polarization, incidence zenith and azimuthal angles. Changing these parameters will cause figure to update.
+incidence zenith and azimuthal angles as well as all other parameters. Changing these parameters will cause figure to update.
 Dots on the figure represent measured data points and by hovering the mouse over them one can see measured values.
 Color coded surface drawn though measured points gives an idea about the shape of the BRDF.
 
@@ -208,30 +206,31 @@ plot located  on the right (bottom-right).
 
 help_text_markdown_part_7 = '''
 
-2D BRDF plot shows you the BRDF at specified wavelength, polarization, incidence zenith, azimuthal angles and selected
-viewing azimuthal angle. Changing these parameters will caus graph to update. By clicking on a point located shown on this graph
+2D BRDF plot shows you the BRDF at specified incidence zenith, azimuthal angles, additional parameters and selected
+viewing azimuthal angle. Changing these parameters will cause graph to update. By clicking on a point located shown on this graph
 you can see the reflectance spectrum at this point. 
 
 '''
 
 help_text_markdown_part_8 = '''
 
-BRDF spectrum at specified polarization, incidence zenith, azimuthal angles and selected
-viewing azimuthal and zenith angles is depicted in top right figure. It gives an idea whether the measured
-sample changes its color under different illumination and/or viewing circumstances or not. This spectrum is
-used for further color and CIELAB values calculations.
-
-##### *Viewing data from multiple files at the same time*
-
-If one wants to view and compare data of selected file with some other file that will be selected in the future,
-one should place a check mark in the checkbox named "visible" and located on the right from file selection dropdown.
-In this case, when other file will be selected data from file marked as visible will appear on the 2D BRDF and 
-BRDF spectrum plots. This feature is disabled for 3D and projection figures since it will disturb analysis rather than
-help it while slowing down the app.
+Last graph located at the upper right corner can show 2D BRDF dependence on any parameter selected as X including additional parameters.
+To select parameter as X use dropdown menu named "Select variable as X". Upon selection graph will be updated and desired
+BRDF dependence on selected parameter will be shown.
 
 '''
 
 help_text_markdown_part_9 = '''
+
+##### *Viewing data from multiple files at the same time*
+
+On 2D plots user can plot and compare data from one and the same file or from different files. To do that one needs to 
+take a snapshot of file menu state by pressing "Snap state" button. When state is snapped BiRDview will remember it and plot it 
+alongside any other state from file menu or other sanaped states. 
+
+'''
+
+help_text_markdown_part_10 = '''
 
 ##### Basics on figures' controls
 

@@ -254,8 +254,8 @@ def render_menu_tabs_content(tab, app_mode):
                       html.Div(children=dcc.Markdown(help_text_markdown_part_4,
                                                      style={'width': '70%'})),
                       html.Div([gif.GifPlayer(
-                          gif='assets/paramstips.gif',
-                          still='assets/paramstips.png')],
+                          gif='assets/metadata.gif',
+                          still='assets/metadata.png')],
                           style={'width': '70%'}),
                       html.Div(children=dcc.Markdown(help_text_markdown_part_5,
                                                      style={'width': '70%'})),
@@ -278,10 +278,16 @@ def render_menu_tabs_content(tab, app_mode):
                       html.Div(children=dcc.Markdown(help_text_markdown_part_8,
                                                      style={'width': '70%'})),
                       html.Div([gif.GifPlayer(
+                          gif='assets/multiPlot.gif',
+                          still='assets/multiPlot.png')],
+                          style={'width': '70%'}),
+                      html.Div(children=dcc.Markdown(help_text_markdown_part_9,
+                                                     style={'width': '70%'})),
+                      html.Div([gif.GifPlayer(
                           gif='assets/multiData.gif',
                           still='assets/multiData.png')],
                           style={'width': '70%'}),
-                      html.Div(children=dcc.Markdown(help_text_markdown_part_9,
+                      html.Div(children=dcc.Markdown(help_text_markdown_part_10,
                                                      style={'width': '70%'})),
                       html.Div([gif.GifPlayer(
                           gif='assets/interaction.gif',
@@ -545,7 +551,7 @@ def update_menu(trigger_upload, trigger_menu_tabs, file_name, file_navigator_sta
                      clearable=False,
                      style={'margin-bottom': '2.5px', 'margin-top': '2.5px'})
     )
-    if uploaded_data[key]['validity'] is False:
+    if uploaded_data[file_name]['validity'] is False:
         file_menu_container_children.append(
             html.P('Some file(s) are not in valid BRDF format. Use validator to check the problem.', style={'margin-bottom': '2.5px', 'margin-top': '2.5px', 'color': 'red'})
         )
@@ -1674,7 +1680,8 @@ def update_2D_brdf_plot(trigger1, trigger2, trigger3, uploaded_data, filename, s
     return figure
 
 @app.callback([Output({'type': 'memory', 'index': '2D-brdf-plot-clicked'}, 'data'),
-               Output({'type': 'options', 'index': 'theta_r'}, 'value')],
+               Output({'type': 'options', 'index': 'theta_r'}, 'value'),
+               Output({'type': 'graph', 'index': '2d-brdf'}, 'clickData')],
               [Input({'type': 'graph', 'index': '2d-brdf'}, 'clickData')],
               [State({'type': 'memory', 'index': 'browser_data_storage'}, 'data'),
                State({'type': 'memory', 'index': 'selected_file'}, 'data'),
@@ -1690,7 +1697,7 @@ def plot_2D_select_ThetaV(clickData, uploaded_data, filename, clicks, current_op
             raise PreventUpdate
     else:
         raise PreventUpdate
-    return clicks+1, selected_theta
+    return clicks+1, selected_theta, None
 
 @app.callback([Output({'type': 'memory', 'index': '2D-arbitrary-plot-previous-state'}, 'data'),
                Output({'type': 'trigger', 'index': 'for-2D-arbitrary-plot'}, 'data')],
@@ -1730,6 +1737,10 @@ def update_2D_arbitrary_plot(trigger1, trigger2, trigger3, uploaded_data, select
     variables = uploaded_data[selected_filename]['data']['variables']
     data = uploaded_data[selected_filename]['data']['values']
     variable_selected_as_x = uploaded_data[selected_filename]['variable_as_x']
+    variable_selected_as_x_unit = ''
+    for variable in variables:
+        if variable['name'] == variable_selected_as_x:
+            variable_selected_as_x_unit = str(variable['unit'])
     # variables_to_options = {}
     # for variable in uploaded_data[selected_filename]['data']['variables']:
     #     if variable['name'] != 'BRDF' and variable['name'] != "uBRDF":
@@ -1824,8 +1835,8 @@ def update_2D_arbitrary_plot(trigger1, trigger2, trigger3, uploaded_data, select
         figure.add_trace(go.Scatter(x=[0, 1, 0.5, 0.5, -0.5, -0.5, -1, 0], y=[0, 1, 1, 3, 3, 1, 1, 0], mode='lines+markers'))
 
     figure.update_layout(
-        title="Reflectance spectrum at selected viewing zenith and azimuth",
-        xaxis_title='Wavelength (nm)',
+        title="BRDF dependence on parameter selected as X",
+        xaxis_title= variable_selected_as_x + ' (' + variable_selected_as_x_unit + ')',
         yaxis_title='BRDF values (sr \u207B\u00B9)',
         xaxis_nticks=15,
         xaxis_gridcolor='rgb(112,112,112)',
@@ -1842,5 +1853,5 @@ app.layout = server_layout()
 app.title = "BiRDview"
 
 if __name__ == '__main__':
-    app.run_server(debug=True,dev_tools_ui=True,dev_tools_props_check=True)
-    app.run_server(debug=True)
+    app.run_server(debug=False,dev_tools_ui=False,dev_tools_props_check=False)
+    app.run_server(debug=False)
