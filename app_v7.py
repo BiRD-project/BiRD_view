@@ -199,6 +199,12 @@ def render_menu_tabs_content(tab, app_mode):
     #Rendering contents for BRDF JSON validator Tab
     elif tab == 'Validator':
         return html.Div(children=[
+            html.Div(children=dcc.Markdown('Validation is conducted using following JSON Schema: [brdf_json_schema.json](https://jsoneditoronline.org/#right=local.yutupo&left=url.https%3A%2F%2Fraw.githubusercontent.com%2FBiRD-project%2FBiRD_view%2Fmaster%2Fbrdf_json_schema.json)'),
+                                     style={'width': '100%', 'height': '30px', 'lineHeight': '30px',
+                                            'borderWidth': '1px', 'borderStyle': 'solid', 'borderRadius': '7.5px',
+                                            'textAlign': 'center', 'margin-bottom': '5px', 'margin-top': '2.5px',
+                                            'borderColor': 'LightGrey'}
+                     ),
             html.Div(id={'type': 'file-loading-container', 'index': 1}, children=[
                 dcc.Loading(id={'type': 'file-loading', 'index': 1}, children=[
                     dcc.Upload(id={'type': 'upload-data', 'index': 1},
@@ -757,7 +763,8 @@ def update_menu(trigger_upload, trigger_menu_tabs, file_name, file_navigator_sta
                State({'type': 'options', 'index': ALL}, 'value'),
                State({'type': 'options', 'index': ALL}, 'id')])
 def take_state_snap(n_clicks, remove_clicks, file_name, snaped_states, options, ids):
-    if file_name == '' or n_clicks == None:
+    print(remove_clicks)
+    if file_name == '':
         raise PreventUpdate
 
     # print(dash.callback_context.triggered)
@@ -774,26 +781,27 @@ def take_state_snap(n_clicks, remove_clicks, file_name, snaped_states, options, 
         if snaped_states[remove_button_file_name] == {}:
             del snaped_states[remove_button_file_name]
     else:
-        id_keys = []
-        for id in ids:
-            id_keys.append(id['index'])
-        options_under_key = {}
-        for i in range(len(options)):
-            options_under_key[id_keys[i]] = options[i]
-        i = len(options) - 1
-        variable_as_x = options[i]
-        if file_name not in snaped_states:
-            variable_as_x_states = []
-            variable_as_x_states.append(options_under_key)
-            snaped_states[file_name] = {variable_as_x: variable_as_x_states}
-        else:
-            if variable_as_x not in snaped_states[file_name]:
+        if n_clicks != None:
+            id_keys = []
+            for id in ids:
+                id_keys.append(id['index'])
+            options_under_key = {}
+            for i in range(len(options)):
+                options_under_key[id_keys[i]] = options[i]
+            i = len(options) - 1
+            variable_as_x = options[i]
+            if file_name not in snaped_states:
                 variable_as_x_states = []
                 variable_as_x_states.append(options_under_key)
-                snaped_states[file_name][variable_as_x] = variable_as_x_states
+                snaped_states[file_name] = {variable_as_x: variable_as_x_states}
             else:
-                if options_under_key not in snaped_states[file_name][variable_as_x]:
-                    snaped_states[file_name][variable_as_x].append(options_under_key)
+                if variable_as_x not in snaped_states[file_name]:
+                    variable_as_x_states = []
+                    variable_as_x_states.append(options_under_key)
+                    snaped_states[file_name][variable_as_x] = variable_as_x_states
+                else:
+                    if options_under_key not in snaped_states[file_name][variable_as_x]:
+                        snaped_states[file_name][variable_as_x].append(options_under_key)
 
     snaped_states_children = []
     for file_name in snaped_states:
@@ -1713,13 +1721,28 @@ def trigger_2D_arbtrary_plot(trigger, plot_previous_state, previous_state, filen
                State({'type': 'memory', 'index': 'selected_file'}, 'data'),
                State({'type': 'memory', 'index': 'snaped-states'}, 'data')])
 def update_2D_arbitrary_plot(trigger1, trigger2, trigger3, uploaded_data, selected_filename, snaped_states):
-    # print(dash.callback_context.triggered)
+
     if selected_filename == '' or uploaded_data == {}:
+        raise PreventUpdate
+    if 'variable_as_x' not in uploaded_data[selected_filename]:
         raise PreventUpdate
 
     variables = uploaded_data[selected_filename]['data']['variables']
     data = uploaded_data[selected_filename]['data']['values']
     variable_selected_as_x = uploaded_data[selected_filename]['variable_as_x']
+    # variables_to_options = {}
+    # for variable in uploaded_data[selected_filename]['data']['variables']:
+    #     if variable['name'] != 'BRDF' and variable['name'] != "uBRDF":
+    #         variables_to_options[variable['name']] = {
+    #             'options': [{'label': uval, 'value': uval} for uval in variable['uvals']],
+    #             'value': variable['sval']
+    #         }
+    # variable_as_x_options = [{'label': key, 'value': key} for key in variables_to_options]
+    # variable_selected_as_x = ''
+    # if 'variable_as_x' in uploaded_data[selected_filename]:
+    #     variable_selected_as_x = uploaded_data[selected_filename]['variable_as_x']
+    # else:
+    #     variable_selected_as_x = variable_as_x_options[len(variable_as_x_options) - 1]['value']
     figure = go.Figure()
 
     if variable_selected_as_x != 'theta_r':
@@ -1762,6 +1785,8 @@ def update_2D_arbitrary_plot(trigger1, trigger2, trigger3, uploaded_data, select
                 for selected_x in snaped_states[file_name]:
                     if selected_x != 'theta_r':
                         for state in snaped_states[file_name][selected_x]:
+                            variables = uploaded_data[file_name]['data']['variables']
+                            data = uploaded_data[file_name]['data']['values']
                             mask = np.array([])
                             brdf = np.array([])
                             ubrdf = np.array([])
@@ -1817,5 +1842,5 @@ app.layout = server_layout()
 app.title = "BiRDview"
 
 if __name__ == '__main__':
-    app.run_server(debug=False,dev_tools_ui=False,dev_tools_props_check=False)
-    app.run_server(debug=False)
+    app.run_server(debug=True,dev_tools_ui=True,dev_tools_props_check=True)
+    app.run_server(debug=True)

@@ -21,7 +21,7 @@ where key is 'string' type and value can be 'string', 'number', 'array', 'True',
 Consortium agreed on following keys and structure in the BRDF file format:
 >
 ```json
->BRDF file is oan object that contains only two main keys "metadata" and "data"
+>BRDF file is an object that contains only two main keys "metadata" and "data"
 >{
 >   "metadata": "value is an object with keys describing metadata and static properties of BRDF dataset" *
 >       {                                
@@ -130,8 +130,12 @@ Consortium agreed on following keys and structure in the BRDF file format:
 
 File can have extension .json or .brdf.
 
+File can be validated using following JSON Schema: [brdf_json_schema.json](https://jsoneditoronline.org/#right=local.yutupo&left=url.https%3A%2F%2Fraw.githubusercontent.com%2FBiRD-project%2FBiRD_view%2Fmaster%2Fbrdf_json_schema.json).
+
 Example files (toggle code/tree options to study the file):
 * [Example 1](https://jsoneditoronline.org/#right=local.yutupo&left=url.https%3A%2F%2Fraw.githubusercontent.com%2FBiRD-project%2FBiRD_view%2Fmaster%2FTest%2520BRDF%2520data%2520files%2FT08_example.brdf)
+* [Example 2](https://jsoneditoronline.org/#right=local.yutupo&left=url.https%3A%2F%2Fraw.githubusercontent.com%2FBiRD-project%2FBiRD_view%2Fmaster%2FTest%2520BRDF%2520data%2520files%2processed_sand_data_v3.brdf)
+* [Example 3](https://jsoneditoronline.org/#right=local.yutupo&left=url.https%3A%2F%2Fraw.githubusercontent.com%2FBiRD-project%2FBiRD_view%2Fmaster%2FTest%2520BRDF%2520data%2520files%2sand_stones_450_900.brdf)
 
 #### *Quick guide*
 
@@ -139,9 +143,8 @@ Example files (toggle code/tree options to study the file):
 To upload the BRDF file in the **"Applet"** tab locate upload field where you can either drag and drop files or open a 
 file selection dialogue to choose files to be opened. Uploading of multiple files is allowed and "loading" animation
 will be shown until all files are loaded. Uploaded file's/files' name will appear in the dropdown menu below upload field.
-In current version uploading of files with the same name is also allowed. In this case a suffix "_copy_N" will be added
-to file name where N corresponds to number of copies. This allows to compare data from one and the same file with itself 
-when it is needed.
+Uploading of files with the same name is also allowed. In this case a suffix "_copy_N" will be added
+to file name where N corresponds to number of copies. 
 
 Click on gif below to see uploading procedure example:
 
