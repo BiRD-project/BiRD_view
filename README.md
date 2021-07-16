@@ -1,4 +1,3 @@
-help_text_markdown_part_1 = '''
 #### *About BiRDview*
 
 ***BiRDview*** is an open source web-application for visualization of _**B**idirectional **R**eflectance **D**istribution **F**unction_ (**BRDF**) measurement data.
