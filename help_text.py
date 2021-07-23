@@ -11,6 +11,9 @@ open source library and the code can be found [here](https://github.com/BiRD-pro
 
 Current version of application allows to open and view files only in the file format developed and agreed by BiRD consortium.
 
+NB! Heroku servers have timeout of 30s. This may cause application to fail to upload very large files.
+The solution is known and will bepresented in the next vercion of application. Thank you for understanding!
+
 #### *Universal BRDF data format*
 BRDF file format is based on [json](https://www.json.org/json-en.html) syntax. I.e. it is a text file that stores data in dictionaries in the form of:
 
