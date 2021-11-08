@@ -1,0 +1,196 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/metadata_json_schema.json",
+  "title": "metadata",
+  "description": "A section of a file that describes the measured or simulated BRDF data set from the point of view of data origin, simulation or measurement system's parameters, sample parameters and evironment. It also contains a globaly unique dataset identifier, specifices the data type, file name and records a timestamp of a measurement or simulation",
+  "type": "object",
+  "required": [
+    "id",
+    "type",
+    "name",
+    "timestamp",
+    "provenance",
+    "simulation",
+    "system",
+    "sample",
+    "environment",
+    "comments"
+  ],
+  "properties": {
+    "id": {
+      "title": "id",
+      "description": "Globally unique identifier such as GUID, UUID or DOI as a string",
+      "type": "string"
+    },
+    "type": {
+      "title": "type",
+      "description": "Data type identifier. Always a \"BRDF\" that stands for bidirectional reflectance distribution function.",
+      "type": "string",
+      "const": "BRDF"
+    },
+    "name": {
+      "title": "name",
+      "description": "Current file name as a string",
+      "type": "string"
+    },
+    "timestamp": {
+      "title": "timestamp",
+      "description": "Timestamp of measurement or simulation as a string in the format of YYYY-MM-DDThh:mm:ss±hh of UTC time corresponding to ISO8601 standard.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "provenance": {
+      "title": "provenance",
+      "description": "String or an object with keys describing the origin of the data i.e. institution, address, personell etc. Object has values as a number or a string.",
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "simulation": {
+      "title": "simulation",
+      "description": "String or an object with keys describing the mathematical/physical simulation model and its parameters used to produce BRDF data. Object has values as a number or a string.",
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "system": {
+      "title": "system",
+      "description": "String or an object with keys describing the setup or instrumentation and its parameters used to measure BRDF data. Object has values as a number or a string.",
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "sample": {
+      "title": "sample",
+      "description": "String or an object with keys describing the virtual or actual sample used to produce BRDF data. Object has values as a number or a string.",
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "environment": {
+      "title": "environment",
+      "description": "String or an object with keys describing the environmental conditions during BRDFmeasurement like pressure, temperature, humidity, etc. Object has values as a number or a string.",
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "comments": {
+      "title": "comments",
+      "description": "String or an object with keys describing any additional data related to BRDF measurement. Object has values as a number or a string.",
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "additionalProperties": {
+    "description": "String or an object with keys describing any other information relevant to the BRDF data that cannot be presented within mandatory metadata objects. Object has values as a number or a string.",
+    "oneOf": [
+      {
+        "type": "string"
+      },
+      {
+        "type": "object",
+        "additionalProperties": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

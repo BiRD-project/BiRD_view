@@ -1583,6 +1583,7 @@ def update_2D_brdf_plot(trigger1, trigger2, trigger3, uploaded_data, filename, s
             for selected_x in snaped_states[file_name]:
                 if selected_x == 'theta_r':
                     for state in snaped_states[file_name][selected_x]:
+                        data = uploaded_data[file_name]['data']['values']
                         mask = np.array([])
                         brdf = np.array([])
                         ubrdf = np.array([])
