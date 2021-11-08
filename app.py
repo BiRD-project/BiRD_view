@@ -26,7 +26,7 @@ server = app.server
 app.config['suppress_callback_exceptions'] = True
 colors = {'background': '#111111', 'text': '#000080'}
 
-json_schema = open('brdf_json_schema.json')
+json_schema = open('BRDF JSON schema/brdf_json_schema.json')
 dict_from_json_schema = json.loads(json_schema.read())
 
 # Static application page layout

@@ -4,7 +4,7 @@ from jsonschema import validate, FormatChecker
 import numpy as np
 import copy
 # import colour as clr
-json_schema = open('brdf_json_schema.json')
+json_schema = open('BRDF JSON schema/brdf_json_schema.json')
 dict_from_json_schema = json.loads(json_schema.read())
 
 def validate_brdf_json(dict_from_brdf_json, dict_from_brdf_json_schema):
