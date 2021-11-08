@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/brdf_json_schema.json",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/brdf_json_schema.json",
   "title": "Universal BRDF data format schema",
   "description": "A JSON schema for automatic validation of Universal BRDF data format proposed by BiRD project consortium in 2021",
   "type": "object",

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/metadata_json_schema.json",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/metadata_json_schema.json",
   "title": "metadata",
   "description": "A section of a file that describes the measured or simulated BRDF data set from the point of view of data origin, simulation or measurement system's parameters, sample parameters and evironment. It also contains a globaly unique dataset identifier, specifices the data type, file name and records a timestamp of a measurement or simulation",
   "type": "object",
