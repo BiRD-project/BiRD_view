@@ -11,11 +11,12 @@
     "timestamp",
     "provenance",
     "simulation",
-    "system",
+    "instrumentation",
     "sample",
     "environment",
     "comments"
   ],
+  "additionalProperties": false,
   "properties": {
     "id": {
       "title": "id",
@@ -40,114 +41,24 @@
       "format": "date-time"
     },
     "provenance": {
-      "title": "provenance",
       "description": "String or an object with keys describing the origin of the data i.e. institution, address, personell etc. Object has values as a number or a string.",
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "object",
-          "additionalProperties": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "number"
-              }
-            ]
-          }
-        }
-      ]
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/provenance_json_schema.json"
     },
     "simulation": {
-      "title": "simulation",
       "description": "String or an object with keys describing the mathematical/physical simulation model and its parameters used to produce BRDF data. Object has values as a number or a string.",
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "object",
-          "additionalProperties": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "number"
-              }
-            ]
-          }
-        }
-      ]
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/simulation_json_schema.json"
     },
-    "system": {
-      "title": "system",
+    "instrumentation": {
       "description": "String or an object with keys describing the setup or instrumentation and its parameters used to measure BRDF data. Object has values as a number or a string.",
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "object",
-          "additionalProperties": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "number"
-              }
-            ]
-          }
-        }
-      ]
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/instrumentation_json_schema.json"
     },
     "sample": {
-      "title": "sample",
       "description": "String or an object with keys describing the virtual or actual sample used to produce BRDF data. Object has values as a number or a string.",
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "object",
-          "additionalProperties": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "number"
-              }
-            ]
-          }
-        }
-      ]
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/sample_json_schema.json"
     },
     "environment": {
-      "title": "environment",
       "description": "String or an object with keys describing the environmental conditions during BRDFmeasurement like pressure, temperature, humidity, etc. Object has values as a number or a string.",
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "object",
-          "additionalProperties": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "number"
-              }
-            ]
-          }
-        }
-      ]
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/environment_json_schema.json"
     },
     "comments": {
       "title": "comments",
@@ -170,27 +81,27 @@
           }
         }
       ]
-    }
-  },
-  "additionalProperties": {
-    "description": "String or an object with keys describing any other information relevant to the BRDF data that cannot be presented within mandatory metadata objects. Object has values as a number or a string.",
-    "oneOf": [
-      {
-        "type": "string"
-      },
-      {
-        "type": "object",
-        "additionalProperties": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "number"
-            }
-          ]
+    },
+    "userkeys": {
+      "description": "String or an object with keys describing any other information relevant to the BRDF data that cannot be presented within mandatory metadata objects. Object has values as a number or a string.",
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          }
         }
-      }
-    ]
+      ]
+    }
   }
 }
