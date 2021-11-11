@@ -55,7 +55,7 @@
       "title": "method",
       "description": "Data acquisition method that specifies whether data was simulated or measured. Can have two string values: \"simulation\" or \"measurement\"",
       "type": "string",
-      "oneOf": {"const": "simulation", "const": "measurement"}
+      "oneOf": [{"const": "simulation"}, {"const": "measurement"}]
     },
     "instrumentation": {
       "description": "String or an object with keys describing the setup or instrumentation and its parameters used to measure BRDF data. Object has values as a number or a string.",
