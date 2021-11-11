@@ -7,11 +7,13 @@
   "required": [
     "id",
     "type",
+    "schema",
     "name",
     "timestamp",
     "provenance",
-    "simulation",
+    "method",
     "instrumentation",
+    "software",
     "sample",
     "environment",
     "comments"
@@ -25,9 +27,14 @@
     },
     "type": {
       "title": "type",
-      "description": "Data type identifier. Always a \"BRDF\" that stands for bidirectional reflectance distribution function.",
+      "description": "Data type identifier. Currently always \"BRDF\" that stands for bidirectional reflectance distribution function. Abbreviations for different spectral and polarimetric BRDF data types will be added in the future versions",
       "type": "string",
       "const": "BRDF"
+    },
+    "schema": {
+      "title": "schema",
+      "description": "URL to schema of universal BRDF file format which name also specifies the schema version.",
+      "type": "string"
     },
     "name": {
       "title": "name",
@@ -44,13 +51,19 @@
       "description": "String or an object with keys describing the origin of the data i.e. institution, address, personell etc. Object has values as a number or a string.",
       "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/provenance_json_schema.json"
     },
-    "simulation": {
-      "description": "String or an object with keys describing the mathematical/physical simulation model and its parameters used to produce BRDF data. Object has values as a number or a string.",
-      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/simulation_json_schema.json"
+    "method": {
+      "title": "method",
+      "description": "Data acquisition method that specifies whether data was simulated or measured. Can have two string values: \"simulation\" or \"measurement\"",
+      "type": "string",
+      "oneOf": ["simulation", "measurement"]
     },
     "instrumentation": {
       "description": "String or an object with keys describing the setup or instrumentation and its parameters used to measure BRDF data. Object has values as a number or a string.",
       "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/instrumentation_json_schema.json"
+    },
+    "software": {
+      "description": "String or an object with keys describing the mathematical/physical simulation model and its parameters used to produce BRDF data. Object has values as a number or a string.",
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/simulation_json_schema.json"
     },
     "sample": {
       "description": "String or an object with keys describing the virtual or actual sample used to produce BRDF data. Object has values as a number or a string.",
@@ -82,7 +95,7 @@
         }
       ]
     },
-    "userkeys": {
+    "user_section": {
       "description": "String or an object with keys describing any other information relevant to the BRDF data that cannot be presented within mandatory metadata objects. Object has values as a number or a string.",
       "oneOf": [
         {
