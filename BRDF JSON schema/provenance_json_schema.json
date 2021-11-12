@@ -3,22 +3,99 @@
   "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/provenance_json_schema.json",
   "title": "provenance",
   "description": "String or an object with keys describing the origin of the data i.e. institution, address, personell etc. Object has values as a number or a string.",
-  "oneOf": [
-    {
+  "type": "object",
+  "properties": {
+    "organization": {
+      "title": "organization",
+      "description": "Name of the company, organization, institution, university etc. that produced the dataset recorded within the file.",
       "type": "string"
     },
-    {
+    "location": {
+      "title": "location",
+      "description": "Object that specifies physical location or address of organization that provided dataset recorded within the file.",
       "type": "object",
-      "additionalProperties": {
-        "oneOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "number"
-          }
-        ]
-      }
+      "properties": {
+        "country": {
+          "title": "organization",
+          "description": "Name of the country where organization is located",
+          "type": "string"
+        },
+        "county": {
+          "title": "organization",
+          "description": "Name of the county within country where organization is located",
+          "type": "string"
+        },
+        "city": {
+          "title": "organization",
+          "description": "Name of the city where organization is located",
+          "type": "string"
+        },
+        "street": {
+          "title": "organization",
+          "description": "Name of the street within city where organization is located",
+          "type": "string"
+        },
+        "building_nr": {
+          "title": "organization",
+          "description": "Street number of the building where organization is residing",
+          "type": "string"
+        },
+        "room_nr": {
+          "title": "organization",
+          "description": "Laboratory or the room number within the organization's building",
+          "type": "string"
+        },
+        "postal_code": {
+          "title": "organization",
+          "description": "Postal code of organization's address.",
+          "type": "string"
+        },
+        "coordinates": {
+          "title": "organization",
+          "description": "Organization location coordinates according to ISO 6709 standard",
+          "type": "string"
+        }
+      },
+      "required": [
+        "country",
+        "city",
+        "street",
+        "building_nr",
+        "postal_code",
+      ],
+      "additionalProperties": false
+    },
+    "website": {
+      "title": "website",
+      "description": "Url of the organization/institution's web-page if available.",
+      "type": "string"
+    },
+    "email": {
+      "title": "email",
+      "description": "Contact email of organization or its contact person.",
+      "type": "string"
+    },
+    "phone": {
+      "title": "phone",
+      "description": "Contact phone/mobile number of organization or its contact person according to notation for international numbers suggested by ITU E.123 standard.",
+      "type": "string"
+    },
+    "contact_person": {
+      "title": "contact_person",
+      "description": "Name of the contact person representing the organization.",
+      "type": "string"
+    },
+    "comments": {
+      "title": "comments",
+      "description": "Any additional iformation related to the provenance of the presented data in text form.",
+      "type": "string"
     }
-  ]
+  },
+  "required": [
+    "organization",
+    "location",
+    "email",
+    "contact_person"
+  ],
+  "additionalProperties": false
 }
