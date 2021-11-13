@@ -61,7 +61,7 @@
         "city",
         "street",
         "building_nr",
-        "postal_code",
+        "postal_code"
       ],
       "additionalProperties": false
     },
