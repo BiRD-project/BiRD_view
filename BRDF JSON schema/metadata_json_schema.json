@@ -77,9 +77,9 @@
       "description": "String describing any additional information or comment related to BRDF measurement data.",
       "type": "string"
     },
-    "user_section": {
-      "title": "user_section",
-      "description": "An object that contains user defined keys describing any information relevant to the BRDF data which cannot be presented within metadata objects provided by schema. User section can contain all types of entries except new objects",
+    "adhoc_section": {
+      "title": "adhoc_section",
+      "description": "An object that contains user defined keys describing any information relevant to the BRDF data which cannot be presented within metadata objects provided by schema. Adhoc section can contain all types of entries except new objects",
       "type": "object",
       "additionalProperties": {
         "not": {
