@@ -21,13 +21,15 @@
   "properties": {
     "schema": {
       "title": "schema",
-      "description": "URL to schema of universal BRDF file format which name also specifies the schema version.",
-      "type": "uri"
+      "description": "URL to schema of universal BRDF file format which name also specifies the schema version. As a string in uri format.",
+      "type": "string",
+      "format": "uri"
     },
     "id": {
       "title": "id",
-      "description": "A universal resource identifier (URI), according to RFC3986",
-      "type": "uri"
+      "description": "A universal resource identifier (URI), according to RFC3986. String in uri format",
+      "type": "string",
+      "format": "uri"
     },
     "type": {
       "title": "type",

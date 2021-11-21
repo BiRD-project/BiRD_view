@@ -17,8 +17,9 @@
     },
     "link": {
       "name": "link",
-      "description": "Link to the licence text applicable license text as url.",
-      "type": "uri"
+      "description": "Link to the licence text applicable license as url string.",
+      "type": "string",
+      "format": "uri"
     },
     "rights_holder": {
       "name": "rights_holder",
@@ -27,8 +28,9 @@
     },
     "email": {
       "name": "email",
-      "description": "E-mail of the natural or legal person who holds full rights for the presented data. According to RFC 5321, section 4.1.2",
-      "type": "email"
+      "description": "E-mail of the natural or legal person who holds full rights for the presented data. String according to RFC 5321, section 4.1.2",
+      "type": "string",
+      "format": "email"
     },
     "phone": {
       "title": "phone",
