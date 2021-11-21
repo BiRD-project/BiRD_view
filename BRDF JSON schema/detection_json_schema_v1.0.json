@@ -1,0 +1,451 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/detection_json_schema_v1.0.json",
+  "title": "detection",
+  "description": "An object with keys describing detector and its accompanying relevant optical components and and settings.",
+  "type": "object",
+  "properties": {
+    "sensor": {
+      "name": {
+        "title": "",
+        "description": "",
+        "type": ""
+      },
+      "model": {
+        "title": "",
+        "description": "",
+        "type": ""
+      },
+      "manufacturer": {
+        "title": "",
+        "description": "",
+        "type": ""
+      },
+      "type": {
+        "title": "",
+        "description": "",
+        "type": ""
+      },
+      "material": {
+        "title": "",
+        "description": "",
+        "type": ""
+      },
+      "area": {
+        "title": "",
+        "description": "",
+        "type": ""
+      },
+      "bias": {
+        "title": "",
+        "description": "",
+        "type": ""
+      },
+      "temperature": {
+        "title": "",
+        "description": "",
+        "type": ""
+      },
+      "polarization_sensitivity": {
+        "title": "",
+        "description": "",
+        "type": ""
+      },
+      "damage_treshold": {
+        "title": "",
+        "description": "",
+        "type": ""
+      },
+      "dark_signal": {
+        "title": "",
+        "description": "",
+        "type": ""
+      },
+      "uniformity": {
+        "title": "",
+        "description": "",
+        "type": ""
+      },
+      "linearity": {
+        "title": "",
+        "description": "",
+        "type": ""
+      },
+      "wl_range": {
+        "title": "",
+        "description": "",
+        "type": ""
+      },
+      "data_links": {
+        "title": "",
+        "description": "",
+        "type": ""
+      },
+      "comments": {
+        "title": "",
+        "description": "",
+        "type": ""
+      },
+      "adhoc_section": {
+        "title": "",
+        "description": "",
+        "type": ""
+      }
+    },
+    "optical_alterants": {
+      "filters": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "title": "",
+              "description": "",
+              "type": ""
+            },
+            "model": {
+              "title": "",
+              "description": "",
+              "type": ""
+            },
+            "manufacturer": {
+              "title": "",
+              "description": "",
+              "type": ""
+            },
+            "type": {
+              "title": "",
+              "description": "",
+              "type": ""
+            },
+            "material": {
+              "title": "",
+              "description": "",
+              "type": ""
+            },
+            "cut_on_wl": {
+              "title": "",
+              "description": "",
+              "type": ""
+            },
+            "cut_off_wl": {
+              "title": "",
+              "description": "",
+              "type": ""
+            },
+            "wl_range": {
+              "title": "",
+              "description": "",
+              "type": ""
+            },
+            "transmission": {
+              "title": "",
+              "description": "",
+              "type": ""
+            },
+            "transmission_FWHM": {
+              "title": "",
+              "description": "",
+              "type": ""
+            },
+            "min_transmission": {
+              "title": "",
+              "description": "",
+              "type": ""
+            },
+            "max_transmission": {
+              "title": "",
+              "description": "",
+              "type": ""
+            },
+            "blocking": {
+              "title": "",
+              "description": "",
+              "type": ""
+            },
+            "min_blocking": {
+              "title": "",
+              "description": "",
+              "type": ""
+            },
+            "max_blocking": {
+              "title": "",
+              "description": "",
+              "type": ""
+            },
+            "damage_treshold": {
+              "title": "",
+              "description": "",
+              "type": ""
+            },
+            "data_links": {
+              "title": "",
+              "description": "",
+              "type": ""
+            },
+            "comments": {
+              "title": "",
+              "description": "",
+              "type": ""
+            },
+            "adhoc_section": {
+              "title": "",
+              "description": "",
+              "type": ""
+            }
+          }
+        }
+      },
+      "monochromator": {
+        "properties": {
+          "name": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "model": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "manufacturer": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "type": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "wl_range": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "bandpass_FWHM": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "resolution": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "damage_treshold": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "data_links": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "comments": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "adhoc_section": {
+            "title": "",
+            "description": "",
+            "type": ""
+          }
+        }
+      },
+      "polarizer": {
+        "properties": {
+          "name": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "model": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "manufacturer": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "material": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "type": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "jones_vector": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "jones_matrix": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "stokes_vector": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "mueller_matrix": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "extinction_ratio": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "wl_range": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "design_wl": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "damage_treshold": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "data_links": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "comments": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "adhoc_section": {
+            "title": "",
+            "description": "",
+            "type": ""
+          }
+        }
+      },
+      "solid_angle": {
+        "title": "",
+        "description": "",
+        "type": ""
+      },
+      "aperture": {
+        "properties": {
+          "height": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "width": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "radius": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "diameter": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "semi_major_axis": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "semi_minor_axis": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "comments": {
+            "title": "",
+            "description": "",
+            "type": ""
+          },
+          "adhoc_section": {
+            "title": "",
+            "description": "",
+            "type": ""
+          }
+        }
+      },
+      "distance_to_sample": {
+        "title": "",
+        "description": "",
+        "type": ""
+      },
+      "viewing_area": {
+        "title": "",
+        "description": "",
+        "type": ""
+      },
+      "stray_light": {
+        "title": "",
+        "description": "",
+        "type": ""
+      },
+      "comments": {
+        "title": "",
+        "description": "",
+        "type": ""
+      },
+      "adhoc_section": {
+        "title": "",
+        "description": "",
+        "type": ""
+      }
+    },
+    "required": [
+      "name"
+    ],
+    "additionalProperties": false
+  },
+  "reference_info": {
+    "title": "reference_info",
+    "description": "An object with keys describing illumination source,optics and beam properties.",
+    "type": "object",
+    "properties": {
+
+    },
+    "required": [
+      "name"
+    ],
+    "additionalProperties": false
+  },
+  "uncertainty": {
+
+  },
+  "documentation_link": {
+    "title": "documentation",
+    "description": "Url to the datasheet, manual, publication etc. describing the instrument used for BRDF measurement.",
+    "type": "string"
+  },
+  "operator_name": {
+    "title": "operator_name",
+    "description": "Name of the person who performed BRDF measurements presented within file.",
+    "type": "string"
+  },
+  "comments": {
+    "title": "comments",
+    "description": "Section where user can specify in the text form any additional information or remarks related to the instrumentation used for BRDF measurement.",
+    "type": "string"
+  }
+}

@@ -11,11 +11,15 @@
   "additionalProperties": false,
   "properties": {
     "metadata": {
+      "title": "metadata",
       "description": "A section of a file that describes the measured or simulated BRDF data set from the point of view of data origin, simulation or measurement system's parameters, sample parameters and evironment. It also contains a globaly unique dataset identifier, specifices the data type, file name and records a timestamp of a measurement or simulation",
+      "type": "object",
       "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/metadata_json_schema_v1.0.json"
     },
     "data": {
+      "title": "data",
       "description": "an object with keys related to definition of BRDF function, variable properties of BRDF data and BRDF values themselves",
+      "type": "object",
       "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/data_json_schema_v1.0.json"
     }
   }
