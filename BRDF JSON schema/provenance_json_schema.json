@@ -68,12 +68,12 @@
     "website": {
       "title": "website",
       "description": "Url of the organization/institution's web-page if available.",
-      "type": "string"
+      "type": "uri"
     },
     "email": {
       "title": "email",
-      "description": "Contact email of organization or its contact person.",
-      "type": "string"
+      "description": "Contact email of organization or its contact person. According to RFC 5321, section 4.1.2",
+      "type": "email"
     },
     "phone": {
       "title": "phone",

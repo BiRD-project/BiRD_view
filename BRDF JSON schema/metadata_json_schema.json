@@ -19,26 +19,21 @@
   ],
   "additionalProperties": false,
   "properties": {
-    "id": {
-      "title": "id",
-      "description": "Globally unique identifier such as GUID, UUID or DOI as a string",
-      "type": "string"
-    },
-    "type": {
-      "title": "type",
-      "description": "Data type identifier. Currently always \"BRDF\" that stands for bidirectional reflectance distribution function. Abbreviations for different spectral and polarimetric BRDF data types will be added in the future versions upon agreement between all stakeholders",
-      "type": "string",
-      "const": "BRDF"
-    },
     "schema": {
       "title": "schema",
       "description": "URL to schema of universal BRDF file format which name also specifies the schema version.",
-      "type": "string"
+      "type": "uri"
     },
-    "name": {
-      "title": "name",
-      "description": "Current file name as a string",
-      "type": "string"
+    "id": {
+      "title": "id",
+      "description": "A universal resource identifier (URI), according to RFC3986",
+      "type": "uri"
+    },
+    "type": {
+      "title": "type",
+      "description": "Data type identifier. Currently always \"BRDF\" that stands for bidirectional reflectance distribution function. Abbreviations for different quantities like spectral and polarimetric BRDF data types will be added in the future versions upon agreement between all stakeholders",
+      "type": "string",
+      "const": "BRDF"
     },
     "timestamp": {
       "title": "timestamp",
@@ -49,6 +44,10 @@
     "provenance": {
       "description": "String or an object with keys describing the origin of the data i.e. institution, address, personell etc. Object has values as a number or a string.",
       "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/provenance_json_schema.json"
+    },
+    "license": {
+      "description": "An object providing all relevant information regarding the license applicable for presented BRDF data.",
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/license_json_schema_v1.0.json"
     },
     "method": {
       "title": "method",

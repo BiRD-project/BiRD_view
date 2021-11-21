@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/license_json_schema_v1.0.json",
+  "title": "license",
+  "description": "An object providing all relevant information regarding the license applicable for presented BRDF data.",
+  "type": "object",
+  "required": [
+    "type",
+    "rights_holder"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "name": "type",
+      "description": "Field specifying license agreement applied to the presented datasets. This can be abbreviation according to \"Creative Commons\" license or short name of any other license. Information should be recorded as a string. Note that custom license text can be provided in \"proprietary\" field.",
+      "type": "string"
+    },
+    "link": {
+      "name": "link",
+      "description": "Link to the licence text applicable license text as url.",
+      "type": "uri"
+    },
+    "rights_holder": {
+      "name": "rights_holder",
+      "description": "Name of the natural or legal person who holds full rights for the presented data. As a string.",
+      "type": "string"
+    },
+    "email": {
+      "name": "email",
+      "description": "E-mail of the natural or legal person who holds full rights for the presented data. According to RFC 5321, section 4.1.2",
+      "type": "email"
+    },
+    "phone": {
+      "title": "phone",
+      "description": "Contact phone/mobile number of the natural or legal person who holds full rights for the presented data according to notation for international numbers suggested by ITU E.123 standard.",
+      "type": "string"
+    },
+    "proprietary": {
+      "name": "proprietary",
+      "description": "Text/string field allowing to provide text of the specific license or comments and additions to existing license template.",
+      "type": "string"
+    }
+  }
+}
