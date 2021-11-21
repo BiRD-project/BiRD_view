@@ -11,23 +11,23 @@
   "additionalProperties": false,
   "properties": {
     "type": {
-      "name": "type",
+      "title": "type",
       "description": "Field specifying license agreement applied to the presented datasets. This can be abbreviation according to \"Creative Commons\" license or short name of any other license. Information should be recorded as a string. Note that custom license text can be provided in \"proprietary\" field.",
       "type": "string"
     },
     "link": {
-      "name": "link",
+      "title": "link",
       "description": "Link to the licence text applicable license as url string.",
       "type": "string",
       "format": "uri"
     },
     "rights_holder": {
-      "name": "rights_holder",
+      "title": "rights_holder",
       "description": "Name of the natural or legal person who holds full rights for the presented data. As a string.",
       "type": "string"
     },
     "email": {
-      "name": "email",
+      "title": "email",
       "description": "E-mail of the natural or legal person who holds full rights for the presented data. String according to RFC 5321, section 4.1.2",
       "type": "string",
       "format": "email"
@@ -38,7 +38,7 @@
       "type": "string"
     },
     "proprietary": {
-      "name": "proprietary",
+      "title": "proprietary",
       "description": "Text/string field allowing to provide text of the specific license or comments and additions to existing license template.",
       "type": "string"
     }
