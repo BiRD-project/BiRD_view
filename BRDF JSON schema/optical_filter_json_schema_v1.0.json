@@ -1,0 +1,431 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/optical_filter_json_schema_v1.0.json",
+  "title": "optical_filter",
+  "description": "The \"optical_filter\" object describing a filter that was used to define illumination light properties used for BRDF measurement.",
+  "type": "object",
+  "properties":  {
+          "name": {
+            "title": "name",
+            "description": "Name of an optical filter inserted into the path of light from illumination source used for BRDF measurements. As a text/string.",
+            "type": "string"
+          },
+          "model": {
+            "title": "model",
+            "description": "Model of an optical filter inserted into the path of light from illumination source used for BRDF measurements. As a text/string.",
+            "type": "string"
+          },
+          "manufacturer": {
+            "title": "manufacturer",
+            "description": "Manufacturer of an optical filter inserted into the path of light from illumination source used for BRDF measurements. As a text/string.",
+            "type": "string"
+          },
+          "type": {
+            "title": "type",
+            "description": "Type of an optical filter inserted into the path of light from illumination source used for BRDF measurements. For example, interference filter, neutral density filter, absorptive filter etc. as a text/string.",
+            "type": "string"
+          },
+          "material": {
+            "title": "material",
+            "description": "Material of an optical filter inserted into the path of light from illumination source used for BRDF measurements. As a text/string.",
+            "type": "string"
+          },
+          "cut_on_wl": {
+            "title": "cut_on_wl",
+            "description": "A cut-on wavelength of optical filter inserted into the path of light from illumination source used for BRDF measurements. It is an object with keys \"value\" and \"unit\".",
+            "type": "object",
+            "properties": {
+              "value": {
+                "title": "value",
+                "description": "Numerical value of the cut-on wavelength as a number or numerical string.",
+                "oneOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "unit": {
+                "title": "unit",
+                "description": "Unit of the optical filter cut-on wavelength as a string that can have values \"nm\" or \"μm\".",
+                "type": "string",
+                "pattern": "^[nμ]?m$"
+              }
+            },
+            "required": [
+              "value",
+              "unit"
+            ],
+            "additionalProperties": false
+          },
+          "cut_off_wl": {
+            "title": "cut_off_wl",
+            "description": "A cut-off wavelength of optical filter inserted into the path of the light from illumination source used for BRDF measurements. It is an object with keys \"value\" and \"unit\".",
+            "type": "object",
+            "properties": {
+              "value": {
+                "title": "value",
+                "description": "Numerical value of the optical filter cut-off wavelength as a number or numerical string.",
+                "oneOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "unit": {
+                "title": "unit",
+                "description": "Unit of the optical filter cut-off wavelength as a string that can have values \"nm\" or \"μm\".",
+                "type": "string",
+                "pattern": "^[nμ]?m$"
+              }
+            },
+            "required": [
+              "value",
+              "unit"
+            ],
+            "additionalProperties": false
+          },
+          "wl_range": {
+            "title": "wl_range",
+            "description": "The field describing transmission wavelength range of the optical filter placed on the path of the illumination beam. It is an object with keys \"min_value\", \"max_value\" and \"unit\".",
+            "properties": {
+              "min_value": {
+                "title": "value",
+                "description": "Numerical value of the optical filter's transmission shortest wavelength as a number or numerical string.",
+                "oneOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "max_value": {
+                "title": "value",
+                "description": "Numerical value of the optical filter's transmission longest wavelength as a number or numerical string.",
+                "oneOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "unit": {
+                "title": "unit",
+                "description": "Unit of the optical filter's transmission shortest and longest wavelengths as a string that can have values \"nm\" or \"μm\".",
+                "type": "string",
+                "pattern": "^[μn]?m$"
+              }
+            },
+            "required": [
+              "min_value",
+              "max_value",
+              "unit"
+            ],
+            "additionalProperties": false
+          },
+          "central_wl": {
+            "title": "central_wl",
+            "description": "The central transmission wavelength of the optical filter placed on the path of the illumination beam. It is an object with keys \"value\" and \"unit\".",
+            "type": "object",
+            "properties": {
+              "value": {
+                "title": "value",
+                "description": "Numerical value of the optical filter central wavelength as a number or numerical string.",
+                "oneOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "unit": {
+                "title": "unit",
+                "description": "Unit of the optical filter central wavelength as a string that can have values \"nm\" or \"μm\".",
+                "type": "string",
+                "pattern": "^[nμ]?m$"
+              }
+            },
+            "required": [
+              "value",
+              "unit"
+            ],
+            "additionalProperties": false
+          },
+          "transmission_FWHM": {
+            "title": "transmission_FWHM",
+            "description": "Full Width at Half Maximum of the spectral transmission range of the optical filter placed on the path of the illumination beam. It is an object with keys \"value\" and \"unit\".",
+            "type": "object",
+            "properties": {
+              "value": {
+                "title": "value",
+                "description": "Numerical value of the optical filter's transmission FWHM as a number or numerical string.",
+                "oneOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "unit": {
+                "title": "unit",
+                "description": "Unit of the optical filter's transmission FWHM as a string that can have values \"nm\" or \"μm\".",
+                "type": "string",
+                "pattern": "^[nμ]?m$"
+              }
+            },
+            "required": [
+              "value",
+              "unit"
+            ],
+            "additionalProperties": false
+          },
+          "transmission_avg": {
+            "title": "transmission_avg",
+            "description": "Average transmission value of the optical filter placed on the path of the illumination beam. It is an object with keys \"value\" and \"unit\".",
+            "type": "object",
+            "properties": {
+              "value": {
+                "title": "value",
+                "description": "Numerical value of the optical filter's average transmission value as a number or numerical string.",
+                "oneOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "unit": {
+                "title": "unit",
+                "description": "Unit of the optical filter's average transmission value as a string that can have values \"%\" or \"\" i.e. unitless.",
+                "type": "string",
+                "pattern": "^[%]?$"
+              }
+            },
+            "required": [
+              "value",
+              "unit"
+            ],
+            "additionalProperties": false
+          },
+          "min_transmission": {
+            "title": "min_transmission",
+            "description": "Minimal transmission value of the optical filter placed on the path of the illumination beam. It is an object with keys \"value\" and \"unit\".",
+            "type": "object",
+            "properties": {
+              "value": {
+                "title": "value",
+                "description": "Numerical value of the optical filter's minimal transmission value as a number or numerical string.",
+                "oneOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "unit": {
+                "title": "unit",
+                "description": "Unit of the optical filter's minimal transmission value as a string that can have values \"%\" or \"\" i.e. unitless.",
+                "type": "string",
+                "pattern": "^[%]?$"
+              }
+            },
+            "required": [
+              "value",
+              "unit"
+            ],
+            "additionalProperties": false
+          },
+          "max_transmission": {
+            "title": "max_transmission",
+            "description": "Maximal transmission value of the optical filter placed on the path of the illumination beam. It is an object with keys \"value\" and \"unit\".",
+            "type": "object",
+            "properties": {
+              "value": {
+                "title": "value",
+                "description": "Numerical value of the optical filter's maximal transmission value as a number or numerical string.",
+                "oneOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "unit": {
+                "title": "unit",
+                "description": "Unit of the optical filter's maximal transmission value as a string that can have values \"%\" or \"\" i.e. unitless.",
+                "type": "string",
+                "pattern": "^[%]?$"
+              }
+            },
+            "required": [
+              "value",
+              "unit"
+            ],
+            "additionalProperties": false
+          },
+          "blocking_avg": {
+            "title": "blocking_avg",
+            "description": "Average blocking/absorption value of the optical filter placed on the path of the illumination beam. It is an object with keys \"value\" and \"unit\".",
+            "type": "object",
+            "properties": {
+              "value": {
+                "title": "value",
+                "description": "Numerical value of the optical filter's average blocking/absorption value as a number or numerical string.",
+                "oneOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "unit": {
+                "title": "unit",
+                "description": "Unit of the optical filter's average blocking/absorption as a string that can have value \"OD\".",
+                "type": "string",
+                "pattern": "OD$"
+              }
+            },
+            "required": [
+              "value",
+              "unit"
+            ],
+            "additionalProperties": false
+          },
+          "min_blocking": {
+            "title": "min_blocking",
+            "description": "Minimal blocking/absorption value of the optical filter placed on the path of the illumination beam. It is an object with keys \"value\" and \"unit\".",
+            "properties": {
+              "value": {
+                "title": "value",
+                "description": "Numerical value of the optical filter's minimal blocking/absorption value as a number or numerical string.",
+                "oneOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "unit": {
+                "title": "unit",
+                "description": "Unit of the optical filter's minimal blocking/absorption as a string that can have value \"OD\".",
+                "type": "string",
+                "pattern": "OD$"
+              }
+            },
+            "required": [
+              "value",
+              "unit"
+            ],
+            "additionalProperties": false
+          },
+          "max_blocking": {
+            "title": "max_blocking",
+            "description": "Maximal blocking/absorption value of the optical filter placed on the path of the illumination beam. It is an object with keys \"value\" and \"unit\".",
+            "properties": {
+              "value": {
+                "title": "value",
+                "description": "Numerical value of the optical filter's maximal blocking/absorption value as a number or numerical string.",
+                "oneOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "unit": {
+                "title": "unit",
+                "description": "Unit of the optical filter's maximal blocking/absorption as a string that can have value \"OD\".",
+                "type": "string",
+                "pattern": "OD$"
+              }
+            },
+            "required": [
+              "value",
+              "unit"
+            ],
+            "additionalProperties": false
+          },
+          "damage_treshold": {
+            "title": "damage_treshold",
+            "description": "Field describing maximal optical power at which optical filter is designed to be operated. It is an object with keys \"value\" and \"unit\".",
+            "properties": {
+              "value": {
+                "title": "value",
+                "description": "Numerical value of the maximal optical power at which optical filter is designed to be operated as a number or numerical string.",
+                "oneOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "unit": {
+                "title": "unit",
+                "description": "Unit of the maximal optical power at which optical filter is designed to be operated as a string that can have values \"pW\", \"nW\", \"μW\", \"mW\", \"W\", \"kW\", \"MW\" or \"GW\".",
+                "type": "string",
+                "pattern": "^[pnμmkMG]?W$"
+              }
+            },
+            "required": [
+              "value",
+              "unit"
+            ],
+            "additionalProperties": false
+          },
+          "data_links": {
+            "title": "data_links",
+            "description": "An object that allows to refer to available external technical information regarding optical filter placed in in the path of light of illumination source used for BRDF measurements. Array of text/string URL links.",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "comments": {
+            "title": "comments",
+            "description": "An object that allows to provide any additional information regarding optical filter placed in in the path of light of illumination source used for BRDF measurements. Array of text/string URL links.",
+            "type": "string"
+          },
+          "adhoc_section": {
+            "title": "adhoc_section",
+            "description": "An object containing user defined keys describing any information relevant to the optical filter placed in in the path of light of illumination source that cannot be presented within \"filter\" object properties provided by schema. Adhoc section can contain all types of entries except new objects",
+            "type": "object",
+            "additionalProperties": {
+              "not": {
+                "type": "object"
+              }
+            }
+          }
+        },
+  "required": [
+
+  ],
+  "additionalProperties": false
+}

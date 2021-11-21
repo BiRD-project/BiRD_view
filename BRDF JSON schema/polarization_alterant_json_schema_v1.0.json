@@ -1,0 +1,187 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/polarization_alterant_json_schema_v1.0.json",
+  "title": "polarization_alterant",
+  "description": "An object describing a single polarization altering element or an assembly that was used to produce illumination with desired polarization properties.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "title": "name",
+      "description": "Short name of an element used for alteration of illumination light polarization state. As a text/string.",
+      "type": "string"
+    },
+    "model": {
+      "title": "model",
+      "description": "Model name of the polarization altering element given by manufacturer. As a text/string.",
+      "type": "string"
+    },
+    "manufacturer": {
+      "title": "manufacturer",
+      "description": "Manufacturer of the polarization altering element as a text/string.",
+      "type": "string"
+    },
+    "material": {
+      "title": "material",
+      "description": "Field describing the material from which polarization altering element was produced as a text/string.",
+      "type": "string"
+    },
+    "type": {
+      "title": "type",
+      "description": "Type of the polarization altering element. For example, \"linear polarizer\", \"quater-wave plate\", \"half-wave plate\", \"retarder\", \"depolarizer\" etc. As a text/string.",
+      "type": "string"
+    },
+    "extinction_ratio": {
+      "title": "extinction_ratio",
+      "description": "The field to describe typical extinction ratio of polarizer used for altering polarization of illumination. It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the polarizer's extinction ratio as a number or numerical string.",
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Polarizer's extinction ratio is unitless and unit property should be filled with empty string \"\".",
+          "type": "string",
+          "pattern": "^[pnμmkMG]?W$"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "wl_range": {
+      "title": "wl_range",
+      "description": "Wavelength range within which polarization altering element is designed to be operated. ",
+      "type": "object",
+      "properties": {
+        "min_value": {
+          "title": "min_value",
+          "description": "Numerical value of shortest wavelength at which polarization altering element can be used as a number or numerical string.",
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "max_value": {
+          "title": "max_value",
+          "description": "Numerical value of the longest wavelength at which polarization altering element can be used as a number or numerical string.",
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the shortest and longest wavelengths at which polarization altering element can be used as a string that can have values \"nm\" or \"μm\".",
+          "type": "string",
+          "pattern": "^[μn]?m$"
+        }
+      },
+      "required": [
+        "min_value",
+        "max_value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "design_wl": {
+      "title": "design_wl",
+      "description": "An object describing wavelength at which polarization altering element is most effective by design.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the wavelength at which polarization altering element is most effective as a number or numerical string.",
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the wavelength at which polarization altering element is most effective as a string that can have values \"nm\" or \"μm\".",
+          "type": "string",
+          "pattern": "^[pnμmkMG]?W$"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "damage_treshold": {
+      "title": "damage_treshold",
+      "description": "The field describing maximum power at which polarization altering element can be operated. It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the maximum power at which polarization altering element can be operated as a number or numerical string.",
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the maximum optical power at which polarization altering element can be operated as a string that can have values \"pW\", \"nW\", \"μW\", \"mW\", \"W\", \"kW\", \"MW\" or \"GW\".",
+          "type": "string",
+          "pattern": "^[pnμmkMG]?W$"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "data_links": {
+      "title": "",
+      "description": "",
+      "type": ""
+    },
+    "comments": {
+      "title": "",
+      "description": "",
+      "type": ""
+    },
+    "adhoc_section": {
+      "title": "",
+      "description": "",
+      "type": ""
+    }
+  },
+  "required": [
+    "value",
+    "unit"
+  ],
+  "additionalProperties": false
+}

@@ -4,10 +4,6 @@
   "title": "instrumentation",
   "description": "An object with keys describing the setup or instrumentation as well as its parameters that were used to measure BRDF data presented in the file.",
   "type": "object",
-  "additionalProperties": false,
-  "required": [
-    "name"
-  ],
   "properties": {
     "name": {
       "title": "name",
@@ -49,6 +45,12 @@
       "type": "object",
       "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/detection_json_schema_v1.0.json"
     },
+    "sample_holder": {
+      "title": "sample_holder",
+      "description": "An object describing sample holder of the instrument used for the measurement of BRDF data presented within the file.",
+      "type": "object",
+      "$ref:": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/sample_holder_json_schema_v1.0.json"
+    },
     "comments": {
       "title": "comments",
       "description": "The field for providing in a text/string form any additional information relevant to instrumentation used for BRDF measurement.",
@@ -64,5 +66,11 @@
         }
       }
     }
-  }
+  },
+  "required": [
+    "name",
+    "illumination",
+    "detection"
+  ],
+  "additionalProperties": false
 }

@@ -1,0 +1,217 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/wavelength_selectors_json_schema_v1.0.json",
+  "title": "monochromator",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "name": {
+      "title": "name",
+      "description": "Name of the monochromator used to select wavelength of illumination during regular or spectral BRDF measurements. As a text/string.",
+      "type": "string"
+    },
+    "model": {
+      "title": "model",
+      "description": "Model of the monochromator used to select wavelength of illumination during regular or spectral BRDF measurements. As a text/string.",
+      "type": "string"
+    },
+    "manufacturer": {
+      "title": "manufacturer",
+      "description": "Manufacturer of the monochromator used to select wavelength of illumination during regular or spectral BRDF measurements. As a text/string.",
+      "type": "string"
+    },
+    "type": {
+      "title": "type",
+      "description": "Type of the monochromator used to select wavelength of illumination during regular or spectral BRDF measurements. For example \"prism based monochromatror\", \"double monochromator\" etc. As a text/string.",
+      "type": "string"
+    },
+    "wl_range": {
+      "title": "wl_range",
+      "description": "Wavelength range in which monochromator is designed to be operated. It is an object with keys \"min_value\", \"max_value\" and \"unit\".",
+      "properties": {
+        "min_value": {
+          "title": "min_value",
+          "description": "Numerical value of the monochromator's transmission shortest wavelength as a number or numerical string.",
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "max_value": {
+          "title": "max_value",
+          "description": "Numerical value of the monochromator's transmission longest wavelength as a number or numerical string.",
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the monochromator's transmission shortest and longest wavelengths as a string that can have values \"nm\" or \"μm\".",
+          "type": "string",
+          "pattern": "^[μn]?m$"
+        }
+      },
+      "required": [
+        "min_value",
+        "max_value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "selected_wl": {
+      "title": "selected_wl",
+      "description": "Wavelength that was selected at monochromator settings for single-wavelength BRDF measurements. It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "max_value",
+          "description": "Numerical value of the set monochromator's wavelength as a number or numerical string.",
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the set monochromator's wavelength as a string that can have values \"nm\" or \"μm\".",
+          "type": "string",
+          "pattern": "^[μn]?m$"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "bandpass_FWHM": {
+      "title": "bandpass_FWHM",
+      "description": "Full Width at Half Maximum of band passed through monochromator. It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the monochromator's bandpass FWHM as a number or numerical string.",
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the monochromator's bandpass FWHM as a string that can have values \"nm\" or \"μm\".",
+          "type": "string",
+          "pattern": "^[μn]?m$"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "spectral_resolution": {
+      "title": "spectral_resolution",
+      "description": "Description of monochromator's wavelength resolving/separation/dispersion capabilities as width of transmitted light spectral band per width of monochromator output slit. It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the monochromator's wavelength resolving/separation/dispersion capabilities as a number or numerical string.",
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the monochromator's wavelength resolving/separation/dispersion capabilities as a string that can have value \"nm/mm\".",
+          "type": "string",
+          "pattern": "nm/mm$"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "damage_treshold": {
+      "title": "damage_treshold",
+      "description": "Field for indication of maximum optical power at which monochromator was designed to be operated. It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the maximum optical power at which monochromator was designed to be operated as a number or numerical string.",
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the maximum optical power at which monochromator was designed to be operated as a string that can have values \"pW\", \"nW\", \"μW\", \"mW\", \"W\", \"kW\", \"MW\" or \"GW\".",
+          "type": "string",
+          "pattern": "^[pnμmkMG]?W$"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "data_links": {
+      "title": "data_links",
+      "description": "An object that allows to refer to available external technical information regarding monochromator used for illumination light wavelength selection during BRDF measurements. Array of text/string URL links.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "comments": {
+      "title": "comments",
+      "description": "The section for providing any relevant information regarding monochromator used for illumination light wavelength selection during BRDF measurements as a string/text.",
+      "type": "string"
+    },
+    "adhoc_section": {
+      "title": "adhoc_section",
+      "description": "An object containing user defined keys describing any information relevant to the monochromator used for illumination light wavelength selection during BRDF measurements that cannot be presented within \"monochromator\" object properties provided by schema. Adhoc section can contain all types of entries except new objects",
+      "type": "object",
+      "additionalProperties": {
+        "not": {
+          "type": "object"
+        }
+      }
+    }
+  },
+  "required": [],
+  "additionalProperties": false
+}

@@ -1,0 +1,336 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/source_json_schema_v1.0.json",
+  "title": "source",
+  "description": "An object that describes source of the illumination used for BRDF measurements.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "title": "name",
+      "description": "Name of the light source that was used for BRDF measurements. Can be written in a free form as a text (string).",
+      "type": "string"
+    },
+    "type": {
+      "title": "type",
+      "description": "The field that specifies what type of illumination source was used for BRDF measurements. For example it can be laser, incandescent lamp, black-body, LED etc. String values are allowed.",
+      "type": "string"
+    },
+    "CIE_notation": {
+      "title": "CIE_notation",
+      "description": "Field that allows to classify light source according to CIE abbreviations for standard illuminants. It accommodates text/string values corresponding only to CIE abbreviations. For information about values see https://en.wikipedia.org/wiki/Standard_illuminant.",
+      "type": "string",
+      "oneOf": [
+        {
+          "const": "A"
+        },
+        {
+          "const": "B"
+        },
+        {
+          "const": "C"
+        },
+        {
+          "const": "D50"
+        },
+        {
+          "const": "D55"
+        },
+        {
+          "const": "D65"
+        },
+        {
+          "const": "D75"
+        },
+        {
+          "const": "D93"
+        },
+        {
+          "const": "E"
+        },
+        {
+          "const": "F1"
+        },
+        {
+          "const": "F2"
+        },
+        {
+          "const": "F3"
+        },
+        {
+          "const": "F4"
+        },
+        {
+          "const": "F5"
+        },
+        {
+          "const": "F6"
+        },
+        {
+          "const": "F7"
+        },
+        {
+          "const": "F8"
+        },
+        {
+          "const": "F9"
+        },
+        {
+          "const": "F10"
+        },
+        {
+          "const": "F11"
+        },
+        {
+          "const": "F12"
+        },
+        {
+          "const": "LED-B1"
+        },
+        {
+          "const": "LED-B2"
+        },
+        {
+          "const": "LED-B3"
+        },
+        {
+          "const": "LED-B4"
+        },
+        {
+          "const": "LED-B5"
+        },
+        {
+          "const": "LED-BH1"
+        },
+        {
+          "const": "LED-RGB1"
+        },
+        {
+          "const": "LED-V1"
+        },
+        {
+          "const": "LED-V2"
+        }
+      ]
+    },
+    "model": {
+      "title": "model",
+      "description": "The property that allows to specify the model of the illumination source that was used for BRDF measurements. It can be written as a text/string.",
+      "type": "string"
+    },
+    "manufacturer": {
+      "title": "manufacturer",
+      "description": "The property that allows to specify the manufacturer of the light source that used for BRDF measurements. For example, company or workshop name written as a text/string",
+      "type": "string"
+    },
+    "power": {
+      "title": "power",
+      "description": "The property describing integral power of the illumination source in power units like W, kW, mW etc. It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the illumination source power as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the illumination source power as a string that can have values \"pW\", \"nW\", \"μW\", \"mW\", \"W\", \"kW\", \"MW\" or \"GW\"",
+          "type": "string",
+          "pattern": "^[GMkmμnp]?W$"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "central_wl": {
+      "title": "central_wl",
+      "description": "Property describing central wavelength of illumination light source. It is most relevant for lasers and narrow-band LEDs. It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the illumination source central wavelength as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the illumination source central wavelength as a string that can have values \"nm\" or \"μm\".",
+          "type": "string",
+          "pattern": "^[μn]?m$"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "wl_range": {
+      "title": "wl_range",
+      "description": "A field allowing to specify the wavelength range within which illumination source radiates. Most relevant for wide-band sources as incandescent lamps, fluorescent lamps, black-bodies etc. It is an object with keys \"min_value\", \"max_value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "min_value": {
+          "title": "value",
+          "description": "Numerical value of the illumination source shortest wavelength as a number.",
+          "type": "number"
+        },
+        "max_value": {
+          "title": "value",
+          "description": "Numerical value of the illumination source longest wavelength as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the illumination source shortest and longest wavelengths as a string that can have values \"nm\" or \"μm\".",
+          "type": "string",
+          "pattern": "^[μn]?m$"
+        }
+      },
+      "required": [
+        "min_value",
+        "max_value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "color_temperature": {
+      "title": "color_temperature",
+      "description": "The field allowing to specify color temperature of black-body radiator if it was used for BRDF measurements. It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the illumination source color temperature as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the illumination source color temperature as a string that can have values \"K\" or \"kK\".",
+          "type": "string",
+          "pattern": "^[k]?K$"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "operating_temperature": {
+      "title": "operating_temperature",
+      "description": "Field for providing the temperature at which light source was operated. Might be relevant in case of cooled light sources or lasers/LEDs which central wavelength can change with temperature. It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the illumination source operating temperature as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the illumination source operating temperature as a string that can have values \"K\", \"kK\" or \"°C\".",
+          "type": "string",
+          "oneOf": [
+            {"pattern": "^[k]?K$"},
+            {"pattern": "°C"}
+          ]
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "operating_current": {
+      "title": "operating_current",
+      "description": "An object describing the current at which illumination source was operated. It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the illumination source operating current as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the illumination source operating current as a string that can have values \"pA\", \"nA\", \"μA\", \"mA\", \"A\", \"kA\", \"MA\" or \"GA\".",
+          "type": "string",
+          "pattern": "^[pnμmkMG]?A$"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "operating_voltage": {
+      "title": "operating_voltage",
+      "description": "An object describing the voltage at which illumination source was operated. It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the illumination source operating voltage as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the illumination source operating voltage as a string that can have values \"pV\", \"nV\", \"μV\", \"mV\", \"V\", \"kV\", \"MV\" or \"GV\".",
+          "type": "string",
+          "pattern": "^[pnμmkMG]?V$"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "data_links": {
+      "title": "data_links",
+      "description": "An object that allows to refer to available external technical information regarding light source used for BRDF measurements. Array of text/string URL links.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "comments": {
+      "title": "comments",
+      "description": "A section that allows to add any additional information regarding illumination source that was used for BRDF measurements. Comments should be presented as a text/string.",
+      "type": "string"
+    },
+    "adhoc_section": {
+      "title": "adhoc_section",
+      "description": "An object containing user defined keys describing any information relevant to the illumination source of the instrument that cannot be presented within source properties provided by schema. Adhoc section can contain all types of entries except new objects",
+      "type": "object",
+      "additionalProperties": {
+        "not": {
+          "type": "object"
+        }
+      }
+    }
+  },
+  "oneOf": [
+    {"required": [
+      "name",
+      "type",
+      "power",
+      "wl_range"
+    ]},
+    {"required": [
+      "name",
+      "type",
+      "power",
+      "central_wl"
+    ]}
+  ],
+  "additionalProperties": false
+}

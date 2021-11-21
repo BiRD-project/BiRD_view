@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/beam_shaper_json_schema_v1.0.json",
+  "title": "beam_shaper",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "name": {
+      "title": "",
+      "description": "",
+      "type": ""
+    },
+    "type": {
+      "title": "",
+      "description": "",
+      "type": ""
+    },
+    "model": {},
+    "manufacturer": {},
+    "shape": {
+      "title": "",
+      "description": "",
+      "type": ""
+    },
+    "dimensions": {
+      "properties": {
+        "height": {
+          "title": "",
+          "description": "",
+          "type": ""
+        },
+        "width": {
+          "title": "",
+          "description": "",
+          "type": ""
+        },
+        "radius": {
+          "title": "",
+          "description": "",
+          "type": ""
+        },
+        "diameter": {
+          "title": "",
+          "description": "",
+          "type": ""
+        },
+        "semi_major_axis": {
+          "title": "",
+          "description": "",
+          "type": ""
+        },
+        "semi_minor_axis": {
+          "title": "",
+          "description": "",
+          "type": ""
+        },
+        "comments": {
+          "title": "",
+          "description": "",
+          "type": ""
+        },
+        "adhoc_section": {
+          "title": "",
+          "description": "",
+          "type": ""
+        }
+      }
+    },
+    "comments": {
+      "title": "",
+      "description": "",
+      "type": ""
+    },
+    "adhoc_section": {
+      "title": "",
+      "description": "",
+      "type": ""
+    }
+  },
+  "required": [],
+  "additionalProperties": false
+}
