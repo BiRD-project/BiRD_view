@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/illumination_system_json_schema_v1.0.json",
+  "title": "illumination",
+  "description": "An object with keys describing illumination system, illumination source, relevant optical components and illumination beam properties.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "title":"system_name",
+      "description": "Field for providing name of illumination system used during BRDF measurements as a text (i.e.string).",
+      "type": "string"
+    },
+    "model": {
+      "title":"system_model",
+      "description": "Field for providing model of illumination system used during BRDF measurements as a text (i.e.string).",
+      "type": "string"
+    },
+    "manufacturer": {
+      "title":"system_manufacturer",
+      "description": "Field for providing manufacturer of illumination system used during BRDF measurements as a text (i.e.string).",
+      "type": "string"
+    },
+    "source": {
+      "title": "source",
+      "description": "An object that describes source of the illumination used for BRDF measurements.",
+      "type": "object",
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/source_json_schema_v1.0.json"
+    },
+    "wavelength_selectors": {
+      "title": "wavelength_selectors",
+      "description": "An object describing optical components that were used to select specific wavelength or wavelength ranges from illumination source radiation as well as properties and settings of these components.",
+      "type": "object",
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/wavelength_selectors_json_schema_v1.0.json"
+    },
+    "polarization_alterants": {
+      "title": "polarization_alterants",
+      "description": "The object containing array of objects describing polarization altering elements placed in the path of illumination light used for BRDF measurements.",
+      "type": "array",
+      "items": {
+        "name": "polarization_alterant",
+        "description": "An object describing a single polarization altering element or an assembly that was used to produce illumination with desired polarization properties.",
+        "type": "object",
+        "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/wavelength_selectors_json_schema_v1.0.json"
+      }
+    },
+    "aperture": {
+      "title": "aperture",
+      "description": "An object describing aperture that was used to shape illumination beam for BRDF measurements.",
+      "type": "object",
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/aperture_json_schema_v1.0.json"
+    },
+    "beam": {
+      "title": "beam",
+      "description": "An object with properties describing illumination beam parameters like size, shape, uniformity etc.",
+      "type": "object",
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/beam_json_schema_v1.0.json"
+    },
+    "data_links": {
+      "title": "data_links",
+      "description": "An object that allows to refer to available external technical information regarding illumination system used for BRDF measurements. Array of URL links as a text (i.e.string).",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "comments": {
+      "title": "comments",
+      "description": "The sectio that allows to provide any additional information regarding instrument illumination system as a text (i.e.string).",
+      "type": "string"
+    },
+    "adhoc_section": {
+      "title": "adhoc_section",
+      "description": "An object containing user defined keys describing any information relevant to the illumination system of the instrument that cannot be presented within \"illumination\" object properties provided by schema. Adhoc section can contain all types of entries.",
+      "type": "object"
+    }
+  },
+  "required": [
+    "name",
+    "source",
+    "beam"
+  ],
+  "additionalProperties": false
+}
+

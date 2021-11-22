@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/source_json_schema_v1.0.json",
   "title": "source",
-  "description": "An object that describes source of the illumination used for BRDF measurements.",
+  "description": "An object that describes illumination source that was used for BRDF measurements.",
   "type": "object",
   "properties": {
     "name": {
@@ -17,7 +17,7 @@
     },
     "CIE_notation": {
       "title": "CIE_notation",
-      "description": "Field that allows to classify light source according to CIE abbreviations for standard illuminants. It accommodates text/string values corresponding only to CIE abbreviations. For information about values see https://en.wikipedia.org/wiki/Standard_illuminant.",
+      "description": "Field that allows to classify light source according to CIE abbreviations for standard illuminants. It accommodates text (i.e.string) values corresponding only to CIE abbreviations. For information about values see https://en.wikipedia.org/wiki/Standard_illuminant.",
       "type": "string",
       "oneOf": [
         {
@@ -114,12 +114,12 @@
     },
     "model": {
       "title": "model",
-      "description": "The property that allows to specify the model of the illumination source that was used for BRDF measurements. It can be written as a text/string.",
+      "description": "The property that allows to specify the model of the illumination source that was used for BRDF measurements. It can be written as a text (i.e.string).",
       "type": "string"
     },
     "manufacturer": {
       "title": "manufacturer",
-      "description": "The property that allows to specify the manufacturer of the light source that used for BRDF measurements. For example, company or workshop name written as a text/string",
+      "description": "The property that allows to specify the manufacturer of the light source that used for BRDF measurements. For example, company or workshop name written as a text (i.e.string)",
       "type": "string"
     },
     "power": {
@@ -147,7 +147,7 @@
     },
     "central_wl": {
       "title": "central_wl",
-      "description": "Property describing central wavelength of illumination light source. It is most relevant for lasers and narrow-band LEDs. It is an object with keys \"value\" and \"unit\".",
+      "description": "Property describing the central wavelength of illumination light source. It is most relevant for lasers and narrow-band LEDs. It is an object with keys \"value\" and \"unit\".",
       "type": "object",
       "properties": {
         "value": {
@@ -170,7 +170,7 @@
     },
     "wl_range": {
       "title": "wl_range",
-      "description": "A field allowing to specify the wavelength range within which illumination source radiates. Most relevant for wide-band sources as incandescent lamps, fluorescent lamps, black-bodies etc. It is an object with keys \"min_value\", \"max_value\" and \"unit\".",
+      "description": "An object allowing to specify the wavelength range within which illumination source radiates. Most relevant for wide-band sources as incandescent lamps, fluorescent lamps, black-bodies etc. It is an object with keys \"min_value\", \"max_value\" and \"unit\".",
       "type": "object",
       "properties": {
         "min_value": {
@@ -294,7 +294,7 @@
     },
     "data_links": {
       "title": "data_links",
-      "description": "An object that allows to refer to available external technical information regarding light source used for BRDF measurements. Array of text/string URL links.",
+      "description": "An object that allows to refer to available external technical information regarding light source used for BRDF measurements. Array of string URL links.",
       "type": "array",
       "uniqueItems": true,
       "items": {
@@ -304,7 +304,7 @@
     },
     "comments": {
       "title": "comments",
-      "description": "A section that allows to add any additional information regarding illumination source that was used for BRDF measurements. Comments should be presented as a text/string.",
+      "description": "A section that allows to add any additional information regarding illumination source that was used for BRDF measurements. Comments should be presented as a text (i.e.string).",
       "type": "string"
     },
     "adhoc_section": {

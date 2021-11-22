@@ -2,31 +2,37 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/wavelength_selectors_json_schema_v1.0.json",
   "title": "wavelength_selectors",
-  "description": "An object describing optical components that were used to select specific wavelength or wavelength ranges from illumination source radiation as well as properties and settings these components.",
+  "description": "An object describing optical components that were used to select/filter specific wavelength or wavelength ranges from incoming radiation as well as properties and settings these components.",
   "type": "object",
   "properties": {
     "optical_filters": {
       "title": "optical_filters",
-      "description": "An array of \"filter\" objects each describing a filter that was used to define illumination light properties used for BRDF measurement.",
+      "description": "An array of \"optical_filter\" objects each describing the filters that were used to define illumination or collected light spectral properties during BRDF measurement.",
       "type": "array",
       "items": {
         "title": "optical_filter",
-        "description": "The \"optical_filter\" object describing a filter that was used to define illumination light properties used for BRDF measurement.",
+        "description": "The \"optical_filter\" object describing properties of the optical filter used for BRDF measurement.",
         "type": "object",
         "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/optical_filter_json_schema_v1.0.json"
       }
     },
     "monochromator": {
       "title": "monochromator",
-      "description": "",
+      "description": "The object describing properties and settings of the monochromator used for BRDF measurements.",
       "type": "object",
       "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/monochromator_json_schema_v1.0.json"
     },
-    "comments": {},
-    "adhoc_section": {}
+    "comments": {
+      "title": "comments",
+      "description": "A field for providing any additional information regarding wavelength selecting optical elements and devices as a text (i.e.string).",
+      "type": "string"
+    },
+    "adhoc_section": {
+      "title": "adhoc_section",
+      "description": "An object containing user defined keys describing any information relevant to the wavelength selecting optical elements and devices that cannot be presented within \"wavelength_selectors\" object properties provided by schema. Adhoc section can contain all types of entries.",
+      "type": "object"
+    }
   },
-  "required": [
-
-  ],
+  "required": [],
   "additionalProperties": false
 }

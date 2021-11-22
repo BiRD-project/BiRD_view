@@ -92,12 +92,8 @@
     },
     "adhoc_section": {
       "title": "adhoc_section",
-      "description": "An object that contains user defined keys describing any information relevant to the BRDF data which cannot be presented within metadata objects provided by schema. Adhoc section can contain all types of entries except new objects",
-      "type": "object",
-      "additionalProperties": {
-        "not": {
-          "type": "object"
-        }
+      "description": "An object that contains user defined keys describing any information relevant to the BRDF data which cannot be presented within metadata objects provided by schema. Adhoc section can contain all types of entries.",
+      "type": "object"
       }
     }
   }

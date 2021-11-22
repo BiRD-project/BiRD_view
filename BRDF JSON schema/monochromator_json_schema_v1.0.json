@@ -7,22 +7,22 @@
   "properties": {
     "name": {
       "title": "name",
-      "description": "Name of the monochromator used to select wavelength of illumination during regular or spectral BRDF measurements. As a text/string.",
+      "description": "Name of the monochromator used to select wavelength of illumination during regular or spectral BRDF measurements. As a text (i.e.string).",
       "type": "string"
     },
     "model": {
       "title": "model",
-      "description": "Model of the monochromator used to select wavelength of illumination during regular or spectral BRDF measurements. As a text/string.",
+      "description": "Model of the monochromator used to select wavelength of illumination during regular or spectral BRDF measurements. As a text (i.e.string).",
       "type": "string"
     },
     "manufacturer": {
       "title": "manufacturer",
-      "description": "Manufacturer of the monochromator used to select wavelength of illumination during regular or spectral BRDF measurements. As a text/string.",
+      "description": "Manufacturer of the monochromator used to select wavelength of illumination during regular or spectral BRDF measurements. As a text (i.e.string).",
       "type": "string"
     },
     "type": {
       "title": "type",
-      "description": "Type of the monochromator used to select wavelength of illumination during regular or spectral BRDF measurements. For example \"prism based monochromatror\", \"double monochromator\" etc. As a text/string.",
+      "description": "Type of the monochromator used to select wavelength of illumination during regular or spectral BRDF measurements. For example \"prism based monochromatror\", \"double monochromator\" etc. As a text (i.e.string).",
       "type": "string"
     },
     "wl_range": {
@@ -31,7 +31,7 @@
       "properties": {
         "min_value": {
           "title": "min_value",
-          "description": "Numerical value of the monochromator's transmission shortest wavelength as a number or numerical string.",
+          "description": "Numerical value of the monochromator's transmission shortest wavelength as a number.",
           "oneOf": [
             {
               "type": "number"
@@ -43,7 +43,7 @@
         },
         "max_value": {
           "title": "max_value",
-          "description": "Numerical value of the monochromator's transmission longest wavelength as a number or numerical string.",
+          "description": "Numerical value of the monochromator's transmission longest wavelength as a number.",
           "oneOf": [
             {
               "type": "number"
@@ -74,7 +74,7 @@
       "properties": {
         "value": {
           "title": "max_value",
-          "description": "Numerical value of the set monochromator's wavelength as a number or numerical string.",
+          "description": "Numerical value of the set monochromator's wavelength as a number.",
           "oneOf": [
             {
               "type": "number"
@@ -104,7 +104,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the monochromator's bandpass FWHM as a number or numerical string.",
+          "description": "Numerical value of the monochromator's bandpass FWHM as a number.",
           "oneOf": [
             {
               "type": "number"
@@ -134,7 +134,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the monochromator's wavelength resolving/separation/dispersion capabilities as a number or numerical string.",
+          "description": "Numerical value of the monochromator's wavelength resolving/separation/dispersion capabilities as a number.",
           "oneOf": [
             {
               "type": "number"
@@ -164,7 +164,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the maximum optical power at which monochromator was designed to be operated as a number or numerical string.",
+          "description": "Numerical value of the maximum optical power at which monochromator was designed to be operated as a number.",
           "oneOf": [
             {
               "type": "number"
@@ -189,11 +189,12 @@
     },
     "data_links": {
       "title": "data_links",
-      "description": "An object that allows to refer to available external technical information regarding monochromator used for illumination light wavelength selection during BRDF measurements. Array of text/string URL links.",
+      "description": "An object that allows to refer to available external technical information regarding monochromator used for illumination light wavelength selection during BRDF measurements. Array of text (i.e.string) URL links.",
       "type": "array",
       "uniqueItems": true,
       "items": {
-        "type": "string"
+        "type": "string",
+        "format": "uri"
       }
     },
     "comments": {

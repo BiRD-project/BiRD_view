@@ -15,6 +15,11 @@
       "description": "Model of the instrument or system that was used for the measurement of BRDF data presented within the file (if applicable).",
       "type": "string"
     },
+    "manufacturer": {
+      "title":"manufacturer",
+      "description": "Field for providing manufacturer of the instrument or system used for BRDF measurements as a text (i.e.string).",
+      "type": "string"
+    },
     "serial_number": {
       "title": "serial_number",
       "description": "Serial number of the instrument or system that was used for the measurement of BRDF data presented within the file (if applicable).",
@@ -33,23 +38,38 @@
         }
       ]
     },
-    "illumination": {
+    "illumination_system": {
       "title": "illumination",
       "description": "An object with keys describing illumination source, relevant optical components and illumination beam properties.",
       "type": "object",
-      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/illumination_json_schema_v1.0.json"
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/illumination_system_json_schema_v1.0.json"
     },
-    "detection": {
+    "detection_system": {
       "title": "detection",
       "description": "An object with keys describing detector and its accompanying relevant optical components and and settings.",
       "type": "object",
-      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/detection_json_schema_v1.0.json"
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/detection_system_json_schema_v1.0.json"
     },
     "sample_holder": {
       "title": "sample_holder",
       "description": "An object describing sample holder of the instrument used for the measurement of BRDF data presented within the file.",
       "type": "object",
       "$ref:": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/sample_holder_json_schema_v1.0.json"
+    },
+    "operator_name": {
+      "title": "operator_name",
+      "description": "Name of the person who performed BRDF measurements presented within file as a string.",
+      "type": "string"
+    },
+    "data_links": {
+      "title": "data_links",
+      "description": "An object that allows to refer to available external technical information regarding setup or instrumentation used for BRDF measurements. Array of URL links as a text (i.e.string).",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "format": "uri"
+      }
     },
     "comments": {
       "title": "comments",
@@ -58,13 +78,8 @@
     },
     "adhoc_section": {
       "title": "adhoc_section",
-      "description": "An object that contains user defined keys describing any information relevant to the instrumentation used for BRDF measurement. Adhoc section can contain all types of entries except new objects",
-      "type": "object",
-      "additionalProperties": {
-        "not": {
-          "type": "object"
-        }
-      }
+      "description": "An object that contains user defined keys (not available in \"instrumentation\" object) describing any information relevant to the instrumentation used for BRDF measurement. Adhoc section can contain all types of entries.",
+      "type": "object"
     }
   },
   "required": [
