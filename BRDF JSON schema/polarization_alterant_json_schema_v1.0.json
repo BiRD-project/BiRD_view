@@ -2,12 +2,12 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/polarization_alterant_json_schema_v1.0.json",
   "title": "polarization_alterant",
-  "description": "An object describing a single polarization altering element or an assembly that was used to produce illumination with desired polarization properties.",
+  "description": "An object describing a single polarization altering element or an assembly that included to the set-up used for (usually polarimetric) BRDF measurements. Note that the same object describes polarization altering elements integrated to illumination or detection systems.",
   "type": "object",
   "properties": {
     "name": {
       "title": "name",
-      "description": "Short name of an element used for alteration of illumination light polarization state. As a text/string.",
+      "description": "Short name of an element used for alteration of illumination or detection polarization state. As a text/string.",
       "type": "string"
     },
     "model": {
@@ -22,7 +22,7 @@
     },
     "material": {
       "title": "material",
-      "description": "Field describing the material from which polarization altering element was produced as a text/string.",
+      "description": "Field describing the material of polarization altering element as a text/string.",
       "type": "string"
     },
     "type": {
@@ -37,21 +37,14 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the polarizer's extinction ratio as a number or numerical string.",
-          "oneOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "string"
-            }
-          ]
+          "description": "Numerical value of the polarizer's extinction ratio as a number. Note that extinction ratio is usually presented as X : 1, but since 1 is a constant only X is the value requested here.",
+          "type": "number"
         },
         "unit": {
           "title": "unit",
           "description": "Polarizer's extinction ratio is unitless and unit property should be filled with empty string \"\".",
           "type": "string",
-          "pattern": "^[pnμmkMG]?W$"
+          "pattern": ""
         }
       },
       "required": [
@@ -62,32 +55,18 @@
     },
     "wl_range": {
       "title": "wl_range",
-      "description": "Wavelength range within which polarization altering element is designed to be operated. ",
+      "description": "Wavelength range within which polarization altering element is designed to be operated.",
       "type": "object",
       "properties": {
         "min_value": {
           "title": "min_value",
-          "description": "Numerical value of shortest wavelength at which polarization altering element can be used as a number or numerical string.",
-          "oneOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "string"
-            }
-          ]
+          "description": "Numerical value of shortest wavelength at which polarization altering element can be used as a number.",
+          "type": "number"
         },
         "max_value": {
           "title": "max_value",
-          "description": "Numerical value of the longest wavelength at which polarization altering element can be used as a number or numerical string.",
-          "oneOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "string"
-            }
-          ]
+          "description": "Numerical value of the longest wavelength at which polarization altering element can be used as a number.",
+          "type": "number"
         },
         "unit": {
           "title": "unit",
@@ -110,21 +89,14 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the wavelength at which polarization altering element is most effective as a number or numerical string.",
-          "oneOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "string"
-            }
-          ]
+          "description": "Numerical value of the wavelength at which polarization altering element is most effective as a number.",
+          "type": "number"
         },
         "unit": {
           "title": "unit",
           "description": "Unit of the wavelength at which polarization altering element is most effective as a string that can have values \"nm\" or \"μm\".",
           "type": "string",
-          "pattern": "^[pnμmkMG]?W$"
+          "pattern": "^[nμ]?m$"
         }
       },
       "required": [
@@ -140,15 +112,8 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the maximum power at which polarization altering element can be operated as a number or numerical string.",
-          "oneOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "string"
-            }
-          ]
+          "description": "Numerical value of the maximum power at which polarization altering element can be operated as a number.",
+          "type": "number"
         },
         "unit": {
           "title": "unit",
@@ -164,24 +129,29 @@
       "additionalProperties": false
     },
     "data_links": {
-      "title": "",
-      "description": "",
-      "type": ""
+      "title": "data_links",
+      "description": "An array with links to any relevant technical information regarding polarization altering element included to the set-up used for (usually polarimetric) BRDF measurements.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "format": "uri"
+      }
     },
     "comments": {
-      "title": "",
-      "description": "",
-      "type": ""
+      "title": "comments",
+      "description": "A section that allows to provide in the form of text (i.e. string) any comments relevant to polarization altering element included to the set-up used for (usually polarimetric) BRDF measurements.",
+      "type": "string"
     },
     "adhoc_section": {
-      "title": "",
-      "description": "",
-      "type": ""
+      "title": "adhoc_section",
+      "description": "An object containing user defined keys describing any information relevant to the polarization altering element included to the of the set-up used for (usually polarimetric) BRDF measurements that cannot be presented within \"polarization_alterant\" object properties provided by schema. Adhoc section can contain all types of entries.",
+      "type": "object"
     }
   },
   "required": [
-    "value",
-    "unit"
+    "name",
+    "type"
   ],
   "additionalProperties": false
 }
