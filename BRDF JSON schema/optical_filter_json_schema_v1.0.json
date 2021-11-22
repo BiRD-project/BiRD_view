@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/optical_filter_json_schema_v1.0.json",
   "title": "optical_filter",
-  "description": "The \"optical_filter\" object describes properties of a single optical filter that was used during BRDF measurements.",
+  "description": "The \"optical_filter\" object describes properties of a single optical filter that was used during BRDF measurements. Note that the same object describes optical filters integrated to illumination or detection systems.",
   "type": "object",
   "properties":  {
     "name": {

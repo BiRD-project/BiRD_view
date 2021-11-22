@@ -4,20 +4,6 @@
   "title": "metadata",
   "description": "A section of a file that describes the measured or simulated BRDF data set from the point of view of data origin, simulation or measurement system's parameters, sample parameters and evironment. It also contains a globaly unique dataset identifier, specifices the data type, file name and records a timestamp of a measurement or simulation",
   "type": "object",
-  "required": [
-    "schema",
-    "id",
-    "type",
-    "name",
-    "timestamp",
-    "provenance",
-    "method",
-    "instrumentation",
-    "software",
-    "sample",
-    "environment"
-  ],
-  "additionalProperties": false,
   "properties": {
     "schema": {
       "title": "schema",
@@ -94,7 +80,20 @@
       "title": "adhoc_section",
       "description": "An object that contains user defined keys describing any information relevant to the BRDF data which cannot be presented within metadata objects provided by schema. Adhoc section can contain all types of entries.",
       "type": "object"
-      }
     }
-  }
+  },
+  "required": [
+    "schema",
+    "id",
+    "type",
+    "name",
+    "timestamp",
+    "provenance",
+    "method",
+    "instrumentation",
+    "software",
+    "sample",
+    "environment"
+  ],
+  "additionalProperties": false
 }
