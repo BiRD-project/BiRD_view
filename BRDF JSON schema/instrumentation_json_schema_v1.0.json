@@ -56,6 +56,12 @@
       "type": "object",
       "$ref:": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/sample_holder_json_schema_v1.0.json"
     },
+    "reference_info": {
+      "title": "reference_sample",
+      "description": "An object describing reference sample and related data used for relative BRDF measurements.",
+      "type": "object",
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/reference_info_json_schema_v1.0.json"
+    },
     "operator_name": {
       "title": "operator_name",
       "description": "Name of the person who performed BRDF measurements presented within file as a string.",
@@ -63,7 +69,7 @@
     },
     "data_links": {
       "title": "data_links",
-      "description": "An object that allows to refer to available external technical information regarding setup or instrumentation used for BRDF measurements. Array of URL links as a text (i.e.string).",
+      "description": "An array that allows to refer to available external technical information regarding setup or instrumentation used for BRDF measurements. Array of URL links as a text (i.e.string).",
       "type": "array",
       "uniqueItems": true,
       "items": {

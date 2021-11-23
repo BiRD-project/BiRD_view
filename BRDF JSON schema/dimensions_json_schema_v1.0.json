@@ -1,0 +1,183 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/dimensions_json_schema_v1.0.json",
+  "title": "dimensions",
+  "description": "An object describing physical dimensions of the different optical elements and samples used for BRDF measurements.",
+  "type": "object",
+  "properties": {
+    "length": {
+      "title": "length",
+      "description": "Length of an optical element or sample used for BRDF measurements. It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the length of an optical element or sample as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the length of an optical element or sample as a string that can have values \"pm\", \"nm\", \"μm\", \"mm\", \"dm\", \"m\", \"km\", \"Mm\" or \"Gm\".",
+          "type": "string",
+          "pattern": "^[GMkmdμnp]?m$"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "width": {
+      "title": "width",
+      "description": "Width of an optical element or sample used for BRDF measurements. It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the width of an optical element or sample as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the width of an optical element or sample as a string that can have values \"pm\", \"nm\", \"μm\", \"mm\", \"dm\", \"m\", \"km\", \"Mm\" or \"Gm\".",
+          "type": "string",
+          "pattern": "^[GMkmdμnp]?m$"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "height": {
+      "title": "height",
+      "description": "Height of an optical element or sample used for BRDF measurements. It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the height of an optical element or sample as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the height of an optical element or sample as a string that can have values \"pm\", \"nm\", \"μm\", \"mm\", \"dm\", \"m\", \"km\", \"Mm\" or \"Gm\".",
+          "type": "string",
+          "pattern": "^[GMkmdμnp]?m$"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "radius": {
+      "title": "radius",
+      "description": "Radius of an optical element or sample used for BRDF measurements. It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the radius of an optical element or sample as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the radius of an optical element or sample as a string that can have values \"pm\", \"nm\", \"μm\", \"mm\", \"dm\", \"m\", \"km\", \"Mm\" or \"Gm\".",
+          "type": "string",
+          "pattern": "^[GMkmdμnp]?m$"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "diameter": {
+      "title": "diameter",
+      "description": "Diameter of an optical element or sample used for BRDF measurements. It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the diameter of an optical element or sample as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the diameter of an optical element or sample as a string that can have values \"pm\", \"nm\", \"μm\", \"mm\", \"dm\", \"m\", \"km\", \"Mm\" or \"Gm\".",
+          "type": "string",
+          "pattern": "^[GMkmdμnp]?m$"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "semi_major_axis": {
+      "title": "semi_major_axis",
+      "description": "Semi-major axis of an optical element or sample used for BRDF measurements. It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the semi-major axis of an optical element or sample as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the semi-major axis of an optical element or sample as a string that can have values \"pm\", \"nm\", \"μm\", \"mm\", \"dm\", \"m\", \"km\", \"Mm\" or \"Gm\".",
+          "type": "string",
+          "pattern": "^[GMkmdμnp]?m$"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "semi_minor_axis": {
+      "title": "semi_minor_axis",
+      "description": "Semi-minor axis of an optical element or sample used for BRDF measurements. It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the semi-minor axis of an optical element or sample as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the semi-minor axis of an optical element or sample as a string that can have values \"pm\", \"nm\", \"μm\", \"mm\", \"dm\", \"m\", \"km\", \"Mm\" or \"Gm\".",
+          "type": "string",
+          "pattern": "^[GMkmdμnp]?m$"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "comments": {
+      "title": "comments",
+      "description": "The section that allows to provide any additional information regarding dimensions of the different optical elements and samples used for BRDF measurements as a text (i.e.string).",
+      "type": "string"
+    },
+    "adhoc_section": {
+      "title": "adhoc_section",
+      "description": "An object containing user defined keys describing any information relevant to the dimensions of the different optical elements and samples that cannot be presented within \"dimensions\" object properties provided by schema. Adhoc section can contain all types of entries.",
+      "type": "object"
+    }
+  },
+  "required": [
+  ],
+  "additionalProperties": false
+}

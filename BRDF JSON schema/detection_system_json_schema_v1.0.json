@@ -1,10 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/detection_system_json_schema_v1.0.json",
-  "title": "detection",
+  "title": "detection_system",
   "description": "An object with keys describing detector and its accompanying relevant optical components and and settings.",
   "type": "object",
   "properties": {
+    "name": {},
+    "model": {},
+    "manufacturer": {},
     "sensor": {
       "name": {
         "title": "",
@@ -92,7 +95,7 @@
         "type": ""
       }
     },
-    "optical_alterants": {
+    "wavelength_selectors": {
       "filters": {
         "properties": {
           "type": "object",
@@ -413,39 +416,22 @@
         "type": ""
       }
     },
-    "required": [
-      "name"
-    ],
-    "additionalProperties": false
-  },
-  "reference_info": {
-    "title": "reference_info",
-    "description": "An object with keys describing illumination source,optics and beam properties.",
-    "type": "object",
-    "properties": {
-
+    "polarization_alterants": {},
+    "aperture": {
+      "title": "aperture",
+      "description": "An object describing aperture that was used to shape illumination beam for BRDF measurements.",
+      "type": "object",
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/aperture_json_schema_v1.0.json"
     },
-    "required": [
-      "name"
-    ],
-    "additionalProperties": false
+    "solid_angle": {},
+    "data_links": {},
+    "comments": {},
+    "adhoc_section": {}
   },
-  "uncertainty": {
-
-  },
-  "documentation_link": {
-    "title": "documentation",
-    "description": "Url to the datasheet, manual, publication etc. describing the instrument used for BRDF measurement.",
-    "type": "string"
-  },
-  "operator_name": {
-    "title": "operator_name",
-    "description": "Name of the person who performed BRDF measurements presented within file.",
-    "type": "string"
-  },
-  "comments": {
-    "title": "comments",
-    "description": "Section where user can specify in the text form any additional information or remarks related to the instrumentation used for BRDF measurement.",
-    "type": "string"
-  }
+  "required": [
+    "name",
+    "sensor",
+    "solid_angle"
+  ],
+  "additionalProperties": false
 }

@@ -1,82 +1,71 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/aperture_json_schema_v1.0.json",
-  "title": "beam_shaper",
-  "description": "",
+  "title": "aperture",
+  "description": "An object describing properties of the aperture that is a part of the instrument used for BRDF measurement.",
   "type": "object",
   "properties": {
     "name": {
-      "title": "",
-      "description": "",
-      "type": ""
+      "title": "name",
+      "description": "Name of the aperture in a free form as a text (i.e. string).",
+      "type": "string"
+    },
+    "model": {
+      "title": "model",
+      "description": "Model of the aperture given by manufacturr as a text (i.e. string).",
+      "type": "string"
+    },
+    "manufacturer": {
+      "title": "manufacturer",
+      "description": "Manufacturer of the aperture as a text (i.e. string).",
+      "type": "string"
+    },
+    "material": {
+      "title": "material",
+      "description": "Material from which aperture was produced as a text (i.e. string).",
+      "type": "string"
     },
     "type": {
-      "title": "",
-      "description": "",
-      "type": ""
+      "title": "type",
+      "description": "Type of aperture used for BRDF measurement. For example, \"slit\", \"iris\", \"diaphragm\" etc. A a a text (i.e. string)",
+      "type": "string"
     },
-    "model": {},
-    "manufacturer": {},
     "shape": {
-      "title": "",
-      "description": "",
-      "type": ""
+      "title": "shape",
+      "description": "Shape of the aperture used for BRDF measurements as a text (i.e. string). For example \"circular\", \"square\", \"rectangular\", \"elliptical\" etc.",
+      "type": "string"
     },
     "dimensions": {
-      "properties": {
-        "height": {
-          "title": "",
-          "description": "",
-          "type": ""
-        },
-        "width": {
-          "title": "",
-          "description": "",
-          "type": ""
-        },
-        "radius": {
-          "title": "",
-          "description": "",
-          "type": ""
-        },
-        "diameter": {
-          "title": "",
-          "description": "",
-          "type": ""
-        },
-        "semi_major_axis": {
-          "title": "",
-          "description": "",
-          "type": ""
-        },
-        "semi_minor_axis": {
-          "title": "",
-          "description": "",
-          "type": ""
-        },
-        "comments": {
-          "title": "",
-          "description": "",
-          "type": ""
-        },
-        "adhoc_section": {
-          "title": "",
-          "description": "",
-          "type": ""
-        }
+      "title": "dimensions",
+      "description": "An object describing physical dimensions of the aperture depending on its shape.",
+      "type": "object",
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/dimensions_json_schema_v1.0.json"
+    },
+    "data_links": {
+      "title": "data_links",
+      "description": "An array that allows to refer to available external technical information regarding aperture used for BRDF measurements. Array of URL links as a text (i.e.string).",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "format": "uri"
       }
     },
     "comments": {
-      "title": "",
-      "description": "",
-      "type": ""
+      "title": "comments",
+      "description": "The section that allows to provide any additional information regarding aperture as a text (i.e.string).",
+      "type": "string"
     },
     "adhoc_section": {
-      "title": "",
-      "description": "",
-      "type": ""
+      "title": "adhoc_section",
+      "description": "An object containing user defined keys describing any information relevant to the aperture that cannot be presented within \"aperture\" object properties provided by schema. Adhoc section can contain all types of entries.",
+      "type": "object"
     }
   },
-  "required": [],
+  "required": [
+    "name",
+    "shape",
+    "dimensions"
+  ],
   "additionalProperties": false
 }

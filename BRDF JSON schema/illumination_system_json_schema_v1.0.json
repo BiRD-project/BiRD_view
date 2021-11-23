@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/illumination_system_json_schema_v1.0.json",
-  "title": "illumination",
+  "title": "illumination_system",
   "description": "An object with keys describing illumination system, illumination source, relevant optical components and illumination beam properties.",
   "type": "object",
   "properties": {
@@ -57,7 +57,7 @@
     },
     "data_links": {
       "title": "data_links",
-      "description": "An object that allows to refer to available external technical information regarding illumination system used for BRDF measurements. Array of URL links as a text (i.e.string).",
+      "description": "An array that allows to refer to available external technical information regarding illumination system used for BRDF measurements. Array of URL links as a text (i.e.string).",
       "type": "array",
       "uniqueItems": true,
       "items": {
@@ -67,7 +67,7 @@
     },
     "comments": {
       "title": "comments",
-      "description": "The sectio that allows to provide any additional information regarding instrument illumination system as a text (i.e.string).",
+      "description": "The section that allows to provide any additional information regarding instrument illumination system as a text (i.e.string).",
       "type": "string"
     },
     "adhoc_section": {
