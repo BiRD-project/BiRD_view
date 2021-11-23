@@ -6,80 +6,87 @@
   "type": "object",
   "properties": {
     "shape": {
-      "title": "",
-      "description": "",
-      "type": ""
+      "title": "shape",
+      "description": "Shape of the illumination beam at the surface of the measurement sample as a text (i.e. string). For example \"circular\", \"square\", \"rectangular\", \"elliptical\" etc.",
+      "type": "string"
     },
     "dimensions": {
-      "properties": {
-        "height": {
-          "title": "",
-          "description": "",
-          "type": ""
-        },
-        "width": {
-          "title": "",
-          "description": "",
-          "type": ""
-        },
-        "radius": {
-          "title": "",
-          "description": "",
-          "type": ""
-        },
-        "diameter": {
-          "title": "",
-          "description": "",
-          "type": ""
-        },
-        "semi_major_axis": {
-          "title": "",
-          "description": "",
-          "type": ""
-        },
-        "semi_minor_axis": {
-          "title": "",
-          "description": "",
-          "type": ""
-        },
-        "comments": {
-          "title": "",
-          "description": "",
-          "type": ""
-        },
-        "adhoc_section": {
-          "title": "",
-          "description": "",
-          "type": ""
-        }
-      }
-    },
-    "area": {
-      "title": "",
-      "description": "",
-      "type": ""
+      "title": "dimensions",
+      "description": "An object describing physical dimensions of the beam at the surface of the measurement sample.",
+      "type": "object",
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/dimensions_json_schema_v1.0.json",
+      "required": ["area"]
     },
     "uniformity": {
-      "title": "",
-      "description": "",
-      "type": ""
+      "title": "uniformity",
+      "description": "An object describing uniformity of the illumination beam at the surface of the measurement sample.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the uniformity of the illumination beam at the surface of the measurement sample. It is defined as a ratio of the minimum and maximum optical power values within illumination beam area. It is an object with keys \"value\", \"unit\" and/or \"comments\".",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the uniformity of the illumination beam at the surface of the measurement sample. as a string that can have values \"%\" or unitless i.e. \"\".",
+          "type": "string",
+          "pattern": "^%$"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
     },
     "divergence": {
-      "title": "",
-      "description": "",
-      "type": ""
+      "title": "divergence",
+      "description": "An object describing divergence of the illumination beam at the surface of the measurement sample.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the divergence of the illumination beam at the surface of the measurement sample. It is defined as a ratio of the minimum and maximum optical power values within illumination beam area. It is an object with keys \"value\", \"unit\" and/or \"comments\".",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the divergence of the illumination beam at the surface of the measurement sample. as a string that can have values \"deg\" or \"rad\".",
+          "type": "string",
+          "enum": ["deg", "rad"]
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "data_links": {
+      "title": "data_links",
+      "description": "An array that allows to refer to available external technical information regarding illumination beam used for BRDF measurements. Array of URL links as a text (i.e.string).",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "format": "uri"
+      }
     },
     "comments": {
-      "title": "",
-      "description": "",
-      "type": ""
+      "title": "comments",
+      "description": "The section that allows to provide any additional information regarding illumination beam as a text (i.e.string).",
+      "type": "string"
     },
     "adhoc_section": {
-      "title": "",
-      "description": "",
-      "type": ""
+      "title": "adhoc_section",
+      "description": "An object containing user defined keys describing any information relevant to the illumination beam that cannot be presented within \"aperture\" object properties provided by schema. Adhoc section can contain all types of entries.",
+      "type": "object"
     }
   },
-  "required": [],
+  "required": [
+    "shape",
+    "dimensions"
+  ],
   "additionalProperties": false
 }

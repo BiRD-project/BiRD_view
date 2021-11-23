@@ -423,6 +423,7 @@
       "type": "object",
       "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/aperture_json_schema_v1.0.json"
     },
+    "distance_from_sample": {},
     "solid_angle": {},
     "data_links": {},
     "comments": {},
