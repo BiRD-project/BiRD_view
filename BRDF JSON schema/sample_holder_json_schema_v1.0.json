@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/sample_holder_json_schema_v1.0.json",
+  "title": "instrumentation",
+  "description": "An object with keys describing the setup or instrumentation as well as its parameters that were used to measure BRDF data presented in the file.",
+  "type": "object"
+}

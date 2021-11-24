@@ -57,7 +57,7 @@
       "$ref:": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/sample_holder_json_schema_v1.0.json"
     },
     "reference_info": {
-      "title": "reference_sample",
+      "title": "reference_info",
       "description": "An object describing reference sample and related data used for relative BRDF measurements.",
       "type": "object",
       "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/reference_info_json_schema_v1.0.json"
