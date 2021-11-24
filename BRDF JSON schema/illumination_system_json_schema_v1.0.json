@@ -34,13 +34,13 @@
     },
     "polarization_alterants": {
       "title": "polarization_alterants",
-      "description": "The object containing array of objects describing polarization altering elements placed in the path of illumination light used for BRDF measurements.",
+      "description": "The field containing array of objects describing polarization altering elements placed in the path of illumination light used for BRDF measurements.",
       "type": "array",
       "items": {
         "name": "polarization_alterant",
         "description": "An object describing a single polarization altering element or an assembly that was used to produce illumination with desired polarization properties.",
         "type": "object",
-        "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/wavelength_selectors_json_schema_v1.0.json"
+        "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/polarization_alterant_json_schema_v1.0.json"
       }
     },
     "aperture": {

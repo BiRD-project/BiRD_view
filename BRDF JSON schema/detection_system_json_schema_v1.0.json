@@ -5,418 +5,49 @@
   "description": "An object with keys describing detector and its accompanying relevant optical components and and settings.",
   "type": "object",
   "properties": {
-    "name": {},
-    "model": {},
-    "manufacturer": {},
-    "sensor": {
-      "name": {
-        "title": "",
-        "description": "",
-        "type": ""
-      },
-      "model": {
-        "title": "",
-        "description": "",
-        "type": ""
-      },
-      "manufacturer": {
-        "title": "",
-        "description": "",
-        "type": ""
-      },
-      "type": {
-        "title": "",
-        "description": "",
-        "type": ""
-      },
-      "material": {
-        "title": "",
-        "description": "",
-        "type": ""
-      },
-      "area": {
-        "title": "",
-        "description": "",
-        "type": ""
-      },
-      "bias": {
-        "title": "",
-        "description": "",
-        "type": ""
-      },
-      "temperature": {
-        "title": "",
-        "description": "",
-        "type": ""
-      },
-      "polarization_sensitivity": {
-        "title": "",
-        "description": "",
-        "type": ""
-      },
-      "damage_treshold": {
-        "title": "",
-        "description": "",
-        "type": ""
-      },
-      "dark_signal": {
-        "title": "",
-        "description": "",
-        "type": ""
-      },
-      "uniformity": {
-        "title": "",
-        "description": "",
-        "type": ""
-      },
-      "linearity": {
-        "title": "",
-        "description": "",
-        "type": ""
-      },
-      "wl_range": {
-        "title": "",
-        "description": "",
-        "type": ""
-      },
-      "data_links": {
-        "title": "",
-        "description": "",
-        "type": ""
-      },
-      "comments": {
-        "title": "",
-        "description": "",
-        "type": ""
-      },
-      "adhoc_section": {
-        "title": "",
-        "description": "",
-        "type": ""
+    "name": {
+      "title": "name",
+      "description": "Name of the detection system used for BRDF measurements as a text (i.e. string).",
+      "type": "string"
+    },
+    "model": {
+      "title": "model",
+      "description": "Model of the detection system used for BRDF measurements as a text (i.e. string).",
+      "type": "string"
+    },
+    "manufacturer": {
+      "title": "manufacturer",
+      "description": "Manufacturer of the detection system used for BRDF measurements as a text (i.e. string).",
+      "type": "string"
+    },
+    "sensors": {
+      "title": "sensors",
+      "description": "An array of objects describing optical sensors of detection system of the instrument used for BRDF measurements.",
+      "type": "array",
+      "items": {
+        "title": "sensor",
+        "description": "An object describing single optical sensor of detection system of the instrument used for BRDF measurements.",
+        "type": "object",
+        "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/sensor_json_schema_v1.0.json"
       }
     },
     "wavelength_selectors": {
-      "filters": {
-        "properties": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "title": "",
-              "description": "",
-              "type": ""
-            },
-            "model": {
-              "title": "",
-              "description": "",
-              "type": ""
-            },
-            "manufacturer": {
-              "title": "",
-              "description": "",
-              "type": ""
-            },
-            "type": {
-              "title": "",
-              "description": "",
-              "type": ""
-            },
-            "material": {
-              "title": "",
-              "description": "",
-              "type": ""
-            },
-            "cut_on_wl": {
-              "title": "",
-              "description": "",
-              "type": ""
-            },
-            "cut_off_wl": {
-              "title": "",
-              "description": "",
-              "type": ""
-            },
-            "wl_range": {
-              "title": "",
-              "description": "",
-              "type": ""
-            },
-            "transmission": {
-              "title": "",
-              "description": "",
-              "type": ""
-            },
-            "transmission_FWHM": {
-              "title": "",
-              "description": "",
-              "type": ""
-            },
-            "min_transmission": {
-              "title": "",
-              "description": "",
-              "type": ""
-            },
-            "max_transmission": {
-              "title": "",
-              "description": "",
-              "type": ""
-            },
-            "blocking": {
-              "title": "",
-              "description": "",
-              "type": ""
-            },
-            "min_blocking": {
-              "title": "",
-              "description": "",
-              "type": ""
-            },
-            "max_blocking": {
-              "title": "",
-              "description": "",
-              "type": ""
-            },
-            "damage_treshold": {
-              "title": "",
-              "description": "",
-              "type": ""
-            },
-            "data_links": {
-              "title": "",
-              "description": "",
-              "type": ""
-            },
-            "comments": {
-              "title": "",
-              "description": "",
-              "type": ""
-            },
-            "adhoc_section": {
-              "title": "",
-              "description": "",
-              "type": ""
-            }
-          }
-        }
-      },
-      "monochromator": {
-        "properties": {
-          "name": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "model": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "manufacturer": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "type": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "wl_range": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "bandpass_FWHM": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "resolution": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "damage_treshold": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "data_links": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "comments": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "adhoc_section": {
-            "title": "",
-            "description": "",
-            "type": ""
-          }
-        }
-      },
-      "polarizer": {
-        "properties": {
-          "name": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "model": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "manufacturer": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "material": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "type": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "jones_vector": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "jones_matrix": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "stokes_vector": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "mueller_matrix": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "extinction_ratio": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "wl_range": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "design_wl": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "damage_treshold": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "data_links": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "comments": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "adhoc_section": {
-            "title": "",
-            "description": "",
-            "type": ""
-          }
-        }
-      },
-      "solid_angle": {
-        "title": "",
-        "description": "",
-        "type": ""
-      },
-      "aperture": {
-        "properties": {
-          "height": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "width": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "radius": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "diameter": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "semi_major_axis": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "semi_minor_axis": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "comments": {
-            "title": "",
-            "description": "",
-            "type": ""
-          },
-          "adhoc_section": {
-            "title": "",
-            "description": "",
-            "type": ""
-          }
-        }
-      },
-      "distance_to_sample": {
-        "title": "",
-        "description": "",
-        "type": ""
-      },
-      "viewing_area": {
-        "title": "",
-        "description": "",
-        "type": ""
-      },
-      "stray_light": {
-        "title": "",
-        "description": "",
-        "type": ""
-      },
-      "comments": {
-        "title": "",
-        "description": "",
-        "type": ""
-      },
-      "adhoc_section": {
-        "title": "",
-        "description": "",
-        "type": ""
+      "title": "wavelength_selectors",
+      "description": "An object describing optical components that were used to select specific wavelength or wavelength ranges for detection as well as properties and settings of these components.",
+      "type": "object",
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/wavelength_selectors_json_schema_v1.0.json"
+    },
+    "polarization_alterants": {
+      "title": "polarization_alterants",
+      "description": "The field containing array of objects describing polarization altering elements placed in the path of the detector used for BRDF measurements.",
+      "type": "array",
+      "items": {
+        "name": "polarization_alterant",
+        "description": "An object describing a single polarization altering element or an assembly that was used to detect light scattered from the sample with desired polarization properties.",
+        "type": "object",
+        "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/polarization_alterant_json_schema_v1.0.json"
       }
     },
-    "polarization_alterants": {},
     "aperture": {
       "title": "aperture",
       "description": "An object describing aperture that was used to shape illumination beam for BRDF measurements.",
@@ -425,6 +56,7 @@
     },
     "distance_from_sample": {},
     "solid_angle": {},
+    "viewing_area": {},
     "data_links": {},
     "comments": {},
     "adhoc_section": {}

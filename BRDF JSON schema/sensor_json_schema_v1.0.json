@@ -1,0 +1,292 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/sensor_json_schema_v1.0.json",
+  "title": "sensor",
+  "description": "An object describing single optical sensor of detection system of the instrument used for BRDF measurements.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "title": "name",
+      "description": "Name of the optical sensor used in BRDF measurement set-up as text (i.e. string).",
+      "type": "string"
+    },
+    "model": {
+      "title": "model",
+      "description": "Model of the optical sensor used in BRDF measurement set-up as text (i.e. string).",
+      "type": "string"
+    },
+    "manufacturer": {
+      "title": "manufacturer",
+      "description": "Manufacturer of the optical sensor used in BRDF measurement set-up as text (i.e. string).",
+      "type": "string"
+    },
+    "type": {
+      "title": "type",
+      "description": "Type of the optical sensor used in BRDF measurement set-up as text (i.e. string). For example \"photodiod\", \"CCD-camera\", \"photomultiplyer\" etc.",
+      "type": "string"
+    },
+    "material": {
+      "title": "material",
+      "description": "Light sensing material used in optical sensor included in BRDF measurement set-up as text (i.e. string). For example \"Si\", \"InGaAs\" etc.",
+      "type": "string"
+    },
+    "shape": {
+      "title": "shape",
+      "description": "Shape of the photosensitive area of optical sensor included in BRDF measurement set-up as text (i.e. string). For example \"Si\", \"InGaAs\" etc.",
+      "type": "string"
+    },
+    "dimensions": {
+      "title": "dimensions",
+      "description": "Dimensions of the photosensitive part of the sensor included in BRDF measurement set-up. It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/dimensions_json_schema_v1.0.json",
+      "required": [
+        "area"
+      ]
+    },
+    "spectral_response_range": {
+      "title": "spectral_response_range",
+      "description": "An object that specifies wavelength range for sensing of which optical sensor can be applied. It is an object with keys \"min_value\", \"max_value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "min_value": {
+          "title": "min_value",
+          "description": "Numerical value of the shortest wavelength that optical sensor can sense as a number.",
+          "type": "number"
+        },
+        "max_value": {
+          "title": "max_value",
+          "description": "Numerical value of the longest wavelength that optical sensor can sense as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the shortest and longest wavelengths that optical sensor can sense as a string that can have values \"nm\" or \"μm\".",
+          "type": "string",
+          "pattern": "^[μn]?m$"
+        }
+      },
+      "required": [
+        "min_value",
+        "max_value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "power_range": {
+      "title": "power_range",
+      "description": "An object describing the optical power range in which optical sensor can be usually applied. It is an object with keys \"min_value\", \"max_value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "min_value": {
+          "title": "min_value",
+          "description": "Numerical value of the lowest optical power sensor can detect as a number.",
+          "type": "number"
+        },
+        "max_value": {
+          "title": "max_value",
+          "description": "Numerical value of the highest optical power sensor can detect as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the lowest and highest power that optical sensor can detect as a string that can have values \"pW\", \"nW\", \"μW\", \"mW\", \"W\", \"kW\", \"MW\" or \"GW\"",
+          "type": "string",
+          "pattern": "^[GMkmμnp]?W$"
+        }
+      },
+      "required": [
+        "min_value",
+        "max_value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "photosensitivity": {
+      "title": "photosensitivity",
+      "description": "Typical or average photosensitivity of optical sensor in A/W. It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the typical or average photosensitivity of optical sensor as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the set typical or average photosensitivity of optical sensor a string that can have values \"A/W\".",
+          "type": "string",
+          "pattern": "A/W"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "linearity": {
+      "title": "linearity",
+      "description": "An object describing the maximal ratio between photosensitivities around different optical powers that sensor can sense in case of fixed detection wavelength. It is defined as min_responsivity / max_responsivity for power range used for BRDF measurements. \"nonlinearity\" object has keys keys \"value\" and \"unit\"",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the optical sensor's linearity as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the optical sensor's linearity as a string that can have values \"%\" or unitless i.e. \"\".",
+          "type": "string",
+          "pattern": "^%?$"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "uniformity": {
+      "title": "uniformity",
+      "description": "An object describing the ratio of minimum and maximum response signals measured at different points of the detector area in case of fixed wavelength and power. It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the uniformity of the optical sensor as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the uniformity of the optical sensor as a string that can have values \"%\" or unitless i.e. \"\".",
+          "type": "string",
+          "pattern": "^%?$"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "dark_signal": {
+      "title": "dark_signal",
+      "description": "An object describing the level of signal when sensor is not exposed to any radiation (in Ampers (A) or Volts (V)). It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the optical sensor's dark current as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the optical sensor's dark current as a string that can have values \"pA\", \"nA\", \"μA\", \"mA\", \"A\", \"kA\", \"MA\", \"GA\" or \"pV\", \"nV\", \"μV\", \"mV\", \"V\", \"kV\", \"MV\" or \"GV\".",
+          "type": "string",
+          "oneOf": [
+            {"pattern": "^[pnμmkMG]?A$"},
+            {"pattern": "^[pnμmkMG]?V$"}
+          ]
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "bias_voltage": {
+      "title": "bias_voltage",
+      "description": "An object describing bias voltage applied applied to the optical sensor during BRDF measurements. It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the bias voltage applied applied to the optical sensor as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the bias voltage applied applied to the optical sensor as a string that can have values \"pV\", \"nV\", \"μV\", \"mV\", \"V\", \"kV\", \"MV\" or \"GV\".",
+          "type": "string",
+          "pattern": "^[pnμmkMG]?V$"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "damage_threshold": {
+      "title": "damage_threshold",
+      "description": "Field describing maximal optical power at which optical sensor is designed to be operated. It is an object with keys \"value\" and \"unit\".",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the maximal optical power at which optical sensor is designed to be operated as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the maximal optical power at which optical sensor is designed to be operated as a string that can have values \"pW\", \"nW\", \"μW\", \"mW\", \"W\", \"kW\", \"MW\" or \"GW\".",
+          "type": "string",
+          "pattern": "^[pnμmkMG]?W$"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "operating_temperature": {
+      "title": "operating_temperature",
+      "description": "Field for providing the temperature at which light sensor was operated during BRDF measurements. It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the temperature at which light sensor was operated as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the temperature at which light sensor was operated as a string that can have values \"K\", \"kK\" or \"°C\".",
+          "type": "string",
+          "oneOf": [
+            {"pattern": "^[k]?K$"},
+            {"pattern": "°C"}
+          ]
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "data_links": {
+      "title": "data_links",
+      "description": "An array that allows to refer to available external technical information regarding optical sensor used for BRDF measurements. Array of URL links as a text (i.e.string).",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "comments": {
+      "title": "comments",
+      "description": "The section that allows to provide any additional information regarding optical sensor used for BRDF measurements as a text (i.e.string).",
+      "type": "string"
+    },
+    "adhoc_section": {
+      "title": "adhoc_section",
+      "description": "An object containing user defined keys describing any information relevant to the optical sensor used for BRDF measurements that cannot be presented within \"sensor\" object properties provided by schema. Adhoc section can contain all types of entries.",
+      "type": "object"
+    }
+  }
+}

@@ -19,19 +19,19 @@
     },
     "uniformity": {
       "title": "uniformity",
-      "description": "An object describing uniformity of the illumination beam at the surface of the measurement sample.",
+      "description": "An object describing uniformity of the illumination beam at the surface of the measurement sample. It is defined as a ratio of the minimum and maximum optical power values within illumination beam area. It is an object with keys \"value\" and \"unit\".",
       "type": "object",
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the uniformity of the illumination beam at the surface of the measurement sample. It is defined as a ratio of the minimum and maximum optical power values within illumination beam area. It is an object with keys \"value\", \"unit\" and/or \"comments\".",
+          "description": "Numerical value of the uniformity of the illumination beam at the surface of the measurement sample as a number.",
           "type": "number"
         },
         "unit": {
           "title": "unit",
-          "description": "Unit of the uniformity of the illumination beam at the surface of the measurement sample. as a string that can have values \"%\" or unitless i.e. \"\".",
+          "description": "Unit of the uniformity of the illumination beam at the surface of the measurement sample as a string that can have values \"%\" or unitless i.e. \"\".",
           "type": "string",
-          "pattern": "^%$"
+          "pattern": "^%?$"
         }
       },
       "required": [
