@@ -54,12 +54,96 @@
       "type": "object",
       "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/aperture_json_schema_v1.0.json"
     },
-    "distance_from_sample": {},
-    "solid_angle": {},
-    "viewing_area": {},
-    "data_links": {},
-    "comments": {},
-    "adhoc_section": {}
+    "distance_from_sample": {
+      "title": "distance_from_sample",
+      "description": "An object describing detection system's distance from the sample surface. It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the detection system's distance from the sample surface as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the detection system's distance from the sample surface as a string that can have values \"pm\", \"nm\", \"μm\", \"mm\", \"dm\", \"m\", \"km\", \"Mm\" or \"Gm\".",
+          "type": "string",
+          "pattern": "^[GMkmdμnp]?m$"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "solid_angle": {
+      "title": "solid_angel",
+      "description": "An object describing detection system's viewing solid angle in steradians. It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the detection system's viewing solid angle as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the detection system's viewing solid angle as a string that can have values \"sr\".",
+          "type": "string",
+          "pattern": "sr"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "viewed_area": {
+      "title": "viewed_area",
+      "description": "An object describing detection system's viewing solid angle in steradians. It is an object with keys \"shape\" and \"dimensions\".",
+      "type": "object",
+      "properties": {
+        "shape": {
+          "title": "shape",
+          "description": "Shape of the area viewed by detection system during BRDF measurements as a text (i.e. string). For example \"circular\", \"square\", \"rectangular\", \"elliptical\" etc.",
+          "type": "string"
+        },
+        "dimensions": {
+          "title": "dimensions",
+          "description": "An object describing physical dimensions of the area viewed by detection system during BRDF measurements.",
+          "type": "object",
+          "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/dimensions_json_schema_v1.0.json"
+        }
+      },
+      "required": [
+        "shape",
+        "dimensions"
+      ],
+      "additionalProperties": false
+
+    },
+    "data_links": {
+      "title": "data_links",
+      "description": "An array that allows to refer to available external technical information regarding detection system used for BRDF measurements. Array of URL links as a text (i.e.string).",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "comments": {
+      "title": "comments",
+      "description": "The section that allows to provide any additional information regarding detection system used for BRDF measurements as a text (i.e.string).",
+      "type": "string"
+    },
+    "adhoc_section": {
+      "title": "adhoc_section",
+      "description": "An object containing user defined keys describing any information relevant to the detection system used for BRDF measurements that cannot be presented within \"detection_system\" object properties provided by schema. Adhoc section can contain all types of entries.",
+      "type": "object"
+    }
   },
   "required": [
     "name",

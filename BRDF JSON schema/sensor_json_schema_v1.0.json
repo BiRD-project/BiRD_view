@@ -114,7 +114,7 @@
         },
         "unit": {
           "title": "unit",
-          "description": "Unit of the set typical or average photosensitivity of optical sensor a string that can have values \"A/W\".",
+          "description": "Unit of the set typical or average photosensitivity of optical sensor as a string that can have values \"A/W\".",
           "type": "string",
           "pattern": "A/W"
         }
@@ -288,5 +288,10 @@
       "description": "An object containing user defined keys describing any information relevant to the optical sensor used for BRDF measurements that cannot be presented within \"sensor\" object properties provided by schema. Adhoc section can contain all types of entries.",
       "type": "object"
     }
-  }
+  },
+  "required": [
+    "name",
+    "spectral_response_range"
+  ],
+  "additionalProperties": false
 }
