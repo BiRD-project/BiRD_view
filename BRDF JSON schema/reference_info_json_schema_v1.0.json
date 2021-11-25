@@ -2,61 +2,58 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/reference_info_json_schema_v1.0.json",
   "title": "reference_info",
-  "description": "An object describing reference sample and related data used for relative BRDF measurements.",
+  "description": "An object describing reference sample and related reference BRDF data used for relative BRDF measurements.",
   "type": "object",
   "properties": {
     "name": {
       "title": "name",
-      "description": "Name of the instrument or system that was used for the measurement of BRDF data presented within the file.",
+      "description": "Name of the reference sample that was used for the relative BRDF measurements of data presented within the file.",
       "type": "string"
     },
     "model": {
       "title": "model",
-      "description": "Model of the instrument or system that was used for the measurement of BRDF data presented within the file (if applicable).",
+      "description": "Model of the reference sample that was used for the relative BRDF measurements of data presented within the file (if applicable).",
       "type": "string"
     },
     "manufacturer": {
       "title":"manufacturer",
-      "description": "Field for providing manufacturer of the instrument or system used for BRDF measurements as a text (i.e.string).",
+      "description": "Field for providing manufacturer of the reference sample used for relative BRDF measurements as a text (i.e.string).",
       "type": "string"
     },
     "type": {
       "title": "type",
-      "description": "Type of the optical sensor used in BRDF measurement set-up as text (i.e. string). For example \"photodiod\", \"CCD-camera\", \"photomultiplyer\" etc.",
+      "description": "Type of the reference sample used for relative BRDF measurements as text (i.e. string). For example \"white diffuse reflectance standard\", \"colored diffuse reflectance standard\", \"grey diffuse reflectance standard\" etc.",
       "type": "string"
     },
     "material": {
       "title": "material",
-      "description": "Light sensing material used in optical sensor included in BRDF measurement set-up as text (i.e. string). For example \"Si\", \"InGaAs\" etc.",
+      "description": "Material from which reference sample used for relative BRDF measurements was made as text (i.e. string). For example \"BaSO4\", \"PTFE\", \"ceramic\" etc.",
       "type": "string"
     },
     "shape": {
       "title": "shape",
-      "description": "Shape of the photosensitive area of optical sensor included in BRDF measurement set-up as text (i.e. string). For example \"Si\", \"InGaAs\" etc.",
+      "description": "Shape of the reference sample used for relative BRDF measurements as text (i.e. string). ",
       "type": "string"
     },
     "dimensions": {
       "title": "dimensions",
-      "description": "Dimensions of the photosensitive part of the sensor included in BRDF measurement set-up. It is an object with keys \"value\" and \"unit\".",
+      "description": "Dimensions of the reference sample used for relative BRDF measurements.",
       "type": "object",
-      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/dimensions_json_schema_v1.0.json",
-      "required": [
-        "area"
-      ]
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/dimensions_json_schema_v1.0.json"
     },
     "solid_angle": {
       "title": "solid_angel",
-      "description": "An object describing detection system's viewing solid angle in steradians. It is an object with keys \"value\" and \"unit\".",
+      "description": "An object describing solid angle that was used for reference BRDF data acquisition. It is an object with keys \"value\" and \"unit\".",
       "type": "object",
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the detection system's viewing solid angle as a number.",
+          "description": "Numerical value of the  solid angle that was used for reference BRDF data acquisition as a number.",
           "type": "number"
         },
         "unit": {
           "title": "unit",
-          "description": "Unit of the detection system's viewing solid angle as a string that can have values \"sr\".",
+          "description": "Unit of the  solid angle that was used for reference BRDF data acquisition as a string that can have values \"sr\".",
           "type": "string",
           "pattern": "sr"
         }
@@ -69,7 +66,7 @@
     },
     "data_links": {
       "title": "data_links",
-      "description": "An array that allows to refer to available external technical information regarding setup or instrumentation used for BRDF measurements. Array of URL links as a text (i.e.string).",
+      "description": "An array that allows to refer to any available external information reference sample or reference BRDF data used for relative BRDF measurements. Array of URL links as a text (i.e.string).",
       "type": "array",
       "uniqueItems": true,
       "items": {
@@ -79,12 +76,12 @@
     },
     "comments": {
       "title": "comments",
-      "description": "The field for providing in a text/string form any additional information relevant to instrumentation used for BRDF measurement.",
+      "description": "The field for providing in a text/string form any additional information relevant to the reference sample and related reference BRDF data used for relative BRDF measurements.",
       "type": "string"
     },
     "adhoc_section": {
       "title": "adhoc_section",
-      "description": "An object that contains user defined keys (not available in \"instrumentation\" object) describing any information relevant to the instrumentation used for BRDF measurement. Adhoc section can contain all types of entries.",
+      "description": "An object that contains user defined keys (not available in \"reference_info\" object) describing any information relevant to the reference sample and related reference BRDF data used for relative BRDF measurements. Adhoc section can contain all types of entries.",
       "type": "object"
     }
   },

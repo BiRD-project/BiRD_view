@@ -32,12 +32,12 @@
     },
     "shape": {
       "title": "shape",
-      "description": "Shape of the photosensitive area of optical sensor included in BRDF measurement set-up as text (i.e. string). For example \"Si\", \"InGaAs\" etc.",
+      "description": "Shape of the photosensitive area of optical sensor included in BRDF measurement set-up as text (i.e. string).",
       "type": "string"
     },
     "dimensions": {
       "title": "dimensions",
-      "description": "Dimensions of the photosensitive part of the sensor included in BRDF measurement set-up. It is an object with keys \"value\" and \"unit\".",
+      "description": "Dimensions of the photosensitive part of the sensor included in BRDF measurement set-up.",
       "type": "object",
       "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/dimensions_json_schema_v1.0.json",
       "required": [

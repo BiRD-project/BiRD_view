@@ -50,12 +50,6 @@
       "type": "object",
       "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/detection_system_json_schema_v1.0.json"
     },
-    "sample_holder": {
-      "title": "sample_holder",
-      "description": "An object describing sample holder of the instrument used for the measurement of BRDF data presented within the file.",
-      "type": "object",
-      "$ref:": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/sample_holder_json_schema_v1.0.json"
-    },
     "reference_info": {
       "title": "reference_info",
       "description": "An object describing reference sample and related data used for relative BRDF measurements.",
