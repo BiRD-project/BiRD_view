@@ -57,7 +57,7 @@ def parse_brdf_json(dict_from_brdf_json):
     return parsed_brdf_dict
 
 # json_file = open('test_brdf_json2.json')
-# json_schema = open('brdf_json_schema_v1.0.json')
+# json_schema = open('brdf_json_schema_v1.html.0.json')
 # dict_from_json = json.loads(json_file.read())
 # dict_from_json_schema = json.loads(json_schema.read())
 # valid = validate_brdf_json(dict_from_json, dict_from_json_schema)

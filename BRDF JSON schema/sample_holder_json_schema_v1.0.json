@@ -14,3 +14,96 @@
   "required": [],
   "additionalProperties": false
 }
+
+"oneOf": [
+        {
+          "const": "A"
+        },
+        {
+          "const": "B"
+        },
+        {
+          "const": "C"
+        },
+        {
+          "const": "D50"
+        },
+        {
+          "const": "D55"
+        },
+        {
+          "const": "D65"
+        },
+        {
+          "const": "D75"
+        },
+        {
+          "const": "D93"
+        },
+        {
+          "const": "E"
+        },
+        {
+          "const": "F1"
+        },
+        {
+          "const": "F2"
+        },
+        {
+          "const": "F3"
+        },
+        {
+          "const": "F4"
+        },
+        {
+          "const": "F5"
+        },
+        {
+          "const": "F6"
+        },
+        {
+          "const": "F7"
+        },
+        {
+          "const": "F8"
+        },
+        {
+          "const": "F9"
+        },
+        {
+          "const": "F10"
+        },
+        {
+          "const": "F11"
+        },
+        {
+          "const": "F12"
+        },
+        {
+          "const": "LED-B1"
+        },
+        {
+          "const": "LED-B2"
+        },
+        {
+          "const": "LED-B3"
+        },
+        {
+          "const": "LED-B4"
+        },
+        {
+          "const": "LED-B5"
+        },
+        {
+          "const": "LED-BH1"
+        },
+        {
+          "const": "LED-RGB1"
+        },
+        {
+          "const": "LED-V1"
+        },
+        {
+          "const": "LED-V2"
+        }
+      ]

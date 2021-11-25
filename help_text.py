@@ -133,7 +133,7 @@ Consortium agreed on following keys and structure in the BRDF file format:
 
 File can have extension .json or .brdf.
 
-File can be validated using following JSON Schema: [brdf_json_schema_v1.0.json](https://jsoneditoronline.org/#right=local.yutupo&left=url.https%3A%2F%2Fraw.githubusercontent.com%2FBiRD-project%2FBiRD_view%2Fmaster%2Fbrdf_json_schema.json).
+File can be validated using following JSON Schema: [brdf_json_schema_v1.html.0.json](https://jsoneditoronline.org/#right=local.yutupo&left=url.https%3A%2F%2Fraw.githubusercontent.com%2FBiRD-project%2FBiRD_view%2Fmaster%2Fbrdf_json_schema.json).
 
 Example files (toggle code/tree options to study the file):
 * [Example 1](https://jsoneditoronline.org/#right=local.yutupo&left=url.https%3A%2F%2Fraw.githubusercontent.com%2FBiRD-project%2FBiRD_view%2Fmaster%2FTest%2520BRDF%2520data%2520files%2FT08_example.brdf)
