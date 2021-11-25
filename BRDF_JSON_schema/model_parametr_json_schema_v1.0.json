@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/model_json_schema_v1.0.json",
+  "title": "model_parameter",
+  "description": "An object with keys describing the mathematical/physical simulation model and its parameters used to produce BRDF data.",
+  "properties": {
+    "name": {
+      "title": "name",
+      "description": "",
+      "type": "string"
+    },
+    "symbol": {
+      "title": "name",
+      "description": "",
+      "type": "string"
+    },
+    "description": {
+      "title": "name",
+      "description": "",
+      "type": "string"
+    },
+    "value": {
+      "title": "name",
+      "description": "",
+      "type": "string"
+    },
+    "unit": {
+      "title": "name",
+      "description": "",
+      "type": "string"
+    },
+    "data_links": {
+      "title": "data_links",
+      "description": "",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "comments": {
+      "title": "name",
+      "description": "",
+      "type": "string"
+    },
+    "adhoc_section": {
+      "title": "adhoc_section",
+      "description": "An object that contains user defined keys (not available in \"instrumentation\" object) describing any information relevant to the instrumentation used for BRDF measurement. Adhoc section can contain all types of entries.",
+      "type": "object"
+    }
+  },
+  "required": [
+    "name",
+    "description",
+    "value",
+    "unit"
+  ],
+  "additionalProperties": false
+}

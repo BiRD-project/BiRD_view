@@ -22,7 +22,12 @@
     },
     "serial_number": {
       "title": "serial_number",
-      "description": "Serial number of the instrument or system that was used for the measurement of BRDF data presented within the file (if applicable).",
+      "description": "Serial number of the instrument or system that was used for the measurement of BRDF data presented within the file. As a text (i.e. string).",
+      "type": "string"
+    },
+    "firmware_version": {
+      "title": "firmware_version",
+      "description": "Version of the firmware used to operate the instrument or system during the measurement of BRDF data presented within the file.  As a text (i.e. string).",
       "type": "string"
     },
     "operation_type": {
