@@ -143,10 +143,7 @@
           "title": "unit",
           "description": "Unit of the illumination source operating temperature as a string that can have values \"K\", \"kK\" or \"°C\".",
           "type": "string",
-          "oneOf": [
-            {"pattern": "^[k]?K$"},
-            {"pattern": "°C"}
-          ]
+          "enum": ["K", "kK", "°C"]
         }
       },
       "required": [
@@ -218,13 +215,8 @@
     },
     "adhoc_section": {
       "title": "adhoc_section",
-      "description": "An object containing user defined keys describing any information relevant to the illumination source of the instrument that cannot be presented within source properties provided by schema. Adhoc section can contain all types of entries except new objects",
-      "type": "object",
-      "additionalProperties": {
-        "not": {
-          "type": "object"
-        }
-      }
+      "description": "An object containing user defined keys describing any information relevant to the illumination source of the instrument that cannot be presented within \"source\" object properties provided by schema. Adhoc section can contain all types of entries except new objects",
+      "type": "object"
     }
   },
   "oneOf": [

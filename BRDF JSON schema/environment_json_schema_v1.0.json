@@ -2,23 +2,101 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/environment_json_schema_v1.0.json",
   "title": "environment",
-  "description": "String or an object with keys describing the environmental conditions during BRDFmeasurement like pressure, temperature, humidity, etc. Object has values as a number or a string.",
-  "oneOf": [
-    {
+  "description": "An object with keys describing the environmental conditions during BRDF measurement like pressure, temperature, humidity, etc.",
+  "type": "object",
+  "properties": {
+    "temperature": {
+      "title": "temperature",
+      "description": "An object describing ambient temperature of the environment in which measurement sample's BRDF was measured.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the ambient temperature of the environment in which measurement sample's BRDF was measured as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the ambient temperature of the environment in which measurement sample's BRDF was measured as a string that can have values \"K\", \"kK\" or \"°C\".",
+          "type": "string",
+          "enum": ["K", "kK", "°C"]
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "relative_humidity": {
+      "title": "relative_humidity",
+      "description": "An object describing relative humidity of the environment in which measurement sample's BRDF was measured.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the relative humidity of the environment (at the given temperature) in which measurement sample's BRDF was measured as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the relative humidity of the environment in which measurement sample's BRDF was measured as a string that can have value \"%\".",
+          "type": "string",
+          "enum": ["%"]
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "pressure": {
+      "title": "pressure",
+      "description": "An object describing pressure within the environment in which measurement sample's BRDF was measured.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the pressure within the environment (at the given temperature) in which measurement sample's BRDF was measured as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the relative pressure within the environment in which measurement sample's BRDF was measured as a string that can have value \"Pa\", \"kPa\", \"bar\" and \"psi\".",
+          "type": "string",
+          "enum": ["Pa", "kPa", "bar", "psi"]
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "data_links": {
+      "title": "data_links",
+      "description": "An object that allows to refer to available external information regarding environmental conditions during BRDF measurements. Array of string URL links.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "comments": {
+      "title": "comments",
+      "description": "A section that allows to add any additional information regarding environmental conditions during BRDF measurements. Comments should be presented as a text (i.e.string).",
       "type": "string"
     },
-    {
-      "type": "object",
-      "additionalProperties": {
-        "oneOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "number"
-          }
-        ]
-      }
+    "adhoc_section": {
+      "title": "adhoc_section",
+      "description": "An object containing user defined keys describing any information relevant to the environmental conditions during BRDF measurements that cannot be presented within \"environment\" object properties provided by schema. Adhoc section can contain all types of entries except new objects",
+      "type": "object"
     }
-  ]
+  },
+  "required": [
+    "temperature"
+  ],
+  "additionalProperties": false
 }
