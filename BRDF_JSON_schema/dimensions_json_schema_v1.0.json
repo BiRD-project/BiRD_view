@@ -223,8 +223,6 @@
       "type": "object"
     }
   },
-  "required": [
-    "area","length"
-  ],
+  "required": [],
   "additionalProperties": false
 }
