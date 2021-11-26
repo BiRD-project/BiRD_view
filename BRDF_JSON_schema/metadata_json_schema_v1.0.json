@@ -33,13 +33,13 @@
       "title": "description",
       "description": "String or an object with keys describing the origin of the data i.e. institution, address, personell etc. Object has values as a number or a string.",
       "type": "object",
-      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/provenance_json_schema_v1.0.json"
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/provenance_json_schema_v1.0.json"
     },
     "license": {
       "title": "license",
       "description": "An object providing all relevant information regarding the license applicable for presented BRDF data.",
       "type": "object",
-      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/license_json_schema_v1.0.json"
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/license_json_schema_v1.0.json"
     },
     "method": {
       "title": "method",
@@ -51,25 +51,25 @@
       "title": "instrumentation",
       "description": "String or an object with keys describing the setup or instrumentation and its parameters used to measure BRDF data. Object has values as a number or a string.",
       "type": "object",
-      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/instrumentation_json_schema_v1.0.json"
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/instrumentation_json_schema_v1.0.json"
     },
     "software": {
       "title": "software",
       "description": "String or an object with keys describing the mathematical/physical simulation model and its parameters used to produce BRDF data. Object has values as a number or a string.",
       "type": "object",
-      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/software_json_schema_v1.0.json"
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/software_json_schema_v1.0.json"
     },
     "sample": {
       "title": "sample",
       "description": "String or an object with keys describing the virtual or actual sample used to produce BRDF data. Object has values as a number or a string.",
       "type": "object",
-      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/sample_json_schema_v1.0.json"
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/sample_json_schema_v1.0.json"
     },
     "environment": {
       "title": "environment",
       "description": "String or an object with keys describing the environmental conditions during BRDFmeasurement like pressure, temperature, humidity, etc. Object has values as a number or a string.",
       "type": "object",
-      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/environment_json_schema_v1.0.json"
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/environment_json_schema_v1.0.json"
     },
     "comments": {
       "title": "comments",
