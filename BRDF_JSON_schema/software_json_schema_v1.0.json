@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/software_json_schema_v1.0.json",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/software_json_schema_v1.0.json",
   "title": "software",
   "description": "An object with keys describing the software as well as the mathematical/physical simulation model and its parameters used to produce or process BRDF data.",
   "properties": {
@@ -28,7 +28,7 @@
       "title": "simulation_model",
       "description": "An object describing physical or mathematical simulation model that was used to generate BRDF values presented in the file.",
       "type": "object",
-      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/simulation_model_json_schema_v1.0.json"
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/simulation_model_json_schema_v1.0.json"
     },
     "data_links": {
       "title": "data_links",

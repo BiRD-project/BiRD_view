@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/license_json_schema_v1.0.json",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/license_json_schema_v1.0.json",
   "title": "license",
   "description": "An object providing all relevant information regarding the license applicable for presented BRDF data.",
   "type": "object",

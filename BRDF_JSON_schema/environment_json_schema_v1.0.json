@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/environment_json_schema_v1.0.json",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/environment_json_schema_v1.0.json",
   "title": "environment",
   "description": "An object with keys describing the environmental conditions during BRDF measurement like pressure, temperature, humidity, etc.",
   "type": "object",

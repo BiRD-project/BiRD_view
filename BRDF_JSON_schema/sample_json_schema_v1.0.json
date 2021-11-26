@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/sample_json_schema_v1.0.json",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/sample_json_schema_v1.0.json",
   "title": "sample",
   "description": "An object with keys describing the physical or virtual sample which BRDF was measured or simulated.",
   "properties": {
@@ -30,7 +30,7 @@
         "name": "material",
         "description": "An object that describes a single material from which measurement sample was produced (either partially or fully).",
         "type": "object",
-        "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/sample_material_schema_v1.0.json"
+        "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/sample_material_schema_v1.0.json"
       }
     },
     "treatment": {},

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/instrumentation_json_schema_v1.0.json",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/instrumentation_json_schema_v1.0.json",
   "title": "instrumentation",
   "description": "An object with keys describing the setup or instrumentation as well as its parameters that were used to measure BRDF data presented in the file.",
   "type": "object",
@@ -47,19 +47,19 @@
       "title": "illumination",
       "description": "An object with keys describing illumination source, relevant optical components and illumination beam properties.",
       "type": "object",
-      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/illumination_system_json_schema_v1.0.json"
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/illumination_system_json_schema_v1.0.json"
     },
     "detection_system": {
       "title": "detection",
       "description": "An object with keys describing detector and its accompanying relevant optical components and and settings.",
       "type": "object",
-      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/detection_system_json_schema_v1.0.json"
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/detection_system_json_schema_v1.0.json"
     },
     "reference_info": {
       "title": "reference_info",
       "description": "An object describing reference sample and related data used for relative BRDF measurements.",
       "type": "object",
-      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/reference_info_json_schema_v1.0.json"
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/reference_info_json_schema_v1.0.json"
     },
     "operator_name": {
       "title": "operator_name",

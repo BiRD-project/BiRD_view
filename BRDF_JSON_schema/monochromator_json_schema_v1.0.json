@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/monochromator_json_schema_v1.0.json",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/monochromator_json_schema_v1.0.json",
   "title": "monochromator",
   "description": "An object describing properties and set parameters of the monochromator included to the set-up used for (usually spectral) BRDF measurements. Note that the same object describes monochromators integrated to illumination or detection systems.",
   "type": "object",
@@ -33,7 +33,7 @@
         "title": "monochromator_setting",
         "description": "An object describing monochromator parameters for a single selected wavelength or wavelength range within which these parameters were constant during BRDF measurements",
         "type": "object",
-        "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/monochromator_setting_json_schema_v1.0.json"
+        "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/monochromator_setting_json_schema_v1.0.json"
       }
     },
     "damage_treshold": {

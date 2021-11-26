@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/simulation_model_json_schema_v1.0.json",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/simulation_model_json_schema_v1.0.json",
   "title": "simulation_model",
   "description": "An object with keys describing the mathematical or physical simulation model and its parameters used to produce BRDF data.",
   "properties": {
@@ -28,7 +28,7 @@
         "title":"model_parameter",
         "description": "An object describing a single mathematical or physical simulation model parameter. I.e. its name, meaning, value, unit, symbol etc.",
         "type": "object",
-        "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/simulation_model_parameter_json_schema_v1.0.json"
+        "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/simulation_model_parameter_json_schema_v1.0.json"
       }
     },
     "data_links": {

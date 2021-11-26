@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/dimensions_json_schema_v1.0.json",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/dimensions_json_schema_v1.0.json",
   "title": "dimensions",
   "description": "An object describing physical dimensions of the different optical elements, illumination beam and/or samples used for BRDF measurements.",
   "type": "object",

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/beam_json_schema_v1.0.json",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/beam_json_schema_v1.0.json",
   "title": "beam",
   "description": "An object with properties describing illumination beam parameters like size, shape, uniformity etc.",
   "type": "object",
@@ -14,7 +14,7 @@
       "title": "dimensions",
       "description": "An object describing physical dimensions of the beam at the surface of the measurement sample.",
       "type": "object",
-      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/dimensions_json_schema_v1.0.json",
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/dimensions_json_schema_v1.0.json",
       "required": ["area"]
     },
     "uniformity": {

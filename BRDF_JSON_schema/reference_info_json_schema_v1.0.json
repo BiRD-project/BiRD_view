@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/reference_info_json_schema_v1.0.json",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/reference_info_json_schema_v1.0.json",
   "title": "reference_info",
   "description": "An object describing reference sample and related reference BRDF data used for relative BRDF measurements.",
   "type": "object",
@@ -39,7 +39,7 @@
       "title": "dimensions",
       "description": "Dimensions of the reference sample used for relative BRDF measurements.",
       "type": "object",
-      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/dimensions_json_schema_v1.0.json"
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/dimensions_json_schema_v1.0.json"
     },
     "solid_angle": {
       "title": "solid_angel",

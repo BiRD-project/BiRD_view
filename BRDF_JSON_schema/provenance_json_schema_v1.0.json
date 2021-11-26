@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/provenance_json_schema_v1.0.json",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/provenance_json_schema_v1.0.json",
   "title": "provenance",
   "description": "String or an object with keys describing the origin of the data i.e. institution, address, personell etc. Object has values as a number or a string.",
   "type": "object",

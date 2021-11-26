@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/polarization_alterant_json_schema_v1.0.json",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/polarization_alterant_json_schema_v1.0.json",
   "title": "polarization_alterant",
   "description": "An object describing a single polarization altering element or an assembly that included to the set-up used for (usually polarimetric) BRDF measurements. Note that the same object describes polarization altering elements integrated to illumination or detection systems.",
   "type": "object",

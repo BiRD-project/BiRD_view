@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/aperture_json_schema_v1.0.json",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/aperture_json_schema_v1.0.json",
   "title": "aperture",
   "description": "An object describing properties of the aperture that is a part of the instrument used for BRDF measurement.",
   "type": "object",
@@ -39,7 +39,7 @@
       "title": "dimensions",
       "description": "An object describing physical dimensions of the aperture depending on its shape.",
       "type": "object",
-      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/dimensions_json_schema_v1.0.json"
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/dimensions_json_schema_v1.0.json"
     },
     "data_links": {
       "title": "data_links",
