@@ -201,9 +201,9 @@
         },
         "unit": {
           "title": "unit",
-          "description": "Unit of the area of an optical element, illumination beam and/or sample as a string that can have values \"pm2\", \"nm2\", \"μm2\", \"mm2\", \"dm2\", \"m2\", \"km2\", \"Mm2\" or \"Gm2\".",
+          "description": "Unit of the area of an optical element, illumination beam and/or sample as a string that can have values \"pm^2\", \"nm^2\", \"μm^2\", \"mm^2\", \"dm^2\" or \"m^2\".",
           "type": "string",
-          "pattern": "^[GMkmdμnp]?m2$"
+          "pattern": ["pm^2", "nm^2", "μm^2", "mm^2", "dm^2", "m^2"]
         }
       },
       "required": [
@@ -224,6 +224,7 @@
     }
   },
   "required": [
+    "area"
   ],
   "additionalProperties": false
 }
