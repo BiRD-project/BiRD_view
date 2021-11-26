@@ -224,7 +224,7 @@
     }
   },
   "required": [
-    "area"
+    "area","length"
   ],
   "additionalProperties": false
 }
