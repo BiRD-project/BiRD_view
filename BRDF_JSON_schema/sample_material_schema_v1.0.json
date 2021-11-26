@@ -1,23 +1,144 @@
 {
-  "properties": {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/sample_material_schema_v1.0.json",
-    "title": "sample",
-    "description": "An object that describes a single material from which measurement sample was produced (either partially or fully).",
-    "properties":{
-      "name": {},
-      "chemical_formula": {},
-      "type": {"description": "main material, substrate, coating"},
-      "refraction_index": {},
-      "extinction_coefficient": {},
-      "layer_number": {},
-      "data_links": {},
-      "comments": {},
-      "adhoc_section": {}
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/sample_material_schema_v1.0.json",
+  "title": "material",
+  "description": "An object that describes a single material from which measurement sample was produced (either partially or fully).",
+  "properties":{
+    "name": {
+      "title": "name",
+      "description": "Naming of the material from rom which measurement sample was produced (either partially or fully) as a string.",
+      "type": "string"
     },
-    "required": [
-      "name"
-    ],
-    "additionalProperties": false
-  }
+    "chemical_formula": {
+      "title": "chemical_formula",
+      "description": "Chemical formula of the material from rom which measurement sample was produced (either partially or fully) as a string.",
+      "type": "string"
+    },
+    "type": {
+      "title": "type",
+      "description": "Short description of the material's structural role as a string. For example \"main material\", \"substrate\", \"coating\".",
+      "type": "string"
+    },
+    "refractive_index_wl": {
+      "title":"refractive_index_wl",
+      "description": "An object describing wavelength for which refractive index (n) of the material is provided in the field \"refractive_index\". It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the wavelength for which refractive index (n) of the material is provided as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the wavelength for which refractive index (n) of the material is provided as a string that can have values \"nm\" or \"μm\".",
+          "type": "string",
+          "enum": ["nm","μm"]
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "refractive_index": {
+      "title":"refractive_index",
+      "description": "An object describing refractive index (n) of the material from rom which measurement sample was produced (either partially or fully). It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the refractive index (n) of the material as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "By definition refractive index (n) is unitless, but to maintain single pattern for all numerical properties, unit is also demanded here even thou it can only have empty string value \"\".",
+          "type": "string",
+          "enum": [""]
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "extinction_coefficient_wl": {
+      "title":"extinction_coefficient_wl",
+      "description": "An object describing wavelength for which extinction coefficient (or absorption index k) of the material is provided in the field \"extinction_coefficient\". It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the wavelength for which extinction coefficient (or absorption index k) of the material is provided as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the wavelength for which extinction coefficient (or absorption index k) of the material is provided as a string that can have values \"nm\" or \"μm\".",
+          "type": "string",
+          "enum": ["nm","μm"]
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "extinction_coefficient": {
+      "title":"extinction_coefficient",
+      "description": "An object describing extinction coefficient (or absorption index k) of the material from rom which measurement sample was produced (either partially or fully). It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the extinction coefficient (or absorption index k) of the material as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "By definition extinction coefficient (or absorption index k) is unitless, but to maintain single pattern for all numerical properties, unit is also demanded here even thou it can only have empty string value \"\".",
+          "type": "string",
+          "enum": [""]
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "layer_number": {
+      "title": "layer_number",
+      "description": "An integer number that describes the position of the material in the sample structure in case of layered sample composition. Numbering starts from the top surface i.e. from the material that is hit with the illumination first during sample's BRDF measurement. Numbering starts from 1.",
+      "type": "integer"
+    },
+    "data_links": {
+      "title": "data_links",
+      "description": "An array with links to any relevant information regarding specific material from which measurement sample was produced (either partially or fully). For example regarding the origin of refractive index and extinction coefficient or relevant transmission, absorption or fluorescence spectra.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "comments": {
+      "title": "comments",
+      "description": "A section that allows to provide in the form of text (i.e. string) any comments relevant to the specific material from which measurement sample was produced (either partially or fully).",
+      "type": "string"
+    },
+    "adhoc_section": {
+      "title": "adhoc_section",
+      "description": "An object containing user defined keys describing any information relevant to the specific material from which measurement sample was produced (either partially or fully) that cannot be presented within sample \"material\" object properties provided by schema. Adhoc section can contain all types of entries.",
+      "type": "object"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "additionalProperties": false
 }

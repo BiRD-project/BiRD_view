@@ -42,9 +42,9 @@
         },
         "unit": {
           "title": "unit",
-          "description": "Polarizer's extinction ratio is unitless and unit property should be filled with empty string \"\".",
+          "description": "Polarizer's extinction ratio can be expressed as unitless (i.e. empty string \"\"),\"%\" and \"dB\".",
           "type": "string",
-          "pattern": ""
+          "enum": ["","%","dB"]
         }
       },
       "required": [
@@ -96,7 +96,7 @@
           "title": "unit",
           "description": "Unit of the wavelength at which polarization altering element is most effective as a string that can have values \"nm\" or \"μm\".",
           "type": "string",
-          "pattern": "^[nμ]?m$"
+          "pattern": ["nm","μm"]
         }
       },
       "required": [
