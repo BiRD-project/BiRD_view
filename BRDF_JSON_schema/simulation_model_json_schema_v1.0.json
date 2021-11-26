@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/simulation_model_json_schema_v1.0.json",
+  "title": "simulation_model",
+  "description": "An object with keys describing the mathematical or physical simulation model and its parameters used to produce BRDF data.",
+  "properties": {
+    "name": {
+      "title": "name",
+      "description": "Short name commonly used to refer to mathematical or physical simulation model used to produce BRDF data as a text (i.e. string). For example, \"Torrance-Sparrow model\", \"Cook-Torrance model\" etc.",
+      "type": "string"
+    },
+    "description": {
+      "title": "description",
+      "description": "Short description of the mathematical or physical simulation model used to produce BRDF data as a text (i.e. string). It may refer to authors of model, its key principles, description of most significant variables, application limits etc.",
+      "type": "string"
+    },
+    "equation": {
+      "title": "equation",
+      "description": "Equation of mathematical or physical simulation model used to produce BRDF data as a text (i.e. string) according to text-based math standards: https://w3c.github.io/mathonwebpages/research/text_based_standards.html. NB! Correct spelling of math equations cannot be checked by JSON validator.",
+      "type": "string"
+    },
+    "parameters": {
+      "title": "parameters",
+      "description": "An array of objects describing mathematical or physical simulation model parameters.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "title":"model_parameter",
+        "description": "An object describing a single mathematical or physical simulation model parameter. I.e. its name, meaning, value, unit, symbol etc.",
+        "type": "object",
+        "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/simulation_model_parameter_json_schema_v1.0.json"
+      }
+    },
+    "data_links": {
+      "title": "data_links",
+      "description": "An array of links (as a string) in URI format that allow to refer to any external information related to the mathematical or physical simulation model that were used to produce BRDF data presented in the file. For example, link to the article describing model.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "comments": {
+      "title": "comments",
+      "description": "A section that allows to add any additional information regarding the mathematical or physical simulation model used to produce BRDF data presented in the file. Comments should be presented as a text (i.e.string).",
+      "type": "string"
+    },
+    "adhoc_section": {
+      "title": "adhoc_section",
+      "description": "An object that contains user defined keys (not available in \"simulation_model\" object) describing any information relevant to the mathematical or physical simulation model used to produce BRDF data presented in the file. Adhoc section can contain all types of entries.",
+      "type": "object"
+    }
+  },
+  "required": [
+    "name",
+    "description"
+  ],
+  "additionalProperties": false
+}

@@ -74,6 +74,29 @@
       ],
       "additionalProperties": false
     },
+    "thickness": {
+      "title": "thickness",
+      "description": "Thickness of an optical element, illumination beam and/or sample used for BRDF measurements. It is an object with keys \"value\" and \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the thickness of an optical element, illumination beam and/or sample as a number.",
+          "type": "number"
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Unit of the thickness of an optical element, illumination beam and/or sample as a string that can have values \"pm\", \"nm\", \"μm\", \"mm\", \"dm\", \"m\", \"km\", \"Mm\" or \"Gm\".",
+          "type": "string",
+          "pattern": "^[GMkmdμnp]?m$"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
     "radius": {
       "title": "radius",
       "description": "Radius of an optical element, illumination beam and/or sample used for BRDF measurements. It is an object with keys \"value\" and \"unit\".",

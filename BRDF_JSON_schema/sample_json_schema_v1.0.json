@@ -2,23 +2,83 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/sample_json_schema_v1.0.json",
   "title": "sample",
-  "description": "String or an object with keys describing the virtual or actual sample used to produce BRDF data. Object has values as a number or a string.",
-  "oneOf": [
-    {
+  "description": "An object with keys describing the physical or virtual sample which BRDF was measured or simulated.",
+  "properties": {
+    "name": {
+      "title": "name",
+      "description": "",
       "type": "string"
     },
-    {
-      "type": "object",
-      "additionalProperties": {
-        "oneOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "number"
-          }
-        ]
+    "type": {
+      "title": "name",
+      "description": "",
+      "type": "string"
+    },
+    "model": {},
+    "manufacturer": {
+      "title": "name",
+      "description": "",
+      "type": "string"
+    },
+    "provenance": {},
+    "manufacturing_method": {},
+    "materials": {
+      "name": "materials",
+      "description": "An array with objects that describes different materials from which measurement sample was made.",
+      "type": "array",
+      "items": {
+        "name": "material",
+        "description": "An object that describes a single material from which measurement sample was produced (either partially or fully).",
+        "type": "object",
+        "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/sample_material_schema_v1.0.json"
       }
+    },
+    "treatment": {},
+    "cleaning_procedure": {},
+    "front_surface_finish": {},
+    "back_surface_finish": {},
+    "front_surface_roughness": {},
+    "back_surface_roughness": {},
+    "shape": {},
+    "dimensions": {},
+    "front_surface_curvature": {},
+    "back_surface_curvature": {},
+    "origin_location": {},
+    "zero_azimuth_location": {},
+    "properties_symmetry": {},
+    "specular_reflectance": {},
+    "specular_transmittance": {},
+    "total_reflectance": {},
+    "total_transmittance": {},
+    "temperature": {},
+    "photo_links": {},
+    "data_links": {
+      "title": "data_links",
+      "description": "",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "comments": {
+      "title": "name",
+      "description": "",
+      "type": "string"
+    },
+    "adhoc_section": {
+      "title": "adhoc_section",
+      "description": "An object that contains user defined keys (not available in \"instrumentation\" object) describing any information relevant to the instrumentation used for BRDF measurement. Adhoc section can contain all types of entries.",
+      "type": "object"
     }
-  ]
+  },
+  "required": [
+    "name",
+    "type",
+    "dimensions",
+    "shape",
+    "zero_azimuth_location"
+  ],
+  "additionalProperties": false
 }

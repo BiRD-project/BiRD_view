@@ -1,0 +1,23 @@
+{
+  "properties": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/sample_material_schema_v1.0.json",
+    "title": "sample",
+    "description": "An object that describes a single material from which measurement sample was produced (either partially or fully).",
+    "properties":{
+      "name": {},
+      "chemical_formula": {},
+      "type": {"description": "main material, substrate, coating"},
+      "refraction_index": {},
+      "extinction_coefficient": {},
+      "layer_number": {},
+      "data_links": {},
+      "comments": {},
+      "adhoc_section": {}
+    },
+    "required": [
+      "name"
+    ],
+    "additionalProperties": false
+  }
+}

@@ -2,37 +2,37 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/software_json_schema_v1.0.json",
   "title": "software",
-  "description": "An object with keys describing the software as well as the mathematical/physical simulation model and its parameters used to produce BRDF data.",
+  "description": "An object with keys describing the software as well as the mathematical/physical simulation model and its parameters used to produce or process BRDF data.",
   "properties": {
     "name": {
       "title": "name",
-      "description": "",
+      "description": "Name of the software used to produce or process BRDF data as a text (i.e. string).",
       "type": "string"
     },
     "version": {
-      "title": "name",
-      "description": "",
+      "title": "version",
+      "description": "Version of the software used to produce or process BRDF data as a text (i.e. string).",
       "type": "string"
     },
     "author": {
-      "title": "name",
-      "description": "",
+      "title": "author",
+      "description": "Person or company name that developed the software used to produce or process BRDF data as a text (i.e. string).",
       "type": "string"
     },
     "description": {
-      "title": "name",
-      "description": "",
+      "title": "description",
+      "description": "Short description of the the software used to produce or process BRDF data as a text (i.e. string). For exmple, \"Ray-tracing software for optical reflectance simulation.\" or \"Matlab script for calculation BRDF values and its uncertainty from measurement results and known instrumental parameters.\"",
       "type": "string"
     },
-    "model": {
-      "title": "name",
-      "description": "",
+    "simulation_model": {
+      "title": "simulation_model",
+      "description": "An object describing physical or mathematical simulation model that was used to generate BRDF values presented in the file.",
       "type": "object",
-      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/model_json_schema_v1.0.json"
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/simulation_model_json_schema_v1.0.json"
     },
     "data_links": {
       "title": "data_links",
-      "description": "",
+      "description": "An array of links (as a string) in URI format that allow to refer to any external information related to the software and simulation model that were used to produce or process BRDF data presented in the file.",
       "type": "array",
       "uniqueItems": true,
       "items": {
@@ -41,13 +41,13 @@
       }
     },
     "comments": {
-      "title": "name",
-      "description": "",
+      "title": "comments",
+      "description": "A section that allows to add any additional information regarding the software and simulation model that were used to produce or process BRDF data presented in the file. Comments should be presented as a text (i.e.string).",
       "type": "string"
     },
     "adhoc_section": {
       "title": "adhoc_section",
-      "description": "An object that contains user defined keys (not available in \"instrumentation\" object) describing any information relevant to the instrumentation used for BRDF measurement. Adhoc section can contain all types of entries.",
+      "description": "An object that contains user defined keys (not available in \"software\" object) describing any information relevant to the software and simulation model that were used to produce or process BRDF data presented in the file. Adhoc section can contain all types of entries.",
       "type": "object"
     }
   },

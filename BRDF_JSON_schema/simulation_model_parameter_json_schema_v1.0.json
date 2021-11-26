@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF JSON schema/simulation_model_parameter_json_schema_v1.0.json",
+  "title": "model_parameter",
+  "description": "An object describing a single mathematical or physical simulation model parameter. I.e. its name, meaning, value, unit, symbol etc.",
+  "properties": {
+    "name": {
+      "title": "name",
+      "description": "Name of the mathematical or physical simulation model parameter as a string.",
+      "type": "string"
+    },
+    "symbol": {
+      "title": "symbol",
+      "description": "Symbol used in equation to denote the mathematical or physical simulation model parameter as a string.",
+      "type": "string"
+    },
+    "description": {
+      "title": "description",
+      "description": "Short description of the meaning of the mathematical or physical simulation model parameter as a text (i.e. string).",
+      "type": "string"
+    },
+    "value": {
+      "title": "value",
+      "description": "Numerical value of the mathematical or physical simulation model parameter as a number. Value should represent the exact same value of the parameter that was used to produce BRDF data presented in the file.",
+      "type": "number"
+    },
+    "unit": {
+      "title": "unit",
+      "description": "Unit of the value of mathematical or physical simulation model parameter as a string.",
+      "type": "string"
+    },
+    "data_links": {
+      "title": "data_links",
+      "description": "An array of links (as a string) in URI format that allow to refer to any external information related to the mathematical or physical simulation model parameter that were used to produce BRDF data presented in the file. For example, link to the source of numerical value of the described model parameter.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "comments": {
+      "title": "comments",
+      "description": "A section that allows to add any additional information regarding the described mathematical or physical simulation model parameter used within it to produce BRDF data presented in the file. Comments should be presented as a text (i.e.string).",
+      "type": "string"
+    },
+    "adhoc_section": {
+      "title": "adhoc_section",
+      "description": "An object that contains user defined keys (not available in \"model_parameter\" object) describing any information relevant to the single mathematical or physical simulation model parameter. Adhoc section can contain all types of entries.",
+      "type": "object"
+    }
+  },
+  "required": [
+    "name",
+    "description",
+    "value",
+    "unit"
+  ],
+  "additionalProperties": false
+}

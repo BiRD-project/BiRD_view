@@ -102,19 +102,19 @@
       ],
       "additionalProperties": false
     },
-    "photosensitivity": {
-      "title": "photosensitivity",
-      "description": "Typical or average photosensitivity of optical sensor in A/W. It is an object with keys \"value\" and \"unit\".",
+    "responsivity": {
+      "title": "responsivity",
+      "description": "Typical or average responsivity of optical sensor in A/W. It is an object with keys \"value\" and \"unit\".",
       "type": "object",
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the typical or average photosensitivity of optical sensor as a number.",
+          "description": "Numerical value of the typical or average responsivity of optical sensor as a number.",
           "type": "number"
         },
         "unit": {
           "title": "unit",
-          "description": "Unit of the set typical or average photosensitivity of optical sensor as a string that can have values \"A/W\".",
+          "description": "Unit of the set typical or average responsivity of optical sensor as a string that can have values \"A/W\".",
           "type": "string",
           "pattern": "A/W"
         }
@@ -127,7 +127,7 @@
     },
     "linearity": {
       "title": "linearity",
-      "description": "An object describing the maximal ratio between photosensitivities around different optical powers that sensor can sense in case of fixed detection wavelength. It is defined as min_responsivity / max_responsivity for power range used for BRDF measurements. \"nonlinearity\" object has keys keys \"value\" and \"unit\"",
+      "description": "An object describing the maximal ratio between responsivity around different optical powers that sensor can sense in case of fixed detection wavelength. It is defined as min_responsivity / max_responsivity for power range used for BRDF measurements. \"nonlinearity\" object has keys keys \"value\" and \"unit\"",
       "type": "object",
       "properties": {
         "value": {

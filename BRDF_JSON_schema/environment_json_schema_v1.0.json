@@ -76,7 +76,7 @@
     },
     "data_links": {
       "title": "data_links",
-      "description": "An object that allows to refer to available external information regarding environmental conditions during BRDF measurements. Array of string URL links.",
+      "description": "An array that allows to refer to available external information regarding environmental conditions during BRDF measurements. Array of string URL links.",
       "type": "array",
       "uniqueItems": true,
       "items": {
