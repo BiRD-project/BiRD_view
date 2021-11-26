@@ -203,7 +203,7 @@
           "title": "unit",
           "description": "Unit of the area of an optical element, illumination beam and/or sample as a string that can have values \"pm^2\", \"nm^2\", \"μm^2\", \"mm^2\", \"dm^2\" or \"m^2\".",
           "type": "string",
-          "pattern": ["pm^2", "nm^2", "μm^2", "mm^2", "dm^2", "m^2"]
+          "enum": ["pm^2", "nm^2", "μm^2", "mm^2", "dm^2", "m^2"]
         }
       },
       "required": [
