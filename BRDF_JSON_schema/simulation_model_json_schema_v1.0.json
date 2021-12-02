@@ -21,7 +21,7 @@
     },
     "parameters": {
       "title": "parameters",
-      "description": "An array of objects describing mathematical or physical simulation model parameters.",
+      "description": "An array of unique \"model_parameter\" objects describing mathematical or physical simulation model parameters.",
       "type": "array",
       "uniqueItems": true,
       "items": {
@@ -33,7 +33,7 @@
     },
     "data_links": {
       "title": "data_links",
-      "description": "An array of links (as a string) in URI format that allow to refer to any external information related to the mathematical or physical simulation model that were used to produce BRDF data presented in the file. For example, link to the article describing model.",
+      "description": "An array that allow to refer to any external information related to the mathematical or physical simulation model that were used to produce BRDF data presented in the file. For example, link to the article describing model. Array contains unique strings formatted as URL links.",
       "type": "array",
       "uniqueItems": true,
       "items": {

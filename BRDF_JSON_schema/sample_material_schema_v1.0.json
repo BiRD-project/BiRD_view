@@ -21,19 +21,32 @@
     },
     "refractive_index_wl": {
       "title":"refractive_index_wl",
-      "description": "An object describing wavelength for which refractive index (n) of the material is provided in the field \"refractive_index\". It is an object with keys \"value\" and \"unit\".",
+      "description": "An object describing wavelength for which refractive index (n) of the material is provided in the field \"refractive_index\". It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
       "type": "object",
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the wavelength for which refractive index (n) of the material is provided as a number.",
-          "type": "number"
+          "description": "Numerical value of the wavelength for which refractive index (n) of the material is provided as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
         },
         "unit": {
           "title": "unit",
-          "description": "Unit of the wavelength for which refractive index (n) of the material is provided as a string that can have values \"nm\" or \"μm\".",
+          "description": "Measurement unit of the wavelength for which refractive index (n) of the material is provided as a string that can have values \"nm\" or \"μm\".",
           "type": "string",
           "enum": ["nm","μm"]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the wavelength for which refractive index (n) of the material is provided as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the wavelength for which refractive index (n) of the material is provided as a string that can have values \"nm\", \"μm\" or \"%\".",
+          "type": "string",
+          "enum": ["nm","μm", "%"]
         }
       },
       "required": [
@@ -44,42 +57,60 @@
     },
     "refractive_index": {
       "title":"refractive_index",
-      "description": "An object describing refractive index (n) of the material from rom which measurement sample was produced (either partially or fully). It is an object with keys \"value\" and \"unit\".",
+      "description": "An object describing refractive index (n) of the material from which measurement sample was produced (either partially or fully) and which corresponds to wavelength specified in \"refractive_index_wl\" object. It is an object with following available keys: \"value\", \"uncertainty\" and \"uncertainty_unit\". Note that by definition, refractive index is unitless and current object doesn't have \"units\" object.",
       "type": "object",
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the refractive index (n) of the material as a number.",
+          "description": "Numerical value of the refractive index (n) of the material as a negative or positive number. Traditionally, it is implied that the minimal possible refractive index is 1 (refractive index of vacuum). However, there are publications that confirm existence of (meta)materials that can have the negative refraction indices (https://en.wikipedia.org/wiki/Negative-index_metamaterial).",
           "type": "number"
         },
-        "unit": {
-          "title": "unit",
-          "description": "By definition refractive index (n) is unitless, but to maintain single pattern for all numerical properties, unit is also demanded here even thou it can only have empty string value \"\".",
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the refractive index (n) of the material as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the refractive index (n) of the material is provided as a string that can have values \"\" or \"%\"",
           "type": "string",
-          "enum": [""]
+          "enum": ["", "%"]
         }
       },
       "required": [
-        "value",
-        "unit"
+        "value"
       ],
       "additionalProperties": false
     },
     "extinction_coefficient_wl": {
       "title":"extinction_coefficient_wl",
-      "description": "An object describing wavelength for which extinction coefficient (or absorption index k) of the material is provided in the field \"extinction_coefficient\". It is an object with keys \"value\" and \"unit\".",
+      "description": "An object describing wavelength for which extinction coefficient (or absorption index k) of the material is provided in the field \"extinction_coefficient\". It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
       "type": "object",
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the wavelength for which extinction coefficient (or absorption index k) of the material is provided as a number.",
-          "type": "number"
+          "description": "Numerical value of the wavelength for which extinction coefficient (or absorption index k) of the material is provided as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
         },
         "unit": {
           "title": "unit",
-          "description": "Unit of the wavelength for which extinction coefficient (or absorption index k) of the material is provided as a string that can have values \"nm\" or \"μm\".",
+          "description": "Measurement unit of the wavelength for which extinction coefficient (or absorption index k) of the material is provided as a string that can have values \"nm\" or \"μm\".",
           "type": "string",
           "enum": ["nm","μm"]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the wavelength for which extinction coefficient (or absorption index k) of the material is provided as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the wavelength for which extinction coefficient (or absorption index k) of the material is provided as a string that can have values \"nm\", \"μm\" or \"%\".",
+          "type": "string",
+          "enum": ["nm", "μm", "%"]
         }
       },
       "required": [
@@ -90,19 +121,26 @@
     },
     "extinction_coefficient": {
       "title":"extinction_coefficient",
-      "description": "An object describing extinction coefficient (or absorption index k) of the material from rom which measurement sample was produced (either partially or fully). It is an object with keys \"value\" and \"unit\".",
+      "description": "An object describing extinction coefficient (or absorption index k) of the material from rom which measurement sample was produced (either partially or fully) and which corresponds to wavelength specified in \"extinction_coefficient_wl\" object. It is an object with following available keys: \"value\", \"uncertainty\" and \"uncertainty_unit\". Note that by definition, extinction coefficient is unitless and current object doesn't have \"units\" object.",
       "type": "object",
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the extinction coefficient (or absorption index k) of the material as a number.",
-          "type": "number"
+          "description": "Numerical value of the extinction coefficient (or absorption index k) of the material as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
         },
-        "unit": {
-          "title": "unit",
-          "description": "By definition extinction coefficient (or absorption index k) is unitless, but to maintain single pattern for all numerical properties, unit is also demanded here even thou it can only have empty string value \"\".",
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the extinction coefficient (or absorption index k) of the material as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the extinction coefficient (or absorption index k) of the material is provided as a string that can have values \"\" or \"%\"",
           "type": "string",
-          "enum": [""]
+          "enum": ["", "%"]
         }
       },
       "required": [
@@ -118,7 +156,7 @@
     },
     "data_links": {
       "title": "data_links",
-      "description": "An array with links to any relevant information regarding specific material from which measurement sample was produced (either partially or fully). For example regarding the origin of refractive index and extinction coefficient or relevant transmission, absorption or fluorescence spectra.",
+      "description": "An array with links to any relevant information regarding specific material from which measurement sample was produced (either partially or fully). For example regarding the origin of refractive index and extinction coefficient or relevant transmission, absorption or fluorescence spectra. Array contains unique strings formatted as URL links.",
       "type": "array",
       "uniqueItems": true,
       "items": {

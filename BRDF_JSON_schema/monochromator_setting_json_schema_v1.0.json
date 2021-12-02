@@ -5,25 +5,32 @@
   "description": "An object describing monochromator parameters for a single selected wavelength or wavelength range within which these parameters were constant during BRDF measurements",
   "type": "object",
   "properties": {
+    "selected_dispersive_element": {
+      "title": "selected_dispersive_element",
+      "description": "Name and/or type of the selected monochromator's wavelength dispersive element as text (i.e. string). For example, \"diffraction grating designed for visible wavelength region\" or \"volumetric Bragg grating designed for NIR wavelength region\".",
+      "type": "string"
+    },
     "wl_range": {
       "title": "wl_range",
       "description": "Design or set operation wavelength range of the monochromator used to select illumination or detection wavelength during BRDF measurements. It is an object with keys \"min_value\", \"max_value\" and \"unit\".",
       "properties": {
         "min_value": {
           "title": "min_value",
-          "description": "Numerical value of the monochromator's transmission shortest wavelength as a number.",
-          "type": "number"
+          "description": "Numerical value of the monochromator's transmission shortest wavelength as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
         },
         "max_value": {
           "title": "max_value",
-          "description": "Numerical value of the monochromator's transmission longest wavelength as a number.",
-          "type": "number"
+          "description": "Numerical value of the monochromator's transmission longest wavelength as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
         },
         "unit": {
           "title": "unit",
-          "description": "Unit of the monochromator's transmission shortest and longest wavelengths as a string that can have values \"nm\" or \"μm\".",
+          "description": "Measurement unit of the monochromator's transmission shortest and longest wavelengths as a string that can have values \"nm\" or \"μm\".",
           "type": "string",
-          "pattern": "^[μn]?m$"
+          "enum": ["nm", "μm"]
         }
       },
       "required": [
@@ -33,21 +40,34 @@
       ],
       "additionalProperties": false
     },
-    "selected_wl": {
-      "title": "selected_wl",
-      "description": "Wavelength that was selected at monochromator settings for single-wavelength BRDF measurements. It is an object with keys \"value\" and \"unit\".",
+    "spectral_resolution": {
+      "title": "spectral_resolution",
+      "description": "Description of monochromator's wavelength resolving/separation/dispersion capabilities as width of transmitted light spectral band per width of monochromator output slit. It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
       "type": "object",
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the set monochromator's wavelength as a number.",
-          "type": "number"
+          "description": "Numerical value of the monochromator's wavelength resolving/separation/dispersion capabilities as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
         },
         "unit": {
           "title": "unit",
-          "description": "Unit of the set monochromator's wavelength as a string that can have values \"nm\" or \"μm\".",
+          "description": "Measurement unit of the monochromator's wavelength resolving/separation/dispersion capabilities as a string that can have value \"nm/mm\".",
           "type": "string",
-          "pattern": "^[μn]?m$"
+          "enum": ["nm/mm"]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the monochromator's wavelength resolving/separation/dispersion capabilities as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the monochromator's wavelength resolving/separation/dispersion capabilities as a string that can have value \"nm/mm\" or \"%\".",
+          "type": "string",
+          "enum": ["nm/mm", "%"]
         }
       },
       "required": [
@@ -58,42 +78,32 @@
     },
     "slit_width": {
       "title": "slit_width",
-      "description": "Slit width of the monochromator for the given wavelength range. It is an object with keys \"value\" and \"unit\".",
+      "description": "Slit width of the monochromator for the given wavelength range. It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
       "type": "object",
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the monochromator's slit width as a number.",
-          "type": "number"
+          "description": "Numerical value of the monochromator's slit width as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
         },
         "unit": {
           "title": "unit",
-          "description": "Unit of the monochromator's slit width as a string that can have values \"nm\", \"μm\", \"mm\" or \"m\".",
+          "description": "Measurement unit of the monochromator's slit width as a string that can have values \"nm\", \"μm\", \"mm\" or \"m\".",
           "type": "string",
-          "pattern": "^[μnm]?m$"
-        }
-      },
-      "required": [
-        "value",
-        "unit"
-      ],
-      "additionalProperties": false
-    },
-    "spectral_resolution": {
-      "title": "spectral_resolution",
-      "description": "Description of monochromator's wavelength resolving/separation/dispersion capabilities as width of transmitted light spectral band per width of monochromator output slit. It is an object with keys \"value\" and \"unit\".",
-      "type": "object",
-      "properties": {
-        "value": {
-          "title": "value",
-          "description": "Numerical value of the monochromator's wavelength resolving/separation/dispersion capabilities as a number.",
-          "type": "number"
+          "enum": ["nm", "μm", "mm", "m"]
         },
-        "unit": {
-          "title": "unit",
-          "description": "Unit of the monochromator's wavelength resolving/separation/dispersion capabilities as a string that can have value \"nm/mm\".",
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the monochromator's slit width as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the monochromator's slit width as a string that can have values \"nm\", \"μm\", \"mm\", \"m\" or \"%\".",
           "type": "string",
-          "pattern": "nm/mm$"
+          "enum": ["nm", "μm", "mm", "m", "%"]
         }
       },
       "required": [
@@ -104,19 +114,92 @@
     },
     "bandpass_FWHM": {
       "title": "bandpass_FWHM",
-      "description": "Full Width at Half Maximum of spectral band passed through monochromator. It is an object with keys \"value\" and \"unit\".",
+      "description": "Full Width at Half Maximum of spectral band passed through monochromator. It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
       "type": "object",
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the monochromator's bandpass FWHM as a number.",
-          "type": "number"
+          "description": "Numerical value of the monochromator's bandpass FWHM as a zero (0) inclusive positive number..",
+          "type": "number",
+          "minimum": 0
         },
         "unit": {
           "title": "unit",
-          "description": "Unit of the monochromator's bandpass FWHM as a string that can have values \"nm\" or \"μm\".",
+          "description": "Measurement unit of the monochromator's bandpass FWHM as a string that can have values \"nm\" or \"μm\".",
           "type": "string",
-          "pattern": "^[μn]?m$"
+          "enum": ["nm", "μm"]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the monochromator's bandpass FWHM as a zero (0) inclusive positive number..",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the monochromator's bandpass FWHM as a string that can have values \"nm\", \"μm\" or \"%\".",
+          "type": "string",
+          "enum": ["nm", "μm", "%"]
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "central_wl_uncertainty": {
+      "title": "selected_wl",
+      "description": "An object describing the average uncertainty of the monochromator's transmitted band central wavelength value within a given wavelength range. It is an object with following available keys: \"value\", \"unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the average uncertainty of the monochromator's transmitted band central wavelength as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Measurement unit of the average uncertainty of the monochromator's transmitted band central wavelength as a string that can have values \"nm\", \"μm\" or \"%\".",
+          "type": "string",
+          "enum": ["nm", "μm", "%"]
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "selected_wl": {
+      "title": "selected_wl",
+      "description": "Wavelength that was selected at monochromator settings for single-wavelength BRDF measurements. It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the set monochromator's wavelength as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Measurement unit of the set monochromator's wavelength as a string that can have values \"nm\" or \"μm\".",
+          "type": "string",
+          "enum": ["nm", "μm"]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the set monochromator's wavelength as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the set monochromator's wavelength as a string that can have values \"nm\", \"μm\" or \"%\".",
+          "type": "string",
+          "enum": ["nm", "μm", "%"]
         }
       },
       "required": [
@@ -132,7 +215,8 @@
     },
     "adhoc_section": {
       "title": "adhoc_section",
-      "description": "An object containing user defined keys describing any information relevant to the monochromator parameters used during BRDF measurements that cannot be presented within \"monochromator_setting\" object properties provided by schema. Adhoc section can contain all types of entries."
+      "description": "An object containing user defined keys describing any information relevant to the monochromator parameters used during BRDF measurements that cannot be presented within \"monochromator_setting\" object properties provided by schema. Adhoc section can contain all types of entries.",
+      "type": "object"
     }
   },
   "oneOf": [

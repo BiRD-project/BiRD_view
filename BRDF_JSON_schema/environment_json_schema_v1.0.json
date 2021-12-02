@@ -7,19 +7,32 @@
   "properties": {
     "temperature": {
       "title": "temperature",
-      "description": "An object describing ambient temperature of the environment in which measurement sample's BRDF was measured.",
+      "description": "An object describing ambient temperature of the environment in which measurement sample's BRDF was measured. It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
       "type": "object",
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the ambient temperature of the environment in which measurement sample's BRDF was measured as a number.",
-          "type": "number"
+          "description": "Numerical value of the ambient temperature of the environment in which measurement sample's BRDF was measured as a number that can have positive and negative values. In allowed units the minimum allowed value is −273.15 (°C).",
+          "type": "number",
+          "minimum": -273.15
         },
         "unit": {
           "title": "unit",
-          "description": "Unit of the ambient temperature of the environment in which measurement sample's BRDF was measured as a string that can have values \"K\", \"kK\" or \"°C\".",
+          "description": "Measurement unit of the ambient temperature of the environment in which measurement sample's BRDF was measured as a string that can have values \"K\", \"kK\" or \"°C\".",
           "type": "string",
           "enum": ["K", "kK", "°C"]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the ambient temperature of the environment in which measurement sample's BRDF was measured as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the ambient temperature of the environment in which measurement sample's BRDF was measured as a string that can have values \"K\", \"kK\", \"°C\" or \"%\".",
+          "type": "string",
+          "enum": ["K", "kK", "°C", "%"]
         }
       },
       "required": [
@@ -30,17 +43,30 @@
     },
     "relative_humidity": {
       "title": "relative_humidity",
-      "description": "An object describing relative humidity of the environment in which measurement sample's BRDF was measured.",
+      "description": "An object describing relative humidity of the environment in which measurement sample's BRDF was measured. It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
       "type": "object",
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the relative humidity of the environment (at the given temperature) in which measurement sample's BRDF was measured as a number.",
-          "type": "number"
+          "description": "Numerical value of the relative humidity of the environment (at the given temperature) in which measurement sample's BRDF was measured as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
         },
         "unit": {
           "title": "unit",
-          "description": "Unit of the relative humidity of the environment in which measurement sample's BRDF was measured as a string that can have value \"%\".",
+          "description": "Measurement unit of the relative humidity of the environment in which measurement sample's BRDF was measured as a string that can have value \"%\".",
+          "type": "string",
+          "enum": ["%"]
+        },
+         "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the relative humidity of the environment (at the given temperature) in which measurement sample's BRDF was measured as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the relative humidity of the environment in which measurement sample's BRDF was measured as a string that can have value \"%\".",
           "type": "string",
           "enum": ["%"]
         }
@@ -53,19 +79,32 @@
     },
     "pressure": {
       "title": "pressure",
-      "description": "An object describing pressure within the environment in which measurement sample's BRDF was measured.",
+      "description": "An object describing pressure within the environment in which measurement sample's BRDF was measured. It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
       "type": "object",
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the pressure within the environment (at the given temperature) in which measurement sample's BRDF was measured as a number.",
-          "type": "number"
+          "description": "Numerical value of the pressure within the environment (at the given temperature) in which measurement sample's BRDF was measured as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
         },
         "unit": {
           "title": "unit",
-          "description": "Unit of the relative pressure within the environment in which measurement sample's BRDF was measured as a string that can have value \"Pa\", \"kPa\", \"bar\" and \"psi\".",
+          "description": "Measurement unit of the relative pressure within the environment in which measurement sample's BRDF was measured as a string that can have value \"Pa\", \"kPa\", \"bar\" and \"psi\".",
           "type": "string",
           "enum": ["Pa", "kPa", "bar", "psi"]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the pressure within the environment (at the given temperature) in which measurement sample's BRDF was measured as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the relative pressure within the environment in which measurement sample's BRDF was measured as a string that can have value \"Pa\", \"kPa\", \"bar\", \"psi\" or \"%\".",
+          "type": "string",
+          "enum": ["Pa", "kPa", "bar", "psi", "%"]
         }
       },
       "required": [
@@ -76,7 +115,7 @@
     },
     "data_links": {
       "title": "data_links",
-      "description": "An array that allows to refer to available external information regarding environmental conditions during BRDF measurements. Array of string URL links.",
+      "description": "An array that allows to refer to available external information regarding environmental conditions during BRDF measurements. Array contains unique strings formatted as URL links.",
       "type": "array",
       "uniqueItems": true,
       "items": {

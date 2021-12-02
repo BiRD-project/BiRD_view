@@ -26,12 +26,22 @@
     },
     "unit": {
       "title": "unit",
-      "description": "Unit of the value of mathematical or physical simulation model parameter as a string.",
+      "description": "Measurement unit of the value of mathematical or physical simulation model parameter as a string.",
+      "type": "string"
+    },
+    "uncertainty": {
+      "title": "uncertainty",
+      "description": "Numerical value of the uncertainty of the mathematical or physical simulation model parameter as a number. Value should represent the exact same value of the parameter that was used to produce BRDF data presented in the file.",
+      "type": "number"
+    },
+    "uncertainty_unit": {
+      "title": "uncertainty_unit",
+      "description": "Measurement unit of the uncertainty of the value of mathematical or physical simulation model parameter as a string.",
       "type": "string"
     },
     "data_links": {
       "title": "data_links",
-      "description": "An array of links (as a string) in URI format that allow to refer to any external information related to the mathematical or physical simulation model parameter that were used to produce BRDF data presented in the file. For example, link to the source of numerical value of the described model parameter.",
+      "description": "An array of unique links as a strings in URL format that allow to refer to any external information related to the mathematical or physical simulation model parameter that were used to produce BRDF data presented in the file. For example, link to the source of numerical value of the described model parameter.",
       "type": "array",
       "uniqueItems": true,
       "items": {

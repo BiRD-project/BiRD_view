@@ -32,7 +32,7 @@
     },
     "data_links": {
       "title": "data_links",
-      "description": "An array of links (as a string) in URI format that allow to refer to any external information related to the software and simulation model that were used to produce or process BRDF data presented in the file.",
+      "description": "An array that allow to refer to any external information related to the software and simulation model that were used to produce or process BRDF data presented in the file. Array contains unique strings formatted as URL links.",
       "type": "array",
       "uniqueItems": true,
       "items": {

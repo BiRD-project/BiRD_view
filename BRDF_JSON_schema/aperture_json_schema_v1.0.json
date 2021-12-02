@@ -43,7 +43,7 @@
     },
     "data_links": {
       "title": "data_links",
-      "description": "An array that allows to refer to available external technical information regarding aperture used for BRDF measurements. Array of URL links as a text (i.e.string).",
+      "description": "An array that allows to refer to available external technical information regarding aperture used for BRDF measurements. Array contains unique strings formatted as URL links.",
       "type": "array",
       "uniqueItems": true,
       "items": {

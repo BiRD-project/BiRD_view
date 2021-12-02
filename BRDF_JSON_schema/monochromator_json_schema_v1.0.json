@@ -27,8 +27,9 @@
     },
     "settings": {
       "title": "settings",
-      "description": "And array with objects that describes monochromator settings for a single selected wavelength or different wavelength ranges that were used for BRDF measurements.",
+      "description": "An array with unique objects that describe monochromator settings for a single selected wavelength or different wavelength ranges that were used for BRDF measurements. Array contains unique \"monochromator_setting\" objects.",
       "type": "array",
+      "uniqueItems": true,
       "items": {
         "title": "monochromator_setting",
         "description": "An object describing monochromator parameters for a single selected wavelength or wavelength range within which these parameters were constant during BRDF measurements",
@@ -36,21 +37,34 @@
         "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/monochromator_setting_json_schema_v1.0.json"
       }
     },
-    "damage_treshold": {
-      "title": "damage_treshold",
-      "description": "Field for indication of maximum optical power at which monochromator was designed to be operated. It is an object with keys \"value\" and \"unit\".",
+    "damage_threshold": {
+      "title": "damage_threshold",
+      "description": "Field for indication of maximum optical power at which monochromator was designed to be operated. It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
       "type": "object",
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the maximum optical power at which monochromator was designed to be operated without damage as a number.",
-          "type": "number"
+          "description": "Numerical value of the maximum optical power at which monochromator was designed to be operated without damage as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
         },
         "unit": {
           "title": "unit",
-          "description": "Unit of the maximum optical power at which monochromator was designed to be operated as a string that can have values \"pW\", \"nW\", \"μW\", \"mW\", \"W\", \"kW\", \"MW\" or \"GW\".",
+          "description": "Measurement unit of the maximum optical power at which monochromator was designed to be operated as a string that can have values \"pW\", \"nW\", \"μW\", \"mW\", \"W\", \"kW\", \"MW\" or \"GW\".",
           "type": "string",
-          "pattern": "^[pnμmkMG]?W$"
+          "enum": ["pW", "nW", "μW", "mW", "W", "kW", "MW", "GW"]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the maximum optical power at which monochromator was designed to be operated without damage as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the maximum optical power at which monochromator was designed to be operated as a string that can have values \"pW\", \"nW\", \"μW\", \"mW\", \"W\", \"kW\", \"MW\", \"GW\" or \"%\".",
+          "type": "string",
+          "enum": ["pW", "nW", "μW", "mW", "W", "kW", "MW", "GW", "%"]
         }
       },
       "required": [
@@ -61,7 +75,7 @@
     },
     "data_links": {
       "title": "data_links",
-      "description": "An object that allows to refer to available external technical information regarding monochromator used during BRDF measurements. Array of text (i.e.string) URL links.",
+      "description": "An object that allows to refer to available external technical information regarding monochromator used during BRDF measurements. Array contains unique strings formatted as URL links.",
       "type": "array",
       "uniqueItems": true,
       "items": {

@@ -2,18 +2,18 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/metadata_json_schema_v1.0.json",
   "title": "metadata",
-  "description": "A section of a file that describes the measured or simulated BRDF data set from the point of view of data origin, simulation or measurement system's parameters, sample parameters and evironment. It also contains a globaly unique dataset identifier, specifices the data type, file name and records a timestamp of a measurement or simulation",
+  "description": "A section of a file that describes the measured or simulated BRDF data set from the point of view of data origin, simulation or measurement system's parameters, sample parameters and environment. It also contains a globally unique dataset identifier, specifies the data type, file name and records a timestamp of a measurement or simulation",
   "type": "object",
   "properties": {
     "schema": {
       "title": "schema",
-      "description": "URL to schema of universal BRDF file format which name also specifies the schema version. As a string in uri format.",
+      "description": "URL link to schema of universal BRDF file format which name also specifies the schema version. Value has to be a string in URI format. Note that URL is part of uri (universal resource identifier (URI), according to RFC3986)",
       "type": "string",
       "format": "uri"
     },
     "id": {
       "title": "id",
-      "description": "A universal resource identifier (URI), according to RFC3986. String in uri format",
+      "description": "A universal resource identifier (URI), according to RFC3986. String in URI format",
       "type": "string",
       "format": "uri"
     },
@@ -31,7 +31,7 @@
     },
     "provenance": {
       "title": "description",
-      "description": "String or an object with keys describing the origin of the data i.e. institution, address, personell etc. Object has values as a number or a string.",
+      "description": "An object with keys describing the origin of the data i.e. institution, address, personell etc. Object has values as a number or a string.",
       "type": "object",
       "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/provenance_json_schema_v1.0.json"
     },
@@ -43,33 +43,67 @@
     },
     "method": {
       "title": "method",
-      "description": "Data acquisition method that specifies whether data was simulated or measured. Can have two string values: \"simulation\" or \"measurement\"",
+      "description": "The field to describe data acquisition method that specifies whether data was simulated or measured. Can have two string values: \"simulation\" or \"measurement\"",
       "type": "string",
-      "oneOf": [{"const": "simulation"}, {"const": "measurement"}]
+      "enum": ["simulation", "measurement"]
     },
     "instrumentation": {
       "title": "instrumentation",
-      "description": "String or an object with keys describing the setup or instrumentation and its parameters used to measure BRDF data. Object has values as a number or a string.",
-      "type": "object",
-      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/instrumentation_json_schema_v1.0.json"
+      "description": "By default it is an object with keys describing the setup or instrumentation and its parameters used to measure BRDF data. However, if data was acquired with the help of simulation/model, the \"instrumentation\" object might be obsolete in which case it is allowed to replace object with a string that has constant value \"NA\" meaning \"not applicable\".",
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": ["NA"]
+        },
+        {
+          "type": "object",
+          "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/instrumentation_json_schema_v1.0.json"
+        }
+      ]
     },
     "software": {
       "title": "software",
-      "description": "String or an object with keys describing the mathematical/physical simulation model and its parameters used to produce BRDF data. Object has values as a number or a string.",
-      "type": "object",
-      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/software_json_schema_v1.0.json"
+      "description": "By default it is an object with keys describing the mathematical/physical simulation model and its parameters used to produce BRDF data. However, if data was acquired through the measurement without the help of any additional software the \"software\" object might be obsolete in which case it is allowed to replace object with a string that has constant value \"NA\" meaning \"not applicable\".",
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": ["NA"]
+        },
+        {
+          "type": "object",
+          "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/software_json_schema_v1.0.json"
+        }
+      ]
     },
     "sample": {
       "title": "sample",
-      "description": "String or an object with keys describing the virtual or actual sample used to produce BRDF data. Object has values as a number or a string.",
+      "description": "An object with keys describing the virtual or actual sample used to produce BRDF data.",
       "type": "object",
       "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/sample_json_schema_v1.0.json"
     },
     "environment": {
       "title": "environment",
-      "description": "String or an object with keys describing the environmental conditions during BRDFmeasurement like pressure, temperature, humidity, etc. Object has values as a number or a string.",
-      "type": "object",
-      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/environment_json_schema_v1.0.json"
+      "description": "By default it is an object with keys describing the environmental conditions during BRDF measurement like pressure, temperature, humidity, etc. However, if data was acquired with the help of simulation/model, the \"environment\" object might be obsolete in which case it is allowed to replace object with a string that has constant value \"NA\" meaning \"not applicable\".",
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": ["NA"]
+        },
+        {
+          "type": "object",
+          "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/environment_json_schema_v1.0.json"
+        }
+      ]
+    },
+    "data_links": {
+      "title": "data_links",
+      "description": "An array that allows to refer to available external information regarding BRDF data presented within the file. Array contains unique strings formatted as URL links.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "format": "uri"
+      }
     },
     "comments": {
       "title": "comments",

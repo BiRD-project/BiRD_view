@@ -34,14 +34,7 @@
       "title": "operation_type",
       "description": "The key describing whether instrument performs measurements absolutely or relatively. Can have string values \"absolute\" and \"relative\".",
       "type": "string",
-      "oneOf": [
-        {
-          "const": "absolute"
-        },
-        {
-          "const": "relative"
-        }
-      ]
+      "enum": ["absolute", "relative"]
     },
     "illumination_system": {
       "title": "illumination",
@@ -68,7 +61,7 @@
     },
     "data_links": {
       "title": "data_links",
-      "description": "An array that allows to refer to available external technical information regarding setup or instrumentation used for BRDF measurements. Array of URL links as a text (i.e.string).",
+      "description": "An array that allows to refer to available external technical information regarding setup or instrumentation used for BRDF measurements. Array contains unique strings formatted as URL links.",
       "type": "array",
       "uniqueItems": true,
       "items": {

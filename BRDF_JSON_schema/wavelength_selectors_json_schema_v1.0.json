@@ -7,8 +7,9 @@
   "properties": {
     "optical_filters": {
       "title": "optical_filters",
-      "description": "An array of \"optical_filter\" objects each describing the filters that were used to define illumination or collected light spectral properties during BRDF measurement.",
+      "description": "An array of unique \"optical_filter\" objects each describing the filters that were used to define illumination or collected light spectral properties during BRDF measurement.",
       "type": "array",
+      "uniqueItems": true,
       "items": {
         "title": "optical_filter",
         "description": "The \"optical_filter\" object describing properties of the optical filter used for BRDF measurement.",

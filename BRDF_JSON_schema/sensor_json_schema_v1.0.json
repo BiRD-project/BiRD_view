@@ -51,19 +51,21 @@
       "properties": {
         "min_value": {
           "title": "min_value",
-          "description": "Numerical value of the shortest wavelength that optical sensor can sense as a number.",
-          "type": "number"
+          "description": "Numerical value of the shortest wavelength that optical sensor can sense as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
         },
         "max_value": {
           "title": "max_value",
-          "description": "Numerical value of the longest wavelength that optical sensor can sense as a number.",
-          "type": "number"
+          "description": "Numerical value of the longest wavelength that optical sensor can sense as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
         },
         "unit": {
           "title": "unit",
-          "description": "Unit of the shortest and longest wavelengths that optical sensor can sense as a string that can have values \"nm\" or \"μm\".",
+          "description": "Measurement unit of the shortest and longest wavelengths that optical sensor can sense as a string that can have values \"nm\" or \"μm\".",
           "type": "string",
-          "pattern": "^[μn]?m$"
+          "enum": ["nm", "μm"]
         }
       },
       "required": [
@@ -80,19 +82,21 @@
       "properties": {
         "min_value": {
           "title": "min_value",
-          "description": "Numerical value of the lowest optical power sensor can detect as a number.",
-          "type": "number"
+          "description": "Numerical value of the lowest optical power sensor can detect as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
         },
         "max_value": {
           "title": "max_value",
-          "description": "Numerical value of the highest optical power sensor can detect as a number.",
-          "type": "number"
+          "description": "Numerical value of the highest optical power sensor can detect as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
         },
         "unit": {
           "title": "unit",
-          "description": "Unit of the lowest and highest power that optical sensor can detect as a string that can have values \"pW\", \"nW\", \"μW\", \"mW\", \"W\", \"kW\", \"MW\" or \"GW\"",
+          "description": "Measurement unit of the lowest and highest power that optical sensor can detect as a string that can have values \"pW\", \"nW\", \"μW\", \"mW\", \"W\", \"kW\", \"MW\" or \"GW\"",
           "type": "string",
-          "pattern": "^[GMkmμnp]?W$"
+          "enum": ["pW", "nW", "μW", "mW", "W", "kW", "MW", "GW"]
         }
       },
       "required": [
@@ -102,21 +106,106 @@
       ],
       "additionalProperties": false
     },
-    "responsivity": {
-      "title": "responsivity",
-      "description": "Typical or average responsivity of optical sensor in A/W. It is an object with keys \"value\" and \"unit\".",
+    "responsivity_wl": {
+      "title":"responsivity_wl",
+      "description": "An object describing wavelength for which responsivity of the sensor is provided in the \"responsivity\" field/object. It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
       "type": "object",
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the typical or average responsivity of optical sensor as a number.",
-          "type": "number"
+          "description": "Numerical value of the wavelength for which responsivity of the sensor is provided as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
         },
         "unit": {
           "title": "unit",
-          "description": "Unit of the set typical or average responsivity of optical sensor as a string that can have values \"A/W\".",
+          "description": "Measurement unit of the wavelength for which responsivity of the sensor is provided as a string that can have values \"nm\" or \"μm\".",
           "type": "string",
-          "pattern": "A/W"
+          "enum": ["nm","μm"]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the wavelength for which responsivity of the sensor is provided as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the wavelength for which responsivity of the sensor is provided as a string that can have values \"nm\", \"μm\" or \"%\".",
+          "type": "string",
+          "enum": ["nm","μm", "%"]
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "responsivity": {
+      "title": "responsivity",
+      "description": "An object describing typical for the wavelength specified in \"responsivity_wl\" object or average responsivity of optical sensor within the whole spectral response range in A/W. It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the typical or average responsivity of optical sensor as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Measurement unit of the set typical or average responsivity of optical sensor as a string that can have values \"mA/mW\" or \"A/W\".",
+          "type": "string",
+          "enum": ["mA/mW", "A/W"]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the typical or average responsivity of optical sensor as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the set typical or average responsivity of optical sensor as a string that can have values \"mA/mW\", \"A/W\" or \"%\".",
+          "type": "string",
+          "enum": ["mA/mW", "A/W", "%"]
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "linearity_wl": {
+      "title":"responsivity_wl",
+      "description": "An object describing wavelength for which linearity of the sensor is provided in the \"linearity\" field/object. It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the wavelength for which linearity of the sensor is provided as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Measurement unit of the wavelength for which linearity of the sensor is provided as a string that can have values \"nm\" or \"μm\".",
+          "type": "string",
+          "enum": ["nm","μm"]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the wavelength for which linearity of the sensor is provided as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the wavelength for which linearity of the sensor is provided as a string that can have values \"nm\", \"μm\" or \"%\".",
+          "type": "string",
+          "enum": ["nm","μm", "%"]
         }
       },
       "required": [
@@ -127,19 +216,33 @@
     },
     "linearity": {
       "title": "linearity",
-      "description": "An object describing the maximal ratio between responsivity around different optical powers that sensor can sense in case of fixed detection wavelength. It is defined as min_responsivity / max_responsivity for power range used for BRDF measurements. \"nonlinearity\" object has keys keys \"value\" and \"unit\"",
+      "description": "An object describing the maximal ratio between responsivities around different optical powers that sensor can sense in case of fixed detection wavelength. It is defined as min_responsivity / max_responsivity for power range used for BRDF measurements. \"nonlinearity\" object has keys keys \"value\" and \"unit\"",
       "type": "object",
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the optical sensor's linearity as a number.",
-          "type": "number"
+          "description": "Numerical value of the optical sensor's linearity as a positive number from 0 to 1 (or 0 to 100 if in \"%\")..",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
         },
         "unit": {
           "title": "unit",
-          "description": "Unit of the optical sensor's linearity as a string that can have values \"%\" or unitless i.e. \"\".",
+          "description": "Measurement unit of the optical sensor's linearity as a string that can have values \"%\" or unitless i.e. \"\".",
           "type": "string",
-          "pattern": "^%?$"
+          "enum": ["", "%"]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the optical sensor's linearity as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the optical sensor's linearity as a string that can have values \"%\" or unitless i.e. \"\".",
+          "type": "string",
+          "enum": ["", "%"]
         }
       },
       "required": [
@@ -150,19 +253,33 @@
     },
     "uniformity": {
       "title": "uniformity",
-      "description": "An object describing the ratio of minimum and maximum response signals measured at different points of the detector area in case of fixed wavelength and power. It is an object with keys \"value\" and \"unit\".",
+      "description": "An object describing the ratio of minimum and maximum response signals measured at different points of the detector area in case of fixed wavelength and power. It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
       "type": "object",
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the uniformity of the optical sensor as a number.",
-          "type": "number"
+          "description": "Numerical value of the uniformity of the optical sensor as a positive number from 0 to 1 (or 0 to 100 if in \"%\").",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
         },
         "unit": {
           "title": "unit",
-          "description": "Unit of the uniformity of the optical sensor as a string that can have values \"%\" or unitless i.e. \"\".",
+          "description": "Measurement unit of the uniformity of the optical sensor as a string that can have values \"%\" or unitless i.e. \"\".",
           "type": "string",
-          "pattern": "^%?$"
+          "enum": ["", "%"]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the uniformity of the optical sensor as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the uniformity of the optical sensor as a string that can have values \"%\" or unitless i.e. \"\".",
+          "type": "string",
+          "enum": ["", "%"]
         }
       },
       "required": [
@@ -173,22 +290,32 @@
     },
     "dark_signal": {
       "title": "dark_signal",
-      "description": "An object describing the level of signal when sensor is not exposed to any radiation (in Ampers (A) or Volts (V)). It is an object with keys \"value\" and \"unit\".",
+      "description": "An object describing the level of signal when sensor is not exposed to any radiation (in Ampers (A) or Volts (V)). It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
       "type": "object",
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the optical sensor's dark current as a number.",
-          "type": "number"
+          "description": "Numerical value of the optical sensor's dark current as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
         },
         "unit": {
           "title": "unit",
-          "description": "Unit of the optical sensor's dark current as a string that can have values \"pA\", \"nA\", \"μA\", \"mA\", \"A\", \"kA\", \"MA\", \"GA\" or \"pV\", \"nV\", \"μV\", \"mV\", \"V\", \"kV\", \"MV\" or \"GV\".",
+          "description": "Measurement unit of the optical sensor's dark current as a string that can have values \"pA\", \"nA\", \"μA\", \"mA\", \"A\", \"kA\", \"MA\", \"GA\" or \"pV\", \"nV\", \"μV\", \"mV\", \"V\", \"kV\", \"MV\", \"GV\".",
           "type": "string",
-          "oneOf": [
-            {"pattern": "^[pnμmkMG]?A$"},
-            {"pattern": "^[pnμmkMG]?V$"}
-          ]
+          "enum": ["pA", "nA", "μA", "mA", "A", "kA", "MA", "GA", "pV", "nV", "μV", "mV", "V", "kV", "MV", "GV"]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the optical sensor's dark current as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of uncertainty of the the optical sensor's dark current as a string that can have values \"pA\", \"nA\", \"μA\", \"mA\", \"A\", \"kA\", \"MA\", \"GA\" or \"pV\", \"nV\", \"μV\", \"mV\", \"V\", \"kV\", \"MV\", \"GV\".",
+          "type": "string",
+          "enum": ["pA", "nA", "μA", "mA", "A", "kA", "MA", "GA", "pV", "nV", "μV", "mV", "V", "kV", "MV", "GV"]
         }
       },
       "required": [
@@ -199,19 +326,32 @@
     },
     "bias_voltage": {
       "title": "bias_voltage",
-      "description": "An object describing bias voltage applied applied to the optical sensor during BRDF measurements. It is an object with keys \"value\" and \"unit\".",
+      "description": "An object describing bias voltage applied applied to the optical sensor during BRDF measurements. It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
       "type": "object",
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the bias voltage applied applied to the optical sensor as a number.",
-          "type": "number"
+          "description": "Numerical value of the bias voltage applied applied to the optical sensor as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
         },
         "unit": {
           "title": "unit",
-          "description": "Unit of the bias voltage applied applied to the optical sensor as a string that can have values \"pV\", \"nV\", \"μV\", \"mV\", \"V\", \"kV\", \"MV\" or \"GV\".",
+          "description": "Measurement unit of the bias voltage applied applied to the optical sensor as a string that can have values \"pV\", \"nV\", \"μV\", \"mV\", \"V\", \"kV\", \"MV\" or \"GV\".",
           "type": "string",
-          "pattern": "^[pnμmkMG]?V$"
+          "enum": ["pV", "nV", "μV", "mV", "V", "kV", "MV", "GV"]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the bias voltage applied applied to the optical sensor as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the bias voltage applied applied to the optical sensor as a string that can have values \"pV\", \"nV\", \"μV\", \"mV\", \"V\", \"kV\", \"MV\", \"GV\" or \"%\".",
+          "type": "string",
+          "enum": ["pV", "nV", "μV", "mV", "V", "kV", "MV", "GV", "%"]
         }
       },
       "required": [
@@ -222,18 +362,31 @@
     },
     "damage_threshold": {
       "title": "damage_threshold",
-      "description": "Field describing maximal optical power at which optical sensor is designed to be operated. It is an object with keys \"value\" and \"unit\".",
+      "description": "Field describing maximal optical power at which optical sensor is designed to be operated. It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the maximal optical power at which optical sensor is designed to be operated as a number.",
-          "type": "number"
+          "description": "Numerical value of the maximal optical power at which optical sensor is designed to be operated as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
         },
         "unit": {
           "title": "unit",
-          "description": "Unit of the maximal optical power at which optical sensor is designed to be operated as a string that can have values \"pW\", \"nW\", \"μW\", \"mW\", \"W\", \"kW\", \"MW\" or \"GW\".",
+          "description": "Measurement unit of the maximal optical power at which optical sensor is designed to be operated as a string that can have values \"pW\", \"nW\", \"μW\", \"mW\", \"W\", \"kW\", \"MW\" or \"GW\".",
           "type": "string",
-          "pattern": "^[pnμmkMG]?W$"
+          "enum": ["pW", "nW", "μW", "mW", "W", "kW", "MW", "GW"]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the maximal optical power at which optical sensor is designed to be operated as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the maximal optical power at which optical sensor is designed to be operated as a string that can have values \"pW\", \"nW\", \"μW\", \"mW\", \"W\", \"kW\", \"MW\", \"GW\" or \"%\".",
+          "type": "string",
+          "enum": ["pW", "nW", "μW", "mW", "W", "kW", "MW", "GW", "%"]
         }
       },
       "required": [
@@ -244,22 +397,32 @@
     },
     "operating_temperature": {
       "title": "operating_temperature",
-      "description": "Field for providing the temperature at which light sensor was operated during BRDF measurements. It is an object with keys \"value\" and \"unit\".",
+      "description": "Field for providing the temperature at which light sensor was operated during BRDF measurements. It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
       "type": "object",
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the temperature at which light sensor was operated as a number.",
-          "type": "number"
+          "description": "Numerical value of the temperature at which light sensor was operated as a number. In allowed units the minimum allowed value is −273.15 (if in °C).",
+          "type": "number",
+          "minimum": -273.15
         },
         "unit": {
           "title": "unit",
-          "description": "Unit of the temperature at which light sensor was operated as a string that can have values \"K\", \"kK\" or \"°C\".",
+          "description": "Measurement unit of the temperature at which light sensor was operated as a string that can have values \"K\", \"kK\" or \"°C\".",
           "type": "string",
-          "oneOf": [
-            {"pattern": "^[k]?K$"},
-            {"pattern": "°C"}
-          ]
+          "enum": ["K", "kK", "°C"]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the temperature at which light sensor was operated as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the temperature at which light sensor was operated as a string that can have values \"K\", \"kK\", \"°C\" or \"%\".",
+          "type": "string",
+          "enum": ["K", "kK", "°C", "%"]
         }
       },
       "required": [
@@ -270,7 +433,7 @@
     },
     "data_links": {
       "title": "data_links",
-      "description": "An array that allows to refer to available external technical information regarding optical sensor used for BRDF measurements. Array of URL links as a text (i.e.string).",
+      "description": "An array that allows to refer to available external technical information regarding optical sensor used for BRDF measurements. Array contains unique strings formatted as URL links.",
       "type": "array",
       "uniqueItems": true,
       "items": {

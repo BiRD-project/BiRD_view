@@ -34,8 +34,9 @@
     },
     "polarization_alterants": {
       "title": "polarization_alterants",
-      "description": "The field containing array of objects describing polarization altering elements placed in the path of illumination light used for BRDF measurements.",
+      "description": "The field containing array of unique objects describing polarization altering elements placed in the path of illumination light used for BRDF measurements. Array contains unique \"polarization_alterant\" objects.",
       "type": "array",
+      "uniqueItems": true,
       "items": {
         "name": "polarization_alterant",
         "description": "An object describing a single polarization altering element or an assembly that was used to produce illumination with desired polarization properties.",
@@ -57,7 +58,7 @@
     },
     "data_links": {
       "title": "data_links",
-      "description": "An array that allows to refer to available external technical information regarding illumination system used for BRDF measurements. Array of URL links as a text (i.e.string).",
+      "description": "An array that allows to refer to available external technical information regarding illumination system used for BRDF measurements. Array contains unique strings formatted as URL links.",
       "type": "array",
       "uniqueItems": true,
       "items": {

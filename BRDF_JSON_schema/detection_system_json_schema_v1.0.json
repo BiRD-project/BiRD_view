@@ -22,8 +22,9 @@
     },
     "sensors": {
       "title": "sensors",
-      "description": "An array of objects describing optical sensors of detection system of the instrument used for BRDF measurements.",
+      "description": "An array of unique objects describing optical sensors of detection system of the instrument used for BRDF measurements. Array contains unique \"sensor\" objects.",
       "type": "array",
+      "uniqueItems": true,
       "items": {
         "title": "sensor",
         "description": "An object describing single optical sensor of detection system of the instrument used for BRDF measurements.",
@@ -39,8 +40,9 @@
     },
     "polarization_alterants": {
       "title": "polarization_alterants",
-      "description": "The field containing array of objects describing polarization altering elements placed in the path of the detector used for BRDF measurements.",
+      "description": "The field containing array of objects describing polarization altering elements placed in the path of the detector used for BRDF measurements. Array contains unique \"polarization_alterant\" objects.",
       "type": "array",
+      "uniqueItems": true,
       "items": {
         "name": "polarization_alterant",
         "description": "An object describing a single polarization altering element or an assembly that was used to detect light scattered from the sample with desired polarization properties.",
@@ -56,42 +58,32 @@
     },
     "distance_from_sample": {
       "title": "distance_from_sample",
-      "description": "An object describing detection system's distance from the sample surface. It is an object with keys \"value\" and \"unit\".",
+      "description": "An object describing detection system's distance from the sample surface. It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
       "type": "object",
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the detection system's distance from the sample surface as a number.",
-          "type": "number"
+          "description": "Numerical value of the detection system's distance from the sample surface as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
         },
         "unit": {
           "title": "unit",
-          "description": "Unit of the detection system's distance from the sample surface as a string that can have values \"pm\", \"nm\", \"μm\", \"mm\", \"dm\", \"m\", \"km\", \"Mm\" or \"Gm\".",
+          "description": "Measurement unit of the detection system's distance from the sample surface as a string that can have values \"pm\", \"nm\", \"μm\", \"mm\", \"dm\", \"m\", \"km\", \"Mm\" or \"Gm\".",
           "type": "string",
-          "pattern": "^[GMkmdμnp]?m$"
-        }
-      },
-      "required": [
-        "value",
-        "unit"
-      ],
-      "additionalProperties": false
-    },
-    "solid_angle": {
-      "title": "solid_angel",
-      "description": "An object describing detection system's viewing solid angle in steradians. It is an object with keys \"value\" and \"unit\".",
-      "type": "object",
-      "properties": {
-        "value": {
-          "title": "value",
-          "description": "Numerical value of the detection system's viewing solid angle as a number.",
-          "type": "number"
+          "enum": ["pm", "nm", "μm", "mm", "dm", "m", "km", "Mm", "Gm"]
         },
-        "unit": {
-          "title": "unit",
-          "description": "Unit of the detection system's viewing solid angle as a string that can have values \"sr\".",
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of detection system's distance from the sample surface as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of detection system's distance from the sample surface as a string that can have values \"pm\", \"nm\", \"μm\", \"mm\", \"dm\", \"m\", \"km\", \"Mm\", \"Gm\" or \"%\".",
           "type": "string",
-          "pattern": "sr"
+          "enum": ["pm", "nm", "μm", "mm", "dm", "m", "km", "Mm", "Gm", "%"]
         }
       },
       "required": [
@@ -114,7 +106,8 @@
           "title": "dimensions",
           "description": "An object describing physical dimensions of the area viewed by detection system during BRDF measurements.",
           "type": "object",
-          "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/dimensions_json_schema_v1.0.json"
+          "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/dimensions_json_schema_v1.0.json",
+          "required": ["area"]
         }
       },
       "required": [
@@ -124,9 +117,46 @@
       "additionalProperties": false
 
     },
+    "solid_angle": {
+      "title": "solid_angel",
+      "description": "An object describing detection system's viewing solid angle in steradians. It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the detection system's viewing solid angle as a positive number from 0 to 12.57 (i.e. from 0 to 4π limits included).",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 12.57
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Measurement unit of the detection system's viewing solid angle as a string that can have values \"sr\".",
+          "type": "string",
+          "enum": ["sr"]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the detection system's viewing solid angle uncertainty as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the detection system's viewing solid angle uncertainty as a string that can have values \"sr\" or \"%\".",
+          "type": "string",
+          "enum": ["sr", "%"]
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
     "data_links": {
       "title": "data_links",
-      "description": "An array that allows to refer to available external technical information regarding detection system used for BRDF measurements. Array of URL links as a text (i.e.string).",
+      "description": "An array that allows to refer to available external technical information regarding detection system used for BRDF measurements. Array contains unique strings formatted as URL links.",
       "type": "array",
       "uniqueItems": true,
       "items": {
@@ -147,7 +177,7 @@
   },
   "required": [
     "name",
-    "sensor",
+    "sensors",
     "solid_angle"
   ],
   "additionalProperties": false

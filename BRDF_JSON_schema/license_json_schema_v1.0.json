@@ -4,11 +4,6 @@
   "title": "license",
   "description": "An object providing all relevant information regarding the license applicable for presented BRDF data.",
   "type": "object",
-  "required": [
-    "type",
-    "rights_holder"
-  ],
-  "additionalProperties": false,
   "properties": {
     "type": {
       "title": "type",
@@ -17,7 +12,7 @@
     },
     "link": {
       "title": "link",
-      "description": "Link to the licence text applicable license as url string.",
+      "description": "Link to the licence text applicable license as URL string.",
       "type": "string",
       "format": "uri"
     },
@@ -42,5 +37,10 @@
       "description": "Text/string field allowing to provide text of the specific license or comments and additions to existing license template.",
       "type": "string"
     }
-  }
+  },
+  "required": [
+    "type",
+    "rights_holder"
+  ],
+  "additionalProperties": false
 }

@@ -32,17 +32,30 @@
     },
     "extinction_ratio": {
       "title": "extinction_ratio",
-      "description": "The field to describe typical extinction ratio of polarizer used for altering polarization of illumination. It is an object with keys \"value\" and \"unit\".",
+      "description": "The field to describe typical extinction ratio of polarizer used for altering polarization of illumination. It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
       "type": "object",
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the polarizer's extinction ratio as a number. Note that extinction ratio is usually presented as X : 1, but since 1 is a constant only X is the value requested here.",
-          "type": "number"
+          "description": "Numerical value of the polarizer's extinction ratio as a zero (0) inclusive positive number. Note that extinction ratio is usually presented as X : 1, but since 1 is a constant only X is the value requested here.",
+          "type": "number",
+          "minimum": 0
         },
         "unit": {
           "title": "unit",
-          "description": "Polarizer's extinction ratio can be expressed as unitless (i.e. empty string \"\"),\"%\" and \"dB\".",
+          "description": "Polarizer's extinction ratio measurement unit can be expressed as unitless (i.e. empty string \"\"),\"%\" and \"dB\".",
+          "type": "string",
+          "enum": ["","%","dB"]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the polarizer's extinction ratio as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Polarizer's extinction ratio uncertainty measurement unit can be expressed as unitless (i.e. empty string \"\"),\"%\" or \"dB\".",
           "type": "string",
           "enum": ["","%","dB"]
         }
@@ -55,24 +68,26 @@
     },
     "wl_range": {
       "title": "wl_range",
-      "description": "Wavelength range within which polarization altering element is designed to be operated.",
+      "description": "Wavelength range within which polarization altering element is designed to be operated. It is an object with keys \"min_value\", \"max_value\" and \"unit\".",
       "type": "object",
       "properties": {
         "min_value": {
           "title": "min_value",
-          "description": "Numerical value of shortest wavelength at which polarization altering element can be used as a number.",
-          "type": "number"
+          "description": "Numerical value of shortest wavelength at which polarization altering element can be used as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
         },
         "max_value": {
           "title": "max_value",
-          "description": "Numerical value of the longest wavelength at which polarization altering element can be used as a number.",
-          "type": "number"
+          "description": "Numerical value of the longest wavelength at which polarization altering element can be used as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
         },
         "unit": {
           "title": "unit",
-          "description": "Unit of the shortest and longest wavelengths at which polarization altering element can be used as a string that can have values \"nm\" or \"μm\".",
+          "description": "Measurement unit of the shortest and longest wavelengths at which polarization altering element can be used as a string that can have values \"nm\" or \"μm\".",
           "type": "string",
-          "pattern": "^[μn]?m$"
+          "enum": ["nm", "μm"]
         }
       },
       "required": [
@@ -84,19 +99,32 @@
     },
     "design_wl": {
       "title": "design_wl",
-      "description": "An object describing wavelength at which polarization altering element is most effective by design.",
+      "description": "An object describing wavelength at which polarization altering element is most effective by design. It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
       "type": "object",
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the wavelength at which polarization altering element is most effective as a number.",
-          "type": "number"
+          "description": "Numerical value of the wavelength at which polarization altering element is most effective as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
         },
         "unit": {
           "title": "unit",
-          "description": "Unit of the wavelength at which polarization altering element is most effective as a string that can have values \"nm\" or \"μm\".",
+          "description": "Measurement unit of the wavelength at which polarization altering element is most effective as a string that can have values \"nm\" or \"μm\".",
           "type": "string",
-          "pattern": ["nm","μm"]
+          "enum": ["nm","μm"]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the wavelength at which polarization altering element is most effective as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the wavelength at which polarization altering element is most effective as a string that can have values \"nm\", \"μm\" or \"%\".",
+          "type": "string",
+          "enum": ["nm","μm", "%"]
         }
       },
       "required": [
@@ -105,21 +133,34 @@
       ],
       "additionalProperties": false
     },
-    "damage_treshold": {
-      "title": "damage_treshold",
-      "description": "The field describing maximum power at which polarization altering element can be operated. It is an object with keys \"value\" and \"unit\".",
+    "damage_threshold": {
+      "title": "damage_threshold",
+      "description": "The field describing maximum power at which polarization altering element can be operated. It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
       "type": "object",
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the maximum power at which polarization altering element can be operated as a number.",
-          "type": "number"
+          "description": "Numerical value of the maximum power at which polarization altering element can be operated as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
         },
         "unit": {
           "title": "unit",
-          "description": "Unit of the maximum optical power at which polarization altering element can be operated as a string that can have values \"pW\", \"nW\", \"μW\", \"mW\", \"W\", \"kW\", \"MW\" or \"GW\".",
+          "description": "Measurement unit of the maximum optical power at which polarization altering element can be operated as a string that can have values \"pW\", \"nW\", \"μW\", \"mW\", \"W\", \"kW\", \"MW\" or \"GW\".",
           "type": "string",
-          "pattern": "^[pnμmkMG]?W$"
+          "enum": ["pW", "nW", "μW", "mW", "W", "kW", "MW", "GW"]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the maximum power at which polarization altering element can be operated as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the maximum optical power at which polarization altering element can be operated as a string that can have values \"pW\", \"nW\", \"μW\", \"mW\", \"W\", \"kW\", \"MW\", \"GW\" or \"%\".",
+          "type": "string",
+          "enum": ["pW", "nW", "μW", "mW", "W", "kW", "MW", "GW", "%"]
         }
       },
       "required": [
@@ -130,7 +171,7 @@
     },
     "data_links": {
       "title": "data_links",
-      "description": "An array with links to any relevant technical information regarding polarization altering element included to the set-up used for (usually polarimetric) BRDF measurements.",
+      "description": "An array with links to any relevant technical information regarding polarization altering element included to the set-up used for (usually polarimetric) BRDF measurements. Array contains unique strings formatted as URL links.",
       "type": "array",
       "uniqueItems": true,
       "items": {

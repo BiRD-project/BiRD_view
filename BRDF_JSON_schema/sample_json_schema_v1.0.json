@@ -6,55 +6,435 @@
   "properties": {
     "name": {
       "title": "name",
-      "description": "",
+      "description": "Name, laboratory marking or short description of the sample as a text (i.e. string).",
       "type": "string"
     },
     "type": {
-      "title": "name",
-      "description": "",
+      "title": "type",
+      "description": "Type of the physical or virtual sample according to its reflective properties as a string. For example \"diffuse reflectance sample\", \"specular reflectance sample\" etc.",
       "type": "string"
     },
-    "model": {},
+    "provenance": {
+      "title": "provenance",
+      "description": "An object describing the origin of the sample which BRDF was measured.",
+      "type": "object",
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/provenance_json_schema_v1.0.json"
+    },
+    "model": {
+      "title": "model",
+      "description": "Model name or code given to the sample by the manufacturer. As a text (i.e. string)."
+    },
     "manufacturer": {
-      "title": "name",
-      "description": "",
+      "title": "manufacturer",
+      "description": "Name of the company or person that produced the sample which BRDF was measured. As a text (i.e. string).",
       "type": "string"
     },
-    "provenance": {},
-    "manufacturing_method": {},
+    "manufacturing_method": {
+      "title": "manufacturing_method",
+      "description": "The field allowing to briefly describe the peculiarities of manufacturing method that was used to produce the sample which BRDF was measured. As a text (i.e. string).",
+      "type": "string"
+    },
     "materials": {
-      "name": "materials",
-      "description": "An array with objects that describes different materials from which measurement sample was made.",
+      "title": "materials",
+      "description": "An array with unique \"material\" objects that describes different materials from which measurement sample was made.",
       "type": "array",
+      "uniqueItems": true,
       "items": {
-        "name": "material",
+        "title": "material",
         "description": "An object that describes a single material from which measurement sample was produced (either partially or fully).",
         "type": "object",
         "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/sample_material_schema_v1.0.json"
       }
     },
-    "treatment": {},
-    "cleaning_procedure": {},
-    "front_surface_finish": {},
-    "back_surface_finish": {},
-    "front_surface_roughness": {},
-    "back_surface_roughness": {},
-    "shape": {},
-    "dimensions": {},
-    "front_surface_curvature": {},
-    "back_surface_curvature": {},
-    "origin_location": {},
-    "zero_azimuth_location": {},
-    "properties_symmetry": {},
-    "specular_reflectance": {},
-    "specular_transmittance": {},
-    "total_reflectance": {},
-    "total_transmittance": {},
-    "temperature": {},
-    "photo_links": {},
+    "treatment": {
+      "title": "treatment",
+      "description": "The field that allowing to briefly describe the peculiarities of any special treatment or preparation procedure that was executed before the measurement of sample's BRDF. s a text (i.e. string).",
+      "type": "string"
+    },
+    "cleaning_procedure": {
+      "title": "cleaning_procedure",
+      "description": "The field that allowing to briefly describe the peculiarities of any cleaning procedure that was applied to the sample before its BRDF measurement. s a text (i.e. string).",
+      "type": "string"
+    },
+    "front_surface_finish": {
+      "title": "front_surface_finish",
+      "description": "The field that allows to describe in text (i.e. string) form the peculiarities of sample's front surface finish. For example \"polished\", \"sand blasted\", \"hardened\" etc.",
+      "type": "string"
+    },
+    "back_surface_finish": {
+      "title": "back_surface_finish",
+      "description": "The field that allows to describe in text (i.e. string) form the peculiarities of sample's back surface finish. For example \"polished\", \"sand blasted\", \"hardened\" etc.",
+      "type": "string"
+    },
+    "front_surface_roughness": {
+      "title": "front_surface_roughness",
+      "description": "An object that describes front surface roughness as arithmetical mean deviation of surface height from its mean value usually denotes as Ra (see https://en.wikipedia.org/wiki/Surface_roughness for more information). It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the measurement sample's front surface roughness as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Measurement unit of the measurement sample's front surface roughness as a string that can have values \"pm\", \"nm\", \"μm\", \"mm\", \"cm\" and \"m\".",
+          "type": "string",
+          "enum": ["pm", "nm", "μm", "mm", "cm", "m"]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the measurement sample's front surface roughness as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the measurement sample's front surface roughness as a string that can have values \"pm\", \"nm\", \"μm\", \"mm\", \"cm\", \"m\" \"%\".",
+          "type": "string",
+          "enum": ["pm", "nm", "μm", "mm", "cm", "m", "%"]
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "back_surface_roughness": {
+      "title": "front_surface_roughness",
+      "description": "An object that describes back surface roughness as arithmetical mean deviation of surface height from its mean value usually denotes as Ra (see https://en.wikipedia.org/wiki/Surface_roughness for more information). It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the measurement sample's back surface roughness as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Measurement unit of the measurement sample's back surface roughness as a string that can have values \"pm\", \"nm\", \"μm\", \"mm\", \"cm\" and \"m\".",
+          "type": "string",
+          "enum": ["pm", "nm", "μm", "mm", "cm", "m"]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the measurement sample's back surface roughness as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the measurement sample's back surface roughness as a string that can have values \"pm\", \"nm\", \"μm\", \"mm\", \"cm\", \"m\" \"%\".",
+          "type": "string",
+          "enum": ["pm", "nm", "μm", "mm", "cm", "m", "%"]
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "shape": {
+      "title": "shape",
+      "description": "The field that allows to describe shape of the sample which BRDF was measured in a text (i.e. string) form.",
+      "type": "string"
+    },
+    "dimensions": {
+      "title": "dimensions",
+      "description": "An object that allows to specify dimensions of the sample which BRDF was measured.",
+      "type": "object",
+      "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/dimensions_json_schema_v1.0.json"
+    },
+    "front_surface_curvature": {
+      "title": "front_surface_curvature",
+      "description": "An object describing the curvature of the measurement sample's front surface as inverse of the curvature radius. It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the inverse of the front surface curvature radius as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Measurement unit of the inverse of the front surface curvature radius as a string that can have values \"1/pm\", \"1/nm\", \"1/μm\", \"1/mm\", \"1/dm\", \"1/m\", \"1/km\", \"1/Mm\", \"1/Gm\" or \"pm^-1\", \"nm^-1\", \"μm^-1\", \"mm^-1\", \"dm^-1\", \"m^-1\", \"km^-1\", \"Mm^-1\", \"Gm^-1\".",
+          "type": "string",
+          "oneOf": [
+            {"enum": ["1/pm", "1/nm", "1/μm", "1/mm", "1/dm", "1/m", "1/km", "1/Mm", "1/Gm"]},
+            {"enum": ["pm^-1", "nm^-1", "μm^-1", "mm^-1", "dm^-1", "m^-1", "km^-1", "Mm^-1", "Gm^-1"]}
+          ]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the front surface curvature as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the front surface curvature as a string that can have values \"1/pm\", \"1/nm\", \"1/μm\", \"1/mm\", \"1/dm\", \"1/m\", \"1/km\", \"1/Mm\", \"1/Gm\" or \"pm^-1\", \"nm^-1\", \"μm^-1\", \"mm^-1\", \"dm^-1\", \"m^-1\", \"km^-1\", \"Mm^-1\", \"Gm^-1\" or \"%\".",
+          "type": "string",
+          "oneOf": [
+            {"enum": ["1/pm", "1/nm", "1/μm", "1/mm", "1/dm", "1/m", "1/km", "1/Mm", "1/Gm", "%"]},
+            {"enum": ["pm^-1", "nm^-1", "μm^-1", "mm^-1", "dm^-1", "m^-1", "km^-1", "Mm^-1", "Gm^-1", "%"]}
+          ]
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "back_surface_curvature": {
+      "title": "back_surface_curvature",
+      "description": "An object describing the curvature of the measurement sample's back surface as inverse of the curvature radius. It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the inverse of the back surface curvature radius as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Measurement unit of the inverse of the back surface curvature radius as a string that can have values \"1/pm\", \"1/nm\", \"1/μm\", \"1/mm\", \"1/dm\", \"1/m\", \"1/km\", \"1/Mm\", \"1/Gm\" or \"pm^-1\", \"nm^-1\", \"μm^-1\", \"mm^-1\", \"dm^-1\", \"m^-1\", \"km^-1\", \"Mm^-1\", \"Gm^-1\".",
+          "type": "string",
+          "oneOf": [
+            {"enum": ["1/pm", "1/nm", "1/μm", "1/mm", "1/dm", "1/m", "1/km", "1/Mm", "1/Gm"]},
+            {"enum": ["pm^-1", "nm^-1", "μm^-1", "mm^-1", "dm^-1", "m^-1", "km^-1", "Mm^-1", "Gm^-1"]}
+          ]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the back surface curvature as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the back surface curvature as a string that can have values \"1/pm\", \"1/nm\", \"1/μm\", \"1/mm\", \"1/dm\", \"1/m\", \"1/km\", \"1/Mm\", \"1/Gm\" or \"pm^-1\", \"nm^-1\", \"μm^-1\", \"mm^-1\", \"dm^-1\", \"m^-1\", \"km^-1\", \"Mm^-1\", \"Gm^-1\" or \"%\".",
+          "type": "string",
+          "oneOf": [
+            {"enum": ["1/pm", "1/nm", "1/μm", "1/mm", "1/dm", "1/m", "1/km", "1/Mm", "1/Gm", "%"]},
+            {"enum": ["pm^-1", "nm^-1", "μm^-1", "mm^-1", "dm^-1", "m^-1", "km^-1", "Mm^-1", "Gm^-1", "%"]}
+          ]
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "origin_location": {
+      "title": "origin_location",
+      "description": "The field that allows to specify in the text (i.e. string) form the location of the origin of coordinate system associated with the sample which BRDF was measured. Usually it is the \"center of the sample\" or one of its corners like \"upper left corner\" in respect to marking on the sample.",
+      "type": "string"
+    },
+    "zero_azimuth_location": {
+      "title": "zero_azimuth_location",
+      "description": "The field that allows in the text (i.e. string) form to describe the reference point/direction/marking on the sample that helps to locate plane where illumination and viewing azimuthal angles equal to zero.",
+      "type": "string"
+    },
+    "properties_symmetry": {
+      "title": "properties_symmetry",
+      "description": "The field allowing to specify in the text (i.e. string) form known symmetry of the reflective properties of the sample. For example, sample's BRDF can be \"isotropic\" or \"bilaterally symmetric\" in respect to plane of incidence.",
+      "type": "string"
+    },
+    "specular_reflectance": {
+      "title": "specular_reflectance",
+      "description": "An object describing specular reflectance of the physical or virtual sample which BRDF was measured or simulated. It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the specular reflectance of the sample which BRDF was measured as a positive number from 0 to 100.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Measurement unit of the specular reflectance of the sample which BRDF was measured as a string that can have values \"%\" or \"\" i.e. unitless.",
+          "type": "string",
+          "enum": ["%", ""]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the specular reflectance of the sample which BRDF was measured as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the specular reflectance of the sample which BRDF was measured as a string that can have values \"%\" or \"\" i.e. unitless.",
+          "type": "string",
+          "enum": ["%", ""]
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "specular_transmittance": {
+      "title": "specular_transmittance",
+      "description": "An object describing specular transmittance of the physical or virtual sample which BRDF was measured or simulated. It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the specular transmittance of the sample which BRDF was measured as a positive number from 0 to 100.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Measurement unit of the specular transmittance of the sample which BRDF was measured as a string that can have values \"%\" or \"\" i.e. unitless.",
+          "type": "string",
+          "enum": ["%", ""]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the specular transmittance of the sample which BRDF was measured as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the specular transmittance of the sample which BRDF was measured as a string that can have values \"%\" or \"\" i.e. unitless.",
+          "type": "string",
+          "enum": ["%", ""]
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "total_reflectance": {
+      "title": "total_reflectance",
+      "description": "An object describing total hemispherical reflectance of the physical or virtual sample which BRDF was measured or simulated. It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the total hemispherical reflectance of the sample which BRDF was measured as a positive number from 0 to 100.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Measurement unit of the total hemispherical reflectance of the sample which BRDF was measured as a string that can have values \"%\" or \"\" i.e. unitless.",
+          "type": "string",
+          "enum": ["%", ""]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the total hemispherical reflectance of the sample which BRDF was measured as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the total hemispherical reflectance of the sample which BRDF was measured as a string that can have values \"%\" or \"\" i.e. unitless.",
+          "type": "string",
+          "enum": ["%", ""]
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "total_transmittance": {
+      "title": "total_transmittance",
+      "description": "An object describing total hemispherical transmittance of the physical or virtual sample which BRDF was measured or simulated. It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the total hemispherical transmittance of the sample which BRDF was measured as a positive number from 0 to 100.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Measurement unit of the total hemispherical transmittance of the sample which BRDF was measured as a string that can have values \"%\" or \"\" i.e. unitless.",
+          "type": "string",
+          "enum": ["%", ""]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the total hemispherical transmittance of the sample which BRDF was measured as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the total hemispherical transmittance of the sample which BRDF was measured as a string that can have values \"%\" or \"\" i.e. unitless.",
+          "type": "string",
+          "enum": ["%", ""]
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "temperature": {
+      "title": "temperature",
+      "description": "An object describing temperature of the sample which BRDF was measured. Note that in some cases it might be different from ambient room temperature since sample can be heated or cooled during BRDF measurement. It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
+      "type": "object",
+      "properties": {
+        "value": {
+          "title": "value",
+          "description": "Numerical value of the temperature of the sample which BRDF was measured as a number. In allowed units the minimum allowed value is −273.15 (if in °C).",
+          "type": "number",
+          "minimum": -273.15
+        },
+        "unit": {
+          "title": "unit",
+          "description": "Measurement unit of the temperature of the sample which BRDF was measured as a string that can have values \"K\", \"kK\" or \"°C\".",
+          "type": "string",
+          "enum": ["K", "kK", "°C"]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the temperature of the sample which BRDF was measured as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the temperature of the sample which BRDF was measured as a string that can have values \"K\", \"kK\", \"°C\" or \"%\".",
+          "type": "string",
+          "enum": ["K", "kK", "°C", "%"]
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
     "data_links": {
       "title": "data_links",
-      "description": "",
+      "description": "An array allowing to provide links to external data regarding physical or virtual sample which BRDF was measured or simulated. For example to photos or 3D model of the sample, its roughness measurement data etc. Array contains unique strings formatted as URL links.",
       "type": "array",
       "uniqueItems": true,
       "items": {
@@ -63,13 +443,13 @@
       }
     },
     "comments": {
-      "title": "name",
-      "description": "",
+      "title": "comments",
+      "description": "The section that allows to add any additional information in a text form regarding physical or virtual sample which BRDF was measured or simulated. Comments should be presented as a text (i.e.string).",
       "type": "string"
     },
     "adhoc_section": {
       "title": "adhoc_section",
-      "description": "An object that contains user defined keys (not available in \"instrumentation\" object) describing any information relevant to the instrumentation used for BRDF measurement. Adhoc section can contain all types of entries.",
+      "description": "An object that contains user defined keys (not available in \"sample\" object) describing any information relevant to the sample which BRDF was measured or simulated. Adhoc section can contain all types of entries.",
       "type": "object"
     }
   },

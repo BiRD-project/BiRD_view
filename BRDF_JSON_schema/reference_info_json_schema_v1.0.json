@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/reference_info_json_schema_v1.0.json",
   "title": "reference_info",
-  "description": "An object describing reference sample and related reference BRDF data used for relative BRDF measurements.",
+  "description": "An object briefly describing reference sample and related reference BRDF data used for relative BRDF measurements. Full description of reference sample/data can be provided as a link to external data in \"data_links\" object.",
   "type": "object",
   "properties": {
     "name": {
@@ -27,7 +27,7 @@
     },
     "material": {
       "title": "material",
-      "description": "Material from which reference sample used for relative BRDF measurements was made as text (i.e. string). For example \"BaSO4\", \"PTFE\", \"ceramic\" etc.",
+      "description": "Short description of the material from which reference sample used for relative BRDF measurements was made as text (i.e. string). For example \"BaSO4\", \"PTFE\", \"ceramic\" etc. Full description of reference sample can be provided as a link external data in \"data_links\" object.",
       "type": "string"
     },
     "shape": {
@@ -42,20 +42,34 @@
       "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/dimensions_json_schema_v1.0.json"
     },
     "solid_angle": {
-      "title": "solid_angel",
-      "description": "An object describing solid angle that was used for reference BRDF data acquisition. It is an object with keys \"value\" and \"unit\".",
+      "title": "solid_angle",
+      "description": "An object describing solid angle that was used for reference BRDF data acquisition. It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
       "type": "object",
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the  solid angle that was used for reference BRDF data acquisition as a number.",
-          "type": "number"
+          "description": "Numerical value of the  solid angle that was used for reference BRDF data acquisition as a positive number from 0 to 12.57 (i.e. from 0 to 4π limits included).",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 12.57
         },
         "unit": {
           "title": "unit",
-          "description": "Unit of the  solid angle that was used for reference BRDF data acquisition as a string that can have values \"sr\".",
+          "description": "Measurement unit of the  solid angle that was used for reference BRDF data acquisition as a string that can have value \"sr\".",
           "type": "string",
-          "pattern": "sr"
+          "enum": ["sr"]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the solid angle that was used for reference BRDF data acquisition as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the solid angle that was used for reference BRDF data acquisition as a string that can have values \"sr\" and \"%\".",
+          "type": "string",
+          "enum": ["sr", "%"]
         }
       },
       "required": [
@@ -66,7 +80,7 @@
     },
     "data_links": {
       "title": "data_links",
-      "description": "An array that allows to refer to any available external information reference sample or reference BRDF data used for relative BRDF measurements. Array of URL links as a text (i.e.string).",
+      "description": "An array that allows to refer to any available external information reference sample or reference BRDF data used for relative BRDF measurements. Array contains unique strings formatted as URL links.",
       "type": "array",
       "uniqueItems": true,
       "items": {

@@ -67,7 +67,7 @@
     },
     "website": {
       "title": "website",
-      "description": "Url of the organization/institution's web-page if available.",
+      "description": "URL of the organization/institution's web-page if available.",
       "type": "string",
       "format": "uri"
     },

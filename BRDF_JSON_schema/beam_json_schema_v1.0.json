@@ -19,19 +19,33 @@
     },
     "uniformity": {
       "title": "uniformity",
-      "description": "An object describing uniformity of the illumination beam at the surface of the measurement sample. It is defined as a ratio of the minimum and maximum optical power values within illumination beam area. It is an object with keys \"value\" and \"unit\".",
+      "description": "An object describing uniformity of the illumination beam at the surface of the measurement sample. It is defined as a ratio of the minimum and maximum optical power values within illumination beam area. It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
       "type": "object",
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the uniformity of the illumination beam at the surface of the measurement sample as a number.",
-          "type": "number"
+          "description": "Numerical value of the uniformity of the illumination beam at the surface of the measurement sample as a positive number from 0 to 100.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
         },
         "unit": {
           "title": "unit",
-          "description": "Unit of the uniformity of the illumination beam at the surface of the measurement sample as a string that can have values \"%\" or unitless i.e. \"\".",
+          "description": "Measurement unit of the uniformity of the illumination beam at the surface of the measurement sample as a string that can have values \"%\" or unitless i.e. \"\".",
           "type": "string",
-          "pattern": "^%?$"
+          "enum": ["%", ""]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of illumination beam uniformity at the surface of the measurement sample as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of illumination beam uniformity at the surface of the measurement sample as a string that can have values \"%\" or unitless i.e. \"\".",
+          "type": "string",
+          "enum": ["%", ""]
         }
       },
       "required": [
@@ -42,19 +56,33 @@
     },
     "divergence": {
       "title": "divergence",
-      "description": "An object describing divergence of the illumination beam at the surface of the measurement sample.",
+      "description": "An object describing divergence of the illumination beam that hits the surface of the measurement sample. It is an object with following available keys: \"value\", \"unit\", \"uncertainty\" and \"uncertainty_unit\".",
       "type": "object",
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the divergence of the illumination beam at the surface of the measurement sample. It is defined as a ratio of the minimum and maximum optical power values within illumination beam area. It is an object with keys \"value\", \"unit\" and/or \"comments\".",
-          "type": "number"
+          "description": "Numerical value of the divergence of the illumination beam that hits the surface of the measurement sample as a positive number from 0 to 360 degrees (or 0 to 2π radians).",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 360
         },
         "unit": {
           "title": "unit",
-          "description": "Unit of the divergence of the illumination beam at the surface of the measurement sample. as a string that can have values \"deg\" or \"rad\".",
+          "description": "Measurement unit of the divergence of the illumination beam that hits the surface of the measurement sample as a string that can have values \"deg\", \"°\", \"rad\".",
           "type": "string",
-          "enum": ["deg", "rad"]
+          "enum": ["deg", "°", "rad"]
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "Numerical value of the uncertainty of the illumination beam divergence as a zero (0) inclusive positive number.",
+          "type": "number",
+          "minimum": 0
+        },
+        "uncertainty_unit": {
+          "title": "uncertainty_unit",
+          "description": "Measurement unit of the uncertainty of the illumination beam divergence as a string that can have values \"deg\", \"°\", \"rad\" or \"%\".",
+          "type": "string",
+          "enum": ["deg", "°", "rad", "%"]
         }
       },
       "required": [
@@ -65,7 +93,7 @@
     },
     "data_links": {
       "title": "data_links",
-      "description": "An array that allows to refer to available external technical information regarding illumination beam used for BRDF measurements. Array of URL links as a text (i.e.string).",
+      "description": "An array that allows to refer to available external technical information regarding illumination beam used for BRDF measurements. Array contains unique strings formatted as URL links.",
       "type": "array",
       "uniqueItems": true,
       "items": {
