@@ -41,6 +41,11 @@
       "type": "object",
       "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/license_json_schema_v1.0.json"
     },
+    "description": {
+      "title": "description",
+      "description": "A short description in the form of text (i.e. string) of the the measured or simulated BRDF data set presented within the file. For example, it can be brief information of what sample was measured, for what purpose and with which simulation model or instrument without giving all possible specific information. The idea of this field is to give short overview of the presented BRDF data in a way that user could understand with what kind of information he is dealing with without going into details presented in other \"metadata\" objects.",
+      "type": "string"
+    },
     "method": {
       "title": "method",
       "description": "The field to describe data acquisition method that specifies whether data was simulated or measured. Can have two string values: \"simulation\" or \"measurement\"",

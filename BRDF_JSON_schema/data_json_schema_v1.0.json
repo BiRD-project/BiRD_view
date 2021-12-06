@@ -3,185 +3,665 @@
   "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/data_json_schema_v1.0.json",
   "title": "data",
   "type": "object",
-  "description": "an object with keys related to definition of BRDF function, variable properties of BRDF data and BRDF values themselves",
-  "required": [
-    "variables",
-    "values"
-  ],
-  "additionalProperties": false,
+  "description": "An object with properties/fields that allow to describe variables of BRDF function and provide their values alongside BRDF values themselves.",
   "properties": {
-    "variables": {
-      "title": "variables",
-      "description": " an array of the objects where each object desribes a variables that were changed during measurement or simulation",
-      "type": "array",
-      "items": {
-        "type": "object",
-        "required": [
-          "name",
-          "type",
-          "unit",
-          "description"
-        ],
-        "properties": {
-          "name": {
-            "title": "name",
-            "description": "Short keyword describing variable",
-            "type": "string"
-          },
-          "type": {
-            "title": "type",
-            "description": "Type of corresponding value in \"values\" as a number or string written within \"...\"",
-            "type": "string",
-            "enum": [
-              "string",
-              "number"
-            ]
-          },
-          "unit": {
-            "title": "unit",
-            "description": "units of variable as a string",
-            "type": "string"
-          },
-          "description": {
-            "title": "description",
-            "description": "short description of variable or its definition",
-            "type": "string"
+    "theta_i": {
+      "title": "theta_i",
+      "description": "An object that allows to describe the variable corresponding to illumination light incidence zenith angle \"theta_i\" and provide its values. By definition of BRDF function first presented by F. E. Nicodemus, the illumination incidence zenith angle \"theta_i\" can be varied from 0° to 90° (0 to π/2 rad) starting from the measurements sample's normal and ending at the surface parallel to sample's surface.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "name",
+          "description": "The field providing the short name of the illumination light incidence zenith angle variable as a string.",
+          "type": "string",
+          "const": "theta_i"
+        },
+        "description": {
+          "title": "description",
+          "description": "The field providing the short description of the \"theta_i\" variable as a string.",
+          "type": "string",
+          "const": "Illumination light/beam incidence zenith angle."
+        },
+        "unit": {
+          "title": "unit",
+          "description": "The field that allows to specify measurement unit of the illumination light incidence zenith angle \"theta_i\". Allowed values are strings \"rad\", \"deg\" or \"°\".",
+          "type": "string",
+          "enum": ["rad", "deg", "°"]
+        },
+        "values": {
+          "title": "values",
+          "description": "An array containing numerical values of the illumination light incidence zenith angle \"theta_i\"s used to measure/simulate each BRDF point/value presented in \"values\" of \"data\" \"BRDF\" object (i.e. under \"BRDF\" key). Array can contain only zero (0) inclusive positive numbers up to maximal value of 90° (i.e. up to 2/2 radians). Shortly: 0 ≤ x ≤ 90° (or π/2).",
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0
           }
         },
-        "additionalProperties": {
-          "oneOf": [
-            {
-              "type": "string"
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "The field containing an object that allows to specify the non-varying uncertainty of the illumination light incidence zenith angle \"theta_i\". It is an object with \"value\" and \"unit\" keys.",
+          "type": "object",
+          "properties": {
+            "value": {
+              "title": "value",
+              "description": "Numerical value of the non-varying uncertainty of the illumination light incidence zenith angle \"theta_i\" as a zero (0) inclusive positive number (0 ≤ x < inf).",
+              "type": "number",
+              "minimum": 0
             },
-            {
-              "type": "number"
+            "unit": {
+              "title": "unit",
+              "description": "Measurement unit of the non-varying uncertainty of the illumination light incidence zenith angle \"theta_i\" as a string that can have values: \"rad\", \"deg\", \"°\" and \"%\".",
+              "type": "string",
+              "enum": ["rad", "deg", "°", "%"]
             }
-          ]
+          },
+          "required": [
+            "value",
+            "unit"
+          ],
+          "additionalProperties": false
+        },
+        "comments": {
+          "title": "comments",
+          "description": "The field allowing to specify any additional information relevant to illumination light incidence zenith angle \"theta_i\" and its values as a text (i.e. string).",
+          "type": "string"
         }
       },
-      "allOf": [
-        {
-          "contains": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "title": "name",
-                "type": "string",
-                "const": "theta_i"
-              },
-              "unit": {
-                "title": "unit",
-                "type": "string",
-                "enum": ["deg", "rad"]
-              }
-            }
-          }
-        },
-        {
-          "contains": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "title": "name",
-                "type": "string",
-                "const": "phi_i"
-              },
-              "unit": {
-                "title": "unit",
-                "type": "string",
-                "enum": ["deg", "rad"]
-              }
-            }
-          }
-        },
-        {
-          "contains": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "title": "name",
-                "type": "string",
-                "const": "theta_r"
-              },
-              "unit": {
-                "title": "unit",
-                "type": "string",
-                "enum": ["deg", "rad"]
-              }
-            }
-          }
-        },
-        {
-          "contains": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "title": "name",
-                "type": "string",
-                "const": "phi_r"
-              },
-              "unit": {
-                "title": "unit",
-                "type": "string",
-                "enum": ["deg", "rad"]
-              }
-            }
-          }
-        },
-        {
-          "contains": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "title": "name",
-                "type": "string",
-                "const": "BRDF"
-              },
-              "unit": {
-                "title": "unit",
-                "type": "string",
-                "const": "sr-1"
-              }
-            }
-          }
-        },
-        {
-          "contains": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "title": "name",
-                "type": "string",
-                "const": "uBRDF"
-              },
-              "unit": {
-                "title": "unit",
-                "type": "string",
-                "const": "sr-1"
-              }
-            }
-          }
-        }
-      ]
+      "if": {
+        "properties": {"unit": {"const": "rad"}}
+      },
+      "then": {
+        "properties": {"values": {"items": {"maximum": 1.5708, "exclusiveMaximum": false}}}
+      },
+      "else": {
+        "properties": {"values": {"items": {"maximum": 90, "exclusiveMaximum": false}}}
+      },
+      "required": [
+        "unit",
+        "values"
+      ],
+      "additionalProperties": false
     },
-    "values": {
-      "title": "values",
-      "description": "Array of length N corresponding to number of measured BRDF points where each element is and array of length M corresponding to M varibles that were varied during simulation/measurement",
-      "type": "array",
-      "items": {
-        "description": "Array of length M corresponding to M varibles that were varied during simulation/measurement alongside BRDF vales and their uncertainties. Order of elements should corespond to order of variables in \"variables\"",
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {
-              "type": "string"
+    "phi_i": {
+      "title": "phi_i",
+      "description": "An object that allows to describe the variable corresponding to illumination light incidence azimuthal angle \"phi_i\" and provide its values. By definition of BRDF function first presented by F. E. Nicodemus, the illumination incidence azimuthal angle \"phi_i\" can be varied from 0° to 360° (0 to π/2 rad) around the sample's normal starting from the direction defined by the user (mark on the sample) and ending at the direction. To avoid overlapping data present file format does not allow to illumination incidence azimuthal angle \"phi_i\" to have values equal or greater than 360°.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "name",
+          "description": "The field providing the short name of the illumination light incidence azimuthal angle variable as a string.",
+          "type": "string",
+          "const": "phi_i"
+        },
+        "description": {
+          "title": "description",
+          "description": "The field providing the short description of the \"phi_i\" variable as a string.",
+          "type": "string",
+          "const": "Illumination light/beam incidence azimuthal angle."
+        },
+        "unit": {
+          "title": "unit",
+          "description": "The field that allows to specify measurement unit of the illumination light incidence azimuthal angle \"phi_i\". Allowed values are strings \"rad\", \"deg\" or \"°\".",
+          "type": "string",
+          "enum": ["rad", "deg", "°"]
+        },
+        "values": {
+          "title": "values",
+          "description": "An array containing numerical values of the illumination light incidence azimuthal angle \"phi_i\" used to measure/simulate each BRDF point/value presented in \"values\" of \"data\" \"BRDF\" object (i.e. under \"BRDF\" key). Array can contain only zero (0) inclusive positive numbers up to maximal value of 360° (i.e. up to 2π radians) that is excluded. Shortly: 0 ≤ x < 360° (or 2π).",
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "The field containing an object that allows to specify the non-varying uncertainty of the illumination light incidence azimuthal angle \"phi_i\". It is an object with \"value\" and \"unit\" keys.",
+          "type": "object",
+          "properties": {
+            "value": {
+              "title": "value",
+              "description": "Numerical value of the non-varying uncertainty of the illumination light incidence azimuthal angle \"phi_i\" as a zero (0) inclusive positive number (0 ≤ x < inf).",
+              "type": "number",
+              "minimum": 0
             },
-            {
-              "type": "number"
+            "unit": {
+              "title": "unit",
+              "description": "Measurement unit of the non-varying uncertainty of the illumination light incidence azimuthal angle \"phi_i\" as a string that can have values: \"rad\", \"deg\", \"°\" and \"%\".",
+              "type": "string",
+              "enum": ["rad", "deg", "°", "%"]
             }
-          ]
+          },
+          "required": [
+            "value",
+            "unit"
+          ],
+          "additionalProperties": false
+        },
+        "comments": {
+          "title": "comments",
+          "description": "The field allowing to specify any additional information relevant to illumination light incidence azimuthal angle \"phi_i\" and its values as a text (i.e. string).",
+          "type": "string"
         }
+      },
+      "if": {
+        "properties": {"unit": {"const": "rad"}}
+      },
+      "then": {
+        "properties": {"values": {"items": {"maximum": 3.141593, "exclusiveMaximum": true}}}
+      },
+      "else": {
+        "properties": {"values": {"items": {"maximum": 360, "exclusiveMaximum": true}}}
+      },
+      "required": [
+        "unit",
+        "values"
+      ],
+      "additionalProperties": false
+    },
+    "theta_r": {
+      "title": "theta_r",
+      "description": "An object that allows to describe the variable corresponding to reflected light observation zenith angle \"theta_r\" and provide its values. By definition of BRDF function first presented by F. E. Nicodemus, the reflected light observation zenith angle \"theta_r\" can be varied from 0° to 90° (0 to π/2 rad) starting from the measurements sample's normal and ending at the surface parallel to sample's surface.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "name",
+          "description": "The field providing the short name of the reflected light observation zenith angle variable as a string.",
+          "type": "string",
+          "const": "theta_r"
+        },
+        "description": {
+          "title": "description",
+          "description": "The field providing the short description of the \"theta_r\" variable as a string.",
+          "type": "string",
+          "const": "Reflected light/beam observation zenith angle."
+        },
+        "unit": {
+          "title": "unit",
+          "description": "The field that allows to specify measurement unit of the reflected light observation zenith angle \"theta_r\". Allowed values are strings \"rad\", \"deg\" or \"°\".",
+          "type": "string",
+          "enum": ["rad", "deg", "°"]
+        },
+        "values": {
+          "title": "values",
+          "description": "An array containing numerical values of the reflected light observation zenith angle \"theta_r\" used to measure/simulate each BRDF point/value presented in \"values\" of \"data\" \"BRDF\" object (i.e. under \"BRDF\" key). Array can contain only zero (0) inclusive positive numbers up to maximal value of 90° (i.e. up to 2/2 radians). Shortly: 0 ≤ x ≤ 90° (or π/2).",
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "The field containing an object that allows to specify the non-varying uncertainty of the reflected light observation zenith angle \"theta_r\". It is an object with \"value\" and \"unit\" keys.",
+          "type": "object",
+          "properties": {
+            "value": {
+              "title": "value",
+              "description": "Numerical value of the non-varying uncertainty of the reflected light observation zenith angle \"theta_r\" as a zero (0) inclusive positive number (0 ≤ x < inf).",
+              "type": "number",
+              "minimum": 0
+            },
+            "unit": {
+              "title": "unit",
+              "description": "Measurement unit of the non-varying uncertainty of the reflected light observation zenith angle \"theta_r\" as a string that can have values: \"rad\", \"deg\", \"°\" and \"%\".",
+              "type": "string",
+              "enum": ["rad", "deg", "°", "%"]
+            }
+          },
+          "required": [
+            "value",
+            "unit"
+          ],
+          "additionalProperties": false
+        },
+        "comments": {
+          "title": "comments",
+          "description": "The field allowing to specify any additional information relevant to reflected light observation zenith angle \"theta_r\" and its values as a text (i.e. string).",
+          "type": "string"
+        }
+      },
+      "if": {
+        "properties": {"unit": {"const": "rad"}}
+      },
+      "then": {
+        "properties": {"values": {"items": {"maximum": 1.5708, "exclusiveMaximum": false}}}
+      },
+      "else": {
+        "properties": {"values": {"items": {"maximum": 90, "exclusiveMaximum": false}}}
+      },
+      "required": [
+        "unit",
+        "values"
+      ],
+      "additionalProperties": false
+    },
+    "phi_r": {
+      "title": "phi_r",
+      "description": "An object that allows to describe the variable corresponding to reflected light observation azimuthal angle \"phi_r\" and provide its values. By definition of BRDF function first presented by F. E. Nicodemus, the reflected light observation azimuthal angle \"phi_r\" can be varied from 0° to 360° (0 to π/2 rad) around the sample's normal starting from the direction defined by the user (mark on the sample) and ending at the direction. To avoid overlapping data present file format does not allow to reflected light observation azimuthal angle \"phi_r\" to have values equal or greater than 360°.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "name",
+          "description": "The field providing the short name of the reflected light observation azimuthal angle variable as a string.",
+          "type": "string",
+          "const": "phi_r"
+        },
+        "description": {
+          "title": "description",
+          "description": "The field providing the short description of the \"phi_r\" variable as a string.",
+          "type": "string",
+          "const": "Reflected light/beam observation azimuthal angle."
+        },
+        "unit": {
+          "title": "unit",
+          "description": "The field that allows to specify measurement unit of the reflected light observation azimuthal angle \"phi_r\". Allowed values are strings \"rad\", \"deg\" or \"°\".",
+          "type": "string",
+          "enum": ["rad", "deg", "°"]
+        },
+        "values": {
+          "title": "values",
+          "description": "An array containing numerical values of the reflected light observation azimuthal angle \"phi_r\" used to measure/simulate each BRDF point/value presented in \"values\" of \"data\" \"BRDF\" object (i.e. under \"BRDF\" key). Array can contain only zero (0) inclusive positive numbers up to maximal value of 360° (i.e. up to 2π radians) that is excluded. Shortly: 0 ≤ x < 360° (or 2π).",
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "The field containing an object that allows to specify the non-varying uncertainty of the reflected light observation azimuthal angle \"phi_r\". It is an object with \"value\" and \"unit\" keys.",
+          "type": "object",
+          "properties": {
+            "value": {
+              "title": "value",
+              "description": "Numerical value of the non-varying uncertainty of the reflected light observation azimuthal angle \"phi_r\" as a zero (0) inclusive positive number (0 ≤ x < inf).",
+              "type": "number",
+              "minimum": 0
+            },
+            "unit": {
+              "title": "unit",
+              "description": "Measurement unit of the non-varying uncertainty of the reflected light observation azimuthal angle \"phi_r\" as a string that can have values: \"rad\", \"deg\", \"°\" and \"%\".",
+              "type": "string",
+              "enum": ["rad", "deg", "°", "%"]
+            }
+          },
+          "required": [
+            "value",
+            "unit"
+          ],
+          "additionalProperties": false
+        },
+        "comments": {
+          "title": "comments",
+          "description": "The field allowing to specify any additional information relevant to reflected light observation azimuthal angle \"phi_r\" and its values as a text (i.e. string).",
+          "type": "string"
+        }
+      },
+      "if": {
+        "properties": {"unit": {"const": "rad"}}
+      },
+      "then": {
+        "properties": {"values": {"items": {"maximum": 3.141593, "exclusiveMaximum": true}}}
+      },
+      "else": {
+        "properties": {"values": {"items": {"maximum": 360, "exclusiveMaximum": true}}}
+      },
+      "required": [
+        "index",
+        "type",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "BRDF": {
+      "title": "BRDF",
+      "description": "An object describing and providing the bidirectional reflectance distribution function \"BRDF\" values as defined by F. E. Nicodemus. I.e. BRDF values are measured in sr^−1 (1/sr) and can vary from 0 sr^−1 to inf. sr^−1.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "name",
+          "description": "The field providing the short name of the bidirectional reflectance distribution function as a string.",
+          "type": "string",
+          "const": "BRDF"
+        },
+        "description": {
+          "title": "description",
+          "description": "The field providing the short description of the \"BRDF\" variable as a string.",
+          "type": "string",
+          "const": "Bidirectional reflectance distribution function."
+        },
+        "unit": {
+          "title": "unit",
+          "description": "The field that allows to specify measurement unit of the \"BRDF\" values. Allowed values are strings \"1/sr\" or \"sr^-1\".",
+          "type": "string",
+          "enum": ["1/sr", "sr^-1"]
+        },
+        "values": {
+          "title": "values",
+          "description": "An array containing numerical values of measured or simulated \"BRDF\" values corresponding to set of parameters stored in other properties of \"data\" object (i.e. objects under \"data\" object keys describing BRDF function parameters and their values). Array can contain only zero (0) inclusive positive numbers. Shortly: 0 ≤ x < inf.",
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "The field containing an object that allows to specify the non-varying uncertainty of \"BRDF\" values. It is an object with \"value\" and \"unit\" keys.",
+          "type": "object",
+          "properties": {
+            "value": {
+              "title": "value",
+              "description": "Numerical value of the non-varying uncertainty of \"BRDF\" values as a zero (0) inclusive positive number (0 ≤ x < inf).",
+              "type": "number",
+              "minimum": 0
+            },
+            "unit": {
+              "title": "unit",
+              "description": "Measurement unit of the non-varying uncertainty of \"BRDF\" values as a string that can have values: \"1/sr\", \"sr^-1\" and \"%\".",
+              "type": "string",
+              "enum": ["1/sr", "sr^-1", "%"]
+            }
+          },
+          "required": [
+            "value",
+            "unit"
+          ],
+          "additionalProperties": false
+        },
+        "comments": {
+          "title": "comments",
+          "description": "The field allowing to specify any additional information relevant to bidirectional reflectance distribution function \"BRDF\" and its values as a text (i.e. string).",
+          "type": "string"
+        }
+      },
+      "required": [
+        "unit",
+        "values"
+      ],
+      "additionalProperties": false
+    },
+    "uBRDF": {
+      "title": "uBRDF",
+      "description": "An object that describes the variable corresponding to non-constant uncertainty of bidirectional reflectance distribution function values \"uBRDF\". I.e. BRDF associated uncertainty that varies with BRDF function parameters/variables. It is a complex quantity that might be affected by the uncertainties of all the variables used for BRDF estimation and most probably is unique for different measurement instruments and simulation models. BRDF uncertainty should be presented in sr^-1 (1/sr) if it is absolute or in % if relative.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "name",
+          "description": "The field providing the short name of the uncertainty of bidirectional reflectance distribution function as a string.",
+          "type": "string",
+          "const": "BRDF"
+        },
+        "description": {
+          "title": "description",
+          "description": "The field providing the short description of the \"uBRDF\" variable as a string.",
+          "type": "string",
+          "const": "Uncertainty of bidirectional reflectance distribution function."
+        },
+        "unit": {
+          "title": "unit",
+          "description": "The field that allows to specify measurement unit uncertainty of bidirectional reflectance distribution function values \"uBRDF\" as a string that can have values: \"1/sr\", \"sr^-1\" and \"%\".",
+          "type": "string",
+          "enum": ["1/sr", "sr^-1", "%"]
+        },
+        "values": {
+          "title": "values",
+          "description": "An array containing numerical values of the measured or simulated \"BRDF\" uncertainty estimated for each set of parameters stored in other properties of \"data\" object (i.e. objects under \"data\" object keys describing BRDF function parameters and their values). Array can contain only zero (0) inclusive positive numbers. Shortly: 0 ≤ x < inf.",
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "comments": {
+          "title": "comments",
+          "description": "The field allowing to specify any additional information relevant to uncertainty of the bidirectional reflectance distribution function \"BRDF\" and its values as a text (i.e. string).",
+          "type": "string"
+        }
+      },
+      "required": [
+        "unit",
+        "values"
+      ],
+      "additionalProperties": false
+    },
+    "wavelength_i": {
+      "title": "wavelength_i",
+      "description": "An object that allows to describe the variable corresponding to illumination light wavelength \"wavelength_i\" and provide its values. This parameter is relevant for spectral BRDF measurements where monochromatic illumination is used and its wavelength is set before the light hits the sample. Wavelength can be presented in nanometers \"nm\" or micrometers \"μm\".",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "name",
+          "description": "The field providing the short name of the illumination light wavelength variable as a string.",
+          "type": "string",
+          "cont": "wavelength_i"
+        },
+        "description": {
+          "title": "description",
+          "description": "The field providing the short description of the \"wavelength_i\" variable as a string.",
+          "type": "string",
+          "const": "Illumination light wavelength."
+        },
+        "unit": {
+          "title": "unit",
+          "description": "The field that allows to specify measurement unit of the illumination light wavelength \"wavelength_i\". Allowed values are strings \"nm\" or \"μm\".",
+          "type": "string",
+          "enum": ["nm", "μm"]
+        },
+        "values": {
+          "title": "values",
+          "description": "An array containing numerical values of the illumination light wavelength \"wavelength_i\" used to measure/simulate each BRDF point/value presented in \"values\" of \"data\" \"BRDF\" object (i.e. under \"BRDF\" key). Array can contain only zero (0) inclusive positive numbers. Shortly: 0 ≤ x < inf.",
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "The field containing an object that allows to specify the non-varying uncertainty of the illumination light wavelength \"wavelength_i\". It is an object with \"value\" and \"unit\" keys.",
+          "type": "object",
+          "properties": {
+            "value": {
+              "title": "value",
+              "description": "Numerical value of the non-varying uncertainty of the illumination light wavelength \"wavelength_i\" as a zero (0) inclusive positive number (0 ≤ x < inf).",
+              "type": "number",
+              "minimum": 0
+            },
+            "unit": {
+              "title": "unit",
+              "description": "Measurement unit of the non-varying uncertainty of the illumination light wavelength \"wavelength_i\" as a string that can have values: \"nm\", \"μm\" and \"%\".",
+              "type": "string",
+              "enum": ["nm", "μm", "%"]
+            }
+          },
+          "required": [
+            "value",
+            "unit"
+          ],
+          "additionalProperties": false
+        },
+        "comments": {
+          "title": "comments",
+          "description": "The field allowing to specify any additional information relevant to illumination light wavelength \"wavelength_i\" and its values as a text (i.e. string).",
+          "type": "string"
+        }
+      },
+      "required": [
+        "unit",
+        "values"
+      ],
+      "additionalProperties": false
+    },
+    "wavelength_r": {
+      "title": "wavelength_r",
+      "description": "An object that allows to describe the variable corresponding to the observed reflected light wavelength \"wavelength_r\" and provide its values. This parameter is relevant for spectral BRDF measurements where light reflected from the sample is spectrally resolved prior its detection by the sensor. Wavelength can be presented in nanometers \"nm\" or micrometers \"μm\".",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "name",
+          "description": "The field providing the short name of the observed reflected light wavelength variable as a string.",
+          "type": "string",
+          "cont": "wavelength_i"
+        },
+        "description": {
+          "title": "description",
+          "description": "The field providing the short description of the \"wavelength_r\" variable as a string.",
+          "type": "string",
+          "const": "Observed reflected light wavelength."
+        },
+        "unit": {
+          "title": "unit",
+          "description": "The field that allows to specify measurement unit of the observed reflected light wavelength \"wavelength_r\". Allowed values are strings \"nm\" or \"μm\".",
+          "type": "string",
+          "enum": ["nm", "μm"]
+        },
+        "values": {
+          "title": "values",
+          "description": "An array containing numerical values of the observed reflected light wavelength \"wavelength_r\" used to measure/simulate each BRDF point/value presented in \"values\" of \"data\" \"BRDF\" object (i.e. under \"BRDF\" key). Array can contain only zero (0) inclusive positive numbers. Shortly: 0 ≤ x < inf.",
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "The field containing an object that allows to specify the non-varying uncertainty of the observed reflected light wavelength \"wavelength_r\". It is an object with \"value\" and \"unit\" keys.",
+          "type": "object",
+          "properties": {
+            "value": {
+              "title": "value",
+              "description": "Numerical value of the non-varying uncertainty of the observed reflected light wavelength \"wavelength_r\" as a zero (0) inclusive positive number (0 ≤ x < inf).",
+              "type": "number",
+              "minimum": 0
+            },
+            "unit": {
+              "title": "unit",
+              "description": "Measurement unit of the non-varying uncertainty of the observed reflected light wavelength \"wavelength_r\" as a string that can have values: \"nm\", \"μm\" and \"%\".",
+              "type": "string",
+              "enum": ["nm", "μm", "%"]
+            }
+          },
+          "required": [
+            "value",
+            "unit"
+          ],
+          "additionalProperties": false
+        },
+        "comments": {
+          "title": "comments",
+          "description": "The field allowing to specify any additional information relevant to the observed reflected light wavelength \"wavelength_r\" and its values as a text (i.e. string).",
+          "type": "string"
+        }
+      },
+      "required": [
+        "unit",
+        "values"
+      ],
+      "additionalProperties": false
+    },
+    "polarization_i": {
+      "title": "polarization_i",
+      "description": "An object that allows to describe the variable corresponding to the illumination light polarization state \"polarization_i\" and provide its values.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "name",
+          "description": "The field providing the short name of the illumination light polarization state variable as a string.",
+          "type": "string",
+          "const": "polarization_i"
+        },
+        "description": {
+          "title": "description",
+          "description": "The field providing the short description of the \"polarization_i\" variable as a string.",
+          "type": "string",
+          "const": "Illumination light polarization state."
+        },
+        "unit": {
+          "title": "unit",
+          "description": "The field that allows to specify measurement unit of the illumination light incidence zenith angle \"theta_i\". Allowed values are strings \"rad\", \"deg\" or \"°\".",
+          "type": "string",
+          "enum": ["rad", "deg", "°"]
+        },
+        "values": {
+          "title": "values",
+          "description": "An array containing numerical values of the illumination light incidence zenith angle \"theta_i\"s used to measure/simulate each BRDF point/value presented in \"values\" of \"data\" \"BRDF\" object (i.e. under \"BRDF\" key). Array can contain only zero (0) inclusive positive numbers up to maximal value of 90° (i.e. up to 2/2 radians). Shortly: 0 ≤ x ≤ 90° (or π/2).",
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "The field containing an object that allows to specify the non-varying uncertainty of the illumination light incidence zenith angle \"theta_i\". It is an object with \"value\" and \"unit\" keys.",
+          "type": "object",
+          "properties": {
+            "value": {
+              "title": "value",
+              "description": "Numerical value of the non-varying uncertainty of the illumination light incidence zenith angle \"theta_i\" as a zero (0) inclusive positive number (0 ≤ x < inf).",
+              "type": "number",
+              "minimum": 0
+            },
+            "unit": {
+              "title": "unit",
+              "description": "Measurement unit of the non-varying uncertainty of the illumination light incidence zenith angle \"theta_i\" as a string that can have values: \"rad\", \"deg\", \"°\" and \"%\".",
+              "type": "string",
+              "enum": ["rad", "deg", "°", "%"]
+            }
+          },
+          "required": [
+            "value",
+            "unit"
+          ],
+          "additionalProperties": false
+        },
+        "comments": {
+          "title": "comments",
+          "description": "The field allowing to specify any additional information relevant to illumination light incidence zenith angle \"theta_i\" and its values as a text (i.e. string).",
+          "type": "string"
+        }
+      },
+      "required": [
+        "unit",
+        "values"
+      ],
+      "additionalProperties": false
+    },
+    "polarization_r": {
+      "title": "",
+      "description": "",
+      "type": "object",
+      "properties": {
+        "name": {},
+        "index": {},
+        "type": {},
+        "unit": {},
+        "uncertainty": {}
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "adhoc_variables": {
+      "title": "adhoc_variables",
+      "description": "",
+      "type": "object",
+      "additionalProperties": {
+        "title": "adhoc_variable",
+        "description": "",
+        "type": "object",
+        "$ref":"https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/adhoc_varible_json_schema_v1.0.json"
       }
     }
-  }
+  },
+  "required": [
+    "theta_i",
+    "phi_i",
+    "theta_r",
+    "phi_r",
+    "BRDF"
+  ],
+  "additionalProperties": false
 }
