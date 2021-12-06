@@ -30,7 +30,7 @@
         },
         "values": {
           "title": "values",
-          "description": "An array containing numerical values of the illumination light incidence zenith angle \"theta_i\"s used to measure/simulate each BRDF point/value presented in \"values\" of \"data\" \"BRDF\" object (i.e. under \"BRDF\" key). Array can contain only zero (0) inclusive positive numbers up to maximal value of 90° (i.e. up to 2/2 radians). Shortly: 0 ≤ x ≤ 90° (or π/2).",
+          "description": "An array containing numerical values of the illumination light incidence zenith angle \"theta_i\" used to measure/simulate each BRDF point/value presented in \"values\" of \"data\" \"BRDF\" object (i.e. under \"BRDF\" key). Array can contain only zero (0) inclusive positive numbers up to maximal value of 90° (i.e. up to 2/2 radians). Shortly: 0 ≤ x ≤ 90° (or π/2).",
           "type": "array",
           "items": {
             "type": "number",
@@ -564,7 +564,7 @@
     },
     "polarization_i": {
       "title": "polarization_i",
-      "description": "An object that allows to describe the variable corresponding to the illumination light polarization state \"polarization_i\" and provide its values.",
+      "description": "An object that allows to describe the variable corresponding to the illumination light polarization state \"polarization_i\" and provide its values. Polarization state can be presented using two different notations: sp-notation for the simplest (linear) cases of polarization state and intensity-normalized Stokes vector notation (https://en.wikipedia.org/wiki/Stokes_parameters) allowing to present arbitrary polarization state as well as degree of polarization. In both cases polarization coordinate frame is defined in respect to plane of incidence (https://en.wikipedia.org/wiki/Plane_of_incidence) where polarized light with its electric field along the plane of incidence is denoted as p-polarized and have Stokes's vector corresponding to vertical linear polarization state [1, -1, 0, 0] i.e. vertical polarization orientation changes with sample's normal orientation. S-polarized light electric field is normal to the plane of incidence and corresponding Stokes vector denotes horizontal linear polarization [1, 1, 0, 0]. If sample is illuminated under 0° illumination zenith angle \"theta_i\", then it is advised to define plane of incidence using sample's normal and 0° azimuthal angle direction (usually marked on the sample). Any specific coordinate frame definitions can be noted in the \"comments\" field of \"polarization_i\" object.",
       "type": "object",
       "properties": {
         "name": {
@@ -579,37 +579,70 @@
           "type": "string",
           "const": "Illumination light polarization state."
         },
-        "unit": {
-          "title": "unit",
-          "description": "The field that allows to specify measurement unit of the illumination light incidence zenith angle \"theta_i\". Allowed values are strings \"rad\", \"deg\" or \"°\".",
+        "notation": {
+          "title": "notation",
+          "description": "The field that allows to specify the notation used to describe illumination light polarization state \"polarization_i\" as a string. Allowed values are strings \"sp\" and \"nStokes\" corresponding to sp-notation and intensity-normalized Stokes notation (i.e. Stokes vector first component denoting total intensity of the beam is always equal to 1 and all vector parameters are unitless).",
           "type": "string",
-          "enum": ["rad", "deg", "°"]
+          "enum": ["sp", "inStokes"]
         },
         "values": {
           "title": "values",
-          "description": "An array containing numerical values of the illumination light incidence zenith angle \"theta_i\"s used to measure/simulate each BRDF point/value presented in \"values\" of \"data\" \"BRDF\" object (i.e. under \"BRDF\" key). Array can contain only zero (0) inclusive positive numbers up to maximal value of 90° (i.e. up to 2/2 radians). Shortly: 0 ≤ x ≤ 90° (or π/2).",
-          "type": "array",
-          "items": {
-            "type": "number",
-            "minimum": 0
-          }
+          "description": "An array containing numerical values of the illumination light polarization state \"polarization_i\" used to measure/simulate each BRDF point/value presented in \"values\" of \"data\" \"BRDF\" object (i.e. under \"BRDF\" key). Array can contain either strings with values of \"p\", \"s\" and \"u\" corresponding to p-, s-polarized and unpolarized states or arrays (Stokes vectors) that have 4 numerical components from which first is always 1 and 3 others can vary from -1 to 1 (see intensity-normalized Stokes vector definition https://en.wikipedia.org/wiki/Polarization_(waves)).",
+          "type": "array"
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "The field containing an object that allows to specify the non-varying uncertainty of the illumination light incidence zenith angle \"theta_i\". It is an object with \"value\" and \"unit\" keys.",
+          "description": "The field containing an object that allows to specify the non-varying uncertainty of the illumination light polarization state \"polarization_i\" presented in intensity-normalized Stokes notation. It is an object with \"values\" and \"units\" keys.",
           "type": "object",
           "properties": {
-            "value": {
-              "title": "value",
-              "description": "Numerical value of the non-varying uncertainty of the illumination light incidence zenith angle \"theta_i\" as a zero (0) inclusive positive number (0 ≤ x < inf).",
-              "type": "number",
-              "minimum": 0
+            "values": {
+              "title": "values",
+              "description": "An array with numerical values of non-varying uncertainties of each Stokes' vector components (4 in total) presented as a zero (0) inclusive positive numbers (0 ≤ x < inf).",
+              "type": "array",
+              "prefixItems": [
+                {
+                  "type": "number",
+                  "minimum": 0
+                },
+                {
+                  "type": "number",
+                  "minimum": 0
+                },
+                {
+                  "type": "number",
+                  "minimum": 0
+                },
+                {
+                  "type": "number",
+                  "minimum": 0
+                }
+              ],
+              "items": false
+
             },
-            "unit": {
-              "title": "unit",
-              "description": "Measurement unit of the non-varying uncertainty of the illumination light incidence zenith angle \"theta_i\" as a string that can have values: \"rad\", \"deg\", \"°\" and \"%\".",
-              "type": "string",
-              "enum": ["rad", "deg", "°", "%"]
+            "units": {
+              "title": "units",
+              "description": "An array that specifies measurement units of the non-varying uncertainties of each Stokes' vector components (4 in total) presented as a string that can have values: \"\" and \"%\".",
+              "type": "array",
+              "prefixItems": [
+                {
+                  "type": "string",
+                  "enum": ["", "%"]
+                },
+                {
+                  "type": "string",
+                  "enum": ["", "%"]
+                },
+                {
+                  "type": "string",
+                  "enum": ["", "%"]
+                },
+                {
+                  "type": "string",
+                  "enum": ["", "%"]
+                }
+              ],
+              "items": false
             }
           },
           "required": [
@@ -620,8 +653,45 @@
         },
         "comments": {
           "title": "comments",
-          "description": "The field allowing to specify any additional information relevant to illumination light incidence zenith angle \"theta_i\" and its values as a text (i.e. string).",
+          "description": "The field allowing to specify any additional information relevant to illumination light polarization state \"polarization_i\" and its values as a text (i.e. string).",
           "type": "string"
+        }
+      },
+      "if": {
+        "properties": {"notation": {"const": "sp"}}
+      },
+      "then": {
+        "properties": {"values": {"items": {"type": "string", "enum": ["s", "p", "u"]}}}
+      },
+      "else": {
+        "properties": {
+          "values": {
+            "items": {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "type": "number",
+                  "const": 1
+                },
+                {
+                  "type": "number",
+                  "minimum": -1,
+                  "maximum": 1
+                },
+                {
+                  "type": "number",
+                  "minimum": -1,
+                  "maximum": 1
+                },
+                {
+                  "type": "number",
+                  "minimum": -1,
+                  "maximum": 1
+                }
+              ],
+              "items": false
+            }
+          }
         }
       },
       "required": [
@@ -631,17 +701,141 @@
       "additionalProperties": false
     },
     "polarization_r": {
-      "title": "",
-      "description": "",
+      "title": "polarization_r",
+      "description": "An object that allows to describe the variable corresponding to the reflected light observation polarization state \"polarization_r\" and provide its values. Polarization state can be presented using two different notations: sp-notation for the simplest (linear) cases of polarization state and intensity-normalized Stokes vector notation (https://en.wikipedia.org/wiki/Stokes_parameters) allowing to present arbitrary polarization state as well as degree of polarization. In both cases polarization coordinate frame is defined in respect to plane of reflectance (i.e. plane defined by the direction of reflectance observation and measurement sample's normal similarly to the plane of incidence - https://en.wikipedia.org/wiki/Plane_of_incidence) where polarized light with its electric field along the plane of reflectance is denoted as p-polarized and have Stokes's vector corresponding to vertical linear polarization state [1, -1, 0, 0] i.e. vertical polarization orientation changes with sample's normal orientation. S-polarized light electric field is normal to the plane of reflectance and corresponding Stokes vector denotes horizontal linear polarization [1, 1, 0, 0]. If sample is observed under 0° reflectance observation zenith angle \"theta_r\", then it is advised to define plane of reflectance using sample's normal and 0° azimuthal angle direction (usually marked on the sample). Any specific coordinate frame definitions can be noted in the \"comments\" field of \"polarization_r\" object.",
       "type": "object",
       "properties": {
-        "name": {},
-        "index": {},
-        "type": {},
-        "unit": {},
-        "uncertainty": {}
+        "name": {
+          "title": "name",
+          "description": "The field providing the short name of the reflected light observation polarization state variable as a string.",
+          "type": "string",
+          "const": "polarization_r"
+        },
+        "description": {
+          "title": "description",
+          "description": "The field providing the short description of the \"polarization_r\" variable as a string.",
+          "type": "string",
+          "const": "Reflected light observation polarization state."
+        },
+        "notation": {
+          "title": "notation",
+          "description": "The field that allows to specify the notation used to describe reflected light observation polarization state \"polarization_r\" as a string. Allowed values are strings \"sp\" and \"nStokes\" corresponding to sp-notation and intensity-normalized Stokes notation (i.e. Stokes vector first component denoting total intensity of the beam is always equal to 1 and all vector parameters are unitless).",
+          "type": "string",
+          "enum": ["sp", "inStokes"]
+        },
+        "values": {
+          "title": "values",
+          "description": "An array containing numerical values of the reflected light observation polarization state \"polarization_r\" used to measure/simulate each BRDF point/value presented in \"values\" of \"data\" \"BRDF\" object (i.e. under \"BRDF\" key). Array can contain either strings with values of \"p\", \"s\" and \"u\" corresponding to p-, s-polarized and unpolarized states or arrays (Stokes vectors) that have 4 numerical components from which first is always 1 and 3 others can vary from -1 to 1 (see intensity-normalized Stokes vector definition https://en.wikipedia.org/wiki/Polarization_(waves)).",
+          "type": "array"
+        },
+        "uncertainty": {
+          "title": "uncertainty",
+          "description": "The field containing an object that allows to specify the non-varying uncertainty of the reflected light observation polarization state \"polarization_r\" presented in intensity-normalized Stokes notation. It is an object with \"values\" and \"units\" keys.",
+          "type": "object",
+          "properties": {
+            "values": {
+              "title": "values",
+              "description": "An array with numerical values of non-varying uncertainties of each Stokes' vector components (4 in total) presented as a zero (0) inclusive positive numbers (0 ≤ x < inf).",
+              "type": "array",
+              "prefixItems": [
+                {
+                  "type": "number",
+                  "minimum": 0
+                },
+                {
+                  "type": "number",
+                  "minimum": 0
+                },
+                {
+                  "type": "number",
+                  "minimum": 0
+                },
+                {
+                  "type": "number",
+                  "minimum": 0
+                }
+              ],
+              "items": false
+
+            },
+            "units": {
+              "title": "units",
+              "description": "An array that specifies measurement units of the non-varying uncertainties of each Stokes' vector components (4 in total) presented as a string that can have values: \"\" and \"%\".",
+              "type": "array",
+              "prefixItems": [
+                {
+                  "type": "string",
+                  "enum": ["", "%"]
+                },
+                {
+                  "type": "string",
+                  "enum": ["", "%"]
+                },
+                {
+                  "type": "string",
+                  "enum": ["", "%"]
+                },
+                {
+                  "type": "string",
+                  "enum": ["", "%"]
+                }
+              ],
+              "items": false
+            }
+          },
+          "required": [
+            "value",
+            "unit"
+          ],
+          "additionalProperties": false
+        },
+        "comments": {
+          "title": "comments",
+          "description": "The field allowing to specify any additional information relevant to reflected light observation polarization state \"polarization_r\" and its values as a text (i.e. string).",
+          "type": "string"
+        }
       },
-      "required": [],
+      "if": {
+        "properties": {"notation": {"const": "sp"}}
+      },
+      "then": {
+        "properties": {"values": {"items": {"type": "string", "enum": ["s", "p", "u"]}}}
+      },
+      "else": {
+        "properties": {
+          "values": {
+            "items": {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "type": "number",
+                  "const": 1
+                },
+                {
+                  "type": "number",
+                  "minimum": -1,
+                  "maximum": 1
+                },
+                {
+                  "type": "number",
+                  "minimum": -1,
+                  "maximum": 1
+                },
+                {
+                  "type": "number",
+                  "minimum": -1,
+                  "maximum": 1
+                }
+              ],
+              "items": false
+            }
+          }
+        }
+      },
+      "required": [
+        "unit",
+        "values"
+      ],
       "additionalProperties": false
     },
     "adhoc_variables": {
