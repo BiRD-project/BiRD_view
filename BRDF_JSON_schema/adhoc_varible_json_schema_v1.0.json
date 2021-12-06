@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/adhoc_varible_json_schema_v1.0.json",
+  "title": "adhoc_variable",
+  "description": "An object describing a single additional BRDF variable defined by the user. It should have at least \"description\", \"unit\" and \"values\" fields.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "title": "name",
+      "description": "The field allowing to provide a short name as a string that would briefly describe the nature of the user-defined variable. This field is not demanded, but might be useful if key under which \"adhoc_variable\" object is stored is not sufficient for the same purpose.",
+      "type": "string"
+    },
+    "description": {
+      "title": "description",
+      "description": "The field that allows to describe user-defined variable and its definition in a text (i.e. string) form. This field should be always present.",
+      "type": "string"
+    },
+    "unit": {
+      "title": "unit",
+      "description": "The field that allows to specify measurement unit of the user-defined variable as a string.",
+      "type": "string"
+    },
+    "type": {
+      "title": "type",
+      "description": "The field allowing to specify user-defined variable values' presentation type as for, example \"string\", \"number\", \"integer\", \"array of strings\", \"array of numbers\", \"array of integers\" or \"array of arrays of string/number/integer\" etc.",
+      "type": "string"
+    },
+    "values": {
+      "title": "values",
+      "description": "The field for storing array with values of user-defined variable. Array can have any type of entries except \"objects\". \"type\" of entry should be specified in the dedicated field.",
+      "type": "array",
+      "items": {
+        "not": {
+          "type": "object"
+        }
+      }
+    },
+    "uncertainty": {
+      "title": "uncertainty",
+      "description": "An object that allows to define non-varying uncertainty of the user-defined variable. The field is optional. It can contain",
+      "type": "object",
+      "oneOf": [
+        {
+          "properties": {
+            "value": {
+              "title": "value",
+              "description": "Numerical value of the non-varying uncertainty of the user-defined variable as a number.",
+              "type": "number"
+            },
+            "unit" : {
+              "title": "unit",
+              "description": "Measurement unit of the non-varying uncertainty of the user-defined variable as a string.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "value",
+            "unit"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "values": {
+              "title": "value",
+              "description": "Array of numerical values of the non-varying uncertainties of the vectorized user-defined variable as a number.",
+              "type": "array",
+              "items": {
+                "description": "Numerical value of the single vector element of the non-varying uncertainty of the vectorized user-defined variable as a number.",
+                "type": "number"
+              }
+            },
+            "units" : {
+              "title": "units",
+              "description": "Array of measurement units of the non-varying uncertainties of the vectorized user-defined variable as a number.",
+              "type": "array",
+              "items": {
+                "description": "Measurement unit of the single vector element of the non-varying uncertainty of the vectorized user-defined variable as a number.",
+                "type": "number"
+              }
+            }
+          },
+          "required": [
+            "values",
+            "units"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "comments": {
+      "title": "comments",
+      "description": "The field allowing to provide any additional and occasional information relevant to user-defined variable as a text (i.e. string).",
+      "type": "string"
+    }
+  },
+  "required": [
+    "description",
+    "unit",
+    "type",
+    "values"
+  ],
+  "additionalProperties": false
+}

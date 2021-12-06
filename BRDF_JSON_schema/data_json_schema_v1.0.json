@@ -784,8 +784,8 @@
             }
           },
           "required": [
-            "value",
-            "unit"
+            "values",
+            "units"
           ],
           "additionalProperties": false
         },
@@ -840,11 +840,11 @@
     },
     "adhoc_variables": {
       "title": "adhoc_variables",
-      "description": "",
+      "description": "An object containing properties/fields describing user defined BRDF variables. For example, solid angle or illumination/observation spot spatial coordinates if they were varied during BRDF measurements. Most successful variable definitions might become standard definitions and will be included to default parameters of future versions of universal BRDF file format schema.",
       "type": "object",
       "additionalProperties": {
         "title": "adhoc_variable",
-        "description": "",
+        "description": "An object describing a single additional BRDF variable defined by the user. It should have at least \"description\", \"unit\" and \"values\" fields. It is also advised to place \"adhoc_variable\" object under such \"adhoc_variables\" key that would shortly describe the nature of the user defined variable.",
         "type": "object",
         "$ref":"https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/adhoc_varible_json_schema_v1.0.json"
       }
