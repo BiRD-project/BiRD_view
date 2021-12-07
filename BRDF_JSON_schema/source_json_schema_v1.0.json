@@ -38,7 +38,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the illumination source power as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the illumination source power as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -50,7 +50,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the illumination source power as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the illumination source power as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -74,7 +74,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the illumination source central wavelength as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the illumination source central wavelength as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -86,7 +86,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the illumination source central wavelength as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the illumination source central wavelength as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -110,13 +110,13 @@
       "properties": {
         "min_value": {
           "title": "min_value",
-          "description": "Numerical value of the illumination source shortest wavelength as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the illumination source shortest wavelength as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
         "max_value": {
           "title": "max_value",
-          "description": "Numerical value of the illumination source longest wavelength as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the illumination source longest wavelength as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -153,7 +153,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the illumination source color temperature as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the illumination source color temperature as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -189,7 +189,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the illumination source operating temperature as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the illumination source operating temperature as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -213,7 +213,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the illumination source operating current as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the illumination source operating current as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -225,7 +225,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the illumination source operating current as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the illumination source operating current as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -249,7 +249,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the illumination source operating voltage as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the illumination source operating voltage as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -261,7 +261,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the illumination source operating voltage as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the illumination source operating voltage as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },

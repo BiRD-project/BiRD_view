@@ -16,13 +16,13 @@
       "properties": {
         "min_value": {
           "title": "min_value",
-          "description": "Numerical value of the monochromator's transmission shortest wavelength as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the monochromator's transmission shortest wavelength as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
         "max_value": {
           "title": "max_value",
-          "description": "Numerical value of the monochromator's transmission longest wavelength as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the monochromator's transmission longest wavelength as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -47,7 +47,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the monochromator's wavelength resolving/separation/dispersion capabilities as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the monochromator's wavelength resolving/separation/dispersion capabilities as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -59,7 +59,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the monochromator's wavelength resolving/separation/dispersion capabilities as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the monochromator's wavelength resolving/separation/dispersion capabilities as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -83,7 +83,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the monochromator's slit width as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the monochromator's slit width as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -95,7 +95,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the monochromator's slit width as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the monochromator's slit width as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -119,7 +119,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the monochromator's bandpass FWHM as a zero (0) inclusive positive number..",
+          "description": "Numerical value of the monochromator's bandpass FWHM as a zero (0) inclusive positive number (x ≥ 0)..",
           "type": "number",
           "minimum": 0
         },
@@ -131,7 +131,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the monochromator's bandpass FWHM as a zero (0) inclusive positive number..",
+          "description": "Numerical value of the uncertainty of the monochromator's bandpass FWHM as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -155,7 +155,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the average uncertainty of the monochromator's transmitted band central wavelength as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the average uncertainty of the monochromator's transmitted band central wavelength as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -179,7 +179,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the set monochromator's wavelength as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the set monochromator's wavelength as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -191,7 +191,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the set monochromator's wavelength as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the set monochromator's wavelength as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },

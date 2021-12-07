@@ -37,7 +37,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the polarizer's extinction ratio as a zero (0) inclusive positive number. Note that extinction ratio is usually presented as X : 1, but since 1 is a constant only X is the value requested here.",
+          "description": "Numerical value of the polarizer's extinction ratio as a zero (0) inclusive positive number (x ≥ 0). Note that extinction ratio is usually presented as X : 1, but since 1 is a constant only X is the value requested here.",
           "type": "number",
           "minimum": 0
         },
@@ -49,7 +49,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the polarizer's extinction ratio as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the polarizer's extinction ratio as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -73,13 +73,13 @@
       "properties": {
         "min_value": {
           "title": "min_value",
-          "description": "Numerical value of shortest wavelength at which polarization altering element can be used as a zero (0) inclusive positive number.",
+          "description": "Numerical value of shortest wavelength at which polarization altering element can be used as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
         "max_value": {
           "title": "max_value",
-          "description": "Numerical value of the longest wavelength at which polarization altering element can be used as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the longest wavelength at which polarization altering element can be used as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -104,7 +104,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the wavelength at which polarization altering element is most effective as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the wavelength at which polarization altering element is most effective as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -116,7 +116,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the wavelength at which polarization altering element is most effective as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the wavelength at which polarization altering element is most effective as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -140,7 +140,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the maximum power at which polarization altering element can be operated as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the maximum power at which polarization altering element can be operated as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -152,7 +152,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the maximum power at which polarization altering element can be operated as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the maximum power at which polarization altering element can be operated as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },

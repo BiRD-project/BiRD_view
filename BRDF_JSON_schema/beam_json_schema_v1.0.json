@@ -24,7 +24,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the uniformity of the illumination beam at the surface of the measurement sample as a positive number from 0 to 100.",
+          "description": "Numerical value of the uniformity of the illumination beam at the surface of the measurement sample as a positive number from 0 to 100 (0 ≤ x ≤ 100).",
           "type": "number",
           "minimum": 0,
           "maximum": 100
@@ -37,7 +37,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of illumination beam uniformity at the surface of the measurement sample as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of illumination beam uniformity at the surface of the measurement sample as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -61,10 +61,9 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the divergence of the illumination beam that hits the surface of the measurement sample as a positive number from 0 to 360 degrees (or 0 to 2π radians).",
+          "description": "Numerical value of the divergence of the illumination beam that hits the surface of the measurement sample as a positive number from 0 to 360 degrees (or 0 to 2π radians). Shortly: 0 ≤ x < 360° (or 2π).",
           "type": "number",
-          "minimum": 0,
-          "maximum": 360
+          "minimum": 0
         },
         "unit": {
           "title": "unit",
@@ -84,6 +83,15 @@
           "type": "string",
           "enum": ["deg", "°", "rad", "%"]
         }
+      },
+      "if": {
+        "properties": {"unit": {"const": "rad"}}
+      },
+      "then": {
+        "properties": {"value": {"maximum": 3.141593, "exclusiveMaximum": true}}
+      },
+      "else": {
+        "properties": {"value": {"maximum": 360, "exclusiveMaximum": true}}
       },
       "required": [
         "value",

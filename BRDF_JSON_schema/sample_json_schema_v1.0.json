@@ -73,7 +73,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the measurement sample's front surface roughness as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the measurement sample's front surface roughness as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -85,7 +85,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the measurement sample's front surface roughness as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the measurement sample's front surface roughness as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -109,7 +109,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the measurement sample's back surface roughness as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the measurement sample's back surface roughness as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -121,7 +121,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the measurement sample's back surface roughness as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the measurement sample's back surface roughness as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -156,7 +156,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the inverse of the front surface curvature radius as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the inverse of the front surface curvature radius as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -171,7 +171,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the front surface curvature as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the front surface curvature as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -198,7 +198,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the inverse of the back surface curvature radius as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the inverse of the back surface curvature radius as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -213,7 +213,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the back surface curvature as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the back surface curvature as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -268,7 +268,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the specular reflectance of the sample which BRDF was measured as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the specular reflectance of the sample which BRDF was measured as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -305,7 +305,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the specular transmittance of the sample which BRDF was measured as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the specular transmittance of the sample which BRDF was measured as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -342,7 +342,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the total hemispherical reflectance of the sample which BRDF was measured as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the total hemispherical reflectance of the sample which BRDF was measured as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -379,7 +379,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the total hemispherical transmittance of the sample which BRDF was measured as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the total hemispherical transmittance of the sample which BRDF was measured as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -403,9 +403,8 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the temperature of the sample which BRDF was measured as a number. In allowed units the minimum allowed value is −273.15 (if in °C).",
-          "type": "number",
-          "minimum": -273.15
+          "description": "Numerical value of the temperature of the sample which BRDF was measured as a number. In \"°C\" units the minimum allowed value is −273.15 (i.e. x ≥ -273.5), while in \"K\" and \"kK\" minimum allowed value is 0 (i.e. x ≥ 0).",
+          "type": "number"
         },
         "unit": {
           "title": "unit",
@@ -415,7 +414,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the temperature of the sample which BRDF was measured as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the temperature of the sample which BRDF was measured as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -425,6 +424,15 @@
           "type": "string",
           "enum": ["K", "kK", "°C", "%"]
         }
+      },
+      "if": {
+        "properties": {"unit": {"const": "°C"}}
+      },
+      "then": {
+        "properties": {"value": {"minimum": -273.15}}
+      },
+      "else": {
+        "properties": {"value": {"minimum": 0}}
       },
       "required": [
         "value",

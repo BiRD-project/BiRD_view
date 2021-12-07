@@ -51,13 +51,13 @@
       "properties": {
         "min_value": {
           "title": "min_value",
-          "description": "Numerical value of the shortest wavelength that optical sensor can sense as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the shortest wavelength that optical sensor can sense as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
         "max_value": {
           "title": "max_value",
-          "description": "Numerical value of the longest wavelength that optical sensor can sense as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the longest wavelength that optical sensor can sense as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -82,13 +82,13 @@
       "properties": {
         "min_value": {
           "title": "min_value",
-          "description": "Numerical value of the lowest optical power sensor can detect as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the lowest optical power sensor can detect as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
         "max_value": {
           "title": "max_value",
-          "description": "Numerical value of the highest optical power sensor can detect as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the highest optical power sensor can detect as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -113,7 +113,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the wavelength for which responsivity of the sensor is provided as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the wavelength for which responsivity of the sensor is provided as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -125,7 +125,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the wavelength for which responsivity of the sensor is provided as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the wavelength for which responsivity of the sensor is provided as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -149,7 +149,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the typical or average responsivity of optical sensor as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the typical or average responsivity of optical sensor as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -161,7 +161,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the typical or average responsivity of optical sensor as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the typical or average responsivity of optical sensor as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -185,7 +185,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the wavelength for which linearity of the sensor is provided as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the wavelength for which linearity of the sensor is provided as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -197,7 +197,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the wavelength for which linearity of the sensor is provided as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the wavelength for which linearity of the sensor is provided as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -234,7 +234,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the optical sensor's linearity as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the optical sensor's linearity as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -271,7 +271,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the uniformity of the optical sensor as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the uniformity of the optical sensor as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -295,7 +295,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the optical sensor's dark current as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the optical sensor's dark current as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -307,7 +307,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the optical sensor's dark current as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the optical sensor's dark current as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -331,7 +331,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the bias voltage applied applied to the optical sensor as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the bias voltage applied applied to the optical sensor as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -343,7 +343,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the bias voltage applied applied to the optical sensor as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the bias voltage applied applied to the optical sensor as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -366,7 +366,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the maximal optical power at which optical sensor is designed to be operated as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the maximal optical power at which optical sensor is designed to be operated as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -378,7 +378,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the maximal optical power at which optical sensor is designed to be operated as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the maximal optical power at which optical sensor is designed to be operated as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -402,9 +402,8 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the temperature at which light sensor was operated as a number. In allowed units the minimum allowed value is −273.15 (if in °C).",
-          "type": "number",
-          "minimum": -273.15
+          "description": "Numerical value of the temperature at which light sensor was operated as a number. In \"°C\" units the minimum allowed value is −273.15 (i.e. x ≥ -273.5), while in \"K\" and \"kK\" minimum allowed value is 0 (i.e. x ≥ 0).",
+          "type": "number"
         },
         "unit": {
           "title": "unit",
@@ -414,7 +413,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the temperature at which light sensor was operated as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the temperature at which light sensor was operated as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -424,6 +423,15 @@
           "type": "string",
           "enum": ["K", "kK", "°C", "%"]
         }
+      },
+      "if": {
+        "properties": {"unit": {"const": "°C"}}
+      },
+      "then": {
+        "properties": {"value": {"minimum": -273.15}}
+      },
+      "else": {
+        "properties": {"value": {"minimum": 0}}
       },
       "required": [
         "value",

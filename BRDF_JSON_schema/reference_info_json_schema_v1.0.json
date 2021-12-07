@@ -48,7 +48,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the  solid angle that was used for reference BRDF data acquisition as a positive number from 0 to 12.57 (i.e. from 0 to 4π limits included).",
+          "description": "Numerical value of the  solid angle that was used for reference BRDF data acquisition as a positive number from 0 to 12.57 (i.e. from 0 to 4π limits included). Shortly: 0 ≤ x ≤ 12.57",
           "type": "number",
           "minimum": 0,
           "maximum": 12.57
@@ -61,7 +61,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the solid angle that was used for reference BRDF data acquisition as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the solid angle that was used for reference BRDF data acquisition as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },

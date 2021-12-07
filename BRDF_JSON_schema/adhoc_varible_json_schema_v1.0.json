@@ -25,6 +25,28 @@
       "description": "The field allowing to specify user-defined variable values' presentation type as for, example \"string\", \"number\", \"integer\", \"array of strings\", \"array of numbers\", \"array of integers\" or \"array of arrays of string/number/integer\" etc.",
       "type": "string"
     },
+    "minimum": {
+      "title": "minimum",
+      "description": "The field allowing to specify minimal allowed value of the user-defined numerical variable.",
+      "type": "number"
+    },
+    "minimum_excluded": {
+      "title": "minimum_excluded",
+      "description": "The field that allows to specify whether provided minimal value of the numerical user-defined variable is excluded from available values range or not. I.e. whether x is \">\" or \"≥\" than minimal value provided in \"minimum\" field. \"true\" boolean value means it is excluded and \"false\" means it is included that is also a default value for this field.",
+      "type": "boolean",
+      "default": false
+    },
+    "maximum": {
+      "title": "maximum",
+      "description": "The field allowing to specify maximal allowed value of the user-defined numerical variable.",
+      "type": "number"
+    },
+    "maximum_excluded": {
+      "title": "maximum_excluded",
+      "description": "The field that allows to specify whether provided maximal value of the numerical user-defined variable is excluded from available values range or not. I.e. whether x is \"<\" or \"≤\" than minimal value provided in \"maximum\" field. \"true\" boolean value means it is excluded and \"false\" means it is included that is also a default value for this field.",
+      "type": "boolean",
+      "default": false
+    },
     "values": {
       "title": "values",
       "description": "The field for storing array with values of user-defined variable. Array can have any type of entries except \"objects\". \"type\" of entry should be specified in the dedicated field.",

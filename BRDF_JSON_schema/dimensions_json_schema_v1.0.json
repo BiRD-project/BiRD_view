@@ -12,7 +12,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the length of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the length of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -24,7 +24,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the length of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the length of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -48,7 +48,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the width of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the width of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -60,7 +60,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the width of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the width of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -84,7 +84,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the height of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the height of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -96,7 +96,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the height of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the height of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -120,7 +120,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the thickness of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the thickness of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -132,7 +132,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the thickness of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the thickness of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -156,7 +156,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the radius of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the radius of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -168,7 +168,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the radius of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the radius of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -192,7 +192,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the diameter of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the diameter of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -204,7 +204,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the diameter of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the diameter of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -228,7 +228,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the semi-major axis of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the semi-major axis of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -240,7 +240,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the semi-major axis of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the semi-major axis of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -264,7 +264,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the semi-minor axis of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the semi-minor axis of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -276,7 +276,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the semi-minor axis of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the semi-minor axis of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -300,7 +300,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the area of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the area of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -312,7 +312,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the area of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the area of an optical element, illumination beam and/or sample as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },

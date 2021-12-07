@@ -44,7 +44,7 @@
       "properties": {
         "value": {
           "title": "value",
-          "description": "Numerical value of the maximum optical power at which monochromator was designed to be operated without damage as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the maximum optical power at which monochromator was designed to be operated without damage as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -56,7 +56,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the maximum optical power at which monochromator was designed to be operated without damage as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the maximum optical power at which monochromator was designed to be operated without damage as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
