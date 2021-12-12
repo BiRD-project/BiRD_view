@@ -184,7 +184,7 @@
         },
         "values": {
           "title": "values",
-          "description": "An array containing numerical values of the reflected light observation zenith angle \"theta_r\" used to measure/simulate each BRDF point/value presented in \"values\" of \"data\" \"BRDF\" object (i.e. under \"BRDF\" key). Array can contain only zero (0) inclusive positive numbers up to maximal value of 90° (i.e. up to 2/2 radians). Shortly: 0 ≤ x ≤ 90° (or π/2).",
+          "description": "An array containing numerical values of the reflected light observation zenith angle \"theta_r\" used to measure/simulate each BRDF point/value presented in \"values\" of \"data\" \"BRDF\" object (i.e. under \"BRDF\" key). Array can contain only zero (0) inclusive positive numbers up to maximal value of 90° (i.e. up to π/2 radians). Shortly: 0 ≤ x ≤ 90° (or π/2).",
           "type": "array",
           "items": {
             "type": "number",
