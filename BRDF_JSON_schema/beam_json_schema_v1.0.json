@@ -73,7 +73,7 @@
         },
         "uncertainty": {
           "title": "uncertainty",
-          "description": "Numerical value of the uncertainty of the illumination beam divergence as a zero (0) inclusive positive number.",
+          "description": "Numerical value of the uncertainty of the illumination beam divergence as a zero (0) inclusive positive number (x ≥ 0).",
           "type": "number",
           "minimum": 0
         },
@@ -88,10 +88,10 @@
         "properties": {"unit": {"const": "rad"}}
       },
       "then": {
-        "properties": {"value": {"maximum": 3.141593, "exclusiveMaximum": true}}
+        "properties": {"value": {"exclusiveMaximum": 3.141593}}
       },
       "else": {
-        "properties": {"value": {"maximum": 360, "exclusiveMaximum": true}}
+        "properties": {"value": {"exclusiveMaximum": 360}}
       },
       "required": [
         "value",
