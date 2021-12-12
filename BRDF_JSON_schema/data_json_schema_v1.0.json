@@ -435,7 +435,7 @@
           "title": "name",
           "description": "The field providing the short name of the illumination light wavelength variable as a string.",
           "type": "string",
-          "cont": "wavelength_i"
+          "const": "wavelength_i"
         },
         "description": {
           "title": "description",
@@ -503,7 +503,7 @@
           "title": "name",
           "description": "The field providing the short name of the observed reflected light wavelength variable as a string.",
           "type": "string",
-          "cont": "wavelength_i"
+          "const": "wavelength_r"
         },
         "description": {
           "title": "description",

@@ -199,7 +199,7 @@ def render_menu_tabs_content(tab, app_mode):
     #Rendering contents for BRDF JSON validator Tab
     elif tab == 'Validator':
         return html.Div(children=[
-            html.Div(children=dcc.Markdown('Validation is conducted using following JSON Schema: [brdf_json_schema_v1.html.0.json](https://jsoneditoronline.org/#right=local.yutupo&left=url.https%3A%2F%2Fraw.githubusercontent.com%2FBiRD-project%2FBiRD_view%2Fmaster%2Fbrdf_json_schema.json)'),
+            html.Div(children=dcc.Markdown('Validation is conducted using following JSON Schema: [brdf_json_schema_v1.0.json](https://jsoneditoronline.org/#right=local.yutupo&left=url.https%3A%2F%2Fraw.githubusercontent.com%2FBiRD-project%2FBiRD_view%2Fmaster%2Fbrdf_json_schema.json)'),
                                      style={'width': '100%', 'height': '30px', 'lineHeight': '30px',
                                             'borderWidth': '1px', 'borderStyle': 'solid', 'borderRadius': '7.5px',
                                             'textAlign': 'center', 'margin-bottom': '5px', 'margin-top': '2.5px',
