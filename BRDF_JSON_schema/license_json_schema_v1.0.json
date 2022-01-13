@@ -7,7 +7,7 @@
   "properties": {
     "type": {
       "title": "type",
-      "description": "Field specifying license agreement applied to the presented datasets. This can be abbreviation according to \"Creative Commons\" license or short name of any other license. Information should be recorded as a string. Note that custom license text can be provided in \"proprietary\" field.",
+      "description": "Field specifying license agreement applied to the presented datasets. This can be an abbreviation according to \"Creative Commons\" license or short name of any other license. Information should be recorded as a string. Note that custom license text can be provided in \"proprietary\" field.",
       "type": "string"
     },
     "link": {
