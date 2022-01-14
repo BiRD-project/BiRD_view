@@ -82,8 +82,8 @@
   },
   "required": [
     "name",
-    "illumination",
-    "detection"
+    "illumination_system",
+    "detection_system"
   ],
   "additionalProperties": false
 }
