@@ -308,8 +308,7 @@
         "properties": {"values": {"items": {"exclusiveMaximum": 360}}}
       },
       "required": [
-        "index",
-        "type",
+        "values",
         "unit"
       ],
       "additionalProperties": false
@@ -695,7 +694,7 @@
         }
       },
       "required": [
-        "unit",
+        "notation",
         "values"
       ],
       "additionalProperties": false
@@ -785,7 +784,7 @@
           },
           "required": [
             "values",
-            "units"
+            "unit"
           ],
           "additionalProperties": false
         },
@@ -833,7 +832,7 @@
         }
       },
       "required": [
-        "unit",
+        "notation",
         "values"
       ],
       "additionalProperties": false
