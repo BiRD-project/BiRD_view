@@ -28,10 +28,8 @@ File can have extension .json or .brdf.
 
 File can be validated using following JSON Schema: [brdf_json_schema_v1.0.json](https://github.com/BiRD-project/BiRD_view/blob/master/BRDF_JSON_schema/brdf_json_schema_v1.0.json).
 
-Example files (toggle code/tree options to study the file):
-* [Example 1](https://jsoneditoronline.org/#right=local.yutupo&left=url.https%3A%2F%2Fraw.githubusercontent.com%2FBiRD-project%2FBiRD_view%2Fmaster%2FTest%2520BRDF%2520data%2520files%2FT08_example.brdf)
-* [Example 2](https://jsoneditoronline.org/#right=local.yutupo&left=url.https%3A%2F%2Fraw.githubusercontent.com%2FBiRD-project%2FBiRD_view%2Fmaster%2FTest%2520BRDF%2520data%2520files%2Fprocessed_sand_data_v3.brdf)
-* [Example 3](https://jsoneditoronline.org/#right=local.yutupo&left=url.https%3A%2F%2Fraw.githubusercontent.com%2FBiRD-project%2FBiRD_view%2Fmaster%2FTest%2520BRDF%2520data%2520files%2Fsand_stones_450_900.brdf)
+Example file (toggle code/tree options to study the file):
+* [Example 1](mhttps://jsoneditoronline.org/#right=local.yutupo&left=url.https%3A%2F%2Fraw.githubusercontent.com%2FBiRD-project%2FBiRD_view%2Fmaster%2FTest%2520BRDF%2520data%2520files%2Fexample.brdf)
 
 #### *Quick guide*
 
