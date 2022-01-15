@@ -1,0 +1,255 @@
+{
+	"metadata":{
+		"schema": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/brdf_json_schema_v1.0.json",
+		"id": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/Test%20BRDF%20data%20files/example.brdf",
+		"type": "BRDF",
+		"timestamp": "2022-01-14T12:00:00+02",
+		"provenance": {
+			"organization": "Aalto University",
+			"location": {
+				"country": "Finland",
+				"county": "Uusimaa",
+				"city": "Espoo",
+				"street": "Maarintie",
+				"building_nr": "8",
+				"postal_code": "02150",
+				"coordinates": "+60.18683195962083+24.819980192216036/"
+			},
+			"website": "https://bird-project.github.io/BRDF_JSON_schema_docs/",
+			"email": "dmitri.lanevski@aalto.fi",
+			"contact_person": "Dmitri Lanevski"
+		},
+		"license": {
+			"type": "BY-SA",
+			"link": "https://en.wikipedia.org/wiki/Creative_Commons_license#Software",
+			"rights_holder": "Aalto University"
+		},
+		"description": "This an example file that demonstrate basic composition of universal BRDF file.",
+		"method": "measurement",
+		"instrumentation": {
+			"name": "Aalto reference gonioreflectometer",
+			"operator_name": "Dmitri Lanevski",
+			"data_links": ["https://www.osapublishing.org/ao/abstract.cfm?uri=ao-43-35-6391"],
+			"comments": "Instrument was developed by Metrology Research Institute of Aalto University.",
+			"illumination_system": {
+				"name": "Aalto reference gonioreflectometer illumination system.",
+				"source": {
+					"name": "Quartz tungsten-halogen lamp",
+					"type": "incandescent lamp",
+					"model": "50T4Q/CL",
+					"manufacturer": "OSRAM",
+					"power": {
+						"value": 50,
+						"unit": "W"
+					},
+					"wl_range": {
+						"min_value": 400,
+						"max_value": 2000,
+						"unit": "nm"
+					},
+					"operating_voltage": {
+						"value": 12,
+						"unit": "V"
+					}
+				},
+				"wavelength_selectors": {
+					"monochromator": {
+						"name": "Bentham double monochromator",
+						"model": "DTMc300",
+						"manufacturer": "Bentham",
+						"type": "double monochromator",
+						"settings": [
+						{
+							"selected_dispersive_element": "difrction grating for visible wavelength range",
+							"wl_range": {
+								"min_value": 400,
+								"max_value": 900,
+								"unit": "nm"
+							},
+							"bandpass_FWHM": {
+								"value": 5,
+								"unit": "nm"
+							}
+						}
+						]						
+					}
+				},
+				"polarization_alterants": [
+				{
+					"name": "linear polarizer for p-polarization",
+					"type": "linear polarizer",
+					"wl_range": {
+								"min_value": 400,
+								"max_value": 800,
+								"unit": "nm"
+							},
+					"extinction_ratio": {
+						"value": 10000,
+						"unit": ""
+					}		
+				},
+				{
+					"name": "linear polarizer for s-polarization",
+					"type": "linear polarizer",
+					"wl_range": {
+								"min_value": 400,
+								"max_value": 800,
+								"unit": "nm"
+							},
+					"extinction_ratio": {
+						"value": 10000,
+						"unit": ""
+					}	
+				}
+				],
+				"aperture": {
+					"name": "Illumination beam aperture",
+					"type": "diaphragm",
+					"shape": "circular aperture",
+					"dimensions": {
+						"diameter": {
+							"value": 10,
+							"unit": "mm"
+						}
+					}
+				},
+				"beam": {
+					"shape": "circular",
+					"dimensions": {
+						"diameter": {
+							"value": 10,
+							"unit": "mm"
+						},
+						"area": {
+							"value": 314.16,
+							"unit": "mm^2"
+						}
+					},
+					"uniformity": {
+						"value": 95,
+						"unit": "%"
+					}
+				},
+				"data_links": ["https://www.bentham.co.uk/products/components/dtmc300-double-monochromator-39/#specifications"]				
+			},
+			"detection_system":{
+				"name": "Aalto reference gonioreflectometer detection system",
+				"sensors": [
+				{
+					"name": "Visible light sensor",
+					"type": "photodiode",
+					"material": "Si",
+					"model": "S1337-66BR",
+					"manufacturer": "Hamamatsu",
+					"shape": "square",
+					"dimensions": {
+						"length": {
+							"value": 5.8,
+							"unit": "mm"
+						},
+						"width": {
+							"value": 5.8,
+							"unit": "mm"
+						},
+						"area": {
+							"value": 33.64,
+							"unit": "mm^2"
+						}
+					},
+					"spectral_response_range": {
+						"min_value": 400,
+						"max_value": 900,
+						"unit": "nm"												
+					},
+					"data_links": ["https://www.hamamatsu.com/resources/pdf/ssd/s1337_series_kspd1032e.pdf"]
+				}
+				],
+				"aperture": {
+					"name": "Detection aperture",
+					"type": "regural aperture",
+					"shape": "circular",
+					"dimensions": {
+						"diameter": {
+							"value": 25,
+							"unit": "mm"
+						}
+					}
+				},
+				"solid_angle": {
+					"value": 0.002194,
+					"unit": "sr"
+				}
+			}
+		},
+		"software": {
+			"name": "LabView programm for gonioreflectometer operation.",
+			"version": "Diffuse_reflectance_v2.4"
+		},
+		"sample": {
+			"name": "SRT1",
+			"type": "spectralon diffuse reflectance sample",
+			"manufacturer": "Labsphere",
+			"materials": [
+			{
+				"name": "PTFE",
+				"type": "mane material"
+			}
+			],
+			"shape": "cuboid",
+			"dimensions": {
+				"length": {
+					"value": 50,
+					"unit": "mm"
+				},
+				"width": {
+					"value": 50,
+					"unit": "mm"
+				},
+				"height": {
+					"value": 15,
+					"unit": "mm"
+				}
+			},
+			"properties_symmetry": "isotropic",
+			"origin_location": "center of the sample",
+			"zero_azimuth_location": "according to marking on the back of the sample",
+			"data_links": ["https://www.labsphere.com/product/spectralon-diffuse-reflectance-standards/"]
+		},
+		"environment": {
+			"temperature": {
+				"value": 23.2,
+				"unit": "°C"
+			}
+		}
+	},
+	"data": {
+		"wavelength_i": {
+			"unit": "nm",
+			"values": [550, 550, 650, 650, 750, 750, 850, 850]
+		},
+		"polarization_i": {
+			"notation": "inStokes",
+			"values": [[1, 1, 0, 0], [1, -1, 0, 0], [1, 1, 0, 0], [1, -1, 0, 0], [1, 1, 0, 0], [1, -1, 0, 0], [1, 1, 0, 0], [1, -1, 0, 0]]
+		},
+		"theta_i": {
+			"unit": "°",
+			"values": [0, 0, 0, 0, 0, 0, 0, 0]
+		},
+		"phi_i": {
+			"unit": "°",
+			"values": [0, 0, 0, 0, 0, 0, 0, 0]
+		},
+		"theta_r": {
+			"unit": "°",
+			"values": [10, 10, 10, 10 ,10, 10 ,10, 10]
+		},
+		"phi_r": {
+			"unit": "°",
+			"values": [60, 60, 60, 60, 60, 60, 60, 60]
+		},
+		"BRDF" :{
+			"unit": "sr^-1",
+			"values": [0.254, 0.263, 0.267, 0.273, 0.281, 0.295, 0.296, 0.301]
+		}
+	}
+}

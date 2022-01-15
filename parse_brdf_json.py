@@ -12,14 +12,14 @@ def validate_brdf_json(dict_from_brdf_json, dict_from_brdf_json_schema):
         validate(instance=dict_from_brdf_json, schema=dict_from_brdf_json_schema, format_checker=FormatChecker())
     except jsonschema.exceptions.ValidationError as err:
         return err
-    variables_array = dict_from_brdf_json["data"]["variables"]
-    values_array = dict_from_brdf_json["data"]["values"]
-    line_n = 1
-    for line in values_array:
-        if len(line) != len(variables_array):
-            err = "Data line length does not match number of variables. Line number: " + str(line_n) + "."
-            return err
-        line_n += 1
+    # variables_array = dict_from_brdf_json["data"]["variables"]
+    # values_array = dict_from_brdf_json["data"]["values"]
+    # line_n = 1
+    # for line in values_array:
+    #     if len(line) != len(variables_array):
+    #         err = "Data line length does not match number of variables. Line number: " + str(line_n) + "."
+    #         return err
+    #     line_n += 1
     return "File valid!"
 
 def simple_validate_brdf_json(dict_from_brdf_json, dict_from_brdf_json_schema):
@@ -27,14 +27,14 @@ def simple_validate_brdf_json(dict_from_brdf_json, dict_from_brdf_json_schema):
         validate(instance=dict_from_brdf_json, schema=dict_from_brdf_json_schema, format_checker=FormatChecker())
     except jsonschema.exceptions.ValidationError as err:
         return False
-    variables_array = dict_from_brdf_json["data"]["variables"]
-    values_array = dict_from_brdf_json["data"]["values"]
-    line_n = 1
-    for line in values_array:
-        if len(line) != len(variables_array):
-            # err = "Data line length does not match number of variables. Line number: " + str(line_n) + "."
-            return False
-        line_n += 1
+    # variables_array = dict_from_brdf_json["data"]["variables"]
+    # values_array = dict_from_brdf_json["data"]["values"]
+    # line_n = 1
+    # for line in values_array:
+    #     if len(line) != len(variables_array):
+    #         # err = "Data line length does not match number of variables. Line number: " + str(line_n) + "."
+    #         return False
+    #     line_n += 1
     return True
 
 def parse_brdf_json(dict_from_brdf_json):
