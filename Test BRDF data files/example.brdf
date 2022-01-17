@@ -24,7 +24,7 @@
 			"link": "https://en.wikipedia.org/wiki/Creative_Commons_license#Software",
 			"rights_holder": "Aalto University"
 		},
-		"description": "This an example file that demonstrate basic composition of universal BRDF file.",
+		"description": "This is an example file that demonstrates basic composition of universal BRDF file.",
 		"method": "measurement",
 		"instrumentation": {
 			"name": "Aalto reference gonioreflectometer",
@@ -60,7 +60,7 @@
 						"type": "double monochromator",
 						"settings": [
 						{
-							"selected_dispersive_element": "difrction grating for visible wavelength range",
+							"selected_dispersive_element": "diffraction grating for visible wavelength range",
 							"wl_range": {
 								"min_value": 400,
 								"max_value": 900,
@@ -71,7 +71,7 @@
 								"unit": "nm"
 							}
 						}
-						]						
+						]
 					}
 				},
 				"polarization_alterants": [
@@ -86,7 +86,7 @@
 					"extinction_ratio": {
 						"value": 10000,
 						"unit": ""
-					}		
+					}
 				},
 				{
 					"name": "linear polarizer for s-polarization",
@@ -99,7 +99,7 @@
 					"extinction_ratio": {
 						"value": 10000,
 						"unit": ""
-					}	
+					}
 				}
 				],
 				"aperture": {
@@ -121,7 +121,7 @@
 							"unit": "mm"
 						},
 						"area": {
-							"value": 314.16,
+							"value": 78.54,
 							"unit": "mm^2"
 						}
 					},
@@ -130,7 +130,7 @@
 						"unit": "%"
 					}
 				},
-				"data_links": ["https://www.bentham.co.uk/products/components/dtmc300-double-monochromator-39/#specifications"]				
+				"data_links": ["https://www.bentham.co.uk/products/components/dtmc300-double-monochromator-39/#specifications"]
 			},
 			"detection_system":{
 				"name": "Aalto reference gonioreflectometer detection system",
@@ -159,7 +159,7 @@
 					"spectral_response_range": {
 						"min_value": 400,
 						"max_value": 900,
-						"unit": "nm"												
+						"unit": "nm"
 					},
 					"data_links": ["https://www.hamamatsu.com/resources/pdf/ssd/s1337_series_kspd1032e.pdf"]
 				}
