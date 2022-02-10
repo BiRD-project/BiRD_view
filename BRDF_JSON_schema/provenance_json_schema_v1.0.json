@@ -16,42 +16,42 @@
       "type": "object",
       "properties": {
         "country": {
-          "title": "organization",
+          "title": "country",
           "description": "Name of the country where organization is located",
           "type": "string"
         },
         "county": {
-          "title": "organization",
+          "title": "county",
           "description": "Name of the county within country where organization is located",
           "type": "string"
         },
         "city": {
-          "title": "organization",
+          "title": "city",
           "description": "Name of the city where organization is located",
           "type": "string"
         },
         "street": {
-          "title": "organization",
+          "title": "street",
           "description": "Name of the street within city where organization is located",
           "type": "string"
         },
         "building_nr": {
-          "title": "organization",
+          "title": "building_nr",
           "description": "Street number of the building where organization is residing",
           "type": "string"
         },
         "room_nr": {
-          "title": "organization",
+          "title": "room_nr",
           "description": "Laboratory or the room number within the organization's building",
           "type": "string"
         },
         "postal_code": {
-          "title": "organization",
+          "title": "postal_code",
           "description": "Postal code of organization's address.",
           "type": "string"
         },
         "coordinates": {
-          "title": "organization",
+          "title": "coordinates",
           "description": "Organization location coordinates according to ISO 6709 standard",
           "type": "string"
         }

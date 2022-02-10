@@ -30,7 +30,7 @@
       "format": "date-time"
     },
     "provenance": {
-      "title": "description",
+      "title": "provenance",
       "description": "An object with keys describing the origin of the data i.e. institution, address, personell etc. Object has values as a number or a string.",
       "type": "object",
       "$ref": "https://raw.githubusercontent.com/BiRD-project/BiRD_view/master/BRDF_JSON_schema/provenance_json_schema_v1.0.json"
