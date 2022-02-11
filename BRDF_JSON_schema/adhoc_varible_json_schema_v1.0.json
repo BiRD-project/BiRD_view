@@ -59,7 +59,7 @@
     },
     "uncertainty": {
       "title": "uncertainty",
-      "description": "An object that allows to define non-varying uncertainty of the user-defined variable. The field is optional. It can contain",
+      "description": "An object that allows to define non-varying uncertainty of the user-defined variable. The field is optional.",
       "type": "object",
       "oneOf": [
         {
@@ -88,23 +88,19 @@
               "description": "Array of numerical values of the non-varying uncertainties of the vectorized user-defined variable as a number.",
               "type": "array",
               "items": {
-                "description": "Numerical value of the single vector element of the non-varying uncertainty of the vectorized user-defined variable as a number.",
+                "description": "Numerical value of the single vector element of the varying uncertainty of the vectorized user-defined variable as a number.",
                 "type": "number"
               }
             },
-            "units" : {
-              "title": "units",
-              "description": "Array of measurement units of the non-varying uncertainties of the vectorized user-defined variable as a number.",
-              "type": "array",
-              "items": {
-                "description": "Measurement unit of the single vector element of the non-varying uncertainty of the vectorized user-defined variable as a number.",
-                "type": "number"
-              }
+            "unit" : {
+              "title": "unit",
+              "description": "Measurement unit of the single vector element of the varying uncertainty of the vectorized user-defined variable as a number.",
+              "type": "string"
             }
           },
           "required": [
             "values",
-            "units"
+            "unit"
           ],
           "additionalProperties": false
         }
