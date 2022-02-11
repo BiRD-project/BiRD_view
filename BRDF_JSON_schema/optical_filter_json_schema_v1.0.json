@@ -504,7 +504,7 @@
         "name",
         "type",
         "central_wl",
-        "transmission_FWHM"
+        "transmittance_FWHM"
       ]
     }
   ],
