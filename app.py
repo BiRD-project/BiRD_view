@@ -581,11 +581,11 @@ def update_menu(trigger_upload, trigger_menu_tabs, file_name, file_navigator_sta
 
         # Create and update options from variables in uploaded data
         variables_to_options = {}
-        for variable in uploaded_data[file_name]['data']['variables']:
-            if variable['name'] != 'BRDF' and variable['name'] != "uBRDF":
-                variables_to_options[variable['name']] = {
-                    'options': [{'label': uval, 'value': uval} for uval in variable['uvals']],
-                    'value': variable['sval']
+        for variable in uploaded_data[file_name]['data']:
+            if variable != 'BRDF' and variable != "uBRDF" and variable != "adhoc_variables":
+                variables_to_options[variable] = {
+                    'options': [{'label': uval, 'value': uval} for uval in uploaded_data[file_name]['data'][variable]['uvals']],
+                    'value': uploaded_data[file_name]['data'][variable]['sval']
                 }
 
         file_menu_container_children.append(
@@ -653,7 +653,7 @@ def update_menu(trigger_upload, trigger_menu_tabs, file_name, file_navigator_sta
         )
         if len(variables_to_options.keys()) > 4:
             for variable_key in variables_to_options:
-                if variable_key != 'theta_i' and variable_key != 'phi_i' and variable_key != 'theta_r' and variable_key != 'phi_r':
+                if variable_key != 'theta_i' and variable_key != 'phi_i' and variable_key != 'theta_r' and variable_key != 'phi_r' and variable_key != 'adhoc_variables':
                     file_menu_container_children.append(
                         html.P('Select ' + variable_key + ':', style={'margin-bottom': '2.5px', 'margin-top': '2.5px'}),
                     )
@@ -683,7 +683,9 @@ def update_menu(trigger_upload, trigger_menu_tabs, file_name, file_navigator_sta
                           'borderColor': 'LightGrey', 'background-color': '#f9f9f9',
                           'margin-bottom': '5px', 'margin-top': '2.5px'})
         )
-        variable_as_x_options = [{'label': key, 'value': key} for key in variables_to_options]
+        variable_as_x_options = []
+        for key in variables_to_options:
+            variable_as_x_options.append({'label': key, 'value': key})
         variable_as_x_value = ''
         if 'variable_as_x' in uploaded_data[file_name]:
             variable_as_x_value = uploaded_data[file_name]['variable_as_x']
@@ -705,7 +707,7 @@ def update_menu(trigger_upload, trigger_menu_tabs, file_name, file_navigator_sta
                         id={'type': 'button', 'index': 'snap_state'},
                         style={'margin-bottom': '2.5px', 'margin-top': '2.5px', 'width': '100%'})
         )
-        snaped_states_children = []
+        snaped_states_children = [] #needs to be checked
         for file_name in snaped_states:
             snaped_states_children.append(
                 html.P(file_name+':',
@@ -862,9 +864,9 @@ def modify_state(trigger, options_values, uploaded_data, previous_state, selecte
     inputs = dash.callback_context.inputs_list
     for input in inputs[1]:
         key = input['id']['index']
-        for variable in uploaded_data[selected_file]['data']['variables']:
-            if key == variable['name']:
-                variable['sval'] = input['value']
+        for variable in uploaded_data[selected_file]['data']:
+            if key == variable:
+                uploaded_data[selected_file]['data'][variable]['sval'] = input['value']
         if key == 'variable_as_x':
             uploaded_data[selected_file][key] = input['value']
 
@@ -901,39 +903,30 @@ def update_3D_plot(trigger1, trigger2, uploaded_data, filename):
     # print(time.process_time())
     degree_sign = u"\N{DEGREE SIGN}"
 
-    variables = uploaded_data[filename]['data']['variables']
-    data = uploaded_data[filename]['data']['values']
+    data = uploaded_data[filename]['data']
 
     mask = np.array([])
     brdf = np.array([])
     ubrdf = np.array([])
     theta_r = np.array([])
     phi_r = np.array([])
-    for variable in variables:
-        name = variable['name']
-        type = variable['type']
-        data[name] = np.array(data[name])
-        if type == "number":
-            data[name] = data[name].astype(np.float64)
-        elif type == "string":
-            data[name] = data[name].astype(str)
-        if name != 'BRDF' and name != 'uBRDF' and name != 'theta_r' and name != 'phi_r':
+    for variable in data:
+        if variable != 'BRDF' and variable != 'uBRDF' and variable != 'theta_r' and variable != 'phi_r'  and variable != 'adhoc_variables':
             if mask.size == 0:
-                mask = data[name] == variable['sval']
+                mask = np.array(data[variable]['values']) == data[variable]['sval']
             else:
-                mask = np.logical_and(mask, data[name] == variable['sval'])
+                mask = np.logical_and(mask, np.array(data[variable]['values']) == data[variable]['sval'])
         else:
-            if name == 'BRDF':
-                brdf = data[name]
-            if name == 'uBRDF':
-                ubrdf = data[name]
-            if name == 'theta_r':
-                theta_r = data[name]
-            if name == 'phi_r':
-                phi_r = data[name]
-
+            if variable == 'BRDF':
+                brdf = np.array(data[variable]['values'])
+            if variable == 'uBRDF':
+                ubrdf = np.array(data[variable]['values'])
+            if variable == 'theta_r':
+                theta_r = np.array(data[variable]['values'])
+            if variable == 'phi_r':
+                phi_r = np.array(data[variable]['values'])
     brdf = brdf[mask]
-    ubrdf = ubrdf[mask]
+    # ubrdf = ubrdf[mask]
     theta_r = theta_r[mask]
     phi_r = phi_r[mask]
 
@@ -1224,8 +1217,7 @@ def update_projection_plot(trigger1, trigger2, uploaded_data, filename):
     if trigger1 is None or uploaded_data == {} or filename == '':
         raise PreventUpdate
 
-    variables = uploaded_data[filename]['data']['variables']
-    data = uploaded_data[filename]['data']['values']
+    data = uploaded_data[filename]['data']
 
     mask = np.array([])
     brdf = np.array([])
@@ -1233,32 +1225,25 @@ def update_projection_plot(trigger1, trigger2, uploaded_data, filename):
     theta_r = np.array([])
     phi_r = np.array([])
     s_phi_r = 0
-    for variable in variables:
-        name = variable['name']
-        type = variable['type']
-        data[name] = np.array(data[name])
-        if type == "number":
-            data[name] = data[name].astype(np.float64)
-        elif type == "string":
-            data[name] = data[name].astype(str)
-        if name != 'BRDF' and name != 'uBRDF' and name != 'theta_r' and name != 'phi_r':
+    for variable in data:
+        if variable != 'BRDF' and variable != 'uBRDF' and variable != 'theta_r' and variable != 'phi_r':
             if mask.size == 0:
-                mask = data[name] == variable['sval']
+                mask = np.array(data[variable]['values']) == data[variable]['sval']
             else:
-                mask = np.logical_and(mask, data[name] == variable['sval'])
+                mask = np.logical_and(mask, np.array(data[variable]['values']) == data[variable]['sval'])
         else:
-            if name == 'BRDF':
-                brdf = data[name]
-            if name == 'uBRDF':
-                ubrdf = data[name]
-            if name == 'theta_r':
-                theta_r = data[name]
-            if name == 'phi_r':
-                phi_r = data[name]
-                s_phi_r = variable['sval']
+            if variable == 'BRDF':
+                brdf = np.array(data[variable]['values'])
+            if variable == 'uBRDF':
+                ubrdf = np.array(data[variable]['values'])
+            if variable == 'theta_r':
+                theta_r = np.array(data[variable]['values'])
+            if variable == 'phi_r':
+                phi_r = np.array(data[variable]['values'])
+                s_phi_r = data[variable]['sval']
 
     brdf = brdf[mask]
-    ubrdf = ubrdf[mask]
+    # ubrdf = ubrdf[mask]
     theta_r = theta_r[mask]
     phi_r = phi_r[mask]
 
@@ -1363,11 +1348,11 @@ def bezel_select_phi_r(relayoutData, uploaded_data, filename, bezel):
         #relayoutData['polar.angularaxis.rotation'] = 0
         raise PreventUpdate
 
-    variables = uploaded_data[filename]['data']['variables']
+    data = uploaded_data[filename]['data']
     phis = []
-    for variable in variables:
-        if variable['name'] == 'phi_r':
-            phis = np.array(variable['uvals'])
+    for variable in data:
+        if variable == 'phi_r':
+            phis = np.array(data[variable]['uvals'])
 
     selected_angle = [0]
     if 'polar.angularaxis.rotation' in relayoutData:
@@ -1443,41 +1428,33 @@ def update_2D_brdf_plot(trigger1, trigger2, trigger3, uploaded_data, filename, s
     if uploaded_data == {} or filename == '':
         raise PreventUpdate
 
-    variables = uploaded_data[filename]['data']['variables']
-    data = uploaded_data[filename]['data']['values']
+    data = uploaded_data[filename]['data']
 
     mask = np.array([])
     brdf = np.array([])
-    ubrdf = np.array([])
+    # ubrdf = np.array([])
     theta_r = np.array([])
     phi_r = np.array([])
     s_phi_r = 0
-    for variable in variables:
-        name = variable['name']
-        type = variable['type']
-        data[name] = np.array(data[name])
-        if type == "number":
-            data[name] = data[name].astype(np.float64)
-        elif type == "string":
-            data[name] = data[name].astype(str)
-        if name != 'BRDF' and name != 'uBRDF' and name != 'theta_r' and name != 'phi_r':
+    for variable in data:
+        if variable != 'BRDF' and variable != 'uBRDF' and variable != 'theta_r' and variable != 'phi_r':
             if mask.size == 0:
-                mask = data[name] == variable['sval']
+                mask = np.array(data[variable]['values']) == data[variable]['sval']
             else:
-                mask = np.logical_and(mask, data[name] == variable['sval'])
+                mask = np.logical_and(mask, np.array(data[variable]['values']) == data[variable]['sval'])
         else:
-            if name == 'BRDF':
-                brdf = data[name]
-            if name == 'uBRDF':
-                ubrdf = data[name]
-            if name == 'theta_r':
-                theta_r = data[name]
-            if name == 'phi_r':
-                phi_r = data[name]
-                s_phi_r = variable['sval']
+            if variable == 'BRDF':
+                brdf = np.array(data[variable]['values'])
+            if variable == 'uBRDF':
+                ubrdf = np.array(data[variable]['values'])
+            if variable == 'theta_r':
+                theta_r = np.array(data[variable]['values'])
+            if variable == 'phi_r':
+                phi_r = np.array(data[variable]['values'])
+                s_phi_r = data[variable]['sval']
 
     brdf = brdf[mask]
-    ubrdf = ubrdf[mask]
+    # ubrdf = ubrdf[mask]
     theta_r = theta_r[mask]
     phi_r = phi_r[mask]
 
@@ -1583,39 +1560,32 @@ def update_2D_brdf_plot(trigger1, trigger2, trigger3, uploaded_data, filename, s
             for selected_x in snaped_states[file_name]:
                 if selected_x == 'theta_r':
                     for state in snaped_states[file_name][selected_x]:
-                        data = uploaded_data[file_name]['data']['values']
+                        data = uploaded_data[file_name]['data']
                         mask = np.array([])
                         brdf = np.array([])
-                        ubrdf = np.array([])
+                        # ubrdf = np.array([])
                         theta_r = np.array([])
                         phi_r = np.array([])
                         s_phi_r = 0
-                        for variable in variables:
-                            name = variable['name']
-                            type = variable['type']
-                            data[name] = np.array(data[name])
-                            if type == "number":
-                                data[name] = data[name].astype(np.float64)
-                            elif type == "string":
-                                data[name] = data[name].astype(str)
-                            if name != 'BRDF' and name != 'uBRDF' and name != 'theta_r' and name != 'phi_r':
+                        for variable in data:
+                            if variable != 'BRDF' and variable != 'uBRDF' and variable != 'theta_r' and variable != 'phi_r':
                                 if mask.size == 0:
-                                    mask = data[name] == state[name]
+                                    mask = np.array(data[variable]['values']) == state[variable]
                                 else:
-                                    mask = np.logical_and(mask, data[name] == state[name])
+                                    mask = np.logical_and(mask, np.array(data[variable]['values']) == state[variable])
                             else:
-                                if name == 'BRDF':
-                                    brdf = data[name]
-                                if name == 'uBRDF':
-                                    ubrdf = data[name]
-                                if name == 'theta_r':
-                                    theta_r = data[name]
-                                if name == 'phi_r':
-                                    phi_r = data[name]
-                                    s_phi_r = state[name]
+                                if variable == 'BRDF':
+                                    brdf = np.array(data[variable]['values'])
+                                if variable == 'uBRDF':
+                                    ubrdf = np.array(data[variable]['values'])
+                                if variable == 'theta_r':
+                                    theta_r = np.array(data[variable]['values'])
+                                if variable == 'phi_r':
+                                    phi_r = np.array(data[variable]['values'])
+                                    s_phi_r = state[variable]
 
                         brdf = brdf[mask]
-                        ubrdf = ubrdf[mask]
+                        # ubrdf = ubrdf[mask]
                         theta_r = theta_r[mask]
                         phi_r = phi_r[mask]
 
@@ -1735,13 +1705,12 @@ def update_2D_arbitrary_plot(trigger1, trigger2, trigger3, uploaded_data, select
     if 'variable_as_x' not in uploaded_data[selected_filename]:
         raise PreventUpdate
 
-    variables = uploaded_data[selected_filename]['data']['variables']
-    data = uploaded_data[selected_filename]['data']['values']
+    data = uploaded_data[selected_filename]['data']
     variable_selected_as_x = uploaded_data[selected_filename]['variable_as_x']
     variable_selected_as_x_unit = ''
-    for variable in variables:
-        if variable['name'] == variable_selected_as_x:
-            variable_selected_as_x_unit = str(variable['unit'])
+    for variable in data:
+        if variable == variable_selected_as_x:
+            variable_selected_as_x_unit = str(data[variable]['unit'])
     # variables_to_options = {}
     # for variable in uploaded_data[selected_filename]['data']['variables']:
     #     if variable['name'] != 'BRDF' and variable['name'] != "uBRDF":
@@ -1760,31 +1729,24 @@ def update_2D_arbitrary_plot(trigger1, trigger2, trigger3, uploaded_data, select
     if variable_selected_as_x != 'theta_r':
         mask = np.array([])
         brdf = np.array([])
-        ubrdf = np.array([])
+        # ubrdf = np.array([])
         x_variable = np.array([])
-        for variable in variables:
-            name = variable['name']
-            type = variable['type']
-            data[name] = np.array(data[name])
-            if type == "number":
-                data[name] = data[name].astype(np.float64)
-            elif type == "string":
-                data[name] = data[name].astype(str)
-            if name != 'BRDF' and name != 'uBRDF' and name != variable_selected_as_x:
+        for variable in data:
+            if variable != 'BRDF' and variable != 'uBRDF' and variable != variable_selected_as_x:
                 if mask.size == 0:
-                    mask = data[name] == variable['sval']
+                    mask = np.array(data[variable]['values']) == data[variable]['sval']
                 else:
-                    mask = np.logical_and(mask, data[name] == variable['sval'])
+                    mask = np.logical_and(mask, np.array(data[variable]['values']) == data[variable]['sval'])
             else:
-                if name == 'BRDF':
-                    brdf = data[name]
-                if name == 'uBRDF':
-                    ubrdf = data[name]
-                if name == variable_selected_as_x:
-                    x_variable = data[name]
+                if variable == 'BRDF':
+                    brdf = np.array(data[variable]['values'])
+                if variable == 'uBRDF':
+                    ubrdf = np.array(data[variable]['values'])
+                if variable == variable_selected_as_x:
+                    x_variable = np.array(data[variable]['values'])
 
         brdf = brdf[mask]
-        ubrdf = ubrdf[mask]
+        # ubrdf = ubrdf[mask]
         x_variable = x_variable[mask]
 
         x = np.sort(x_variable)
@@ -1797,35 +1759,27 @@ def update_2D_arbitrary_plot(trigger1, trigger2, trigger3, uploaded_data, select
                 for selected_x in snaped_states[file_name]:
                     if selected_x != 'theta_r':
                         for state in snaped_states[file_name][selected_x]:
-                            variables = uploaded_data[file_name]['data']['variables']
-                            data = uploaded_data[file_name]['data']['values']
+                            data = uploaded_data[file_name]['data']
                             mask = np.array([])
                             brdf = np.array([])
-                            ubrdf = np.array([])
+                            # ubrdf = np.array([])
                             x_variable = np.array([])
-                            for variable in variables:
-                                name = variable['name']
-                                type = variable['type']
-                                data[name] = np.array(data[name])
-                                if type == "number":
-                                    data[name] = data[name].astype(np.float64)
-                                elif type == "string":
-                                    data[name] = data[name].astype(str)
-                                if name != 'BRDF' and name != 'uBRDF' and name != selected_x:
+                            for variable in data:
+                                if variable != 'BRDF' and variable != 'uBRDF' and variable != selected_x:
                                     if mask.size == 0:
-                                        mask = data[name] == state[name]
+                                        mask = np.array(data[variable]['values']) == state[variable]
                                     else:
-                                        mask = np.logical_and(mask, data[name] == state[name])
+                                        mask = np.logical_and(mask, np.array(data[variable]['values']) == state[variable])
                                 else:
-                                    if name == 'BRDF':
-                                        brdf = data[name]
-                                    if name == 'uBRDF':
-                                        ubrdf = data[name]
-                                    if name == selected_x:
-                                        x_variable = data[name]
+                                    if variable == 'BRDF':
+                                        brdf = np.array(data[variable]['values'])
+                                    if variable == 'uBRDF':
+                                        ubrdf = np.array(data[variable]['values'])
+                                    if variable == selected_x:
+                                        x_variable = np.array(data[variable]['values'])
 
                             brdf = brdf[mask]
-                            ubrdf = ubrdf[mask]
+                            # ubrdf = ubrdf[mask]
                             x_variable = x_variable[mask]
 
                             x = np.sort(x_variable)
@@ -1855,5 +1809,5 @@ app.title = "BiRDview"
 
 #Run application code
 if __name__ == '__main__':
-    app.run_server(debug=False,dev_tools_ui=False,dev_tools_props_check=False)
-    app.run_server(debug=False)
+    app.run_server(debug=False, dev_tools_ui=False, dev_tools_props_check=False)
+    # app.run_server(debug=False)

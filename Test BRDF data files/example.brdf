@@ -247,9 +247,17 @@
 			"unit": "°",
 			"values": [60, 60, 60, 60, 60, 60, 60, 60]
 		},
-		"BRDF" :{
+		"BRDF":{
 			"unit": "sr^-1",
 			"values": [0.254, 0.263, 0.267, 0.273, 0.281, 0.295, 0.296, 0.301]
+		},
+		"adhoc_variables":{
+			"sample_width": {
+				"description": "Width of the measurement sample.",
+				"unit": "mm",
+				"type": "number",
+				"values": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+			}
 		}
 	}
 }
