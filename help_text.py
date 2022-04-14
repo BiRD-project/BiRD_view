@@ -21,7 +21,8 @@ BRDF file format is based on [json](https://www.json.org/json-en.html) syntax. I
 
 where key is 'string' type and value can be 'string', 'number', 'array', 'True', 'False', 'Null' or 'object' i.e. another '{key: value}' structure.
 
-Consortium agreed on following keys and structure in the BRDF file format that are thoroughly described in following
+Consortium agreed on following keys and structure in the BRDF file format that are thoroughly described in following [article](https://doi.org/10.1002/col.22790) 
+with [supporting materials](https://onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fcol.22790&file=col22790-sup-0001-supinfo.zip) and 
 [documentation](https://bird-project.github.io/BRDF_JSON_schema_docs) web-page.
 
 File can have extension .json or .brdf.
