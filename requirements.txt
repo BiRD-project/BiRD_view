@@ -16,7 +16,7 @@ itsdangerous==2.0.1
 Jinja2==3.0.1
 jsonschema==4.2.1
 MarkupSafe==2.0.1
-numpy==1.22.0
+numpy==1.21.6
 plotly==5.1.0
 pyrsistent==0.18.0
 six==1.16.0
