@@ -22,4 +22,4 @@ pyrsistent==0.18.0
 six==1.16.0
 strict-rfc3339==0.7
 tenacity==7.0.0
-Werkzeug==2.0.1
+Werkzeug==2.2.3
