@@ -152,7 +152,7 @@ def parse_brdf_json(dict_from_brdf_json):
                     parsed_brdf_dict["data"][adhoc_variable+'_adhoc'] = parsed_brdf_dict["data"]["adhoc_variables"][adhoc_variable]
                     parsed_brdf_dict["data"][adhoc_variable+'_adhoc']["uvals"] = np.unique(parsed_brdf_dict["data"][adhoc_variable+'_adhoc']["values"])
                     parsed_brdf_dict["data"][adhoc_variable+'_adhoc']["sval"] = parsed_brdf_dict["data"][adhoc_variable+'_adhoc']["uvals"][0]
-        del parsed_brdf_dict["data"]["adhoc_variables"]
+                del parsed_brdf_dict["data"]["adhoc_variables"]
     return parsed_brdf_dict
 
 
